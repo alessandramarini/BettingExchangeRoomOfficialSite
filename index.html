@@ -4,19 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="theme-color" content="#030509">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="description" content="Betting Exchange Room - Reti neurali profonde. Agenti IA autonomi. Il massimo Valore Atteso.">
     
     <title>Betting Exchange Room | A.I. Betting Signals</title>
     
-    <!-- Preload Ottimizzati -->
-    <link rel="icon" type="image/jpeg" href="logo-tondo.jpeg">
-    <link rel="preload" as="image" href="logo-tondo.jpeg" fetchpriority="high">
-    <link rel="preload" as="video" href="spot1.mp4" fetchpriority="high">
+    <!-- Preconnect e DNS-Prefetch per velocizzare risorse esterne su Vercel/GitHub -->
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://flagcdn.com">
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="icon" type="image/jpeg" href="logo-tondo.jpeg">
+    <!-- Preload critico: Logo e Video per il First Contentful Paint -->
+    <link rel="preload" as="image" href="logo-tondo.jpeg" fetchpriority="high">
+    <link rel="preload" as="video" href="spot1.mp4" fetchpriority="high">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -53,6 +61,7 @@
             background-color: #05070A;
             color: #f1f5f9;
             -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none; /* Previene l'effetto molla su dispositivi mobile */
         }
         
         /* Gestione SPA Views */
@@ -65,26 +74,27 @@
         .menu-video-container { width: 100%; max-width: 56rem; aspect-ratio: 16/9; margin: 0 auto; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.15); background: #000; position: relative; box-shadow: 0 30px 60px -15px rgba(0,0,0,0.7), 0 0 30px rgba(163,230,53,0.1); overflow: hidden; }
         .menu-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
         
-        /* Custom Dropdown Menu */
-        .lang-dropdown-content { display: none; position: absolute; right: 0; top: 110%; background: #111827; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); min-width: 140px; z-index: 100; transform-origin: top right; animation: dropdownAnim 0.2s ease forwards; }
+        /* Custom Dropdown Menu (Ottimizzato per Mobile) */
+        .lang-dropdown-content { display: none; position: absolute; right: 0; top: 120%; background: #111827; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5); min-width: 140px; z-index: 100; transform-origin: top right; animation: dropdownAnim 0.2s ease forwards; }
         .lang-dropdown-content.show { display: block; }
         @keyframes dropdownAnim { from { opacity:0; transform: scale(0.95); } to { opacity:1; transform: scale(1); } }
-        .lang-item { padding: 10px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: background 0.2s; font-size: 13px; font-weight: 600; color: white; }
+        .lang-item { padding: 12px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer; transition: background 0.2s; font-size: 13px; font-weight: 600; color: white; }
         .lang-item:hover { background: rgba(255,255,255,0.1); }
         .flag-icon { width: 20px; height: 14px; border-radius: 2px; object-fit: cover; }
 
         /* Animazione FAQ */
         details > summary::-webkit-details-marker { display: none; }
         
-        /* Stili App Checkout */
+        /* Stili App Checkout (Telegram Simulator) */
         .sim-phone { height: 380px; width: 100%; max-width: 240px; background-color: #000; border-radius: 2rem; border: 4px solid #1F2937; position: relative; overflow: hidden; display: flex; flex-direction: column; margin: 0 auto; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
         .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 40%; height: 18px; background-color: #1F2937; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 50; }
         .sim-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #1c242f; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; display: flex; flex-direction: column; padding-top: 18px; }
         .sim-screen.active { opacity: 1; pointer-events: auto; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* Protected Text */
+        /* Protected Text & Lazy Loading */
         .protected-address { font-family: monospace; word-break: break-all; user-select: none; }
+        .content-visibility-auto { content-visibility: auto; contain-intrinsic-size: auto 500px; }
     </style>
 </head>
 
@@ -99,26 +109,26 @@
                 <span class="font-heading font-extrabold text-sm sm:text-base tracking-wider text-white uppercase bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">B.E. Room</span>
             </button>
             
-            <!-- Dropdown Menu a Tendina -->
+            <!-- Dropdown Menu a Tendina (Ordine Alfabetico) -->
             <div class="relative">
-                <button onclick="toggleLangMenu()" id="current-lang-btn" class="flex items-center gap-2 bg-black/40 hover:bg-black/60 px-4 py-2 rounded-full border border-white/10 transition-colors outline-none">
+                <button onclick="toggleLangMenu()" id="current-lang-btn" class="flex items-center gap-2 bg-black/40 hover:bg-black/60 px-4 py-2.5 rounded-full border border-white/10 transition-colors outline-none cursor-pointer">
                     <img id="current-flag" src="https://flagcdn.com/w40/it.png" class="flag-icon" alt="Lang">
                     <span id="current-lang-code" class="text-xs font-bold uppercase">IT</span>
                     <i class="fa-solid fa-chevron-down text-[10px] text-gray-400 ml-1"></i>
                 </button>
                 
                 <div id="lang-dropdown" class="lang-dropdown-content">
-                    <div class="lang-item" onclick="setLang('it')">
-                        <img src="https://flagcdn.com/w40/it.png" class="flag-icon"> Italiano
-                    </div>
                     <div class="lang-item" onclick="setLang('en')">
-                        <img src="https://flagcdn.com/w40/gb.png" class="flag-icon"> English
+                        <img src="https://flagcdn.com/w40/gb.png" class="flag-icon" alt="EN"> English
                     </div>
                     <div class="lang-item" onclick="setLang('es')">
-                        <img src="https://flagcdn.com/w40/es.png" class="flag-icon"> Español
+                        <img src="https://flagcdn.com/w40/es.png" class="flag-icon" alt="ES"> Español
+                    </div>
+                    <div class="lang-item" onclick="setLang('it')">
+                        <img src="https://flagcdn.com/w40/it.png" class="flag-icon" alt="IT"> Italiano
                     </div>
                     <div class="lang-item" onclick="setLang('pt')">
-                        <img src="https://flagcdn.com/w40/br.png" class="flag-icon"> Português
+                        <img src="https://flagcdn.com/w40/br.png" class="flag-icon" alt="PT"> Português
                     </div>
                 </div>
             </div>
@@ -132,158 +142,171 @@
         <!-- ============================================== -->
         <!-- VIEW 1: SITO VETRINA (LANDING PAGE)            -->
         <!-- ============================================== -->
-        <div id="view-landing" class="spa-view active pb-24">
+        <!-- pb-32 assicura che il footer sia visibile e non coperto dalla Sticky CTA -->
+        <div id="view-landing" class="spa-view active pb-32">
             
             <!-- HERO & VIDEO -->
-            <section class="relative pt-12 pb-16 px-4 max-w-5xl mx-auto flex flex-col items-center text-center">
+            <section class="relative pt-10 sm:pt-12 pb-16 px-4 max-w-5xl mx-auto flex flex-col items-center text-center">
                 <div class="flex items-center justify-center gap-2 mb-6 opacity-80">
                     <span class="relative flex h-2.5 w-2.5">
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-neon"></span>
                     </span>
-                    <span class="text-xs font-medium text-brand-neon uppercase tracking-[0.2em]" data-i18n="hero_badge">PIATTAFORMA UFFICIALE</span>
+                    <span class="text-[10px] sm:text-xs font-medium text-brand-neon uppercase tracking-[0.2em]" data-i18n="hero_badge">PIATTAFORMA UFFICIALE</span>
                 </div>
 
                 <h1 class="font-heading font-black mb-8 tracking-tight flex flex-col items-center w-full drop-shadow-2xl">
-                    <span class="text-4xl sm:text-6xl text-white uppercase tracking-tighter" data-i18n="hero_title_1">IL TUO VANTAGGIO</span>
-                    <span class="text-3xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-[#65a30d] uppercase tracking-tighter mt-2" data-i18n="hero_title_2">MATEMATICO</span>
+                    <span class="text-[clamp(2rem,6vw,4rem)] leading-none text-white uppercase tracking-tighter" data-i18n="hero_title_1">IL TUO VANTAGGIO</span>
+                    <span class="text-[clamp(1.8rem,5vw,3.5rem)] leading-none text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-[#65a30d] uppercase tracking-tighter mt-2" data-i18n="hero_title_2">MATEMATICO</span>
                 </h1>
 
-                <div class="menu-video-container mb-10">
-                    <video class="menu-video" autoplay muted playsinline webkit-playsinline loop poster="logo-tondo.jpeg">
+                <div class="menu-video-container mb-8 sm:mb-10 w-full">
+                    <!-- webkit-playsinline impedisce il fullscreen forzato su iOS -->
+                    <video class="menu-video" autoplay muted playsinline webkit-playsinline loop preload="auto" poster="logo-tondo.jpeg">
                         <source src="spot1.mp4" type="video/mp4">
                     </video>
                 </div>
 
-                <p class="text-gray-300 text-[1.1rem] max-w-3xl mx-auto leading-relaxed font-medium" data-i18n="hero_subtitle">
+                <p class="text-gray-300 text-[clamp(0.9rem,2vw,1.1rem)] max-w-3xl mx-auto leading-relaxed font-medium px-2" data-i18n="hero_subtitle">
                     Dimentica l'azzardo. Sfrutta le nostre reti neurali per estrarre vero <strong class="text-white">Expected Value</strong> dall'Exchange. Gestisci il rischio. Copia le operazioni.
                 </p>
             </section>
 
-            <!-- 3 CARD FOTO -->
-            <section class="py-8 px-4 max-w-6xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <article class="glass-panel rounded-3xl flex flex-col h-full overflow-hidden group border border-white/5 shadow-lg">
-                        <div class="w-full aspect-video relative overflow-hidden bg-black">
-                            <img src="cyborgcalciatore.jpeg" alt="A.I. Signals" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+            <!-- 3 CARD FOTO (Lazy Loaded for Speed) -->
+            <section class="py-8 px-4 max-w-6xl mx-auto content-visibility-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                    <article class="glass-panel rounded-3xl flex flex-col h-full overflow-hidden group border border-white/5 shadow-lg relative min-h-[300px]">
+                        <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
+                            <img src="cyborgcalciatore.jpeg" alt="A.I. Signals" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         </div>
                         <div class="p-6 flex-1 flex flex-col bg-gradient-to-b from-transparent to-[#0a0e14]">
-                            <h3 class="text-xl font-heading font-black text-white mb-2" data-i18n="card1_title">SEGNALI A.I.</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed" data-i18n="card1_desc">Scansioniamo in tempo reale per estrarre il vero valore statistico dai mercati.</p>
+                            <h3 class="text-lg sm:text-xl font-heading font-black text-white mb-2" data-i18n="card1_title">SEGNALI A.I.</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed" data-i18n="card1_desc">Scansioniamo in tempo reale per estrarre il vero valore statistico dai mercati.</p>
                         </div>
                     </article>
 
-                    <article class="glass-panel rounded-3xl flex flex-col h-full overflow-hidden group border border-white/5 shadow-lg">
-                        <div class="w-full aspect-video relative overflow-hidden bg-black">
-                            <img src="cyborgtifoso.jpeg" alt="Academy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <article class="glass-panel rounded-3xl flex flex-col h-full overflow-hidden group border border-white/5 shadow-lg relative min-h-[300px]">
+                        <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
+                            <img src="cyborgtifoso.jpeg" alt="Academy" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         </div>
                         <div class="p-6 flex-1 flex flex-col bg-gradient-to-b from-transparent to-[#0a0e14]">
-                            <h3 class="text-xl font-heading font-black text-white mb-2" data-i18n="card2_title">ACADEMY 360°</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed" data-i18n="card2_desc">Lezioni interattive guidate dall'AI per farti dominare il mercato da professionista.</p>
+                            <h3 class="text-lg sm:text-xl font-heading font-black text-white mb-2" data-i18n="card2_title">ACADEMY 360°</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed" data-i18n="card2_desc">Lezioni interattive guidate dall'AI per farti dominare il mercato da professionista.</p>
                         </div>
                     </article>
 
-                    <article class="glass-panel rounded-3xl flex flex-col h-full overflow-hidden group border border-white/5 shadow-lg">
-                        <div class="w-full aspect-video relative overflow-hidden bg-black">
-                            <img src="cyborgbarbitro.jpeg" alt="Risk" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <article class="glass-panel rounded-3xl flex flex-col h-full overflow-hidden group border border-white/5 shadow-lg relative min-h-[300px]">
+                        <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
+                            <img src="cyborgbarbitro.jpeg" alt="Risk" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         </div>
                         <div class="p-6 flex-1 flex flex-col bg-gradient-to-b from-transparent to-[#0a0e14]">
-                            <h3 class="text-xl font-heading font-black text-white mb-2" data-i18n="card3_title">RISK MANAGEMENT</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed" data-i18n="card3_desc">Modelli matematici studiati al millimetro per proteggere e scalare il tuo bankroll.</p>
+                            <h3 class="text-lg sm:text-xl font-heading font-black text-white mb-2" data-i18n="card3_title">RISK MANAGEMENT</h3>
+                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed" data-i18n="card3_desc">Modelli matematici studiati al millimetro per proteggere e scalare il tuo bankroll.</p>
                         </div>
                     </article>
                 </div>
             </section>
 
             <!-- SUBBUTEO WEB3 -->
-            <section class="py-8 px-4 max-w-5xl mx-auto">
-                <div class="bg-gradient-to-r from-blue-900/50 to-indigo-900/50 border border-blue-500/30 rounded-3xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 text-white/5 text-9xl"><i class="fa-solid fa-gamepad"></i></div>
+            <section class="py-8 px-4 max-w-5xl mx-auto content-visibility-auto">
+                <div class="bg-gradient-to-r from-blue-900/60 to-indigo-900/60 border border-blue-500/30 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 text-white/5 text-9xl pointer-events-none"><i class="fa-solid fa-gamepad"></i></div>
                     <div class="text-center md:text-left relative z-10">
-                        <h3 class="text-2xl font-black text-white uppercase mb-2 flex items-center justify-center md:justify-start gap-2">
+                        <h3 class="text-xl sm:text-2xl font-black text-white uppercase mb-2 flex items-center justify-center md:justify-start gap-2">
                             <i class="fa-solid fa-gamepad text-blue-400"></i> <span data-i18n="sub_title">SUBBUTEO WEB3</span>
                         </h3>
-                        <p class="text-gray-300 text-sm" data-i18n="sub_desc">Mettiti alla prova sul panno verde virtuale per staccare la spina dal trading.</p>
+                        <p class="text-gray-300 text-xs sm:text-sm" data-i18n="sub_desc">Mettiti alla prova sul panno verde virtuale per staccare la spina dal trading.</p>
                     </div>
-                    <a href="https://subbuteo.vercel.app/" target="_blank" class="bg-blue-500 hover:bg-blue-400 text-white px-8 py-4 rounded-xl font-bold uppercase shrink-0 transition-transform hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.4)] relative z-10">
+                    <a href="https://subbuteo.vercel.app/" target="_blank" rel="noopener noreferrer" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3.5 rounded-xl font-bold text-sm sm:text-base uppercase shrink-0 transition-transform hover:scale-105 shadow-[0_0_20px_rgba(59,130,246,0.4)] relative z-10 text-center w-full md:w-auto">
                         <span data-i18n="sub_btn">GIOCA ORA</span>
                     </a>
                 </div>
             </section>
 
             <!-- PREZZO PIENO (97 USDT) -->
-            <section class="py-12 px-4 max-w-4xl mx-auto">
-                <div class="glass-panel rounded-[2.5rem] p-10 md:p-14 text-center border border-brand-neon/30 relative shadow-neon-strong">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-neon text-black font-black uppercase tracking-widest text-xs px-4 py-1.5 rounded-full shadow-lg" data-i18n="price_badge">
+            <section class="py-12 px-4 max-w-4xl mx-auto content-visibility-auto">
+                <div class="glass-panel rounded-[2rem] sm:rounded-[2.5rem] p-8 sm:p-10 md:p-14 text-center border border-brand-neon/30 relative shadow-neon-strong">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-neon text-black font-black uppercase tracking-widest text-[10px] sm:text-xs px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap" data-i18n="price_badge">
                         NESSUN VINCOLO
                     </div>
                     
-                    <h2 class="text-4xl font-black text-white uppercase mb-4 mt-2" data-i18n="price_title">ACCESSO PIATTAFORMA</h2>
-                    <p class="text-gray-400 mb-8 max-w-xl mx-auto" data-i18n="price_desc">Accesso completo, immediato e senza limiti all'Academy e alla Premium Room con Segnali A.I.</p>
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mb-3 mt-2" data-i18n="price_title">ACCESSO PIATTAFORMA</h2>
+                    <p class="text-gray-400 mb-8 max-w-xl mx-auto text-xs sm:text-sm leading-relaxed px-2" data-i18n="price_desc">Accesso completo, immediato e senza limiti all'Academy e alla Premium Room con Segnali A.I.</p>
                     
                     <div class="flex items-center justify-center gap-2 mb-2">
-                        <span class="text-[5rem] md:text-[6rem] leading-none font-black text-white tracking-tighter drop-shadow-lg">97</span>
+                        <span class="text-[4.5rem] sm:text-[5rem] md:text-[6rem] leading-none font-black text-white tracking-tighter drop-shadow-lg">97</span>
                         <div class="flex flex-col items-start justify-center">
-                            <span class="text-2xl text-brand-neon font-bold leading-none">USDT</span>
-                            <span class="text-gray-500 text-xs font-bold uppercase tracking-widest mt-1" data-i18n="price_sub">AL MESE</span>
+                            <span class="text-xl sm:text-2xl text-brand-neon font-bold leading-none">USDT</span>
+                            <span class="text-gray-500 text-[10px] sm:text-xs font-bold uppercase tracking-widest mt-1" data-i18n="price_sub">AL MESE</span>
                         </div>
                     </div>
 
-                    <button onclick="switchView('checkout')" class="mt-8 w-full max-w-md mx-auto block bg-brand-neon hover:bg-[#86d611] text-black px-10 py-5 rounded-2xl font-black text-lg uppercase shadow-[0_10px_30px_rgba(163,230,53,0.3)] transition-transform hover:scale-105 active:scale-95">
+                    <button onclick="switchView('checkout')" class="mt-8 w-full max-w-md mx-auto block bg-brand-neon hover:bg-[#86d611] text-black px-6 py-4 sm:py-5 rounded-2xl font-black text-base sm:text-lg uppercase shadow-[0_10px_30px_rgba(163,230,53,0.3)] transition-transform hover:scale-105 active:scale-95 cursor-pointer">
                         <span data-i18n="price_btn">ACQUISTA ORA</span>
                     </button>
                 </div>
             </section>
 
             <!-- FAQ -->
-            <section class="py-12 px-4 max-w-3xl mx-auto">
-                <h2 class="text-center font-heading font-black text-3xl mb-8 uppercase text-white tracking-tight" data-i18n="faq_title">DOMANDE FREQUENTI</h2>
+            <section class="py-12 px-4 max-w-3xl mx-auto content-visibility-auto">
+                <h2 class="text-center font-heading font-black text-2xl sm:text-3xl mb-8 uppercase text-white tracking-tight" data-i18n="faq_title">DOMANDE FREQUENTI</h2>
                 <div class="space-y-4">
-                    <details class="bg-[#0f141e] border border-white/5 rounded-2xl p-5 group transition-all">
-                        <summary class="flex justify-between items-center font-bold text-white cursor-pointer select-none outline-none">
+                    <details class="bg-[#0f141e] border border-white/5 rounded-2xl p-5 group transition-all cursor-pointer">
+                        <summary class="flex justify-between items-center font-bold text-white select-none outline-none text-sm sm:text-base">
                             <span data-i18n="faq_q1" class="pr-4">Come funziona il pagamento in USDT (Web3)?</span>
-                            <i class="fa-solid fa-chevron-down text-brand-neon group-open:rotate-180 transition-transform"></i>
+                            <i class="fa-solid fa-chevron-down text-brand-neon group-open:rotate-180 transition-transform shrink-0"></i>
                         </summary>
-                        <div class="mt-4 text-gray-400 text-sm leading-relaxed border-t border-white/5 pt-4" data-i18n="faq_a1">
-                            Paghila tuo abbonamento tramite USDT sulla rete TON. È un sistema globale che abbatte le barriere bancarie offrendo transazioni sicure, veloci e svincolate da intermediari.
+                        <div class="mt-4 text-gray-400 text-xs sm:text-sm leading-relaxed border-t border-white/5 pt-4 cursor-text" data-i18n="faq_a1">
+                            Paghi il tuo abbonamento tramite USDT sulla rete TON. È un sistema globale che abbatte le barriere bancarie offrendo transazioni sicure, veloci e svincolate da intermediari.
                         </div>
                     </details>
-                    <details class="bg-[#0f141e] border border-white/5 rounded-2xl p-5 group transition-all">
-                        <summary class="flex justify-between items-center font-bold text-white cursor-pointer select-none outline-none">
+                    <details class="bg-[#0f141e] border border-white/5 rounded-2xl p-5 group transition-all cursor-pointer">
+                        <summary class="flex justify-between items-center font-bold text-white select-none outline-none text-sm sm:text-base">
                             <span data-i18n="faq_q2" class="pr-4">C'è un vincolo contrattuale?</span>
-                            <i class="fa-solid fa-chevron-down text-brand-neon group-open:rotate-180 transition-transform"></i>
+                            <i class="fa-solid fa-chevron-down text-brand-neon group-open:rotate-180 transition-transform shrink-0"></i>
                         </summary>
-                        <div class="mt-4 text-gray-400 text-sm leading-relaxed border-t border-white/5 pt-4" data-i18n="faq_a2">
+                        <div class="mt-4 text-gray-400 text-xs sm:text-sm leading-relaxed border-t border-white/5 pt-4 cursor-text" data-i18n="faq_a2">
                             Assolutamente no. Rinnovi di mese in mese. Se decidi di fermarti, non effettui il pagamento successivo e l'accesso si interrompe. Sei tu ad avere il controllo totale.
                         </div>
                     </details>
-                    <details class="bg-[#0f141e] border border-white/5 rounded-2xl p-5 group transition-all">
-                        <summary class="flex justify-between items-center font-bold text-white cursor-pointer select-none outline-none">
+                    <details class="bg-[#0f141e] border border-white/5 rounded-2xl p-5 group transition-all cursor-pointer">
+                        <summary class="flex justify-between items-center font-bold text-white select-none outline-none text-sm sm:text-base">
                             <span data-i18n="faq_q3" class="pr-4">Cosa include esattamente l'abbonamento?</span>
-                            <i class="fa-solid fa-chevron-down text-brand-neon group-open:rotate-180 transition-transform"></i>
+                            <i class="fa-solid fa-chevron-down text-brand-neon group-open:rotate-180 transition-transform shrink-0"></i>
                         </summary>
-                        <div class="mt-4 text-gray-400 text-sm leading-relaxed border-t border-white/5 pt-4" data-i18n="faq_a3">
+                        <div class="mt-4 text-gray-400 text-xs sm:text-sm leading-relaxed border-t border-white/5 pt-4 cursor-text" data-i18n="faq_a3">
                             Include l'accesso completo alla Zero To Hero Academy (lezioni, video, simulatore) e l'ingresso esclusivo nella Premium Room su Telegram dove i nostri bot quantitativi inviano segnali operativi in tempo reale.
                         </div>
                     </details>
                 </div>
             </section>
             
+            <!-- FOOTER CON SOCIAL E WHATSAPP -->
+            <footer class="pt-8 pb-12 px-4 text-center border-t border-white/10 mt-6 content-visibility-auto">
+                <!-- Social Links (Minimal & Professional Hover) -->
+                <div class="flex justify-center items-center gap-5 sm:gap-6 mb-8">
+                    <a href="https://x.com/BettingExcRoom" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors duration-300 text-lg sm:text-xl" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.youtube.com/@bettingexchangeroom" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#FF0000] transition-colors duration-300 text-lg sm:text-xl" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/share/19gmdRYKa9/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#1877F2] transition-colors duration-300 text-lg sm:text-xl" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://whatsapp.com/channel/0029VbCLlH8LI8YUjKBH0v1o" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#25D366] transition-colors duration-300 text-lg sm:text-xl" aria-label="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#229ED9] transition-colors duration-300 text-lg sm:text-xl" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                </div>
+
+                <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-3 px-6 sm:px-8 rounded-full inline-flex items-center gap-3 transition-transform hover:scale-105 shadow-[0_10px_25px_rgba(37,211,102,0.3)] text-xs sm:text-sm">
+                    <i class="fa-brands fa-whatsapp text-lg sm:text-xl"></i> <span data-i18n="wa_btn">Lavora con noi</span>
+                </a>
+                
+                <p class="text-gray-600 text-[9px] sm:text-[10px] mt-8 uppercase tracking-widest">&copy; 2026 Betting Exchange Room</p>
+            </footer>
+
             <!-- STICKY CTA -->
-            <div class="fixed bottom-0 left-0 w-full z-40 glass-panel border-t border-brand-neon/30 p-4">
+            <div class="fixed bottom-0 left-0 w-full z-40 glass-panel border-t border-brand-neon/30 p-3 sm:p-4">
                 <div class="max-w-4xl mx-auto">
-                    <button onclick="switchView('checkout')" class="w-full bg-brand-neon text-black py-4 rounded-xl font-black text-lg flex items-center justify-center uppercase shadow-neon-strong transition-transform active:scale-95">
+                    <button onclick="switchView('checkout')" class="w-full bg-brand-neon hover:bg-[#86d611] text-black py-3.5 sm:py-4 rounded-xl font-black text-sm sm:text-lg flex items-center justify-center uppercase shadow-neon-strong transition-transform active:scale-95 cursor-pointer">
                         <span data-i18n="cta_button">INIZIA ORA A 97 USDT</span>
                     </button>
                 </div>
             </div>
-            
-            <!-- FOOTER CON WHATSAPP -->
-            <footer class="pt-8 pb-32 text-center border-t border-white/10 mt-10">
-                <a id="wa-btn" href="#" target="_blank" class="bg-[#25D366] hover:bg-[#20b858] text-white font-bold py-4 px-8 rounded-full inline-flex items-center gap-3 transition-transform hover:scale-105 shadow-[0_10px_25px_rgba(37,211,102,0.3)]">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i> <span data-i18n="wa_btn">Lavora con noi</span>
-                </a>
-            </footer>
 
         </div>
 
@@ -296,7 +319,7 @@
                 
                 <!-- Bottone Indietro -->
                 <div class="w-full flex justify-start mb-4">
-                    <button onclick="switchView('landing')" class="text-gray-400 hover:text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-colors">
+                    <button onclick="switchView('landing')" class="text-gray-400 hover:text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-colors cursor-pointer p-2 -ml-2">
                         <i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_home">Torna alla Vetrina</span>
                     </button>
                 </div>
@@ -317,7 +340,7 @@
                             </ul>
                         </div>
 
-                        <button onclick="openPaymentModal()" class="w-full bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-600 hover:to-blue-400 text-white rounded-2xl py-4 text-[16px] font-black flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95">
+                        <button onclick="openPaymentModal()" class="w-full bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-600 hover:to-blue-400 text-white rounded-2xl py-4 text-[16px] font-black flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95 cursor-pointer">
                             <i class="fa-solid fa-wallet"></i> <span data-i18n="pay_now">PAGA 97 USDT ORA</span>
                         </button>
                     </div>
@@ -329,15 +352,15 @@
                             <div class="h-px bg-gray-800 flex-1"></div>
                         </div>
                         
-                        <button onclick="openTutorial()" class="w-full bg-white/5 hover:bg-white/10 transition-colors py-3 px-3.5 rounded-xl flex items-center gap-3 border border-gray-800 cursor-pointer active:scale-95">
+                        <button onclick="openTutorial()" class="w-full bg-white/5 hover:bg-white/10 transition-colors py-3 px-3.5 rounded-xl flex items-center gap-3 border border-gray-800 cursor-pointer active:scale-95 text-left">
                             <i class="fa-brands fa-telegram text-tg-blue text-2xl shrink-0"></i>
-                            <div class="text-left">
+                            <div>
                                 <div data-i18n="how_usdt_title" class="text-[13px] font-bold text-tg-blue">Come comprare 97 USDT</div>
                                 <div data-i18n="how_usdt_sub" class="text-[11px] text-gray-400 mt-0.5">Tutorial passo passo sul Wallet</div>
                             </div>
                         </button>
 
-                        <button onclick="openSecurityModal()" class="mt-6 text-gray-400 hover:text-white transition-colors text-[12px] flex items-center gap-2 font-medium cursor-pointer">
+                        <button onclick="openSecurityModal()" class="mt-6 text-gray-400 hover:text-white transition-colors text-[12px] flex items-center gap-2 font-medium cursor-pointer p-2">
                             <i class="fa-solid fa-shield-halved opacity-80"></i> <span data-i18n="sec_btn" class="underline underline-offset-4">Cos'è il Gas (TON), USDT e Sicurezza?</span>
                         </button>
                     </div>
@@ -348,7 +371,7 @@
                     <div class="sim-phone mb-4 shrink-0">
                         <div class="phone-notch"></div>
                         <div id="sim-tu-1" class="sim-screen active"><div class="flex-1 p-4 flex flex-col items-center justify-center"><div class="text-white text-3xl font-bold mb-6">$0.00</div><div class="bg-tg-blue rounded-xl py-2 px-6 text-white text-xs font-bold" data-i18n="tut_add">Add Crypto</div></div></div>
-                        <div id="sim-tu-2" class="sim-screen"><div class="flex-1 p-4 flex flex-col items-center justify-center"><div class="bg-tg-panel p-3 rounded-xl border border-gray-700 w-full flex items-center gap-3"><img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=025" class="w-6 h-6"><span class="text-white text-sm font-medium">Tether (USDT)</span></div></div></div>
+                        <div id="sim-tu-2" class="sim-screen"><div class="flex-1 p-4 flex flex-col items-center justify-center"><div class="bg-tg-panel p-3 rounded-xl border border-gray-700 w-full flex items-center gap-3"><img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=025" alt="USDT" class="w-6 h-6"><span class="text-white text-sm font-medium">Tether (USDT)</span></div></div></div>
                         <div id="sim-tu-3" class="sim-screen">
                             <div class="flex-1 p-4 flex flex-col items-center justify-center">
                                 <div class="text-white text-5xl font-bold flex items-baseline gap-1.5 mb-2">97 <span class="text-sm text-gray-400">USDT</span></div>
@@ -366,12 +389,12 @@
                     </div>
 
                     <div class="bg-[#111827] w-full p-4 rounded-2xl border border-gray-800 flex justify-between items-center shadow-lg">
-                        <button id="tu-btn-prev" onclick="navTutorial(-1)" class="text-gray-500 hover:text-white text-[11px] font-bold uppercase transition-colors"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="prev">Prec</span></button>
+                        <button id="tu-btn-prev" onclick="navTutorial(-1)" class="text-gray-500 hover:text-white text-[11px] font-bold uppercase transition-colors cursor-pointer p-2 -ml-2"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="prev">Prec</span></button>
                         <span class="text-white text-xs font-bold bg-black/50 px-3 py-1 rounded-full"><span id="tu-step-num">1</span> / 4</span>
-                        <button id="tu-btn-next" onclick="navTutorial(1)" class="text-brand-neon hover:text-white text-[11px] font-bold uppercase transition-colors"><span data-i18n="next">Avanti</span> <i class="fa-solid fa-chevron-right"></i></button>
+                        <button id="tu-btn-next" onclick="navTutorial(1)" class="text-brand-neon hover:text-white text-[11px] font-bold uppercase transition-colors cursor-pointer p-2 -mr-2"><span data-i18n="next">Avanti</span> <i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                     
-                    <button onclick="closeTutorial()" class="mt-6 text-gray-500 hover:text-white text-xs underline underline-offset-4 text-center mx-auto block transition-colors" data-i18n="close_tut">Chiudi Tutorial</button>
+                    <button onclick="closeTutorial()" class="mt-6 text-gray-500 hover:text-white text-xs underline underline-offset-4 text-center mx-auto block transition-colors cursor-pointer p-2" data-i18n="close_tut">Chiudi Tutorial</button>
                 </div>
 
             </div>
@@ -387,7 +410,7 @@
                 <h3 data-i18n="sec_title" class="text-base sm:text-lg font-black text-white flex items-center gap-2 uppercase tracking-tight">
                     <i class="fa-solid fa-shield-halved text-brand-neon"></i> Sicurezza Web3
                 </h3>
-                <button onclick="closeSecurityModal()" class="text-gray-500 hover:text-white text-xl transition-colors"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="closeSecurityModal()" class="text-gray-500 hover:text-white text-xl transition-colors cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
             <div class="space-y-5">
@@ -422,7 +445,7 @@
                 </div>
             </div>
 
-            <button onclick="closeSecurityModal()" class="w-full mt-6 bg-white hover:bg-gray-200 text-black font-black py-4 rounded-xl text-[13px] uppercase tracking-widest active:scale-95 transition-all shadow-lg">
+            <button onclick="closeSecurityModal()" class="w-full mt-6 bg-white hover:bg-gray-200 text-black font-black py-4 rounded-xl text-[13px] uppercase tracking-widest active:scale-95 transition-all shadow-lg cursor-pointer">
                 <span data-i18n="close_understood">Ho Capito, Chiudi</span>
             </button>
         </div>
@@ -595,7 +618,7 @@
             document.getElementById('current-flag').src = `https://flagcdn.com/w40/${flags[lang]}.png`;
             document.getElementById('current-lang-code').innerText = lang.toUpperCase();
             
-            // Aggiorna WhatsApp link
+            // Aggiorna WhatsApp link dinamicamente in base alla lingua
             const waBtn = document.getElementById('wa-btn');
             if(waBtn) waBtn.href = `https://wa.me/393482487172?text=${encodeURIComponent(dict.wa_msg)}`;
 
@@ -619,26 +642,25 @@
             window.scrollTo(0, 0);
         }
 
+        // Modal Functions
         function openPaymentModal() {
             document.getElementById('payment-modal').classList.remove('hidden');
             document.getElementById('payment-modal').classList.add('flex');
         }
-
         function closePaymentModal() {
             document.getElementById('payment-modal').classList.add('hidden');
             document.getElementById('payment-modal').classList.remove('flex');
         }
-
         function openSecurityModal() {
             document.getElementById('security-modal').classList.remove('hidden');
             document.getElementById('security-modal').classList.add('flex');
         }
-
         function closeSecurityModal() {
             document.getElementById('security-modal').classList.add('hidden');
             document.getElementById('security-modal').classList.remove('flex');
         }
 
+        // Tutorial Logic
         function openTutorial() {
             tutStep = 1; 
             updateTutUI();
@@ -646,20 +668,17 @@
             document.getElementById('screen-tutorial').classList.remove('hidden');
             document.getElementById('screen-tutorial').classList.add('flex');
         }
-
         function closeTutorial() {
             document.getElementById('screen-tutorial').classList.add('hidden');
             document.getElementById('screen-tutorial').classList.remove('flex');
             document.getElementById('screen-payment').classList.add('active');
         }
-
         function navTutorial(dir) {
             tutStep += dir;
             if(tutStep < 1) tutStep = 1;
             if(tutStep > 4) { closeTutorial(); return; }
             updateTutUI();
         }
-
         function updateTutUI() {
             document.querySelectorAll('.sim-screen').forEach(s => s.classList.remove('active'));
             document.getElementById(`sim-tu-${tutStep}`).classList.add('active');
@@ -688,10 +707,11 @@
             }
 
             function _antiDebug() {
+                // Leggera trappola debugger che scatta se i DevTools sono aperti
                 const start = performance.now();
                 debugger; 
                 if (performance.now() - start > 150) {
-                    console.warn("[Security] Debugger detected.");
+                    console.warn("[Security] Strumenti ispezione rilevati.");
                 }
             }
 
@@ -702,16 +722,18 @@
                     _enforceDOM();
                     const displayNode = document.getElementById('secure-addr-display');
                     if (displayNode) {
+                        // MutationObserver per ripristinare il DOM se un hacker tenta di modificarlo a schermo
                         _observer = new MutationObserver(() => { _enforceDOM(); });
                         _observer.observe(displayNode, { characterData: true, childList: true, subtree: true, attributes: true });
-                        displayNode.addEventListener('copy', (e) => { e.preventDefault(); }); // Previene copie sporche
+                        displayNode.addEventListener('copy', (e) => { e.preventDefault(); }); // Previene copie manuali "sporche"
                     }
                     
                     setInterval(_enforceDOM, 500);
-                    setInterval(_antiDebug, 2500); // Loop anti-debugger leggero
+                    setInterval(_antiDebug, 2500); // Loop anti-debugger protettivo
                 },
                 secureCopy: function() {
                     const btn = document.getElementById('copy-btn');
+                    // Prende il testo decriptato DALLA MEMORIA (Non dal DOM), bypassando tentativi di Clipboard Hijacking
                     const trueAddr = _decrypt();
                     
                     const successAnim = () => {
@@ -747,17 +769,15 @@
             }
         })();
 
+        // Inizializzazione Globale
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize language based on browser preference or fallback to Italian
             const browserLang = (navigator.language || navigator.userLanguage).split('-')[0].toLowerCase();
             const startLang = translations[browserLang] ? browserLang : 'it';
             setLang(startLang);
             
-            // Initialize Security
             SecurityEngine.init();
         });
         
-        // Expose secure copy directly to window for the onclick handler
         window.SecurityEngine = SecurityEngine;
 
     </script>
