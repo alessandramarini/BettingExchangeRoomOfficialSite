@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="theme-color" content="#05070a">
     <meta name="description" content="Betting Exchange Room - Il tuo vantaggio matematico.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     
-    <!-- OTTIMIZZAZIONI PERFORMANCE EXTREME -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -62,7 +62,8 @@
             color: #ffffff;
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
-            padding-bottom: calc(90px + env(safe-area-inset-bottom)); /* Protegge footer dalla sticky CTA */
+            /* Extra padding bottom per proteggere il footer dalla Sticky CTA su iOS/Android */
+            padding-bottom: calc(100px + env(safe-area-inset-bottom)); 
         }
         
         .glass-panel {
@@ -92,7 +93,7 @@
     <header class="fixed w-full z-50 top-0 bg-[#05070a]/90 backdrop-blur-md border-b border-white/10 pt-[max(0px,env(safe-area-inset-top))]">
         <div class="max-w-6xl mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer">
-                <img src="logo-tondo.jpeg" alt="Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-700 shadow-lg object-cover">
+                <img src="logo-tondo.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=BE&background=05070a&color=A3E635'" alt="Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-700 shadow-lg object-cover">
                 <span class="font-heading font-black text-xs sm:text-base tracking-widest text-white uppercase truncate">Betting Exchange Room</span>
             </div>
             
@@ -100,7 +101,7 @@
             <div class="relative lang-dropdown cursor-pointer">
                 <div class="flex items-center gap-2 bg-gray-800/50 hover:bg-gray-800 px-3 py-2 rounded-xl border border-gray-700 transition-colors">
                     <i class="fa-solid fa-globe text-gray-400"></i>
-                    <span id="current-lang-display" class="text-xs font-bold uppercase">IT</span>
+                    <span id="current-lang-display" class="text-xs font-bold uppercase">EN</span>
                     <i class="fa-solid fa-chevron-down text-[10px] text-gray-500"></i>
                 </div>
                 <div class="lang-dropdown-content pt-1">
@@ -140,7 +141,7 @@
         <section class="px-4 max-w-6xl mx-auto py-12 lazy-reveal content-visibility-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 
-                <!-- Card 1: Academy -->
+                <!-- Card 1: Academy (cyborgtifoso) -->
                 <article class="glass-panel rounded-3xl overflow-hidden hover:border-[#A855F7]/50 transition-colors duration-500 group flex flex-col shadow-xl">
                     <div class="w-full aspect-video relative overflow-hidden bg-black">
                         <img src="cyborgtifoso.jpeg" alt="Academy" loading="lazy" decoding="async" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-1000 ease-out">
@@ -155,7 +156,7 @@
                     </div>
                 </article>
 
-                <!-- Card 2: Segnali A.I. -->
+                <!-- Card 2: Segnali A.I. (cyborgcalciatore) -->
                 <article class="glass-panel rounded-3xl overflow-hidden hover:border-[#00D2FF]/50 transition-colors duration-500 group flex flex-col shadow-xl">
                     <div class="w-full aspect-video relative overflow-hidden bg-black">
                         <img src="cyborgcalciatore.jpeg" alt="A.I. Signals" loading="lazy" decoding="async" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-1000 ease-out">
@@ -170,7 +171,7 @@
                     </div>
                 </article>
 
-                <!-- Card 3: Risk Management -->
+                <!-- Card 3: Risk Management (cyborgarbitro) -->
                 <article class="glass-panel rounded-3xl overflow-hidden hover:border-[#FBBF24]/50 transition-colors duration-500 group flex flex-col shadow-xl">
                     <div class="w-full aspect-video relative overflow-hidden bg-black">
                         <img src="cyborgarbitro.jpeg" alt="Risk Management" loading="lazy" decoding="async" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-1000 ease-out">
@@ -204,6 +205,7 @@
                     <span class="text-sm text-gray-500 font-bold" data-i18n="price_sub">/mese</span>
                 </div>
 
+                <!-- Questo bottone porta a app-full-price.html per processare 97 USDT -->
                 <a id="btn-full-price" href="app-full-price.html" class="w-full block bg-gradient-to-r from-[#1E3A8A] to-[#3B82F6] hover:from-[#3B82F6] hover:to-[#1E3A8A] text-white font-black text-center py-4 rounded-xl text-[15px] sm:text-lg uppercase tracking-widest shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300 transform hover:scale-[1.02] active:scale-95 mb-6">
                     <i class="fa-solid fa-lock mr-2"></i> <span data-i18n="price_btn">ACQUISTA ORA</span>
                 </a>
@@ -245,7 +247,7 @@
                 </details>
             </div>
         </section>
-        
+
         <section class="py-8 px-4 max-w-4xl mx-auto content-visibility-auto lazy-reveal">
             <div class="bg-gradient-to-r from-blue-900/60 to-indigo-900/60 border border-blue-500/30 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden">
                 <div class="absolute -right-4 -top-4 text-white/5 text-9xl pointer-events-none"><i class="fa-solid fa-gamepad"></i></div>
@@ -269,19 +271,18 @@
             <i class="fa-brands fa-whatsapp text-lg sm:text-xl"></i> <span data-i18n="wa_btn">Lavora con noi</span>
         </a>
 
-        <!-- Social Links (Ordine Alfabetico & Hover Effetti) -->
+        <!-- Social Links -->
         <div class="flex justify-center items-center gap-5 sm:gap-6 mb-8">
-            <a href="https://www.facebook.com/share/19gmdRYKa9/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#1877F2] transition-colors duration-300 text-xl sm:text-2xl" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#229ED9] transition-colors duration-300 text-xl sm:text-2xl" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-            <a href="https://whatsapp.com/channel/0029VbCLlH8LI8YUjKBH0v1o" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#25D366] transition-colors duration-300 text-xl sm:text-2xl" aria-label="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
             <a href="https://x.com/BettingExcRoom" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-white transition-colors duration-300 text-xl sm:text-2xl" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
             <a href="https://www.youtube.com/@bettingexchangeroom" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#FF0000] transition-colors duration-300 text-xl sm:text-2xl" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.facebook.com/share/19gmdRYKa9/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#1877F2] transition-colors duration-300 text-xl sm:text-2xl" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://whatsapp.com/channel/0029VbCLlH8LI8YUjKBH0v1o" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#25D366] transition-colors duration-300 text-xl sm:text-2xl" aria-label="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-[#229ED9] transition-colors duration-300 text-xl sm:text-2xl" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
         </div>
 
         <p class="text-gray-600 text-[9px] sm:text-[10px] mt-8 uppercase tracking-widest">&copy; 2026 Betting Exchange Room</p>
     </footer>
 
-    <!-- FISSA AL FONDO SEMPRE VISIBILE -->
     <div class="fixed bottom-0 left-0 w-full z-50 bg-[#05070a]/90 backdrop-blur-md border-t border-[#D4AF37]/30 px-3 py-3 sm:px-4 sm:py-4 shadow-[0_-10px_30px_rgba(0,0,0,0.8)] pb-[calc(12px+env(safe-area-inset-bottom))] sm:pb-[calc(16px+env(safe-area-inset-bottom))]">
         <div class="max-w-4xl mx-auto">
             <a href="https://zero-to-hero-academy-betting-exchan.vercel.app/" target="_blank" rel="noopener noreferrer" class="group relative w-full bg-gradient-to-r from-[#D4AF37] via-[#FFF0B3] to-[#D4AF37] bg-[length:200%_auto] text-black py-3.5 sm:py-4 rounded-xl font-black text-sm sm:text-lg flex items-center justify-center uppercase shadow-gold-glow transition-all duration-500 active:scale-95 cursor-pointer overflow-hidden animate-pulse-soft">
@@ -294,7 +295,6 @@
     </div>
 
     <script>
-        // DIZIONARIO MULTILINGUA
         const translations = {
             en: {
                 hero_badge: "OFFICIAL PLATFORM", hero_title_1: "YOUR MATHEMATICAL", hero_title_2: "ADVANTAGE",
@@ -362,7 +362,6 @@
             }
         };
 
-        // GESTIONE LINGUA
         function setLang(lang) {
             if (!translations[lang]) lang = 'en';
             
@@ -375,7 +374,7 @@
             // 2. Aggiorna il selettore visivo
             document.getElementById('current-lang-display').innerText = lang.toUpperCase();
 
-            // 3. Aggiorna il link del pulsante acquista (Passa il parametro lingua al checkout)
+            // 3. Aggiorna il link del pulsante acquista (Passa il parametro lingua all'app checkout)
             const buyBtn = document.getElementById('btn-full-price');
             if(buyBtn) buyBtn.href = `app-full-price.html?lang=${lang}`;
 
@@ -389,7 +388,7 @@
             try { localStorage.setItem('bx_lang', lang); } catch(e){}
         }
 
-        // RILEVAZIONE AUTOMATICA LINGUA ALL'AVVIO
+        // RILEVAZIONE AUTOMATICA LINGUA ALL'AVVIO & LAZY REVEAL
         document.addEventListener('DOMContentLoaded', () => {
             let startLang = 'en';
             try {
