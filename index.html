@@ -1,34 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-[#05070a]">
+<html lang="it" class="scroll-smooth bg-[#05070a]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="theme-color" content="#05070a">
-    <meta name="description" content="Betting Exchange Room - Extract True Expected Value.">
+    <meta name="description" content="Betting Exchange Room - Estrai Valore Atteso. Modelli algoritmici per far crescere il tuo bankroll.">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- Preconnect for performance -->
+    <!-- Preconnect & Preload for maximum speed on Vercel/GitHub -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Preload critical assets -->
     <link rel="preload" as="image" href="logo-tondo.jpeg" fetchpriority="high">
-    <!-- Note: Preloading video can be heavy, usually better to let browser handle it with poster -->
     
     <title>Betting Exchange Room | Official Site</title>
-    <!-- Placeholder favicon if logo is missing -->
-    <link rel="icon" type="image/jpeg" href="logo-tondo.jpeg" onerror="this.href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>'">
+    <link rel="icon" type="image/jpeg" href="logo-tondo.jpeg">
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <!-- FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome (Load deferred for performance, using specific icons) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
-    <!-- Tailwind CSS Script -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
@@ -42,29 +37,29 @@
                     colors: {
                         brand: {
                             dark: '#05070a',
-                            neon: '#A3E635', // Acid Green
+                            neon: '#A3E635',
                             neonDark: '#84cc16',
                             gold: '#D4AF37',
                             gray: '#8a94a6'
                         }
                     },
                     boxShadow: {
-                        'neon': '0 0 20px rgba(163, 230, 53, 0.15)',
-                        'gold': '0 0 30px rgba(212, 175, 55, 0.15)',
+                        'neon': '0 0 20px rgba(163, 230, 53, 0.2)',
+                        'gold': '0 0 30px rgba(212, 175, 55, 0.2)',
                         'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
                     },
                     animation: {
                         'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'pulse-slow': 'pulseSlow 4s ease-in-out infinite'
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite'
                     },
                     keyframes: {
                         fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' }
                         },
-                        pulseSlow: {
-                            '0%, 100%': { opacity: '1' },
-                            '50%': { opacity: '.8' }
+                        pulseSoft: {
+                            '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 20px rgba(163, 230, 53, 0.2)' },
+                            '50%': { transform: 'scale(1.02)', boxShadow: '0 0 35px rgba(163, 230, 53, 0.6)' }
                         }
                     }
                 }
@@ -79,106 +74,99 @@
             color: #ffffff;
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
-            /* Avoid jumpy scrollbars */
-            width: 100vw;
-            /* Padding for sticky footer CTA on mobile */
-            padding-bottom: calc(90px + env(safe-area-inset-bottom)); 
+            width: 100%;
+            /* Safe area padding for mobile sticky CTA */
+            padding-bottom: calc(100px + env(safe-area-inset-bottom)); 
         }
 
-        @media (min-width: 640px) {
-            body { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
-        }
-        
-        /* High-end Glassmorphism */
+        /* Glassmorphism */
         .glass-panel {
-            background: linear-gradient(180deg, rgba(17, 24, 39, 0.7) 0%, rgba(10, 14, 23, 0.9) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.8) 0%, rgba(10, 14, 23, 0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             transition: border-color 0.3s ease, transform 0.3s ease;
-        }
-
-        .glass-panel:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        /* Fluid Typography scaling */
-        .text-fluid-h1 { font-size: clamp(2.5rem, 5vw + 1rem, 5rem); line-height: 1.05; }
-        .text-fluid-h2 { font-size: clamp(2rem, 4vw + 1rem, 3.5rem); line-height: 1.1; }
-        .text-fluid-h3 { font-size: clamp(1.25rem, 2vw + 1rem, 1.75rem); line-height: 1.2; }
-        .text-fluid-p { font-size: clamp(1rem, 1.2vw + 0.5rem, 1.125rem); line-height: 1.6; }
-
-        /* Performance: Lazy Reveal classes */
-        .lazy-reveal { opacity: 0; transform: translateY(30px); }
-        .lazy-reveal.revealed { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        
-        /* Performance: Content Visibility */
-        .content-visibility-auto { 
-            content-visibility: auto; 
-            contain-intrinsic-size: 10px 500px; /* Placeholder dimensions */
-        }
-
-        /* Custom Dropdown for Language */
+        /* Dropdown custom */
         .lang-dropdown-wrapper { position: relative; display: inline-block; }
         .lang-dropdown-content { 
             visibility: hidden; opacity: 0; position: absolute; right: 0; top: calc(100% + 0.5rem); 
             min-width: 150px; background-color: #111827; border: 1px solid rgba(255,255,255,0.1); 
             border-radius: 0.75rem; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 100;
-            transform: translateY(-10px); transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(-10px); transition: all 0.2s ease;
         }
         .lang-dropdown-wrapper:hover .lang-dropdown-content, 
         .lang-dropdown-wrapper:focus-within .lang-dropdown-content { 
             visibility: visible; opacity: 1; transform: translateY(0); 
         }
 
-        /* Gradient Text Utility */
-        .text-gradient {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Stili specifici per la sezione Dashboard Quant */
+        .dashboard-quant-text span {
+            display: block;
+            color: #60A5FA; /* Tailwind blue-400 */
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
+            text-transform: uppercase;
+        }
+        @media (min-width: 640px) {
+            .dashboard-quant-text span { font-size: 1.3rem; }
         }
 
-        /* Hide details marker */
+        /* Hide Details Marker */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
+        
+        /* Video aspect ratio safe wrapper */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+        .video-wrapper video {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+        }
     </style>
 </head>
 
 <body class="antialiased selection:bg-brand-neon selection:text-black font-sans">
 
-    <!-- Header / Navbar -->
-    <header class="fixed w-full z-50 top-0 bg-[#05070a]/80 backdrop-blur-xl border-b border-white/5 transition-all duration-300" id="main-header">
+    <header class="fixed w-full z-50 top-0 bg-[#05070a]/90 backdrop-blur-xl border-b border-white/5 transition-all duration-300" id="main-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             
             <!-- Logo -->
             <a href="#" class="flex items-center gap-3 group outline-none focus-visible:ring-2 focus-visible:ring-brand-neon rounded-lg">
-                <div class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-white/10 shadow-lg group-hover:border-brand-neon/50 transition-colors">
-                    <img src="logo-tondo.jpeg" onerror="this.src='https://placehold.co/100x100/111827/A3E635?text=BE'" alt="Betting Exchange Room Logo" class="w-full h-full object-cover">
+                <div class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-white/10 shadow-lg group-hover:border-brand-neon/50 transition-colors shrink-0">
+                    <img src="logo-tondo.jpeg" alt="Logo" class="w-full h-full object-cover">
                 </div>
-                <span class="font-heading font-bold text-sm sm:text-base tracking-widest text-white uppercase hidden sm:block">
+                <span class="font-heading font-black text-[11px] sm:text-base tracking-widest text-white uppercase truncate">
                     Betting Exchange <span class="text-brand-neon">Room</span>
                 </span>
             </a>
             
             <!-- Language Selector -->
-            <div class="lang-dropdown-wrapper">
-                <button class="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-3 py-2 rounded-lg border border-white/10 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-brand-neon" aria-label="Select Language">
+            <div class="lang-dropdown-wrapper shrink-0">
+                <button class="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-3 py-2 rounded-lg border border-white/10 transition-colors outline-none" aria-label="Select Language">
                     <i class="fa-solid fa-globe text-brand-gray text-sm"></i>
-                    <span id="current-lang-display" class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-white">EN</span>
+                    <span id="current-lang-display" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">EN</span>
                     <i class="fa-solid fa-chevron-down text-[10px] text-brand-gray ml-1"></i>
                 </button>
                 <div class="lang-dropdown-content overflow-hidden">
-                    <button onclick="setLang('en')" class="w-full text-left px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white outline-none focus-visible:bg-white/10">
+                    <button onclick="setLang('en')" class="w-full text-left px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
                         <img src="https://flagcdn.com/w20/gb.png" alt="" class="w-5 rounded-[2px]" aria-hidden="true"> English
                     </button>
-                    <button onclick="setLang('es')" class="w-full text-left px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white outline-none focus-visible:bg-white/10">
+                    <button onclick="setLang('es')" class="w-full text-left px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
                         <img src="https://flagcdn.com/w20/es.png" alt="" class="w-5 rounded-[2px]" aria-hidden="true"> Español
                     </button>
-                    <button onclick="setLang('it')" class="w-full text-left px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white outline-none focus-visible:bg-white/10">
+                    <button onclick="setLang('it')" class="w-full text-left px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
                         <img src="https://flagcdn.com/w20/it.png" alt="" class="w-5 rounded-[2px]" aria-hidden="true"> Italiano
                     </button>
-                    <button onclick="setLang('pt')" class="w-full text-left px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white outline-none focus-visible:bg-white/10">
+                    <button onclick="setLang('pt')" class="w-full text-left px-4 py-3 text-sm font-medium hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
                         <img src="https://flagcdn.com/w20/br.png" alt="" class="w-5 rounded-[2px]" aria-hidden="true"> Português
                     </button>
                 </div>
@@ -187,89 +175,121 @@
         </div>
     </header>
 
-    <main class="pt-[calc(64px+2rem)] sm:pt-[calc(80px+4rem)]">
+    <main class="pt-[calc(64px+2rem)] sm:pt-[calc(80px+3rem)]">
         
-        <!-- Hero Section -->
         <section class="px-4 max-w-6xl mx-auto flex flex-col items-center text-center pb-12 sm:pb-20 relative">
             
-            <!-- Ambient Glow -->
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-brand-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
 
             <!-- Global Badge -->
-            <div class="inline-flex items-center gap-2 bg-brand-neon/5 border border-brand-neon/20 px-4 py-1.5 rounded-full mb-8 sm:mb-10 animate-fade-in-up" style="animation-delay: 0.1s;">
-                <span class="relative flex h-2 w-2">
+            <div class="inline-flex items-center gap-2 bg-brand-neon/5 border border-brand-neon/20 px-4 py-1.5 rounded-full mb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+                <span class="relative flex h-2 w-2 shrink-0">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-neon"></span>
                 </span>
-                <span class="text-brand-gray text-[10px] sm:text-xs font-semibold tracking-widest uppercase" data-i18n="hero_badge">
+                <span class="text-brand-gray text-[10px] sm:text-xs font-bold tracking-widest uppercase" data-i18n="hero_badge">
                     Segnali attivi su Telegram
                 </span>
             </div>
 
-            <!-- Main Title (Removed ROOM, highly professional) -->
+            <!-- Title -->
             <h1 class="font-heading font-black mb-6 tracking-tighter w-full animate-fade-in-up" style="animation-delay: 0.2s;">
                 <span class="block text-fluid-h1 text-white uppercase drop-shadow-lg" data-i18n="hero_title_1">IL TUO VANTAGGIO</span>
-                <span class="block text-fluid-h1 text-gradient bg-gradient-to-r from-white via-brand-neon to-brand-neonDark uppercase mt-2 drop-shadow-xl" data-i18n="hero_title_2">MATEMATICO</span>
+                <span class="block text-fluid-h1 text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-neon to-brand-neonDark uppercase mt-2 drop-shadow-xl" data-i18n="hero_title_2">MATEMATICO</span>
             </h1>
 
             <!-- Subtitle -->
-            <p class="text-brand-gray text-fluid-p max-w-3xl mx-auto font-normal mb-10 sm:mb-14 animate-fade-in-up" style="animation-delay: 0.3s;" data-i18n="hero_subtitle">
-                Dimentica l'azzardo. Sfrutta le nostre reti neurali per estrarre vero <span class='text-white font-semibold'>Valore Atteso</span> dall'Exchange. Copia le operazioni, gestisci il rischio e proteggi il tuo bankroll.
+            <p class="text-brand-gray text-fluid-p max-w-3xl mx-auto font-medium mb-10 sm:mb-14 animate-fade-in-up px-4" style="animation-delay: 0.3s;" data-i18n="hero_subtitle">
+                Dimentica l'azzardo. Sfrutta le nostre reti neurali per estrarre vero <span class='text-white font-bold'>Valore Atteso</span> dall'Exchange. Copia le operazioni, gestisci il rischio e proteggi il tuo bankroll.
             </p>
 
-            <!-- Video Container -->
-            <div class="w-full max-w-5xl rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative aspect-video bg-[#0a0e14] animate-fade-in-up group" style="animation-delay: 0.4s;">
-                <video class="absolute inset-0 w-full h-full object-cover z-10" 
-                       autoplay muted playsinline webkit-playsinline loop 
-                       poster="logo-tondo.jpeg">
-                    <source src="spot1.mp4" type="video/mp4">
-                    <!-- Fallback message if video fails -->
-                    <p class="text-white">Il tuo browser non supporta il tag video.</p>
-                </video>
-                <!-- Subtle overlay to make UI elements pop if they are over video -->
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-20 pointer-events-none"></div>
+            <!-- Video Player -->
+            <div class="w-full max-w-5xl rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl relative bg-black animate-fade-in-up group" style="animation-delay: 0.4s;">
+                <div class="video-wrapper">
+                    <video autoplay muted playsinline webkit-playsinline loop poster="logo-tondo.jpeg" class="object-cover">
+                        <source src="spot1.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
 
         </section>
 
-        <!-- Value Proposition Section -->
-        <section class="px-4 max-w-5xl mx-auto py-12 sm:py-20 text-center lazy-reveal content-visibility-auto">
-            <h2 class="text-fluid-h2 font-heading font-black text-white mb-8 tracking-tight" data-i18n="new_sec_title">COPIA. INCOLLA. INCASSA.</h2>
+        <!-- SEZIONE "COPIA. INCOLLA. INCASSA." RINNOVATA (High-Tech Dashboard) -->
+        <section class="px-4 max-w-6xl mx-auto py-12 sm:py-20 lazy-reveal">
             
-            <div class="glass-panel rounded-[1.5rem] sm:rounded-[2rem] p-8 sm:p-12 relative overflow-hidden">
-                <!-- Background Accent -->
-                <div class="absolute -right-20 -top-20 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none"></div>
+            <div class="glass-panel rounded-[2rem] sm:rounded-[3rem] p-1 border border-white/5 relative overflow-hidden shadow-2xl group">
                 
-                <div class="relative z-10 flex flex-col items-center">
-                    <div class="w-16 h-16 rounded-full bg-blue-500/10 flex items-center justify-center mb-6 border border-blue-500/20">
-                        <i class="fa-solid fa-bullseye text-blue-400 text-2xl"></i>
+                <!-- Animated border gradient effect background -->
+                <div class="absolute inset-0 bg-gradient-to-br from-brand-neon/20 via-[#05070a] to-blue-500/20 opacity-50 group-hover:opacity-80 transition-opacity duration-700"></div>
+                
+                <!-- Inner Panel -->
+                <div class="relative bg-[#05070a]/95 backdrop-blur-2xl rounded-[1.8rem] sm:rounded-[2.8rem] p-8 sm:p-14 h-full w-full overflow-hidden">
+                    
+                    <!-- Tech Background Grid -->
+                    <div class="absolute inset-0 opacity-[0.04] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:30px_30px] pointer-events-none"></div>
+
+                    <!-- Header -->
+                    <div class="text-center mb-12 sm:mb-16 relative z-10 flex flex-col items-center">
+                        <div class="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6 shadow-lg">
+                            <span class="w-2 h-2 rounded-full bg-brand-neon animate-pulse mr-2"></span>
+                            <span class="text-[10px] sm:text-xs font-bold tracking-widest text-brand-gray uppercase">Trading System Protocol</span>
+                        </div>
+                        <h2 class="text-fluid-h2 font-heading font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-100 to-gray-500 tracking-tight drop-shadow-lg" data-i18n="new_sec_title">
+                            COPIA. INCOLLA. INCASSA.
+                        </h2>
                     </div>
-                    <p class="text-blue-400 text-fluid-h3 font-bold mb-4 uppercase tracking-wide leading-tight" data-i18n="new_sec_desc1">
-                        Ricevi segnali chiari e precisi, con stop loss e money management preimpostati.
-                    </p>
-                    <div class="w-16 h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent my-6 rounded-full"></div>
-                    <p class="text-brand-gray text-fluid-p max-w-2xl" data-i18n="new_sec_desc2">
-                        <span class="text-white font-semibold">ANALISI QUANTITATIVA APPLICATA.</span> Non una previsione, ma un protocollo matematico con rigorosa gestione del rischio e Stop Loss.
-                    </p>
+                    
+                    <!-- Grid Content -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0 relative z-10">
+                        
+                        <!-- Colonna Sinistra (Esecuzione / Segnali) -->
+                        <div class="flex flex-col items-center md:items-start text-center md:text-left md:pr-12 relative">
+                            <!-- Desktop Divider -->
+                            <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-[120%] bg-gradient-to-b from-transparent via-white/15 to-transparent"></div>
+                            
+                            <div class="relative flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-2xl bg-brand-neon/10 border border-brand-neon/30 mb-6 sm:mb-8 shadow-neon">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-2xl bg-brand-neon opacity-20"></span>
+                                <i class="fa-solid fa-satellite-dish text-brand-neon text-2xl sm:text-3xl"></i>
+                            </div>
+                            
+                            <h3 class="text-white text-xl sm:text-2xl lg:text-3xl font-black uppercase tracking-wide leading-[1.2] drop-shadow-md" data-i18n="new_sec_desc1">
+                                Ricevi segnali chiari e precisi, con stop loss e money management preimpostati.
+                            </h3>
+                        </div>
+
+                        <!-- Mobile Divider -->
+                        <div class="md:hidden w-full h-px bg-gradient-to-r from-transparent via-white/15 to-transparent my-2"></div>
+
+                        <!-- Colonna Destra (Logica / Quant) -->
+                        <div class="flex flex-col items-center md:items-start text-center md:text-left md:pl-12 relative dashboard-quant-text">
+                            <div class="h-16 w-16 sm:h-20 sm:w-20 flex items-center justify-center rounded-2xl bg-blue-500/10 border border-blue-500/30 mb-6 sm:mb-8 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                                <i class="fa-solid fa-microchip text-blue-400 text-2xl sm:text-3xl"></i>
+                            </div>
+                            
+                            <p class="text-brand-gray text-base sm:text-lg lg:text-xl leading-relaxed font-medium" data-i18n="new_sec_desc2">
+                                <span class='text-white font-bold'>ANALISI QUANTITATIVA APPLICATA.</span> Non una previsione, ma un protocollo matematico con rigorosa gestione del rischio e Stop Loss.
+                            </p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Features Grid -->
-        <section class="px-4 max-w-7xl mx-auto py-12 sm:py-20 lazy-reveal content-visibility-auto">
+        <section class="px-4 max-w-7xl mx-auto py-10 sm:py-16 lazy-reveal">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                 
                 <!-- Card 1 -->
                 <article class="glass-panel rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden flex flex-col group">
-                    <div class="w-full aspect-[16/10] relative overflow-hidden bg-[#0a0e14]">
-                        <img src="cyborgtifoso.jpeg" onerror="this.src='https://placehold.co/600x400/111827/A855F7?text=Academy'" alt="Academy" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0e14] via-[#0a0e14]/50 to-transparent z-10"></div>
+                    <div class="w-full aspect-[16/10] relative overflow-hidden bg-black">
+                        <img src="cyborgtifoso.jpeg" alt="Academy" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/50 to-transparent"></div>
                     </div>
-                    <div class="p-6 sm:p-8 relative z-20 flex flex-col flex-1 -mt-16">
-                        <div class="w-12 h-12 rounded-xl bg-[#0a0e14] flex items-center justify-center border border-purple-500/30 mb-4 shadow-lg shadow-purple-500/10">
+                    <div class="p-6 sm:p-8 relative z-10 flex flex-col flex-1 -mt-16">
+                        <div class="w-12 h-12 rounded-xl bg-[#05070a] flex items-center justify-center border border-purple-500/30 mb-4 shadow-lg shadow-purple-500/10 shrink-0">
                             <i class="fa-solid fa-graduation-cap text-purple-400 text-xl"></i>
                         </div>
-                        <h3 class="text-xl sm:text-2xl font-heading font-bold text-white mb-3" data-i18n="card1_title">DA PRINCIPIANTE A PRO</h3>
+                        <h3 class="text-xl sm:text-2xl font-heading font-black text-white mb-3 tracking-wide" data-i18n="card1_title">DA PRINCIPIANTE A PRO</h3>
                         <p class="text-brand-gray text-sm sm:text-base leading-relaxed" data-i18n="card1_desc">
                             ZERO TO HERO Academy.<br>30 lezioni interattive con video, podcast, ebook, quiz, demo e giochi educativi guidati dall'AI.
                         </p>
@@ -278,15 +298,15 @@
 
                 <!-- Card 2 -->
                 <article class="glass-panel rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden flex flex-col group">
-                    <div class="w-full aspect-[16/10] relative overflow-hidden bg-[#0a0e14]">
-                        <img src="cyborgcalciatore.jpeg" onerror="this.src='https://placehold.co/600x400/111827/06B6D4?text=AI+Signals'" alt="AI Signals" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0e14] via-[#0a0e14]/50 to-transparent z-10"></div>
+                    <div class="w-full aspect-[16/10] relative overflow-hidden bg-black">
+                        <img src="cyborgcalciatore.jpeg" alt="AI Signals" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/50 to-transparent"></div>
                     </div>
-                    <div class="p-6 sm:p-8 relative z-20 flex flex-col flex-1 -mt-16">
-                        <div class="w-12 h-12 rounded-xl bg-[#0a0e14] flex items-center justify-center border border-cyan-500/30 mb-4 shadow-lg shadow-cyan-500/10">
+                    <div class="p-6 sm:p-8 relative z-10 flex flex-col flex-1 -mt-16">
+                        <div class="w-12 h-12 rounded-xl bg-[#05070a] flex items-center justify-center border border-cyan-500/30 mb-4 shadow-lg shadow-cyan-500/10 shrink-0">
                             <i class="fa-solid fa-robot text-cyan-400 text-xl"></i>
                         </div>
-                        <h3 class="text-xl sm:text-2xl font-heading font-bold text-white mb-3" data-i18n="card2_title">NESSUNA EMOZIONE</h3>
+                        <h3 class="text-xl sm:text-2xl font-heading font-black text-white mb-3 tracking-wide" data-i18n="card2_title">NESSUNA EMOZIONE</h3>
                         <p class="text-brand-gray text-sm sm:text-base leading-relaxed" data-i18n="card2_desc">
                             Copia il segnale. Imposta il trade. Vantaggio matematico.
                         </p>
@@ -295,17 +315,17 @@
 
                 <!-- Card 3 -->
                 <article class="glass-panel rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden flex flex-col group">
-                    <div class="w-full aspect-[16/10] relative overflow-hidden bg-[#0a0e14]">
-                        <img src="cyborgarbitro.jpeg" onerror="this.src='https://placehold.co/600x400/111827/F59E0B?text=Risk+Mgmt'" alt="Risk Management" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0e14] via-[#0a0e14]/50 to-transparent z-10"></div>
+                    <div class="w-full aspect-[16/10] relative overflow-hidden bg-black">
+                        <img src="cyborgarbitro.jpeg" alt="Risk Management" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/50 to-transparent"></div>
                     </div>
-                    <div class="p-6 sm:p-8 relative z-20 flex flex-col flex-1 -mt-16">
-                        <div class="w-12 h-12 rounded-xl bg-[#0a0e14] flex items-center justify-center border border-amber-500/30 mb-4 shadow-lg shadow-amber-500/10">
+                    <div class="p-6 sm:p-8 relative z-10 flex flex-col flex-1 -mt-16">
+                        <div class="w-12 h-12 rounded-xl bg-[#05070a] flex items-center justify-center border border-amber-500/30 mb-4 shadow-lg shadow-amber-500/10 shrink-0">
                             <i class="fa-solid fa-shield-halved text-amber-400 text-xl"></i>
                         </div>
-                        <h3 class="text-xl sm:text-2xl font-heading font-bold text-white mb-3" data-i18n="card3_title">MONEY MANAGEMENT</h3>
+                        <h3 class="text-xl sm:text-2xl font-heading font-black text-white mb-3 tracking-wide" data-i18n="card3_title">MONEY MANAGEMENT</h3>
                         <p class="text-brand-gray text-sm sm:text-base leading-relaxed" data-i18n="card3_desc">
-                            Modelli matematici rigidi progettati per proteggere e far crescere il tuo bankroll in modo matematico.
+                            Modelli algoritmici rigidi progettati per proteggere e far crescere il tuo bankroll in modo matematico.
                         </p>
                     </div>
                 </article>
@@ -313,92 +333,84 @@
             </div>
         </section>
 
-        <!-- Pricing Section -->
-        <section class="py-12 sm:py-20 px-4 max-w-4xl mx-auto content-visibility-auto lazy-reveal">
-            <div class="glass-panel rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-12 md:p-16 text-center border border-brand-gold/20 relative shadow-gold">
+        <section class="py-10 sm:py-16 px-4 max-w-4xl mx-auto lazy-reveal">
+            <div class="glass-panel rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-14 text-center border border-brand-gold/30 relative shadow-gold">
                 
-                <!-- Badge -->
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-gold to-[#F5E084] text-black font-bold uppercase tracking-widest text-xs px-6 py-2 rounded-full shadow-lg whitespace-nowrap">
-                    <i class="fa-solid fa-star text-[10px] mr-1"></i> <span data-i18n="price_badge">OFFERTA COMPLETA</span>
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-gold to-[#F5E084] text-black font-black uppercase tracking-widest text-xs px-6 py-2 rounded-full shadow-lg whitespace-nowrap">
+                    <i class="fa-solid fa-star mr-1"></i> <span data-i18n="price_badge">OFFERTA COMPLETA</span>
                 </div>
 
-                <h2 class="text-2xl sm:text-3xl font-heading font-black text-white uppercase tracking-widest mb-4 mt-4" data-i18n="price_title">ACCESSO PIATTAFORMA</h2>
-                <p class="text-brand-gray text-base sm:text-lg max-w-xl mx-auto mb-10" data-i18n="price_desc">Accesso completo, immediato e senza limiti all'Academy e alla Premium Room con Segnali A.I.</p>
+                <h2 class="text-2xl sm:text-3xl font-heading font-black text-white uppercase tracking-widest mb-4 mt-2" data-i18n="price_title">ACCESSO PIATTAFORMA</h2>
+                <p class="text-brand-gray text-sm sm:text-base max-w-xl mx-auto mb-10" data-i18n="price_desc">Accesso completo, immediato e senza limiti all'Academy e alla Premium Room con Segnali A.I.</p>
                 
-                <div class="flex items-center justify-center mb-10">
-                    <span class="text-6xl sm:text-7xl lg:text-8xl font-heading font-black text-gradient bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">97</span>
-                    <div class="flex flex-col items-start ml-3">
+                <div class="flex items-center justify-center mb-10 gap-2">
+                    <span class="text-6xl sm:text-7xl lg:text-8xl font-heading font-black text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">97</span>
+                    <div class="flex flex-col items-start">
                         <span class="text-2xl sm:text-3xl text-gray-300 font-bold leading-none">USDT</span>
                         <span class="text-sm text-gray-500 font-medium mt-1" data-i18n="price_sub">/mese</span>
                     </div>
                 </div>
 
-                <a id="btn-full-price" href="app-full-price.html" class="inline-flex items-center justify-center w-full sm:w-auto min-w-[280px] bg-white text-black hover:bg-gray-200 font-bold py-4 px-8 rounded-xl text-base sm:text-lg uppercase tracking-widest transition-all duration-300 transform hover:-translate-y-1 focus:ring-4 focus:ring-white/30 outline-none">
-                    <i class="fa-solid fa-lock mr-3 opacity-70"></i> <span data-i18n="price_btn">ACQUISTA ORA</span>
+                <a id="btn-full-price" href="app-full-price.html" class="inline-flex items-center justify-center w-full sm:w-auto min-w-[280px] bg-gradient-to-r from-[#D4AF37] via-[#FFF0B3] to-[#D4AF37] bg-[length:200%_auto] hover:bg-right text-black font-black py-4 px-8 rounded-xl text-base sm:text-lg uppercase tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 outline-none shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.6)]">
+                    <i class="fa-solid fa-lock mr-3 opacity-80"></i> <span data-i18n="price_btn">ACQUISTA ORA</span>
                 </a>
             </div>
         </section>
 
-        <!-- FAQ Section -->
-        <section class="py-12 sm:py-20 px-4 max-w-3xl mx-auto content-visibility-auto lazy-reveal">
+        <section class="py-10 sm:py-16 px-4 max-w-3xl mx-auto lazy-reveal">
             <h2 class="font-heading font-black text-2xl sm:text-3xl text-center text-white mb-10 uppercase tracking-widest" data-i18n="faq_title">DOMANDE FREQUENTI</h2>
             
             <div class="space-y-4">
-                <!-- FAQ Item 1 -->
-                <details class="bg-white/5 border border-white/10 rounded-2xl group cursor-pointer hover:bg-white/10 transition-colors duration-300">
-                    <summary class="flex justify-between items-center font-semibold text-base sm:text-lg text-white p-5 sm:p-6 outline-none focus-visible:ring-2 focus-visible:ring-brand-neon rounded-2xl">
+                <details class="glass-panel border border-white/10 rounded-2xl group cursor-pointer hover:bg-white/5 transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-base sm:text-lg text-white p-5 sm:p-6 outline-none rounded-2xl">
                         <span data-i18n="faq_q1">Posso annullare quando voglio?</span>
                         <span class="relative flex-shrink-0 ml-4 w-6 h-6 flex items-center justify-center">
                             <i class="fa-solid fa-chevron-down text-brand-gray group-open:rotate-180 transition-transform duration-300"></i>
                         </span>
                     </summary>
                     <div class="px-5 sm:px-6 pb-6 text-brand-gray text-sm sm:text-base leading-relaxed cursor-text" data-i18n="faq_a1">
-                        Sì, l'abbonamento è mensile e non ha vincoli di permanenza. Puoi disdire in qualsiasi momento dal tuo pannello di controllo.
+                        Sì, l'abbonamento è mensile e non ha vincoli di permanenza. Puoi disdire in qualsiasi momento.
                     </div>
                 </details>
 
-                <!-- FAQ Item 2 -->
-                <details class="bg-white/5 border border-white/10 rounded-2xl group cursor-pointer hover:bg-white/10 transition-colors duration-300">
-                    <summary class="flex justify-between items-center font-semibold text-base sm:text-lg text-white p-5 sm:p-6 outline-none focus-visible:ring-2 focus-visible:ring-brand-neon rounded-2xl">
+                <details class="glass-panel border border-white/10 rounded-2xl group cursor-pointer hover:bg-white/5 transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-base sm:text-lg text-white p-5 sm:p-6 outline-none rounded-2xl">
                         <span data-i18n="faq_q2">Devo usare per forza USDT e TON?</span>
                         <span class="relative flex-shrink-0 ml-4 w-6 h-6 flex items-center justify-center">
                             <i class="fa-solid fa-chevron-down text-brand-gray group-open:rotate-180 transition-transform duration-300"></i>
                         </span>
                     </summary>
                     <div class="px-5 sm:px-6 pb-6 text-brand-gray text-sm sm:text-base leading-relaxed cursor-text" data-i18n="faq_a2">
-                        Sì, utilizziamo la tecnologia Blockchain per garantire pagamenti globali, sicuri, istantanei e senza limiti bancari. Nel tutorial gratuito ti spieghiamo passo-passo come fare in 5 minuti.
+                        Sì, utilizziamo la tecnologia Blockchain per garantire pagamenti globali, sicuri, istantanei e senza limiti bancari. Nel tutorial gratuito ti spieghiamo passo-passo come fare.
                     </div>
                 </details>
 
-                <!-- FAQ Item 3 -->
-                <details class="bg-white/5 border border-white/10 rounded-2xl group cursor-pointer hover:bg-white/10 transition-colors duration-300">
-                    <summary class="flex justify-between items-center font-semibold text-base sm:text-lg text-white p-5 sm:p-6 outline-none focus-visible:ring-2 focus-visible:ring-brand-neon rounded-2xl">
+                <details class="glass-panel border border-white/10 rounded-2xl group cursor-pointer hover:bg-white/5 transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-base sm:text-lg text-white p-5 sm:p-6 outline-none rounded-2xl">
                         <span data-i18n="faq_q3">Cosa include esattamente l'abbonamento?</span>
                         <span class="relative flex-shrink-0 ml-4 w-6 h-6 flex items-center justify-center">
                             <i class="fa-solid fa-chevron-down text-brand-gray group-open:rotate-180 transition-transform duration-300"></i>
                         </span>
                     </summary>
                     <div class="px-5 sm:px-6 pb-6 text-brand-gray text-sm sm:text-base leading-relaxed cursor-text" data-i18n="faq_a3">
-                        L'accesso completo e illimitato alla Zero To Hero Academy (video, quiz, simulatori) e l'ingresso esclusivo nella Premium Room su Telegram dove i nostri sistemi inviano segnali operativi in tempo reale.
+                        L'accesso completo e illimitato alla Zero To Hero Academy e l'ingresso esclusivo nella Premium Room su Telegram dove i nostri sistemi inviano segnali operativi in tempo reale.
                     </div>
                 </details>
             </div>
         </section>
 
-        <!-- Gamification / Subbuteo Section -->
-        <section class="py-8 sm:py-12 px-4 max-w-5xl mx-auto content-visibility-auto lazy-reveal">
+        <section class="py-10 px-4 max-w-5xl mx-auto lazy-reveal">
             <div class="glass-panel bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border-indigo-500/20 rounded-[1.5rem] sm:rounded-[2rem] p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-                <!-- Icon background -->
                 <i class="fa-solid fa-gamepad absolute -right-10 -bottom-10 text-9xl text-white/5 pointer-events-none transform -rotate-12"></i>
                 
                 <div class="text-center md:text-left relative z-10 flex-1">
-                    <h3 class="text-xl sm:text-2xl font-heading font-bold text-white uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
+                    <h3 class="text-xl sm:text-2xl font-heading font-black text-white uppercase mb-3 flex items-center justify-center md:justify-start gap-3">
                         <i class="fa-solid fa-gamepad text-indigo-400"></i> <span data-i18n="sub_title">SUBBUTEO</span>
                     </h3>
                     <p class="text-brand-gray text-sm sm:text-base" data-i18n="sub_desc">Prenditi una pausa dai grafici. Sfida i tuoi amici in questa simulazione web.</p>
                 </div>
                 
-                <a href="https://subbuteo.vercel.app/" target="_blank" rel="noopener noreferrer" class="relative z-10 inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-xl font-bold text-sm sm:text-base uppercase tracking-wider transition-all hover:scale-105 focus:ring-4 focus:ring-indigo-500/50 outline-none w-full md:w-auto whitespace-nowrap">
+                <a href="https://subbuteo.vercel.app/" target="_blank" rel="noopener noreferrer" class="relative z-10 inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 rounded-xl font-bold text-sm sm:text-base uppercase tracking-wider transition-transform hover:scale-105 outline-none w-full md:w-auto whitespace-nowrap">
                     <span data-i18n="sub_btn">GIOCA ORA</span> <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs opacity-70"></i>
                 </a>
             </div>
@@ -406,60 +418,56 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="pt-16 pb-24 sm:pb-32 px-4 border-t border-white/5 mt-10 content-visibility-auto lazy-reveal">
-        <div class="max-w-4xl mx-auto flex flex-col items-center">
-            
-            <!-- WhatsApp Work With Us -->
-            <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium py-3 px-6 rounded-full transition-colors duration-300 text-sm mb-12 focus:ring-2 focus:ring-white/30 outline-none">
-                <i class="fa-brands fa-whatsapp text-[#25D366] text-lg"></i> <span data-i18n="wa_btn">Lavora con noi</span>
+    <footer class="pt-12 pb-8 px-4 border-t border-white/5 mt-8 lazy-reveal flex flex-col items-center">
+        
+        <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium py-3 px-6 rounded-full transition-colors text-sm mb-10 outline-none">
+            <i class="fa-brands fa-whatsapp text-[#25D366] text-lg"></i> <span data-i18n="wa_btn">Lavora con noi</span>
+        </a>
+
+        <!-- Social Links (X icon fixed with explicit SVG for maximum cross-browser support) -->
+        <div class="flex flex-wrap justify-center items-center gap-5 sm:gap-8 mb-8">
+            <a href="https://x.com/BettingExcRoom" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-white hover:bg-white/10 transition-all text-lg" aria-label="X (Twitter)">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="currentColor"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
             </a>
-
-            <!-- Social Links -->
-            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mb-10">
-                <a href="https://x.com/BettingExcRoom" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-white hover:bg-white/10 transition-all text-lg" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-                <a href="https://www.youtube.com/@bettingexchangeroom" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#FF0000] hover:bg-white/10 transition-all text-lg" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://www.facebook.com/share/19gmdRYKa9/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#1877F2] hover:bg-white/10 transition-all text-lg" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://whatsapp.com/channel/0029VbCLlH8LI8YUjKBH0v1o" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#25D366] hover:bg-white/10 transition-all text-lg" aria-label="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#229ED9] hover:bg-white/10 transition-all text-lg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-            </div>
-
-            <p class="text-gray-600 text-[10px] sm:text-xs uppercase tracking-widest">&copy; <span id="current-year">2026</span> Betting Exchange Room. All rights reserved.</p>
+            <a href="https://www.youtube.com/@bettingexchangeroom" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#FF0000] hover:bg-white/10 transition-all text-lg" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.facebook.com/share/19gmdRYKa9/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#1877F2] hover:bg-white/10 transition-all text-lg" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://whatsapp.com/channel/0029VbCLlH8LI8YUjKBH0v1o" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#25D366] hover:bg-white/10 transition-all text-lg" aria-label="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#229ED9] hover:bg-white/10 transition-all text-lg" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
         </div>
+
+        <p class="text-gray-600 text-[10px] sm:text-xs uppercase tracking-widest text-center">&copy; <span id="current-year">2026</span> Betting Exchange Room. All rights reserved.</p>
     </footer>
 
-    <!-- Sticky CTA Bottom -->
-    <div class="fixed bottom-0 left-0 w-full z-50 bg-[#05070a]/90 backdrop-blur-xl border-t border-brand-neon/20 p-3 sm:p-4 pb-[calc(12px+env(safe-area-inset-bottom))] transform transition-transform duration-300 translate-y-0" id="sticky-cta">
+    <!-- Sticky Bottom CTA -->
+    <div class="fixed bottom-0 left-0 w-full z-50 bg-[#05070a]/95 backdrop-blur-xl border-t border-brand-neon/20 p-3 sm:p-4 pb-[calc(12px+env(safe-area-inset-bottom))]">
         <div class="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
             
             <div class="hidden sm:flex flex-col items-start">
                 <span class="text-white font-bold text-sm" data-i18n="cta_title">Inizia subito il tuo percorso</span>
-                <span class="text-brand-gray text-[10px] font-semibold uppercase tracking-widest mt-0.5" data-i18n="no_card_req">NESSUNA CARTA DI CREDITO RICHIESTA</span>
+                <span class="text-brand-gray text-[10px] font-bold uppercase tracking-widest mt-0.5" data-i18n="no_card_req">NESSUNA CARTA DI CREDITO RICHIESTA</span>
             </div>
 
-            <a href="https://full-zero-to-hero-academy-betting-e.vercel.app/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-1 max-w-sm bg-brand-neon hover:bg-brand-neonDark text-brand-dark font-black py-3.5 px-6 rounded-xl text-sm sm:text-base flex items-center justify-center uppercase tracking-wider transition-colors focus:ring-4 focus:ring-brand-neon/40 outline-none shadow-neon">
+            <a href="https://full-zero-to-hero-academy-betting-e.vercel.app/" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-1 max-w-sm bg-brand-neon hover:bg-brand-neonDark text-brand-dark font-black py-3.5 px-6 rounded-xl text-sm sm:text-base flex items-center justify-center uppercase tracking-wider transition-all duration-300 outline-none animate-pulse-soft">
                 <i class="fa-solid fa-bolt mr-2"></i> <span data-i18n="cta_button">INIZIA ORA GRATIS</span>
             </a>
             
-            <span class="sm:hidden text-brand-gray text-[9px] font-bold uppercase tracking-widest" data-i18n="no_card_req">NESSUNA CARTA RICHIESTA</span>
+            <span class="sm:hidden text-brand-gray text-[9px] font-bold uppercase tracking-widest text-center w-full" data-i18n="no_card_req">NESSUNA CARTA RICHIESTA</span>
         </div>
     </div>
 
     <script>
-        // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // 1. Translation Dictionary (Expanded and refined for professional tone)
         const translations = {
             en: {
                 hero_badge: "Active signals on Telegram", 
                 hero_title_1: "YOUR MATHEMATICAL", 
-                hero_title_2: "ADVANTAGE", // Removed "ROOM" from logic, left as ADVANTAGE
-                hero_subtitle: "Forget gambling. Leverage our neural networks to extract true <span class='text-white font-semibold'>Expected Value</span> from the Exchange. Copy trades, manage risk, and protect your bankroll.",
+                hero_title_2: "ADVANTAGE",
+                hero_subtitle: "Forget gambling. Leverage our neural networks to extract true <span class='text-white font-bold'>Expected Value</span> from the Exchange. Copy trades, manage risk, and protect your bankroll.",
                 
                 new_sec_title: "COPY. PASTE. CASH IN.",
                 new_sec_desc1: "Receive clear, precise signals with preset stop-loss and money management parameters.",
-                new_sec_desc2: "<span class='text-white font-semibold'>APPLIED QUANTITATIVE ANALYSIS.</span> Not a prediction, but a strict mathematical protocol designed for capital preservation.",
+                new_sec_desc2: "<span class='text-white font-bold'>APPLIED QUANTITATIVE ANALYSIS.</span> Not a prediction, but a strict mathematical protocol designed for risk management and Stop Loss.",
 
                 card1_title: "FROM BEGINNER TO PRO", 
                 card1_desc: "ZERO TO HERO Academy.<br>30 interactive lessons featuring video, audio, simulations, and AI-guided assessments.",
@@ -476,11 +484,11 @@
                 
                 faq_title: "FREQUENTLY ASKED QUESTIONS",
                 faq_q1: "Are there any long-term contracts?", 
-                faq_a1: "No. The subscription is strictly month-to-month. You can easily manage or cancel your membership at any time via your dashboard.",
+                faq_a1: "No. The subscription is strictly month-to-month. You can easily manage or cancel your membership at any time.",
                 faq_q2: "Why do I need to use USDT/TON?", 
-                faq_a2: "We utilize Blockchain infrastructure to ensure global, instant, and borderless transactions without traditional banking restrictions. Our quick-start tutorial explains the 5-minute setup process.",
+                faq_a2: "We utilize Blockchain infrastructure to ensure global, instant, and borderless transactions without traditional banking restrictions. Our quick-start tutorial explains how.",
                 faq_q3: "What exactly is included?", 
-                faq_a3: "Unlimited access to the Zero To Hero Academy (lessons, quizzes, simulators) and exclusive entry to the Telegram Premium Room for real-time automated trading signals.",
+                faq_a3: "Unlimited access to the Zero To Hero Academy and exclusive entry to the Telegram Premium Room for real-time automated trading signals.",
                 
                 sub_title: "SUBBUTEO", 
                 sub_desc: "Take a break from the charts. Challenge your friends in this web simulation.", 
@@ -497,11 +505,11 @@
                 hero_badge: "Señales activas en Telegram", 
                 hero_title_1: "TU VENTAJA", 
                 hero_title_2: "MATEMÁTICA",
-                hero_subtitle: "Olvida el azar. Aprovecha nuestras redes neuronales para extraer verdadero <span class='text-white font-semibold'>Valor Esperado</span> del Exchange. Copia operaciones, gestiona el riesgo y protege tu capital.",
+                hero_subtitle: "Olvida el azar. Aprovecha nuestras redes neuronales para extraer verdadero <span class='text-white font-bold'>Valor Esperado</span> del Exchange. Copia operaciones, gestiona el riesgo y protege tu bankroll.",
                 
                 new_sec_title: "COPIA. PEGA. COBRA.",
                 new_sec_desc1: "Recibe señales claras y precisas, con parámetros de stop-loss y gestión de capital preestablecidos.",
-                new_sec_desc2: "<span class='text-white font-semibold'>ANÁLISIS CUANTITATIVO APLICADO.</span> No es una predicción, sino un protocolo matemático estricto diseñado para preservar tu capital.",
+                new_sec_desc2: "<span class='text-white font-bold'>ANÁLISIS CUANTITATIVO APLICADO.</span> No es una predicción, sino un protocolo matemático estricto diseñado para la gestión de riesgos y Stop Loss.",
 
                 card1_title: "DE PRINCIPIANTE A PRO", 
                 card1_desc: "ZERO TO HERO Academy.<br>30 lecciones interactivas con vídeo, audio, simulaciones y evaluaciones guiadas por IA.",
@@ -511,18 +519,18 @@
                 card3_desc: "Modelos algorítmicos rígidos diseñados para proteger y componer tu capital de forma matemática.",
                 
                 price_badge: "ACCESO TOTAL", 
-                price_title: "MEMBRESÍA A LA PLATAFORMA", 
+                price_title: "MEMBRESÍA DE PLATAFORMA", 
                 price_desc: "Acceso inmediato y sin restricciones a la Academia completa y a la Sala Premium de Señales de IA.",
                 price_sub: "/mes", 
                 price_btn: "SUSCRÍBETE AHORA",
                 
                 faq_title: "PREGUNTAS FRECUENTES",
                 faq_q1: "¿Hay contratos a largo plazo?", 
-                faq_a1: "No. La suscripción es estrictamente mensual. Puedes gestionar o cancelar tu membresía fácilmente en cualquier momento a través de tu panel.",
+                faq_a1: "No. La suscripción es estrictamente mensual. Puedes cancelar tu membresía fácilmente en cualquier momento.",
                 faq_q2: "¿Por qué debo usar USDT/TON?", 
-                faq_a2: "Utilizamos infraestructura Blockchain para garantizar transacciones globales, instantáneas y sin fronteras, evitando las restricciones bancarias tradicionales. Nuestro tutorial rápido explica el proceso de configuración en 5 minutos.",
+                faq_a2: "Utilizamos infraestructura Blockchain para garantizar transacciones globales e instantáneas sin restricciones bancarias tradicionales. Nuestro tutorial rápido lo explica todo.",
                 faq_q3: "¿Qué se incluye exactamente?", 
-                faq_a3: "Acceso ilimitado a la Academia Zero To Hero (lecciones, cuestionarios, simuladores) y entrada exclusiva a la Sala Premium de Telegram para recibir señales de trading automatizadas en tiempo real.",
+                faq_a3: "Acceso ilimitado a la Academia Zero To Hero y entrada exclusiva a la Sala Premium de Telegram para recibir señales de trading automatizadas en tiempo real.",
                 
                 sub_title: "SUBBUTEO", 
                 sub_desc: "Tómate un descanso de los gráficos. Desafía a tus amigos en esta simulación web.", 
@@ -539,32 +547,32 @@
                 hero_badge: "Segnali attivi su Telegram", 
                 hero_title_1: "IL TUO VANTAGGIO", 
                 hero_title_2: "MATEMATICO",
-                hero_subtitle: "Dimentica l'azzardo. Sfrutta le nostre reti neurali per estrarre vero <span class='text-white font-semibold'>Valore Atteso</span> dall'Exchange. Copia le operazioni, gestisci il rischio e proteggi il tuo bankroll.",
+                hero_subtitle: "Dimentica l'azzardo. Sfrutta le nostre reti neurali per estrarre vero <span class='text-white font-bold'>Valore Atteso</span> dall'Exchange. Copia le operazioni, gestisci il rischio e proteggi il tuo bankroll.",
                 
                 new_sec_title: "COPIA. INCOLLA. INCASSA.",
-                new_sec_desc1: "Ricevi segnali chiari e precisi, con parametri di stop-loss e money management preimpostati.",
-                new_sec_desc2: "<span class='text-white font-semibold'>ANALISI QUANTITATIVA APPLICATA.</span> Non una previsione, ma un rigoroso protocollo matematico progettato per la preservazione del capitale.",
+                new_sec_desc1: "Ricevi segnali chiari e precisi, con stop loss e money management preimpostati.",
+                new_sec_desc2: "<span class='text-white font-bold'>ANALISI QUANTITATIVA APPLICATA.</span> Non una previsione, ma un protocollo matematico con rigorosa gestione del rischio e Stop Loss.",
 
                 card1_title: "DA PRINCIPIANTE A PRO", 
-                card1_desc: "ZERO TO HERO Academy.<br>30 lezioni interattive con video, audio, simulazioni e test guidati dall'IA.",
-                card2_title: "TRADING SENZA EMOZIONI", 
-                card2_desc: "Copia il segnale. Esegui l'operazione. Mantieni il tuo vantaggio matematico.",
-                card3_title: "GESTIONE DEL CAPITALE", 
+                card1_desc: "ZERO TO HERO Academy.<br>30 lezioni interattive con video, podcast, ebook, quiz, demo e giochi educativi guidati dall'AI.",
+                card2_title: "NESSUNA EMOZIONE", 
+                card2_desc: "Copia il segnale. Imposta il trade. Vantaggio matematico.",
+                card3_title: "MONEY MANAGEMENT", 
                 card3_desc: "Modelli algoritmici rigidi progettati per proteggere e far crescere il tuo bankroll in modo matematico.",
                 
-                price_badge: "ACCESSO TOTALE", 
-                price_title: "MEMBERSHIP PIATTAFORMA", 
-                price_desc: "Accesso immediato e illimitato all'intera Academy e alla Premium Room dei Segnali IA.",
+                price_badge: "OFFERTA COMPLETA", 
+                price_title: "ACCESSO PIATTAFORMA", 
+                price_desc: "Accesso completo, immediato e senza limiti all'Academy e alla Premium Room con Segnali A.I.",
                 price_sub: "/mese", 
-                price_btn: "ABBONATI ORA",
+                price_btn: "ACQUISTA ORA",
                 
                 faq_title: "DOMANDE FREQUENTI",
-                faq_q1: "Ci sono vincoli a lungo termine?", 
-                faq_a1: "No. L'abbonamento è strettamente mensile. Puoi gestire o disdire la tua iscrizione facilmente in qualsiasi momento tramite la tua dashboard.",
-                faq_q2: "Perché devo usare USDT/TON?", 
-                faq_a2: "Utilizziamo l'infrastruttura Blockchain per garantire transazioni globali, istantanee e senza limiti geografici, aggirando le tradizionali restrizioni bancarie. Il nostro tutorial spiega il setup in 5 minuti.",
-                faq_q3: "Cosa è incluso esattamente?", 
-                faq_a3: "Accesso illimitato alla Zero To Hero Academy (lezioni, quiz, simulatori) e ingresso esclusivo nella Premium Room di Telegram per segnali di trading automatizzati in tempo reale.",
+                faq_q1: "Posso annullare quando voglio?", 
+                faq_a1: "Sì, l'abbonamento è mensile e non ha vincoli di permanenza. Puoi disdire in qualsiasi momento.",
+                faq_q2: "Devo usare per forza USDT e TON?", 
+                faq_a2: "Sì, utilizziamo la tecnologia Blockchain per garantire pagamenti globali, sicuri, istantanei e senza limiti bancari. Nel tutorial gratuito ti spieghiamo passo-passo come fare.",
+                faq_q3: "Cosa include esattamente l'abbonamento?", 
+                faq_a3: "L'accesso completo e illimitato alla Zero To Hero Academy e l'ingresso esclusivo nella Premium Room su Telegram dove i nostri sistemi inviano segnali operativi in tempo reale.",
                 
                 sub_title: "SUBBUTEO", 
                 sub_desc: "Prenditi una pausa dai grafici. Sfida i tuoi amici in questa simulazione web.", 
@@ -573,19 +581,19 @@
                 wa_btn: "Lavora con noi", 
                 wa_msg: "Salve, sono interessato a opportunità di partnership con Betting Exchange Room.",
                 
-                cta_title: "Inizia il tuo percorso oggi",
+                cta_title: "Inizia subito il tuo percorso",
                 cta_button: "INIZIA ORA GRATIS",
-                no_card_req: "NESSUNA CARTA DI CREDITO RICHIESTA"
+                no_card_req: "NESSUNA CARTA RICHIESTA"
             },
             pt: {
                 hero_badge: "Sinais ativos no Telegram", 
                 hero_title_1: "A SUA VANTAGEM", 
                 hero_title_2: "MATEMÁTICA",
-                hero_subtitle: "Esqueça o acaso. Utilize as nossas redes neurais para extrair o verdadeiro <span class='text-white font-semibold'>Valor Esperado</span> do Exchange. Copie operações, gira o risco e proteja o seu capital.",
+                hero_subtitle: "Esqueça o acaso. Utilize as nossas redes neurais para extrair o verdadeiro <span class='text-white font-bold'>Valor Esperado</span> do Exchange. Copie operações, gira o risco e proteja a sua banca.",
                 
                 new_sec_title: "COPIA. COLA. RECEBE.",
                 new_sec_desc1: "Receba sinais claros e precisos, com parâmetros de stop-loss e gestão de capital predefinidos.",
-                new_sec_desc2: "<span class='text-white font-semibold'>ANÁLISE QUANTITATIVA APLICADA.</span> Não é uma previsão, mas um rigoroso protocolo matemático concebido para a preservação do capital.",
+                new_sec_desc2: "<span class='text-white font-bold'>ANÁLISE QUANTITATIVA APLICADA.</span> Não é uma previsão, mas um rigoroso protocolo matemático com gestão de risco e Stop Loss.",
 
                 card1_title: "DE INICIANTE A PRO", 
                 card1_desc: "ZERO TO HERO Academy.<br>30 lições interativas com vídeo, áudio, simulações e avaliações guiadas por IA.",
@@ -602,11 +610,11 @@
                 
                 faq_title: "PERGUNTAS FREQUENTES",
                 faq_q1: "Existem contratos a longo prazo?", 
-                faq_a1: "Não. A subscrição é estritamente mensal. Pode gerir ou cancelar a sua adesão facilmente em qualquer altura através do seu painel de controlo.",
+                faq_a1: "Não. A subscrição é estritamente mensal. Pode cancelar a sua adesão facilmente em qualquer altura.",
                 faq_q2: "Por que preciso usar USDT/TON?", 
-                faq_a2: "Utilizamos infraestruturas Blockchain para garantir transações globais, instantâneas e sem fronteiras, evitando as restrições bancárias tradicionais. O nosso tutorial rápido explica o processo de configuração em 5 minutos.",
+                faq_a2: "Utilizamos infraestruturas Blockchain para garantir transações globais e instantâneas, evitando restrições bancárias tradicionais. O nosso tutorial explica tudo.",
                 faq_q3: "O que está exatamente incluído?", 
-                faq_a3: "Acesso ilimitado à Academia Zero To Hero (lições, quizzes, simuladores) e entrada exclusiva na Sala Premium do Telegram para sinais de trading automatizados em tempo real.",
+                faq_a3: "Acesso ilimitado à Academia Zero To Hero e entrada exclusiva na Sala Premium do Telegram para sinais de trading automatizados em tempo real.",
                 
                 sub_title: "SUBBUTEO", 
                 sub_desc: "Faça uma pausa nos gráficos. Desafie os seus amigos nesta simulação web.", 
@@ -617,13 +625,11 @@
                 
                 cta_title: "Comece a sua jornada hoje",
                 cta_button: "COMEÇAR GRÁTIS",
-                no_card_req: "NÃO REQUER CARTÃO DE CRÉDITO"
+                no_card_req: "NÃO REQUER CARTÃO"
             }
         };
 
-        // 2. Core Language Function
         function setLang(lang) {
-            // Default to EN if invalid
             if (!translations[lang]) lang = 'en';
             
             // Update DOM Elements
@@ -634,11 +640,11 @@
                 }
             });
 
-            // Update UI Dropdown
+            // Update UI
             document.getElementById('current-lang-display').innerText = lang.toUpperCase();
-            document.documentElement.lang = lang; // Update HTML lang attribute for SEO/Accessibility
+            document.documentElement.lang = lang;
 
-            // Update Dynamic Links
+            // Update Links
             const buyBtn = document.getElementById('btn-full-price');
             if(buyBtn) buyBtn.href = `app-full-price.html?lang=${lang}`;
 
@@ -648,62 +654,43 @@
                 waBtn.href = `https://wa.me/393482487172?text=${msg}`;
             }
 
-            // Save Preference
-            try { 
-                localStorage.setItem('bx_lang', lang); 
-            } catch(e) {
-                console.warn("Could not save language preference.");
-            }
+            try { localStorage.setItem('bx_lang', lang); } catch(e) {}
         }
 
-        // 3. Initialization
+        // Initialization & Lazy Load Observer
         document.addEventListener('DOMContentLoaded', () => {
-            // Determine starting language
-            let startLang = 'en';
+            // Lang Detection: Auto-rilevamento della lingua del dispositivo/browser
+            let startLang = 'en'; // Lingua di base (se il browser usa una lingua non supportata, es: Tedesco)
             try {
                 const saved = localStorage.getItem('bx_lang');
-                // Get browser language (e.g., 'en-US' -> 'en')
-                const browserLang = (navigator.language || navigator.userLanguage).split('-')[0].toLowerCase();
+                // Estrae le prime due lettere della lingua di sistema (es: "it-IT" -> "it", "es-ES" -> "es", "pt-BR" -> "pt")
+                const systemLang = navigator.language || navigator.userLanguage || 'en';
+                const browserLang = systemLang.substring(0, 2).toLowerCase();
                 
                 if (saved && translations[saved]) {
-                    startLang = saved;
+                    startLang = saved; // Rispetta la scelta se l'utente l'aveva già cambiata manualmente in passato
                 } else if (translations[browserLang]) {
-                    startLang = browserLang;
+                    startLang = browserLang; // Applica automaticamente la lingua nativa del dispositivo dell'utente
                 }
-            } catch(e) {}
+            } catch(e) {
+                console.warn('Impossibile rilevare la lingua:', e);
+            }
             
-            // Apply language
             setLang(startLang);
 
-            // 4. Performance: Lazy Reveal Animation via Intersection Observer
-            const revealOptions = {
-                threshold: 0.1, // Trigger when 10% visible
-                rootMargin: '0px 0px -50px 0px' 
-            };
-            
+            // Reveal Animation Observer
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('revealed');
-                        // Stop observing once revealed
                         observer.unobserve(entry.target);
                     }
                 });
-            }, revealOptions);
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
             document.querySelectorAll('.lazy-reveal').forEach(el => {
                 revealObserver.observe(el);
             });
-
-            // 5. Scroll Header Effect (Optional: add blur/border on scroll)
-            const header = document.getElementById('main-header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 20) {
-                    header.classList.add('shadow-md');
-                } else {
-                    header.classList.remove('shadow-md');
-                }
-            }, { passive: true });
         });
     </script>
 </body>
