@@ -90,14 +90,14 @@
         body.ready { opacity: 1; }
 
         /* Perfect Viewport Fitting Utility */
-        /* Calculates available space: 100dvh minus header (64px/80px) minus footer (90px/76px) */
+        /* Calculates available space and adds slightly more buffer to prevent cut-offs */
         .min-h-section {
-            min-height: calc(100dvh - 10rem); 
+            min-height: calc(100dvh - 11rem); 
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
         }
 
         /* Glassmorphism Refined */
@@ -192,76 +192,76 @@
 
     <main class="pt-[64px] sm:pt-[80px]">
         
-        <!-- HERO SECTION - Optimized to fit screen without scrolling -->
-        <section class="px-4 max-w-6xl mx-auto flex flex-col items-center justify-center text-center relative min-h-section">
+        <!-- HERO SECTION - Scaled down for perfect framing -->
+        <section class="px-4 max-w-5xl mx-auto flex flex-col items-center justify-center text-center relative min-h-section py-4">
             
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-brand-neon/5 blur-[100px] rounded-full pointer-events-none"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] bg-brand-neon/5 blur-[90px] rounded-full pointer-events-none"></div>
 
             <!-- Global Badge -->
-            <div class="inline-flex items-center gap-2 bg-brand-neon/5 border border-brand-neon/20 px-3 py-1 sm:px-4 sm:py-1.5 rounded-full mb-4 sm:mb-6 animate-fade-in-up" style="animation-delay: 0.1s;">
-                <span class="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2 shrink-0">
+            <div class="inline-flex items-center gap-2 bg-brand-neon/5 border border-brand-neon/20 px-3 py-1 sm:px-3.5 sm:py-1 rounded-full mb-3 sm:mb-4 animate-fade-in-up" style="animation-delay: 0.1s;">
+                <span class="relative flex h-1.5 w-1.5 shrink-0">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-brand-neon"></span>
+                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-neon"></span>
                 </span>
-                <span class="text-brand-gray text-[9px] sm:text-[11px] font-bold tracking-widest uppercase" data-i18n="hero_badge">
+                <span class="text-brand-gray text-[9px] sm:text-[10px] font-bold tracking-widest uppercase" data-i18n="hero_badge">
                     Active signals on Telegram
                 </span>
             </div>
 
-            <!-- Title - Typography adjusted to prevent excessive wrapping -->
-            <h1 class="font-heading font-black mb-4 sm:mb-5 tracking-tighter w-full animate-fade-in-up" style="animation-delay: 0.2s;">
-                <span class="block text-[clamp(2rem,5vw,5.5rem)] leading-[1.05] text-white uppercase drop-shadow-2xl" data-i18n="hero_title_1">YOUR MATHEMATICAL</span>
-                <span class="block text-[clamp(2rem,5vw,5.5rem)] leading-[1.05] text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-neon to-[#65a30d] uppercase mt-0 sm:mt-1 drop-shadow-2xl" data-i18n="hero_title_2">ADVANTAGE</span>
+            <!-- Title - Scaled down slightly -->
+            <h1 class="font-heading font-black mb-3 sm:mb-4 tracking-tighter w-full animate-fade-in-up" style="animation-delay: 0.2s;">
+                <span class="block text-[clamp(1.6rem,3.5vw,4rem)] leading-[1.05] text-white uppercase drop-shadow-2xl" data-i18n="hero_title_1">YOUR MATHEMATICAL</span>
+                <span class="block text-[clamp(1.6rem,3.5vw,4rem)] leading-[1.05] text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-neon to-[#65a30d] uppercase mt-0 drop-shadow-2xl" data-i18n="hero_title_2">ADVANTAGE</span>
             </h1>
 
             <!-- Subtitle -->
-            <p class="text-brand-gray text-xs sm:text-sm lg:text-base max-w-2xl mx-auto font-medium mb-6 sm:mb-8 animate-fade-in-up px-2" style="animation-delay: 0.3s;" data-i18n="hero_subtitle">
+            <p class="text-brand-gray text-[11px] sm:text-xs lg:text-sm max-w-xl mx-auto font-medium mb-5 sm:mb-6 animate-fade-in-up px-2" style="animation-delay: 0.3s;" data-i18n="hero_subtitle">
                 Forget gambling. Leverage our neural networks to extract true <span class='text-white font-bold'>Expected Value</span> from the Exchange. Copy trades, manage risk, and protect your bankroll.
             </p>
 
-            <!-- Video Player - Dynamic sizing via aspect-video and max-height -->
-            <div class="w-full max-w-4xl mx-auto aspect-video max-h-[35vh] sm:max-h-[45vh] rounded-[1rem] sm:rounded-[1.5rem] overflow-hidden border border-white/10 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] relative animate-fade-in-up bg-black flex items-center justify-center shrink-0" style="animation-delay: 0.4s;">
-                <video autoplay muted playsinline webkit-playsinline loop preload="auto" class="min-w-full min-h-full object-cover">
+            <!-- Video Player - Restored natural 16:9 proportions, size reduced to fit screen -->
+            <div class="w-full max-w-2xl lg:max-w-3xl mx-auto aspect-video rounded-[0.75rem] sm:rounded-[1rem] overflow-hidden border border-white/10 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] relative animate-fade-in-up bg-black shrink-0" style="animation-delay: 0.4s;">
+                <video autoplay muted playsinline webkit-playsinline loop preload="auto" class="w-full h-full object-cover">
                     <source src="spot1.mp4" type="video/mp4">
                 </video>
             </div>
         </section>
 
         <!-- SEZIONE QUANT / COPY PASTE - Compressed to fit perfectly -->
-        <section class="px-4 max-w-6xl mx-auto lazy-reveal min-h-section">
+        <section class="px-4 max-w-5xl mx-auto lazy-reveal min-h-section py-4">
             
-            <div class="glass-panel rounded-[1.5rem] sm:rounded-[2.5rem] p-1 border border-white/5 relative overflow-hidden shadow-2xl group w-full flex-1 flex flex-col max-h-[80vh] justify-center">
+            <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-1 border border-white/5 relative overflow-hidden shadow-2xl group w-full flex-1 flex flex-col justify-center">
                 
                 <!-- Animated border gradient effect background -->
                 <div class="absolute inset-0 bg-gradient-to-br from-brand-neon/15 via-[#05070a] to-blue-500/15 opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
                 
                 <!-- Inner Panel -->
-                <div class="relative bg-[#05070a]/95 backdrop-blur-2xl rounded-[1.4rem] sm:rounded-[2.4rem] p-6 sm:p-10 lg:p-12 w-full overflow-hidden flex flex-col justify-center h-full">
+                <div class="relative bg-[#05070a]/95 backdrop-blur-2xl rounded-[1.15rem] sm:rounded-[1.9rem] p-5 sm:p-8 lg:p-10 w-full overflow-hidden flex flex-col justify-center h-full">
                     
                     <!-- Tech Background Grid -->
-                    <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
+                    <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none"></div>
 
                     <!-- Header -->
-                    <div class="text-center mb-6 sm:mb-10 relative z-10">
-                        <h2 class="text-[clamp(1.75rem,4vw,4rem)] leading-[1.1] font-heading font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 tracking-tight drop-shadow-lg" data-i18n="new_sec_title">
+                    <div class="text-center mb-5 sm:mb-8 relative z-10">
+                        <h2 class="text-[clamp(1.4rem,3vw,3rem)] leading-[1.1] font-heading font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 tracking-tight drop-shadow-lg" data-i18n="new_sec_title">
                             COPY. PASTE. CASH IN.
                         </h2>
                     </div>
                     
                     <!-- Grid Content -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0 relative z-10 items-center">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 relative z-10 items-center">
                         
                         <!-- Colonna Sinistra (Esecuzione / Segnali) -->
-                        <div class="flex flex-col items-center md:items-start text-center md:text-left md:pr-10 lg:pr-16 relative">
+                        <div class="flex flex-col items-center md:items-start text-center md:text-left md:pr-8 lg:pr-12 relative">
                             <!-- Desktop Divider -->
-                            <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-[100%] bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
+                            <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-[90%] bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
                             
-                            <div class="relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-brand-neon/10 border border-brand-neon/30 mb-4 sm:mb-6 shadow-neon shrink-0">
+                            <div class="relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-brand-neon/10 border border-brand-neon/30 mb-3 sm:mb-4 shadow-neon shrink-0">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-2xl bg-brand-neon opacity-20"></span>
-                                <i class="fa-solid fa-satellite-dish text-brand-neon text-xl sm:text-2xl"></i>
+                                <i class="fa-solid fa-satellite-dish text-brand-neon text-lg sm:text-xl"></i>
                             </div>
                             
-                            <p class="text-blue-200/90 text-sm sm:text-base lg:text-lg font-semibold tracking-wide leading-relaxed" data-i18n="new_sec_desc1">
+                            <p class="text-blue-200/90 text-xs sm:text-sm lg:text-base font-semibold tracking-wide leading-relaxed" data-i18n="new_sec_desc1">
                                 Receive clear, precise signals with preset stop-loss and money management parameters.
                             </p>
                         </div>
@@ -270,12 +270,12 @@
                         <div class="md:hidden w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-1"></div>
 
                         <!-- Colonna Destra (Logica / Quant) -->
-                        <div class="flex flex-col items-center md:items-start text-center md:text-left md:pl-10 lg:pl-16 relative dashboard-quant-text">
-                            <div class="h-14 w-14 sm:h-16 sm:w-16 flex items-center justify-center rounded-2xl bg-blue-500/10 border border-blue-500/30 mb-4 sm:mb-6 shadow-[0_0_20px_rgba(59,130,246,0.2)] shrink-0">
-                                <i class="fa-solid fa-microchip text-blue-400 text-xl sm:text-2xl"></i>
+                        <div class="flex flex-col items-center md:items-start text-center md:text-left md:pl-8 lg:pl-12 relative dashboard-quant-text">
+                            <div class="h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center rounded-2xl bg-blue-500/10 border border-blue-500/30 mb-3 sm:mb-4 shadow-[0_0_20px_rgba(59,130,246,0.2)] shrink-0">
+                                <i class="fa-solid fa-microchip text-blue-400 text-lg sm:text-xl"></i>
                             </div>
                             
-                            <p class="text-brand-gray text-xs sm:text-sm lg:text-base leading-relaxed font-medium" data-i18n="new_sec_desc2">
+                            <p class="text-brand-gray text-[11px] sm:text-xs lg:text-sm leading-relaxed font-medium" data-i18n="new_sec_desc2">
                                 <span class='text-white font-bold'>APPLIED QUANTITATIVE ANALYSIS.</span> Not a prediction, but a strict mathematical protocol designed for risk management and Stop Loss.
                             </p>
                         </div>
@@ -286,55 +286,55 @@
         </section>
 
         <!-- SEZIONE CARDS ACADEMY -->
-        <section class="px-4 max-w-6xl mx-auto py-10 sm:py-16 lazy-reveal">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 h-full">
+        <section class="px-4 max-w-5xl mx-auto py-6 sm:py-10 lazy-reveal">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 h-full">
                 
                 <!-- Card 1 -->
-                <article class="glass-panel rounded-[1.25rem] sm:rounded-[1.75rem] overflow-hidden flex flex-col group h-full">
+                <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
                     <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
                         <img src="cyborgtifoso.jpeg" alt="Academy" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
                     </div>
-                    <div class="p-5 sm:p-7 relative z-10 flex flex-col flex-1 -mt-12 sm:-mt-14">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#05070a] flex items-center justify-center border border-purple-500/40 mb-3 sm:mb-4 shadow-lg shadow-purple-500/20 shrink-0">
-                            <i class="fa-solid fa-graduation-cap text-purple-400 text-lg sm:text-xl"></i>
+                    <div class="p-4 sm:p-5 relative z-10 flex flex-col flex-1 -mt-8 sm:-mt-10">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#05070a] flex items-center justify-center border border-purple-500/40 mb-2 sm:mb-3 shadow-lg shadow-purple-500/20 shrink-0">
+                            <i class="fa-solid fa-graduation-cap text-purple-400 text-sm sm:text-base"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-heading font-black text-white mb-2 tracking-wide" data-i18n="card1_title">FROM BEGINNER TO PRO</h3>
-                        <p class="text-brand-gray text-xs sm:text-sm leading-relaxed flex-1" data-i18n="card1_desc">
+                        <h3 class="text-base sm:text-lg font-heading font-black text-white mb-1.5 tracking-wide" data-i18n="card1_title">FROM BEGINNER TO PRO</h3>
+                        <p class="text-brand-gray text-[11px] sm:text-xs leading-relaxed flex-1" data-i18n="card1_desc">
                             ZERO TO HERO Academy.<br>30 interactive lessons featuring video, audio, simulations, and AI-guided assessments.
                         </p>
                     </div>
                 </article>
 
                 <!-- Card 2 -->
-                <article class="glass-panel rounded-[1.25rem] sm:rounded-[1.75rem] overflow-hidden flex flex-col group h-full">
+                <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
                     <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
                         <img src="cyborgcalciatore.jpeg" alt="AI Signals" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
                     </div>
-                    <div class="p-5 sm:p-7 relative z-10 flex flex-col flex-1 -mt-12 sm:-mt-14">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#05070a] flex items-center justify-center border border-cyan-500/40 mb-3 sm:mb-4 shadow-lg shadow-cyan-500/20 shrink-0">
-                            <i class="fa-solid fa-robot text-cyan-400 text-lg sm:text-xl"></i>
+                    <div class="p-4 sm:p-5 relative z-10 flex flex-col flex-1 -mt-8 sm:-mt-10">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#05070a] flex items-center justify-center border border-cyan-500/40 mb-2 sm:mb-3 shadow-lg shadow-cyan-500/20 shrink-0">
+                            <i class="fa-solid fa-robot text-cyan-400 text-sm sm:text-base"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-heading font-black text-white mb-2 tracking-wide" data-i18n="card2_title">EMOTIONLESS TRADING</h3>
-                        <p class="text-brand-gray text-xs sm:text-sm leading-relaxed flex-1" data-i18n="card2_desc">
+                        <h3 class="text-base sm:text-lg font-heading font-black text-white mb-1.5 tracking-wide" data-i18n="card2_title">EMOTIONLESS TRADING</h3>
+                        <p class="text-brand-gray text-[11px] sm:text-xs leading-relaxed flex-1" data-i18n="card2_desc">
                             Copy the signal. Execute the trade. Maintain your mathematical edge.
                         </p>
                     </div>
                 </article>
 
                 <!-- Card 3 -->
-                <article class="glass-panel rounded-[1.25rem] sm:rounded-[1.75rem] overflow-hidden flex flex-col group h-full">
+                <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
                     <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
                         <img src="cyborgarbitro.jpeg" alt="Risk Management" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
                     </div>
-                    <div class="p-5 sm:p-7 relative z-10 flex flex-col flex-1 -mt-12 sm:-mt-14">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#05070a] flex items-center justify-center border border-amber-500/40 mb-3 sm:mb-4 shadow-lg shadow-amber-500/20 shrink-0">
-                            <i class="fa-solid fa-shield-halved text-amber-400 text-lg sm:text-xl"></i>
+                    <div class="p-4 sm:p-5 relative z-10 flex flex-col flex-1 -mt-8 sm:-mt-10">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#05070a] flex items-center justify-center border border-amber-500/40 mb-2 sm:mb-3 shadow-lg shadow-amber-500/20 shrink-0">
+                            <i class="fa-solid fa-shield-halved text-amber-400 text-sm sm:text-base"></i>
                         </div>
-                        <h3 class="text-lg sm:text-xl font-heading font-black text-white mb-2 tracking-wide" data-i18n="card3_title">CAPITAL MANAGEMENT</h3>
-                        <p class="text-brand-gray text-xs sm:text-sm leading-relaxed flex-1" data-i18n="card3_desc">
+                        <h3 class="text-base sm:text-lg font-heading font-black text-white mb-1.5 tracking-wide" data-i18n="card3_title">CAPITAL MANAGEMENT</h3>
+                        <p class="text-brand-gray text-[11px] sm:text-xs leading-relaxed flex-1" data-i18n="card3_desc">
                             Rigid algorithmic models designed to protect and compound your bankroll mathematically.
                         </p>
                     </div>
@@ -344,84 +344,84 @@
         </section>
 
         <!-- SEZIONE PRICING - Scaled to fit exactly in screen -->
-        <section class="px-4 max-w-3xl mx-auto lazy-reveal min-h-section">
-            <div class="glass-panel rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-10 text-center border border-brand-gold/30 relative shadow-gold mx-auto w-full">
+        <section class="px-4 max-w-2xl mx-auto lazy-reveal min-h-section py-4">
+            <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-5 sm:p-8 text-center border border-brand-gold/30 relative shadow-gold mx-auto w-full">
                 
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-gold to-[#F5E084] text-black font-black uppercase tracking-widest text-[10px] sm:text-xs px-5 py-1.5 sm:py-2 rounded-full shadow-lg whitespace-nowrap">
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-gold to-[#F5E084] text-black font-black uppercase tracking-widest text-[9px] sm:text-[10px] px-4 py-1 sm:py-1.5 rounded-full shadow-lg whitespace-nowrap">
                     <i class="fa-solid fa-star mr-1"></i> <span data-i18n="price_badge">FULL ACCESS</span>
                 </div>
 
-                <h2 class="text-xl sm:text-3xl font-heading font-black text-white uppercase tracking-widest mb-2 mt-2" data-i18n="price_title">PLATFORM MEMBERSHIP</h2>
-                <p class="text-brand-gray text-xs sm:text-sm max-w-md mx-auto mb-6 sm:mb-8" data-i18n="price_desc">Immediate, unrestricted access to the complete Academy and the Premium A.I. Signals Room.</p>
+                <h2 class="text-lg sm:text-2xl font-heading font-black text-white uppercase tracking-widest mb-1.5 mt-1" data-i18n="price_title">PLATFORM MEMBERSHIP</h2>
+                <p class="text-brand-gray text-[11px] sm:text-xs max-w-sm mx-auto mb-5 sm:mb-6" data-i18n="price_desc">Immediate, unrestricted access to the complete Academy and the Premium A.I. Signals Room.</p>
                 
                 <!-- Price Box - Optimized Diagonal Strikethrough -->
-                <div class="flex flex-col items-center justify-center mb-6 sm:mb-8">
+                <div class="flex flex-col items-center justify-center mb-5 sm:mb-6">
                     <!-- Prezzo Originale Barrato Diagonalmente -->
                     <div class="relative inline-block mb-0.5">
-                        <span class="text-lg sm:text-xl font-bold text-gray-500 opacity-70 tracking-wider">199 USDT</span>
+                        <span class="text-base sm:text-lg font-bold text-gray-500 opacity-70 tracking-wider">199 USDT</span>
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                            <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
+                            <div class="w-full h-[1.5px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
                         </div>
                     </div>
                     
                     <!-- Prezzo Scontato Attuale -->
                     <div class="flex items-end justify-center gap-1 sm:gap-2">
-                        <span class="text-5xl sm:text-7xl font-heading font-black text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">97</span>
-                        <div class="flex flex-col items-start pb-1.5 sm:pb-2">
-                            <span class="text-xl sm:text-2xl text-gray-300 font-bold leading-none">USDT</span>
-                            <span class="text-[10px] sm:text-xs text-gray-500 font-medium mt-0.5" data-i18n="price_sub">/mo</span>
+                        <span class="text-4xl sm:text-6xl font-heading font-black text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">97</span>
+                        <div class="flex flex-col items-start pb-1 sm:pb-1.5">
+                            <span class="text-lg sm:text-xl text-gray-300 font-bold leading-none">USDT</span>
+                            <span class="text-[9px] sm:text-[10px] text-gray-500 font-medium mt-0.5" data-i18n="price_sub">/mo</span>
                         </div>
                     </div>
                     
                     <!-- Badge Risparmio Dinamico -->
-                    <div class="mt-3 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest animate-pulse" data-i18n="price_discount">
+                    <div class="mt-2 bg-green-500/10 border border-green-500/30 text-green-400 text-[9px] sm:text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-widest animate-pulse" data-i18n="price_discount">
                         Save over 50%
                     </div>
                 </div>
 
-                <a id="btn-full-price" href="app-full-price.html" class="inline-flex items-center justify-center w-full max-w-sm bg-gradient-to-r from-[#D4AF37] via-[#FFF0B3] to-[#D4AF37] bg-[length:200%_auto] hover:bg-right text-black font-black py-3.5 sm:py-4 px-6 rounded-xl text-sm sm:text-base uppercase tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 outline-none shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)]">
+                <a id="btn-full-price" href="app-full-price.html" class="inline-flex items-center justify-center w-full max-w-[280px] sm:max-w-xs bg-gradient-to-r from-[#D4AF37] via-[#FFF0B3] to-[#D4AF37] bg-[length:200%_auto] hover:bg-right text-black font-black py-2.5 sm:py-3 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 outline-none shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)]">
                     <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
                 </a>
             </div>
         </section>
 
         <!-- SEZIONE FAQ -->
-        <section class="py-10 px-4 max-w-3xl mx-auto lazy-reveal">
-            <h2 class="font-heading font-black text-xl sm:text-2xl text-center text-white mb-8 uppercase tracking-widest" data-i18n="faq_title">FREQUENTLY ASKED QUESTIONS</h2>
+        <section class="py-8 px-4 max-w-2xl mx-auto lazy-reveal">
+            <h2 class="font-heading font-black text-lg sm:text-xl text-center text-white mb-6 uppercase tracking-widest" data-i18n="faq_title">FREQUENTLY ASKED QUESTIONS</h2>
             
-            <div class="space-y-3 sm:space-y-4">
-                <details class="glass-panel border border-white/10 rounded-2xl group cursor-pointer hover:bg-white/5 transition-colors">
-                    <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white p-4 sm:p-5 outline-none rounded-2xl">
+            <div class="space-y-2.5 sm:space-y-3">
+                <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-xs sm:text-sm text-white p-3.5 sm:p-4 outline-none rounded-xl">
                         <span data-i18n="faq_q1">Are there any long-term contracts?</span>
-                        <span class="relative flex-shrink-0 ml-3 w-5 h-5 flex items-center justify-center">
-                            <i class="fa-solid fa-chevron-down text-brand-gray text-xs sm:text-sm group-open:rotate-180 transition-transform duration-300"></i>
+                        <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
+                            <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
                         </span>
                     </summary>
-                    <div class="px-4 sm:px-5 pb-5 text-brand-gray text-xs sm:text-sm leading-relaxed cursor-text" data-i18n="faq_a1">
+                    <div class="px-3.5 sm:px-4 pb-4 text-brand-gray text-[11px] sm:text-xs leading-relaxed cursor-text" data-i18n="faq_a1">
                         No. The subscription is strictly month-to-month. You can easily manage or cancel your membership at any time.
                     </div>
                 </details>
 
-                <details class="glass-panel border border-white/10 rounded-2xl group cursor-pointer hover:bg-white/5 transition-colors">
-                    <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white p-4 sm:p-5 outline-none rounded-2xl">
+                <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-xs sm:text-sm text-white p-3.5 sm:p-4 outline-none rounded-xl">
                         <span data-i18n="faq_q2">Why do I need to use USDT/TON?</span>
-                        <span class="relative flex-shrink-0 ml-3 w-5 h-5 flex items-center justify-center">
-                            <i class="fa-solid fa-chevron-down text-brand-gray text-xs sm:text-sm group-open:rotate-180 transition-transform duration-300"></i>
+                        <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
+                            <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
                         </span>
                     </summary>
-                    <div class="px-4 sm:px-5 pb-5 text-brand-gray text-xs sm:text-sm leading-relaxed cursor-text" data-i18n="faq_a2">
+                    <div class="px-3.5 sm:px-4 pb-4 text-brand-gray text-[11px] sm:text-xs leading-relaxed cursor-text" data-i18n="faq_a2">
                         We utilize Blockchain infrastructure to ensure global, instant, and borderless transactions without traditional banking restrictions. Our quick-start tutorial explains how.
                     </div>
                 </details>
 
-                <details class="glass-panel border border-white/10 rounded-2xl group cursor-pointer hover:bg-white/5 transition-colors">
-                    <summary class="flex justify-between items-center font-bold text-sm sm:text-base text-white p-4 sm:p-5 outline-none rounded-2xl">
+                <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
+                    <summary class="flex justify-between items-center font-bold text-xs sm:text-sm text-white p-3.5 sm:p-4 outline-none rounded-xl">
                         <span data-i18n="faq_q3">What exactly is included?</span>
-                        <span class="relative flex-shrink-0 ml-3 w-5 h-5 flex items-center justify-center">
-                            <i class="fa-solid fa-chevron-down text-brand-gray text-xs sm:text-sm group-open:rotate-180 transition-transform duration-300"></i>
+                        <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
+                            <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
                         </span>
                     </summary>
-                    <div class="px-4 sm:px-5 pb-5 text-brand-gray text-xs sm:text-sm leading-relaxed cursor-text" data-i18n="faq_a3">
+                    <div class="px-3.5 sm:px-4 pb-4 text-brand-gray text-[11px] sm:text-xs leading-relaxed cursor-text" data-i18n="faq_a3">
                         Unlimited access to the Zero To Hero Academy and exclusive entry to the Telegram Premium Room for real-time automated trading signals.
                     </div>
                 </details>
@@ -429,19 +429,19 @@
         </section>
 
         <!-- SEZIONE GIOCO / EXTRA -->
-        <section class="py-8 px-4 max-w-4xl mx-auto lazy-reveal">
-            <div class="glass-panel bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border-indigo-500/20 rounded-[1.25rem] sm:rounded-[1.75rem] p-5 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden">
-                <i class="fa-solid fa-gamepad absolute -right-6 -bottom-6 text-7xl sm:text-8xl text-white/5 pointer-events-none transform -rotate-12"></i>
+        <section class="py-6 px-4 max-w-3xl mx-auto lazy-reveal">
+            <div class="glass-panel bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border-indigo-500/20 rounded-[1rem] sm:rounded-[1.25rem] p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
+                <i class="fa-solid fa-gamepad absolute -right-4 -bottom-4 text-6xl sm:text-7xl text-white/5 pointer-events-none transform -rotate-12"></i>
                 
                 <div class="text-center md:text-left relative z-10 flex-1">
-                    <h3 class="text-lg sm:text-xl font-heading font-black text-white uppercase mb-2 flex items-center justify-center md:justify-start gap-2">
+                    <h3 class="text-base sm:text-lg font-heading font-black text-white uppercase mb-1.5 flex items-center justify-center md:justify-start gap-2">
                         <i class="fa-solid fa-gamepad text-indigo-400"></i> <span data-i18n="sub_title">SUBBUTEO</span>
                     </h3>
-                    <p class="text-brand-gray text-xs sm:text-sm max-w-md" data-i18n="sub_desc">Take a break from the charts. Challenge your friends in this web simulation.</p>
+                    <p class="text-brand-gray text-[11px] sm:text-xs max-w-sm" data-i18n="sub_desc">Take a break from the charts. Challenge your friends in this web simulation.</p>
                 </div>
                 
-                <a href="Game-Subbuteo.html" class="relative z-10 inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider transition-transform hover:scale-105 outline-none w-full md:w-auto whitespace-nowrap shadow-lg">
-                    <span data-i18n="sub_btn">PLAY NOW</span> <i class="fa-solid fa-gamepad ml-2 text-[10px] opacity-70"></i>
+                <a href="Game-Subbuteo.html" class="relative z-10 inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-transform hover:scale-105 outline-none w-full md:w-auto whitespace-nowrap shadow-lg">
+                    <span data-i18n="sub_btn">PLAY NOW</span> <i class="fa-solid fa-gamepad ml-2 text-[9px] opacity-70"></i>
                 </a>
             </div>
         </section>
@@ -449,7 +449,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="pt-10 pb-6 px-4 border-t border-white/5 mt-4 lazy-reveal flex flex-col items-center">
+    <footer class="pt-8 pb-4 px-4 border-t border-white/5 mt-2 lazy-reveal flex flex-col items-center">
         
         <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium py-2.5 px-5 rounded-full transition-colors text-xs sm:text-sm mb-8 outline-none">
             <i class="fa-brands fa-whatsapp text-[#25D366] text-base"></i> <span data-i18n="wa_btn">Partner with us</span>
