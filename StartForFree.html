@@ -315,7 +315,8 @@
                 <div class="bg-gray-900 text-[#99E814] border border-[#99E814]/30 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest break-words" data-i18n="demoBadge">DEMO INTERATTIVA</div>
             </div>
 
-            <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-[#99E814]/30 hover:border-[#99E814] transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
+            <!-- Changed href to point to the local file Demo-WorldCupFreeLesson.html -->
+            <a href="Demo-WorldCupFreeLesson.html" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-[#99E814]/30 hover:border-[#99E814] transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
                 
                 <div class="relative w-full overflow-hidden" style="aspect-ratio: 16/9;">
                     <img src="demo-odds.jpeg" alt="Demo Odds" decoding="async" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-top z-0 transition-transform duration-1000 group-hover:scale-105 opacity-100">
@@ -341,7 +342,8 @@
                 <h4 class="text-[#3b82f6] font-black text-lg sm:text-xl md:text-2xl tracking-[0.2em] uppercase drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] w-full break-words" data-i18n="penaltiesTitle">GIOCO EDUCATIVO</h4>
                 <p class="text-gray-300 text-xs sm:text-sm md:text-base font-medium max-w-lg mx-auto leading-relaxed w-full break-words" data-i18n="penaltiesDesc">Clicca il joystick per scommettere sui rigori.</p>
             </div>
-            <a href="https://penalties-zero-to-hero-academy.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-6xl sm:text-7xl md:text-8xl hover:scale-125 transition-transform duration-500 touch-manipulation joystick-pulse transform-gpu shrink-0 relative z-10 mt-4" title="Play Penalties Live" onclick="SoundEngine.click()">
+            <!-- Changed href to point to the local file Game-PenaltiesFreeLesson.html -->
+            <a href="Game-PenaltiesFreeLesson.html" target="_blank" rel="noopener noreferrer" class="text-6xl sm:text-7xl md:text-8xl hover:scale-125 transition-transform duration-500 touch-manipulation joystick-pulse transform-gpu shrink-0 relative z-10 mt-4" title="Play Penalties Live" onclick="SoundEngine.click()">
                 🎮
                 <div class="absolute inset-0 bg-[#3b82f6] rounded-full blur-[50px] opacity-20 -z-10"></div>
             </a>
@@ -352,7 +354,6 @@
                 <span data-i18n="subNotActive">ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE</span>
             </div>
             
-            <!-- Fixed the hover issue here by removing gradient and using flat colors with group-hover text -->
             <a id="btn-next-lesson" href="http://www.bettingexchangeroom.com" onclick="SoundEngine.click()" class="bg-[#0a140f] text-[#99E814] border-2 border-[#99E814] font-black w-full max-w-md mx-auto justify-center px-6 sm:px-10 py-5 rounded-2xl hover:bg-[#99E814] hover:border-[#99E814] transition-all duration-300 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(153,232,20,0.2)] hover:shadow-[0_0_40px_rgba(153,232,20,0.6)] touch-manipulation active:scale-95 flex items-center gap-3 z-10 transform-gpu group btn-hover-fix">
                 <span data-i18n="navNextLesson" class="truncate transition-colors duration-300">SBLOCCA IL TUO PERCORSO</span> 
                 <span class="text-xl sm:text-2xl group-hover:translate-x-2 group-hover:text-black transition-all duration-300 shrink-0">→</span>
@@ -837,8 +838,9 @@
 
                     Gamification.renderQuiz();
                     
+                    // Changed link href modification for the internal Demo file
                     document.querySelectorAll('.demo-link').forEach(link => {
-                        link.href = `https://demo-betting-exchange.vercel.app/?lang=${targetLang}`;
+                        link.href = `Demo-WorldCupFreeLesson.html?lang=${targetLang}`;
                     });
 
                     try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ lang: State.lang, xp: State.xp, currentQuizStep: State.currentQuizStep, quizCompleted: State.quizCompleted })); } catch(e){}
