@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <!-- Preconnect & Preload for maximum speed -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,14 +16,11 @@
     <title>Betting Exchange Room | Official Site</title>
     <link rel="icon" type="image/jpeg" href="logo-tondo.jpeg">
 
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome (Load deferred for performance) -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
@@ -150,11 +146,9 @@
 
 <body class="antialiased selection:bg-brand-neon selection:text-black font-sans" id="main-body">
 
-    <!-- HEADER -->
     <header class="fixed w-full z-50 top-0 bg-[#05070a]/85 backdrop-blur-xl border-b border-white/5 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.5)]" id="main-header">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             
-            <!-- Logo -->
             <a href="#" class="flex items-center gap-2.5 group outline-none focus-visible:ring-2 focus-visible:ring-brand-neon rounded-lg">
                 <div class="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-white/10 shadow-lg group-hover:border-brand-neon/50 transition-colors shrink-0 bg-black">
                     <img src="logo-tondo.jpeg" alt="Logo" class="w-full h-full object-cover">
@@ -164,7 +158,6 @@
                 </span>
             </a>
             
-            <!-- Language Selector -->
             <div class="lang-dropdown-wrapper shrink-0" tabindex="0">
                 <button class="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-3 py-1.5 sm:py-2 rounded-xl border border-white/10 transition-colors outline-none" aria-label="Select Language">
                     <i class="fa-solid fa-globe text-brand-gray text-xs sm:text-sm"></i>
@@ -192,12 +185,10 @@
 
     <main class="pt-[64px] sm:pt-[80px]">
         
-        <!-- HERO SECTION - Scaled down for perfect framing -->
         <section class="px-4 max-w-5xl mx-auto flex flex-col items-center justify-center text-center relative min-h-section py-4">
             
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] bg-brand-neon/5 blur-[90px] rounded-full pointer-events-none"></div>
 
-            <!-- Global Badge -->
             <div class="inline-flex items-center gap-2 bg-brand-neon/5 border border-brand-neon/20 px-3 py-1 sm:px-3.5 sm:py-1 rounded-full mb-3 sm:mb-4 animate-fade-in-up" style="animation-delay: 0.1s;">
                 <span class="relative flex h-1.5 w-1.5 shrink-0">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
@@ -208,18 +199,15 @@
                 </span>
             </div>
 
-            <!-- Title - Scaled down slightly -->
             <h1 class="font-heading font-black mb-3 sm:mb-4 tracking-tighter w-full animate-fade-in-up" style="animation-delay: 0.2s;">
                 <span class="block text-[clamp(1.6rem,3.5vw,4rem)] leading-[1.05] text-white uppercase drop-shadow-2xl" data-i18n="hero_title_1">YOUR MATHEMATICAL</span>
                 <span class="block text-[clamp(1.6rem,3.5vw,4rem)] leading-[1.05] text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-neon to-[#65a30d] uppercase mt-0 drop-shadow-2xl" data-i18n="hero_title_2">ADVANTAGE</span>
             </h1>
 
-            <!-- Subtitle -->
             <p class="text-brand-gray text-[11px] sm:text-xs lg:text-sm max-w-xl mx-auto font-medium mb-5 sm:mb-6 animate-fade-in-up px-2" style="animation-delay: 0.3s;" data-i18n="hero_subtitle">
                 Forget gambling. Leverage our neural networks to extract true <span class='text-white font-bold'>Expected Value</span> from the Exchange. Copy trades, manage risk, and protect your bankroll.
             </p>
 
-            <!-- Video Player - Restored natural 16:9 proportions, size reduced to fit screen -->
             <div class="w-full max-w-2xl lg:max-w-3xl mx-auto aspect-video rounded-[0.75rem] sm:rounded-[1rem] overflow-hidden border border-white/10 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] relative animate-fade-in-up bg-black shrink-0" style="animation-delay: 0.4s;">
                 <video autoplay muted playsinline webkit-playsinline loop preload="auto" class="w-full h-full object-cover">
                     <source src="spot1.mp4" type="video/mp4">
@@ -227,33 +215,25 @@
             </div>
         </section>
 
-        <!-- SEZIONE QUANT / COPY PASTE - Compressed to fit perfectly -->
         <section class="px-4 max-w-5xl mx-auto lazy-reveal min-h-section py-4">
             
             <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-1 border border-white/5 relative overflow-hidden shadow-2xl group w-full flex-1 flex flex-col justify-center">
                 
-                <!-- Animated border gradient effect background -->
                 <div class="absolute inset-0 bg-gradient-to-br from-brand-neon/15 via-[#05070a] to-blue-500/15 opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
                 
-                <!-- Inner Panel -->
                 <div class="relative bg-[#05070a]/95 backdrop-blur-2xl rounded-[1.15rem] sm:rounded-[1.9rem] p-5 sm:p-8 lg:p-10 w-full overflow-hidden flex flex-col justify-center h-full">
                     
-                    <!-- Tech Background Grid -->
                     <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none"></div>
 
-                    <!-- Header -->
                     <div class="text-center mb-5 sm:mb-8 relative z-10">
                         <h2 class="text-[clamp(1.4rem,3vw,3rem)] leading-[1.1] font-heading font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 tracking-tight drop-shadow-lg" data-i18n="new_sec_title">
                             COPY. PASTE. CASH IN.
                         </h2>
                     </div>
                     
-                    <!-- Grid Content -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 relative z-10 items-center">
                         
-                        <!-- Colonna Sinistra (Esecuzione / Segnali) -->
                         <div class="flex flex-col items-center md:items-start text-center md:text-left md:pr-8 lg:pr-12 relative">
-                            <!-- Desktop Divider -->
                             <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-[90%] bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
                             
                             <div class="relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-brand-neon/10 border border-brand-neon/30 mb-3 sm:mb-4 shadow-neon shrink-0">
@@ -266,10 +246,8 @@
                             </p>
                         </div>
 
-                        <!-- Mobile Divider -->
                         <div class="md:hidden w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-1"></div>
 
-                        <!-- Colonna Destra (Logica / Quant) -->
                         <div class="flex flex-col items-center md:items-start text-center md:text-left md:pl-8 lg:pl-12 relative dashboard-quant-text">
                             <div class="h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center rounded-2xl bg-blue-500/10 border border-blue-500/30 mb-3 sm:mb-4 shadow-[0_0_20px_rgba(59,130,246,0.2)] shrink-0">
                                 <i class="fa-solid fa-microchip text-blue-400 text-lg sm:text-xl"></i>
@@ -285,11 +263,9 @@
             </div>
         </section>
 
-        <!-- SEZIONE CARDS ACADEMY -->
         <section class="px-4 max-w-5xl mx-auto py-6 sm:py-10 lazy-reveal">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 h-full">
                 
-                <!-- Card 1 -->
                 <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
                     <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
                         <img src="cyborgtifoso.jpeg" alt="Academy" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
@@ -306,7 +282,6 @@
                     </div>
                 </article>
 
-                <!-- Card 2 -->
                 <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
                     <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
                         <img src="cyborgcalciatore.jpeg" alt="AI Signals" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
@@ -323,7 +298,6 @@
                     </div>
                 </article>
 
-                <!-- Card 3 -->
                 <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
                     <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
                         <img src="cyborgarbitro.jpeg" alt="Risk Management" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
@@ -343,7 +317,6 @@
             </div>
         </section>
 
-        <!-- SEZIONE PRICING - Scaled to fit exactly in screen -->
         <section class="px-4 max-w-2xl mx-auto lazy-reveal min-h-section py-4">
             <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-5 sm:p-8 text-center border border-brand-gold/30 relative shadow-gold mx-auto w-full">
                 
@@ -354,9 +327,7 @@
                 <h2 class="text-lg sm:text-2xl font-heading font-black text-white uppercase tracking-widest mb-1.5 mt-1" data-i18n="price_title">PLATFORM MEMBERSHIP</h2>
                 <p class="text-brand-gray text-[11px] sm:text-xs max-w-sm mx-auto mb-5 sm:mb-6" data-i18n="price_desc">Immediate, unrestricted access to the complete Academy and the Premium A.I. Signals Room.</p>
                 
-                <!-- Price Box - Optimized Diagonal Strikethrough -->
                 <div class="flex flex-col items-center justify-center mb-5 sm:mb-6">
-                    <!-- Prezzo Originale Barrato Diagonalmente -->
                     <div class="relative inline-block mb-0.5">
                         <span class="text-base sm:text-lg font-bold text-gray-500 opacity-70 tracking-wider">199 USDT</span>
                         <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
@@ -364,7 +335,6 @@
                         </div>
                     </div>
                     
-                    <!-- Prezzo Scontato Attuale -->
                     <div class="flex items-end justify-center gap-1 sm:gap-2">
                         <span class="text-4xl sm:text-6xl font-heading font-black text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">97</span>
                         <div class="flex flex-col items-start pb-1 sm:pb-1.5">
@@ -373,7 +343,6 @@
                         </div>
                     </div>
                     
-                    <!-- Badge Risparmio Dinamico -->
                     <div class="mt-2 bg-green-500/10 border border-green-500/30 text-green-400 text-[9px] sm:text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-widest animate-pulse" data-i18n="price_discount">
                         Save over 50%
                     </div>
@@ -385,7 +354,6 @@
             </div>
         </section>
 
-        <!-- SEZIONE FAQ -->
         <section class="py-8 px-4 max-w-2xl mx-auto lazy-reveal">
             <h2 class="font-heading font-black text-lg sm:text-xl text-center text-white mb-6 uppercase tracking-widest" data-i18n="faq_title">FREQUENTLY ASKED QUESTIONS</h2>
             
@@ -428,7 +396,26 @@
             </div>
         </section>
 
-        <!-- SEZIONE GIOCO / EXTRA -->
+        <section class="py-6 px-4 max-w-3xl mx-auto lazy-reveal">
+            <div class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] p-5 sm:p-8 text-center border border-white/10 shadow-glass">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/30 mb-4 text-blue-400">
+                    <i class="fa-solid fa-headset text-xl"></i>
+                </div>
+                <h2 class="text-base sm:text-xl font-heading font-black text-white uppercase tracking-widest mb-2" data-i18n="support_title">CUSTOMER SUPPORT</h2>
+                <p class="text-brand-gray text-[11px] sm:text-xs max-w-md mx-auto mb-6 leading-relaxed" data-i18n="support_desc">Need help? Open a direct ticket with our team. We are available on Telegram and WhatsApp.</p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                    <a id="btn-support-tg" href="tg://user?id=556534716" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full sm:w-auto bg-[#229ED9]/20 hover:bg-[#229ED9] border border-[#229ED9]/50 text-white font-bold py-3 px-6 rounded-xl text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 outline-none hover:shadow-[0_0_15px_rgba(34,158,217,0.4)]">
+                        <i class="fa-brands fa-telegram text-base mr-2"></i> <span data-i18n="support_tg">TELEGRAM TICKET</span>
+                    </a>
+                    
+                    <a id="btn-support-wa" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full sm:w-auto bg-[#25D366]/20 hover:bg-[#25D366] border border-[#25D366]/50 text-white font-bold py-3 px-6 rounded-xl text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 outline-none hover:shadow-[0_0_15px_rgba(37,211,102,0.4)]">
+                        <i class="fa-brands fa-whatsapp text-base mr-2"></i> <span data-i18n="support_wa">WHATSAPP TICKET</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <section class="py-6 px-4 max-w-3xl mx-auto lazy-reveal">
             <div class="glass-panel bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border-indigo-500/20 rounded-[1rem] sm:rounded-[1.25rem] p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
                 <i class="fa-solid fa-gamepad absolute -right-4 -bottom-4 text-6xl sm:text-7xl text-white/5 pointer-events-none transform -rotate-12"></i>
@@ -448,14 +435,12 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="pt-8 pb-4 px-4 border-t border-white/5 mt-2 lazy-reveal flex flex-col items-center">
         
         <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium py-2.5 px-5 rounded-full transition-colors text-xs sm:text-sm mb-8 outline-none">
-            <i class="fa-brands fa-whatsapp text-[#25D366] text-base"></i> <span data-i18n="wa_btn">Partner with us</span>
+            <i class="fa-solid fa-handshake text-[#D4AF37] text-base"></i> <span data-i18n="wa_btn">Partner with us</span>
         </a>
 
-        <!-- Social Links -->
         <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mb-6">
             <a href="https://x.com/BettingExcRoom" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-white hover:bg-white/10 transition-all text-sm" aria-label="X (Twitter)">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="currentColor"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
@@ -466,10 +451,15 @@
             <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#229ED9] hover:bg-white/10 transition-all text-sm" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
         </div>
 
+        <div class="max-w-3xl mx-auto w-full mb-6 p-3 sm:p-4 bg-red-900/10 border border-red-500/20 rounded-xl text-center">
+            <p class="text-red-400/80 text-[9px] sm:text-[10px] leading-relaxed uppercase tracking-widest font-bold" data-i18n="legal_18">
+                🔞 Gambling is strictly prohibited for minors under 18 years of age. Trading involves risk of loss. Play responsibly.
+            </p>
+        </div>
+
         <p class="text-gray-600 text-[9px] sm:text-[10px] uppercase tracking-widest text-center">&copy; <span id="current-year"></span> Betting Exchange Room. All rights reserved.</p>
     </footer>
 
-    <!-- STICKY BOTTOM CTA - Reduced padding to give content more room -->
     <div class="fixed bottom-0 left-0 w-full z-50 bg-[#05070a]/90 backdrop-blur-xl border-t border-brand-neon/20 p-2.5 sm:p-4 pb-[calc(10px+env(safe-area-inset-bottom))] shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
         <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-6">
             
@@ -486,7 +476,6 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
@@ -523,12 +512,20 @@
                 faq_q3: "What exactly is included?", 
                 faq_a3: "Unlimited access to the Zero To Hero Academy and exclusive entry to the Telegram Premium Room for real-time automated trading signals.",
                 
+                support_title: "CUSTOMER SUPPORT",
+                support_desc: "Need help? Open a direct ticket with our team. We are available on Telegram and WhatsApp.",
+                support_tg: "TELEGRAM TICKET",
+                support_wa: "WHATSAPP TICKET",
+                support_msg: "Hello! I need support with the Betting Exchange Room.",
+                
                 sub_title: "SUBBUTEO", 
                 sub_desc: "Take a break from the charts. Challenge your friends in this web simulation.", 
                 sub_btn: "PLAY NOW",
                 
                 wa_btn: "Partner with us", 
                 wa_msg: "Hello, I am interested in partnership opportunities with Betting Exchange Room.",
+                
+                legal_18: "🔞 Gambling is strictly prohibited for minors under 18 years of age. Trading involves risk of loss. Play responsibly.",
                 
                 cta_title: "Begin your journey today",
                 cta_button: "START FOR FREE",
@@ -566,6 +563,12 @@
                 faq_q3: "¿Qué se incluye exactamente?", 
                 faq_a3: "Acceso ilimitado a la Academia Zero To Hero y entrada exclusiva a la Sala Premium de Telegram para recibir señales de trading automatizadas en tiempo real.",
                 
+                support_title: "ATENCIÓN AL CLIENTE",
+                support_desc: "¿Necesitas ayuda? Abre un ticket directo con nuestro equipo. Estamos disponibles en Telegram y WhatsApp.",
+                support_tg: "TICKET TELEGRAM",
+                support_wa: "TICKET WHATSAPP",
+                support_msg: "¡Hola! Necesito ayuda con Betting Exchange Room.",
+
                 sub_title: "SUBBUTEO", 
                 sub_desc: "Tómate un descanso de los gráficos. Desafía a tus amigos en esta simulación web.", 
                 sub_btn: "JUGAR AHORA",
@@ -573,6 +576,8 @@
                 wa_btn: "Colabora con nosotros", 
                 wa_msg: "Hola, estoy interesado en oportunidades de colaboración con Betting Exchange Room.",
                 
+                legal_18: "🔞 El juego está estrictamente prohibido para menores de 18 años. El trading implica riesgo de pérdida. Juega responsablemente.",
+
                 cta_title: "Comienza tu viaje hoy",
                 cta_button: "EMPEZAR GRATIS",
                 no_card_req: "NO SE REQUIERE TARJETA"
@@ -609,6 +614,12 @@
                 faq_q3: "O que está exatamente incluído?", 
                 faq_a3: "Acesso ilimitado à Academia Zero To Hero e entrada exclusiva na Sala Premium do Telegram para sinais de trading automatizados em tempo real.",
                 
+                support_title: "SUPORTE AO CLIENTE",
+                support_desc: "Precisa de ajuda? Abra um ticket direto com a nossa equipa. Estamos disponíveis no Telegram e WhatsApp.",
+                support_tg: "TICKET TELEGRAM",
+                support_wa: "TICKET WHATSAPP",
+                support_msg: "Olá! Preciso de ajuda com a Betting Exchange Room.",
+
                 sub_title: "SUBBUTEO", 
                 sub_desc: "Faça uma pausa nos gráficos. Desafie os seus amigos nesta simulação web.", 
                 sub_btn: "JOGAR AGORA",
@@ -616,6 +627,8 @@
                 wa_btn: "Trabalhe connosco", 
                 wa_msg: "Olá, estou interessado em oportunidades de parceria com a Betting Exchange Room.",
                 
+                legal_18: "🔞 O jogo é estritamente proibido a menores de 18 anos. A negociação envolve risco de perda. Jogue com responsabilidade.",
+
                 cta_title: "Comece a sua jornada hoje",
                 cta_button: "COMEÇAR GRÁTIS",
                 no_card_req: "NÃO REQUER CARTÃO"
@@ -652,6 +665,12 @@
                 faq_q3: "Cosa include esattamente l'abbonamento?", 
                 faq_a3: "Accesso completo e illimitato alla Zero To Hero Academy e ingresso esclusivo nella Premium Room su Telegram con segnali in tempo reale.",
                 
+                support_title: "ASSISTENZA CLIENTI",
+                support_desc: "Hai bisogno di aiuto? Apri un ticket diretto con il nostro team. Siamo disponibili su Telegram e WhatsApp.",
+                support_tg: "TICKET TELEGRAM",
+                support_wa: "TICKET WHATSAPP",
+                support_msg: "Ciao! Ho bisogno di assistenza per la Betting Exchange Room.",
+
                 sub_title: "SUBBUTEO", 
                 sub_desc: "Prenditi una pausa dai grafici. Sfida i tuoi amici in questa simulazione web.", 
                 sub_btn: "GIOCA ORA",
@@ -659,6 +678,8 @@
                 wa_btn: "Lavora con noi", 
                 wa_msg: "Salve, sono interessato a opportunità di partnership con Betting Exchange Room.",
                 
+                legal_18: "🔞 Il gioco d'azzardo è severamente vietato ai minori di 18 anni. Il trading comporta rischi di perdita del capitale. Gioca responsabilmente.",
+
                 cta_title: "Inizia subito il tuo percorso",
                 cta_button: "INIZIA ORA GRATIS",
                 no_card_req: "NESSUNA CARTA RICHIESTA"
@@ -681,10 +702,21 @@
             const buyBtn = document.getElementById('btn-full-price');
             if(buyBtn) buyBtn.href = `app-full-price.html?lang=${lang}`;
 
-            const waBtn = document.getElementById('wa-btn');
-            if(waBtn) {
-                const msg = encodeURIComponent(translations[lang].wa_msg);
-                waBtn.href = `https://wa.me/393482487172?text=${msg}`;
+            // Gestione Dinamica URL Assistenza (WA & TG)
+            const waSupportBtn = document.getElementById('btn-support-wa');
+            const tgSupportBtn = document.getElementById('btn-support-tg');
+            const waPartnerBtn = document.getElementById('wa-btn');
+            
+            if(waSupportBtn && tgSupportBtn) {
+                const supportMsg = encodeURIComponent(translations[lang].support_msg);
+                waSupportBtn.href = `https://wa.me/393482487172?text=${supportMsg}`;
+                // Deep link web di telegram sicuro per fallback numero/testo, in caso l'ID non agganci il client
+                tgSupportBtn.href = `https://t.me/+393482487172?text=${supportMsg}`; 
+            }
+
+            if(waPartnerBtn) {
+                const partnerMsg = encodeURIComponent(translations[lang].wa_msg);
+                waPartnerBtn.href = `https://wa.me/393482487172?text=${partnerMsg}`;
             }
 
             try { localStorage.setItem('bx_lang', lang); } catch(e) {}
@@ -706,6 +738,18 @@
             
             setLang(startLang);
             document.getElementById('main-body').classList.add('ready');
+            
+            // Forzatura per link Telegram Desktop se si clicca specificamente per ID (sovrascrive href di base se supportato)
+            const tgBtn = document.getElementById('btn-support-tg');
+            if(tgBtn) {
+                tgBtn.addEventListener('click', function(e) {
+                    // Tenta di aprire nativamente l'app via ID utente se in ambiente supportato (es. mobile/app desktop)
+                    // Il fallback web rimane l'href standard con il numero preimpostato
+                    setTimeout(() => {
+                         window.location.href = "tg://user?id=556534716";
+                    }, 25);
+                });
+            }
         })();
 
         document.addEventListener('DOMContentLoaded', () => {
