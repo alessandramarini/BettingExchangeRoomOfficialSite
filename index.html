@@ -25,6 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
+    <!-- Tailwind CSS Engine -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
@@ -79,43 +80,55 @@
     </script>
 
     <style>
-        /* Base Resets & Professional Aesthetics */
+        /* Base Resets & Bug-Free Display */
         body {
             background-color: #05070a;
             color: #ffffff;
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
             width: 100%;
-            opacity: 0; /* Prevents FOUC */
-            transition: opacity 0.4s ease-in-out;
             overscroll-behavior-y: none;
+            /* Fade In Nativo per evitare la schermata bianca */
+            animation: fadeInBody 0.4s ease-out forwards;
         }
-        body.ready { opacity: 1; }
+        
+        @keyframes fadeInBody {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-        /* Full Screen Section Alignment (No overlap, dynamic sizing) */
+        /* * CALCOLO DEGLI SPAZI (Anti-Taglio) 
+         * Previene che le barre fisse sopra e sotto coprano i testi 
+         */
         .landing-pad {
-            padding-bottom: calc(90px + env(safe-area-inset-bottom)); 
+            /* Spazio in basso per la sticky CTA Mobile (~110px) */
+            padding-bottom: calc(110px + env(safe-area-inset-bottom)); 
         }
         @media (min-width: 640px) {
-            .landing-pad { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+            .landing-pad { padding-bottom: calc(90px + env(safe-area-inset-bottom)); }
         }
 
         .min-h-section {
-            min-height: max(100dvh - 5rem, 550px); 
+            /* Adatta ogni blocco esattamente allo schermo visibile, sottraendo header e footer */
+            min-height: calc(100dvh - 64px - 110px); 
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        @media (min-width: 640px) {
+            .min-h-section { min-height: calc(100dvh - 80px - 90px); }
         }
 
+        /* Effetto Vetro */
         .glass-panel {
             background: linear-gradient(180deg, rgba(17, 24, 39, 0.7) 0%, rgba(10, 14, 23, 0.9) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transition: border-color 0.3s ease, transform 0.3s ease;
+            transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         /* Language Dropdown */
@@ -133,7 +146,7 @@
             visibility: visible; opacity: 1; transform: translateY(0) scale(1); 
         }
 
-        /* Quant Dashboard Text */
+        /* Dashboard Texts */
         .dashboard-quant-text span {
             display: block; color: #60A5FA; font-size: clamp(0.9rem, 2vw, 1.15rem); margin-bottom: 0.5rem;
             letter-spacing: 0.05em; text-shadow: 0 0 15px rgba(96, 165, 250, 0.3); text-transform: uppercase;
@@ -155,7 +168,7 @@
         
         .scroll-container {
             flex: 1; width: 100%; overflow-y: auto; overflow-x: hidden;
-            display: flex; flex-direction: column; align-items: center; padding-bottom: 24px;
+            display: flex; flex-direction: column; align-items: center; padding-bottom: 30px;
         }
 
         @keyframes fadeIn {
@@ -186,7 +199,7 @@
         /* Simulator Styles - Adaptive scaling */
         .sim-phone { 
             flex: none; 
-            height: min(380px, 45dvh); /* Perfectly adapts to small screens dynamically */
+            height: min(400px, 45dvh); /* Perfectly adapts to small screens dynamically */
             width: 100%; 
             max-width: 240px; 
             background-color: #000; 
@@ -234,7 +247,7 @@
                         <span id="current-lang-display" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">EN</span>
                         <i class="fa-solid fa-chevron-down text-[9px] text-brand-gray ml-0.5"></i>
                     </button>
-                    <!-- Oridne strictly richiesto: EN, ES, PT, IT -->
+                    <!-- Strict Order: EN, ES, PT, IT -->
                     <div class="lang-dropdown-content overflow-hidden p-1.5">
                         <button onclick="setLang('en')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
                             <img src="https://flagcdn.com/w20/gb.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> English
@@ -254,7 +267,7 @@
             </div>
         </header>
 
-        <main class="pt-[64px] sm:pt-[80px]">
+        <main class="pt-[64px] sm:pt-[80px] w-full">
             
             <section class="px-4 max-w-7xl mx-auto flex flex-col items-center justify-center text-center relative min-h-section py-4">
                 
@@ -323,7 +336,7 @@
 
             <section class="px-4 max-w-7xl mx-auto py-6 sm:py-10 lazy-reveal min-h-section">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 h-full items-stretch">
-                    <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
+                    <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full hover:border-white/30 hover:shadow-[0_10px_40px_rgba(163,230,53,0.1)]">
                         <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
                             <img src="cyborgtifoso.jpeg" alt="Academy" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
                             <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
@@ -339,7 +352,7 @@
                         </div>
                     </article>
 
-                    <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
+                    <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full hover:border-white/30 hover:shadow-[0_10px_40px_rgba(59,130,246,0.1)]">
                         <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
                             <img src="cyborgcalciatore.jpeg" alt="AI Signals" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
                             <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
@@ -355,7 +368,7 @@
                         </div>
                     </article>
 
-                    <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full md:col-span-2 lg:col-span-1">
+                    <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full md:col-span-2 lg:col-span-1 hover:border-white/30 hover:shadow-[0_10px_40px_rgba(245,158,11,0.1)]">
                         <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
                             <img src="cyborgarbitro.jpeg" alt="Risk Management" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
                             <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
@@ -420,7 +433,7 @@
                     <!-- PRO (Scale applies safely on lg screens) -->
                     <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-brand-gold/50 relative shadow-gold w-full flex flex-col lg:scale-105 z-10 bg-[#0c1017]">
                         <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-gold to-[#FFF0B3] text-black font-black uppercase tracking-widest text-[9px] sm:text-[10px] px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">
-                            <i class="fa-solid fa-star mr-1"></i> <span data-i18n="price_badge_pro">COMPLETE OFFER</span>
+                            <i class="fa-solid fa-star mr-1"></i> <span data-i18n="price_badge_pro">MOST POPULAR</span>
                         </div>
 
                         <h2 class="text-2xl sm:text-3xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-3">Pro</h2>
@@ -480,18 +493,18 @@
                 </div>
             </section>
 
-            <section class="py-8 px-4 max-w-2xl mx-auto lazy-reveal min-h-section">
+            <section class="py-8 px-4 max-w-3xl mx-auto lazy-reveal min-h-section">
                 <h2 class="font-heading font-black text-lg sm:text-xl lg:text-2xl text-center text-white mb-6 uppercase tracking-widest" data-i18n="faq_title">FREQUENTLY ASKED QUESTIONS</h2>
                 <div class="space-y-2.5 sm:space-y-3">
                     <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
                         <summary class="flex justify-between items-center font-bold text-xs sm:text-sm lg:text-base text-white p-4 sm:p-5 outline-none rounded-xl">
-                            <span data-i18n="faq_q1">Are there any long-term contracts?</span>
+                            <span data-i18n="faq_q1">Is this an auto-renewing subscription?</span>
                             <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
                                 <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
                             </span>
                         </summary>
                         <div class="px-4 sm:px-5 pb-5 text-brand-gray text-[11px] sm:text-xs lg:text-sm leading-relaxed cursor-text" data-i18n="faq_a1">
-                            No. The subscription is strictly month-to-month. You can easily manage or cancel your membership at any time.
+                            No. We operate on a strictly transparent policy: one-time payment, no auto-renewal. Your access simply expires at the end of your selected period. You have full control over when and if to top up, with no need to cancel anything.
                         </div>
                     </details>
                     <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
@@ -559,8 +572,8 @@
         </footer>
 
         <!-- Stiky CTA for mobile -->
-        <div class="fixed bottom-0 left-0 w-full z-40 bg-[#05070a]/90 backdrop-blur-xl border-t border-brand-neon/20 p-2.5 sm:p-4 pb-[calc(10px+env(safe-area-inset-bottom))] shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-            <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-6">
+        <div class="fixed bottom-0 left-0 w-full z-40 bg-[#05070a]/90 backdrop-blur-xl border-t border-brand-neon/20 px-4 py-3 sm:py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] shadow-[0_-10px_30px_rgba(0,0,0,0.8)]">
+            <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-6">
                 <div class="hidden sm:flex flex-col items-start flex-1">
                     <span class="text-white font-bold text-sm lg:text-base leading-tight" data-i18n="cta_title">Begin your journey today</span>
                     <span class="text-brand-gray text-[9px] lg:text-[10px] font-bold uppercase tracking-widest mt-0.5" data-i18n="no_card_req">NO CREDIT CARD REQUIRED</span>
@@ -580,7 +593,7 @@
     <div id="checkout-container" class="hidden w-full h-[100dvh] flex-col items-center justify-start overflow-hidden px-3 sm:px-4 pt-3 sm:pt-5 bg-[#05070A]">
         
         <div class="flex flex-col items-center justify-center shrink-0 w-full mb-3 sm:mb-4">
-            <img src="logo-tondo.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=BE&background=111827&color=D4AF37&rounded=true'" alt="Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-700 shadow-[0_4px_15px_rgba(0,0,0,0.3)] object-cover mb-2">
+            <img src="logo-tondo.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=BE&background=111827&color=D4AF37&rounded=true'" alt="Logo" class="w-10 h-10 sm:w-16 sm:h-16 rounded-full border border-gray-700 shadow-[0_4px_15px_rgba(0,0,0,0.3)] object-cover mb-2">
             <h1 class="text-[13px] sm:text-[15px] font-bold tracking-[0.2em] text-center text-gray-300 leading-tight">
                 BETTING EXCHANGE <span class="text-bf-yellow">ROOM</span>
             </h1>
@@ -621,7 +634,7 @@
 
             <!-- 2. Payment Action Screen -->
             <div id="screen-payment" class="screen">
-                <div class="scroll-container no-scrollbar justify-start pt-2">
+                <div class="scroll-container no-scrollbar justify-start pt-2 w-full pb-[80px]">
                     
                     <div class="w-full bg-[#111827] rounded-3xl border border-gray-700 shadow-2xl relative overflow-hidden flex flex-col items-center px-4 py-6 mb-5 flex-shrink-0">
                         <p data-i18n="pl_subtitle" class="text-[12px] sm:text-[13px] text-gray-400 text-center mb-5 font-medium px-2">Completa il pagamento per sbloccare la Premium Room:</p>
@@ -632,7 +645,7 @@
                             <ul class="space-y-3 text-[12px] sm:text-[13px] text-gray-200 font-semibold">
                                 <li class="flex items-center gap-3">
                                     <div class="w-5 h-5 rounded-full bg-bf-green/20 border border-bf-green/50 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-bf-green text-[9px]"></i></div> 
-                                    <span data-i18n="vp_1">Accesso alla zero To Hero Academy</span>
+                                    <span data-i18n="vp_1">Accesso alla Zero To Hero Academy</span>
                                 </li>
                                 <li class="flex items-center gap-3">
                                     <div class="w-5 h-5 rounded-full bg-bf-green/20 border border-bf-green/50 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-bf-green text-[9px]"></i></div> 
@@ -953,8 +966,8 @@
                 pricing_main_title: "CHOOSE YOUR PLAN", pricing_main_desc: "Select the credit package that best suits your trading journey.",
                 credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Access Policy:</strong> 1 Credit = 1 Day of uninterrupted access. The period runs consecutively from the moment of activation (e.g., 30 credits = 30 consecutive days).",
                 desc_starter: "30 Days of continuous access (30 Credits)", desc_pro: "90 Days of continuous access (90 Credits)", desc_elite: "180 Days of continuous access (180 Credits)",
-                price_badge_pro: "COMPLETE OFFER", save_50: "SAVE 50%", price_btn: "SUBSCRIBE NOW",
-                faq_title: "FREQUENTLY ASKED QUESTIONS", faq_q1: "Are there any long-term contracts?", faq_a1: "No. The subscription is strictly month-to-month. You can easily manage or cancel your membership at any time.",
+                price_badge_pro: "MOST POPULAR", save_50: "SAVE 50%", price_btn: "SUBSCRIBE NOW",
+                faq_title: "FREQUENTLY ASKED QUESTIONS", faq_q1: "Is this an auto-renewing subscription?", faq_a1: "No. We operate on a strictly transparent policy: one-time payment, no auto-renewal. Your access simply expires at the end of your selected period. You have full control over when and if to top up, with no need to cancel anything.",
                 faq_q2: "Why do I need to use USDT/TON?", faq_a2: "We utilize Blockchain infrastructure to ensure global, instant, and borderless transactions without traditional banking restrictions. Our quick-start tutorial explains how.",
                 faq_q3: "What exactly is included?", faq_a3: "Unlimited access to the Zero To Hero Academy and exclusive entry to the Telegram Premium Room for real-time automated trading signals.",
                 support_title: "CUSTOMER SUPPORT", support_desc: "Need help? Open a direct ticket with our team. We are available on Telegram and WhatsApp.",
@@ -998,63 +1011,6 @@
                 tu_t6: "6. Pay & Get Access", tu_d6: "Back on the menu, click <b>PAY NOW</b> to confirm the Smart Contract. Once paid, you will instantly receive the <b>Signals Channel Link</b> and your <b>Unique Password</b>.",
                 step: "Step", prev: "Prev", next: "Next", done: "Done", tut_badge: "TUTORIAL - NOT OPERATIONAL", tw_btn_open: "Open Telegram Wallet"
             },
-            it: {
-                // Landing Keys
-                hero_badge: "Segnali attivi su Telegram", hero_title_1: "IL TUO VANTAGGIO", hero_title_2: "MATEMATICO",
-                hero_subtitle: "Dimentica l'azzardo. Sfrutta le nostre reti neurali per estrarre vero <span class='text-white font-bold'>Valore Atteso</span> dall'Exchange. Copia le operazioni, gestisci il rischio e proteggi il tuo bankroll.",
-                new_sec_title: "COPIA. INCOLLA. INCASSA.", new_sec_desc1: "Ricevi segnali chiari e precisi, con stop loss e money management preimpostati.",
-                new_sec_desc2: "<span class='text-white font-bold'>ANALISI QUANTITATIVA APPLICATA.</span> Non una previsione, ma un protocollo matematico con rigorosa gestione del rischio e Stop Loss.",
-                card1_title: "DA PRINCIPIANTE A PRO", card1_desc: "ZERO TO HERO Academy.<br>30 lezioni interattive guidate dall'AI.",
-                card2_title: "NESSUNA EMOZIONE", card2_desc: "Copia il segnale. Imposta il trade. Vantaggio matematico.",
-                card3_title: "MONEY MANAGEMENT", card3_desc: "Modelli algoritmici rigidi progettati per far crescere il tuo bankroll in modo matematico.",
-                pricing_main_title: "SCEGLI IL TUO PIANO", pricing_main_desc: "Seleziona il pacchetto di crediti più adatto al tuo trading.",
-                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Policy di Accesso:</strong> 1 Credito = 1 Giorno di fruizione ininterrotta. Il periodo decorre in modo consecutivo dal momento dell'attivazione (es. 30 crediti = 30 giorni consecutivi).",
-                desc_starter: "30 Giorni di accesso continuo (30 Crediti)", desc_pro: "90 Giorni di accesso continuo (90 Crediti)", desc_elite: "180 Giorni di accesso continuo (180 Crediti)",
-                price_badge_pro: "OFFERTA COMPLETA", save_50: "RISPARMI IL 50%", price_btn: "ACQUISTA ORA",
-                faq_title: "DOMANDE FREQUENTI", faq_q1: "Posso annullare quando voglio?", faq_a1: "Sì, l'abbonamento non ha vincoli di permanenza. Puoi disdire in qualsiasi momento.",
-                faq_q2: "Devo usare per forza USDT e TON?", faq_a2: "Sì, utilizziamo la tecnologia Blockchain per garantire pagamenti sicuri, istantanei e senza limiti bancari. Nel tutorial ti spieghiamo come fare.",
-                faq_q3: "Cosa include esattamente l'abbonamento?", faq_a3: "Accesso completo e illimitato alla Zero To Hero Academy e ingresso esclusivo nella Premium Room su Telegram con segnali in tempo reale.",
-                support_title: "ASSISTENZA CLIENTI", support_desc: "Hai bisogno di aiuto? Apri un ticket diretto con il nostro team. Siamo disponibili su Telegram e WhatsApp.",
-                support_tg: "TICKET TELEGRAM", support_wa: "TICKET WHATSAPP", support_msg: "Ciao! Ho bisogno di assistenza per la Betting Exchange Room.",
-                wa_btn: "Lavora con noi", wa_msg: "Salve, sono interessato a opportunità di partnership con Betting Exchange Room.",
-                legal_18: "🔞 Il gioco d'azzardo è severamente vietato ai minori di 18 anni. Il trading comporta rischi di perdita del capitale. Gioca responsabilmente.",
-                cta_title: "Inizia subito il tuo percorso", cta_button: "INIZIA ORA", no_card_req: "NESSUNA CARTA RICHIESTA",
-
-                // Checkout Keys
-                offer_title: "Checkout", expires_in: "OFFERTA VALIDA X 24 ORE:", lock_price: "PROCEDI AL PAGAMENTO",
-                no_payment: "Pagamento Sicuro Web3", back_home: "TORNA ALLA HOME", days_access: "Giorni di accesso continuo",
-                pl_subtitle: "Completa il pagamento per sbloccare la Premium Room:", vp_1: "Accesso alla Zero To Hero Academy",
-                vp_2: "Accesso alla Segnali Operativi ad Alta Precisione", vp_3: "Nessun vincolo", pay_now: "SBLOCCA ACCESSO ORA",
-                new_to_crypto: "Primo pagamento in crypto?", how_wallet_title: "Crea il Wallet", how_wallet_sub: "Richiede 1 minuto",
-                how_usdt_title: "Compra USDT", how_usdt_sub: "Guida passo passo", trust_crypto: "Infrastruttura di pagamento su Blockchain. Transazioni trasparenti, sicure e svincolate da intermediari bancari.",
-                sec_btn: "Cos'è il Gas (TON), USDT e la Sicurezza?", close_tut: "Chiudi Tutorial", sec_title: "Info Sicurezza",
-                sec_lock_title: "Pagamenti Globali Web 3.0", sec_lock_desc: "Con la Blockchain paghi da tutto il mondo senza confini. Addio carte bloccate dalle banche per frodi inesistenti o commissioni folli sul cambio valuta. La transazione è istantanea.",
-                sec_usdt_title: "Cos'è USDT?", sec_usdt_desc: "È il 'dollaro digitale'. 1 USDT vale esattamente 1 Dollaro Americano. È stabile, non oscilla come il Bitcoin, perfetto per gli abbonamenti.",
-                sec_gas_title: "Perché serve anche il Toncoin (TON)?", sec_gas_desc: "Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima 'tassa di trasporto' (Gas) che si paga <b>solo in Toncoin (TON)</b>.",
-                sec_tg_title: "È un sistema sicuro?", sec_tg_desc: "Assolutamente sì. Il Wallet è una funzione ufficiale di Telegram. Attivando 'TON Space' possiedi le tue chiavi private: nessuno al mondo può toccare i tuoi fondi tranne te.",
-                close_understood: "Ho capito, chiudi", pay_modal_title: "Effettua il Pagamento", pay_modal_text: "Invia esattamente <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> sulla rete <strong class='text-white'>TON</strong> a questo indirizzo:",
-                pay_warning: "Invia SOLO <strong class='text-red-400'>USDT</strong> tramite la rete <strong class='text-red-400'>TON (Toncoin)</strong>. Altre reti causeranno la perdita dei fondi.", pay_modal_close: "Ho compreso, chiudi",
-
-                // Simulators
-                sim_w_welcome: "Benvenuto in Wallet! <br>Compra, vendi e scambia crypto su Telegram.", sim_w_open: "Apri Wallet", sim_w_settings: "Impostazioni",
-                sim_w_features: "Funzionalità", sim_w_recovery: "Frase di Recupero", sim_w_write: "Trascrivi queste 24 parole nell'ordine esatto.",
-                sim_w_saved: "Le ho salvate", sim_w_ready: "Pronto!", sim_w_done_title: "Configurazione Completata", sim_w_done_desc: "Hai salvato correttamente il wallet. Custodisci la frase al sicuro.",
-                sim_u_total: "Saldo Totale", sim_u_add: "Aggiungi Crypto", sim_u_send: "Invia", sim_u_bank: "Carta Bancaria", sim_u_fastest: "Metodo più veloce",
-                sim_u_p2p: "Mercato P2P", sim_u_local: "Metodi di pagamento locali", sim_u_choose: "Scegli Crypto", sim_u_buy: "Compra Crypto",
-                sim_u_continue: "Continua", sim_u_confirm_tx: "Conferma Transazione", sim_u_amount: "Importo", sim_u_network_fee: "Costo di Rete",
-                sim_u_to_address: "Indirizzo Destinatario", sim_u_confirm_pay: "Conferma Pagamento",
-                tw_t1: "1. Apri @wallet", tw_d1: "Cerca <b>@wallet</b> nella barra di ricerca in alto. Clicca <b>Avvia</b> e poi premi sul pulsante <b>Open Wallet</b> o digita sul browser: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
-                tw_t2: "2. Attiva TON Space", tw_d2: "Clicca sui tre puntini (Impostazioni) in alto a destra. Attiva <b>TON Space Beta</b>. Questa diventerà la tua cassaforte personale.",
-                tw_t3: "3. Fai il Backup (Importante!)", tw_d3: "Fai il backup manuale. Ti verranno mostrate <b>24 parole segrete</b>. Scrivile su carta in ordine! Non fare screenshot, servono a recuperare i soldi se perdi il telefono.",
-                tw_t4: "4. Apri il Wallet", tw_d4: "Ora che hai capito come funziona, apri il tuo Wallet ufficiale su Telegram per procedere.",
-                tu_t1: "1. Aggiungi Crypto", tu_d1: "Nella schermata principale del tuo Wallet, clicca sul pulsante <b>Add Crypto</b>.",
-                tu_t2: "2. Scegli il Metodo", tu_d2: "Scegli <b>Carta Bancaria</b> per un acquisto immediato, oppure usa il <b>Mercato P2P</b> se preferisci usare metodi locali come bonifici.",
-                tu_t3: "3. Seleziona USDT", tu_d3: "Seleziona la criptovaluta USDT dall'elenco per iniziare l'acquisto.",
-                tu_t4: "4. Inserisci l'Importo (USDT)", tu_d4: "Acquista esattamente l'importo necessario a coprire l'accesso.",
-                tu_t5: "5. Compra il Gas (TON)", tu_d5: "Ripeti la stessa operazione scegliendo <b>TON</b>. Acquista <b>1 TON</b>. Ti servirà per pagare la piccolissima tassa della blockchain.",
-                tu_t6: "6. Paga l'Accademia", tu_d6: "Tornato al menu, clicca su <b>PAGA ORA</b>. Confermerai la transazione allo Smart Contract. A pagamento completato riceverai istantaneamente il <b>Link d'ingresso</b> e la <b>Password Univoca</b>.",
-                step: "Passo", prev: "Prec", next: "Avanti", done: "Finito", tut_badge: "Tutorial - Simulazione non operativa", tw_btn_open: "Apri il Wallet Telegram"
-            },
             es: {
                 // Landing Keys
                 hero_badge: "Señales activas en Telegram", hero_title_1: "TU VENTAJA", hero_title_2: "MATEMÁTICA",
@@ -1067,8 +1023,8 @@
                 pricing_main_title: "ELIGE TU PLAN", pricing_main_desc: "Selecciona el paquete de créditos que mejor se adapte a tu trading.",
                 credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Política de Acceso:</strong> 1 Crédito = 1 Día de acceso ininterrumpido. El período transcurre de forma consecutiva desde la activación (ej. 30 créditos = 30 días consecutivos).",
                 desc_starter: "30 Días de acceso continuo (30 Créditos)", desc_pro: "90 Días de acceso continuo (90 Créditos)", desc_elite: "180 Días de acceso continuo (180 Créditos)",
-                price_badge_pro: "OFERTA COMPLETA", save_50: "AHORRAS EL 50%", price_btn: "SUSCRÍBETE AHORA",
-                faq_title: "PREGUNTAS FRECUENTES", faq_q1: "¿Hay contratos a largo plazo?", faq_a1: "No. La suscripción no tiene permanencia. Puedes cancelar fácilmente en cualquier momento.",
+                price_badge_pro: "MÁS POPULAR", save_50: "AHORRAS EL 50%", price_btn: "SUSCRÍBETE AHORA",
+                faq_title: "PREGUNTAS FRECUENTES", faq_q1: "¿Es una suscripción de renovación automática?", faq_a1: "No. Operamos con total transparencia: es un pago único, sin renovaciones automáticas. Su acceso simplemente caduca al final del período seleccionado. No necesita cancelar nada, usted tiene el control total.",
                 faq_q2: "¿Por qué debo usar USDT/TON?", faq_a2: "Utilizamos infraestructura Blockchain para garantizar transacciones globales e instantáneas sin restricciones bancarias tradicionales. Nuestro tutorial rápido lo explica todo.",
                 faq_q3: "¿Qué se incluye exactamente?", faq_a3: "Acceso ilimitado a la Academia Zero To Hero y entrada exclusiva a la Sala Premium de Telegram para recibir señales de trading automatizadas en tiempo real.",
                 support_title: "ATENCIÓN AL CLIENTE", support_desc: "¿Necesitas ayuda? Abre un ticket directo con nuestro equipo. Estamos disponibles en Telegram y WhatsApp.",
@@ -1120,12 +1076,12 @@
                 new_sec_desc2: "<span class='text-white font-bold'>ANÁLISE QUANTITATIVA APLICADA.</span> Não é uma previsão, mas um rigoroso protocolo matemático com gestão de risco e Stop Loss.",
                 card1_title: "DE INICIANTE A PRO", card1_desc: "ZERO TO HERO Academy.<br>30 lições interativas com vídeo, áudio, simulações e avaliações guiadas por IA.",
                 card2_title: "TRADING SEM EMOÇÕES", card2_desc: "Copie o sinal. Execute a operação. Mantenha a sua vantagem matemática.",
-                card3_title: "GESTÃO DE CAPITAL", card3_desc: "Modelos algorítmicos rígidos concebidos para proteger e aumentar o seu capital de forma matemática.",
+                card3_title: "GESTÃO DE CAPITAL", card3_desc: "Modelos algoritmicos rígidos concebidos para proteger e aumentar o seu capital de forma matemática.",
                 pricing_main_title: "ESCOLHA SEU PLANO", pricing_main_desc: "Selecione o pacote de créditos que melhor se adapta ao seu trading.",
                 credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Política de Acesso:</strong> 1 Crédito = 1 Dia de acesso ininterrupto. O período decorre de forma consecutiva a partir da ativação (ex. 30 créditos = 30 dias consecutivos).",
                 desc_starter: "30 Dias de acesso contínuo (30 Créditos)", desc_pro: "90 Dias de acesso contínuo (90 Créditos)", desc_elite: "180 Dias de acesso contínuo (180 Créditos)",
-                price_badge_pro: "OFERTA COMPLETA", save_50: "POUPE 50%", price_btn: "SUBSCREVER AGORA",
-                faq_title: "PERGUNTAS FREQUENTES", faq_q1: "Existem contratos a longo prazo?", faq_a1: "Não. A subscrição não tem fidelidade. Pode cancelar facilmente em qualquer altura.",
+                price_badge_pro: "MAIS POPULAR", save_50: "POUPE 50%", price_btn: "SUBSCREVER AGORA",
+                faq_title: "PERGUNTAS FREQUENTES", faq_q1: "É uma assinatura de renovação automática?", faq_a1: "Não. Operamos com total transparência: pagamento único, sem renovações automáticas. O seu acesso simplesmente expira no final do período selecionado. Não é necessário cancelar nada, você tem o controle total.",
                 faq_q2: "Por que preciso usar USDT/TON?", faq_a2: "Utilizamos infraestruturas Blockchain para garantir transações globais e instantâneas, evitando restrições bancárias tradicionais. O nosso tutorial explica tudo.",
                 faq_q3: "O que está exatamente incluído?", faq_a3: "Acesso ilimitado à Academia Zero To Hero e entrada exclusiva na Sala Premium do Telegram para sinais de trading automatizados em tempo real.",
                 support_title: "SUPORTE AO CLIENTE", support_desc: "Precisa de ajuda? Abra um ticket direto com a nossa equipa. Estamos disponíveis no Telegram e WhatsApp.",
@@ -1168,6 +1124,63 @@
                 tu_t5: "5. Compre Gas (TON)", tu_d5: "Repita o processo selecionando <b>TON</b>. Compre <b>1 TON</b>. Isso é necessário para pagar a pequena taxa da blockchain.",
                 tu_t6: "6. Pague e Receba Acesso", tu_d6: "De volta ao menu, clique em <b>PAGAR AGORA</b> para confirmar. Você receberá instantaneamente o <b>Link de Acesso</b> e sua <b>Senha Única</b>.",
                 step: "Passo", prev: "Ant", next: "Próx", done: "Feito", tut_badge: "TUTORIAL - NÃO OPERACIONAL", tw_btn_open: "Abrir Telegram Wallet"
+            },
+            it: {
+                // Landing Keys
+                hero_badge: "Segnali attivi su Telegram", hero_title_1: "IL TUO VANTAGGIO", hero_title_2: "MATEMATICO",
+                hero_subtitle: "Dimentica l'azzardo. Sfrutta le nostre reti neurali per estrarre vero <span class='text-white font-bold'>Valore Atteso</span> dall'Exchange. Copia le operazioni, gestisci il rischio e proteggi il tuo bankroll.",
+                new_sec_title: "COPIA. INCOLLA. INCASSA.", new_sec_desc1: "Ricevi segnali chiari e precisi, con stop loss e money management preimpostati.",
+                new_sec_desc2: "<span class='text-white font-bold'>ANALISI QUANTITATIVA APPLICATA.</span> Non una previsione, ma un protocollo matematico con rigorosa gestione del rischio e Stop Loss.",
+                card1_title: "DA PRINCIPIANTE A PRO", card1_desc: "ZERO TO HERO Academy.<br>30 lezioni interattive guidate dall'AI.",
+                card2_title: "NESSUNA EMOZIONE", card2_desc: "Copia il segnale. Imposta il trade. Vantaggio matematico.",
+                card3_title: "MONEY MANAGEMENT", card3_desc: "Modelli algoritmici rigidi progettati per far crescere il tuo bankroll in modo matematico.",
+                pricing_main_title: "SCEGLI IL TUO PIANO", pricing_main_desc: "Seleziona il pacchetto di crediti più adatto al tuo trading.",
+                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Policy di Accesso:</strong> 1 Credito = 1 Giorno di fruizione ininterrotta. Il periodo decorre in modo consecutivo dal momento dell'attivazione (es. 30 crediti = 30 giorni consecutivi).",
+                desc_starter: "30 Giorni di accesso continuo (30 Crediti)", desc_pro: "90 Giorni di accesso continuo (90 Crediti)", desc_elite: "180 Giorni di accesso continuo (180 Crediti)",
+                price_badge_pro: "IL PIÙ SCELTO", save_50: "RISPARMI IL 50%", price_btn: "ACQUISTA ORA",
+                faq_title: "DOMANDE FREQUENTI", faq_q1: "Si tratta di un abbonamento a rinnovo automatico?", faq_a1: "Assolutamente no. Operiamo con la massima trasparenza: si tratta di un pagamento una tantum senza prelievi automatici. L'accesso scade semplicemente al termine del periodo acquistato. Non devi disdire nulla, hai tu il pieno controllo.",
+                faq_q2: "Devo usare per forza USDT e TON?", faq_a2: "Sì, utilizziamo la tecnologia Blockchain per garantire pagamenti sicuri, istantanei e senza limiti bancari. Nel tutorial ti spieghiamo come fare.",
+                faq_q3: "Cosa include esattamente l'abbonamento?", faq_a3: "Accesso completo e illimitato alla Zero To Hero Academy e ingresso esclusivo nella Premium Room su Telegram con segnali in tempo reale.",
+                support_title: "ASSISTENZA CLIENTI", support_desc: "Hai bisogno di aiuto? Apri un ticket diretto con il nostro team. Siamo disponibili su Telegram e WhatsApp.",
+                support_tg: "TICKET TELEGRAM", support_wa: "TICKET WHATSAPP", support_msg: "Ciao! Ho bisogno di assistenza per la Betting Exchange Room.",
+                wa_btn: "Lavora con noi", wa_msg: "Salve, sono interessato a opportunità di partnership con Betting Exchange Room.",
+                legal_18: "🔞 Il gioco d'azzardo è severamente vietato ai minori di 18 anni. Il trading comporta rischi di perdita del capitale. Gioca responsabilmente.",
+                cta_title: "Inizia subito il tuo percorso", cta_button: "INIZIA ORA", no_card_req: "NESSUNA CARTA RICHIESTA",
+
+                // Checkout Keys
+                offer_title: "Checkout", expires_in: "OFFERTA VALIDA X 24 ORE:", lock_price: "PROCEDI AL PAGAMENTO",
+                no_payment: "Pagamento Sicuro Web3", back_home: "TORNA ALLA HOME", days_access: "Giorni di accesso continuo",
+                pl_subtitle: "Completa il pagamento per sbloccare la Premium Room:", vp_1: "Accesso alla Zero To Hero Academy",
+                vp_2: "Accesso alla Segnali Operativi ad Alta Precisione", vp_3: "Nessun vincolo", pay_now: "SBLOCCA ACCESSO ORA",
+                new_to_crypto: "Primo pagamento in crypto?", how_wallet_title: "Crea il Wallet", how_wallet_sub: "Richiede 1 minuto",
+                how_usdt_title: "Compra USDT", how_usdt_sub: "Guida passo passo", trust_crypto: "Infrastruttura di pagamento su Blockchain. Transazioni trasparenti, sicure e svincolate da intermediari bancari.",
+                sec_btn: "Cos'è il Gas (TON), USDT e la Sicurezza?", close_tut: "Chiudi Tutorial", sec_title: "Info Sicurezza",
+                sec_lock_title: "Pagamenti Globali Web 3.0", sec_lock_desc: "Con la Blockchain paghi da tutto il mondo senza confini. Addio carte bloccate dalle banche per frodi inesistenti o commissioni folli sul cambio valuta. La transazione è istantanea.",
+                sec_usdt_title: "Cos'è USDT?", sec_usdt_desc: "È il 'dollaro digitale'. 1 USDT vale esattamente 1 Dollaro Americano. È stabile, non oscilla come il Bitcoin, perfetto per gli abbonamenti.",
+                sec_gas_title: "Perché serve anche il Toncoin (TON)?", sec_gas_desc: "Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima 'tassa di trasporto' (Gas) che si paga <b>solo in Toncoin (TON)</b>.",
+                sec_tg_title: "È un sistema sicuro?", sec_tg_desc: "Assolutamente sì. Il Wallet è una funzione ufficiale di Telegram. Attivando 'TON Space' possiedi le tue chiavi private: nessuno al mondo può toccare i tuoi fondi tranne te.",
+                close_understood: "Ho capito, chiudi", pay_modal_title: "Effettua il Pagamento", pay_modal_text: "Invia esattamente <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> sulla rete <strong class='text-white'>TON</strong> a questo indirizzo:",
+                pay_warning: "Invia SOLO <strong class='text-red-400'>USDT</strong> tramite la rete <strong class='text-red-400'>TON (Toncoin)</strong>. Altre reti causeranno la perdita dei fondi.", pay_modal_close: "Ho compreso, chiudi",
+
+                // Simulators
+                sim_w_welcome: "Benvenuto in Wallet! <br>Compra, vendi e scambia crypto su Telegram.", sim_w_open: "Apri Wallet", sim_w_settings: "Impostazioni",
+                sim_w_features: "Funzionalità", sim_w_recovery: "Frase di Recupero", sim_w_write: "Trascrivi queste 24 parole nell'ordine esatto.",
+                sim_w_saved: "Le ho salvate", sim_w_ready: "Pronto!", sim_w_done_title: "Configurazione Completata", sim_w_done_desc: "Hai salvato correttamente il wallet. Custodisci la frase al sicuro.",
+                sim_u_total: "Saldo Totale", sim_u_add: "Aggiungi Crypto", sim_u_send: "Invia", sim_u_bank: "Carta Bancaria", sim_u_fastest: "Metodo più veloce",
+                sim_u_p2p: "Mercado P2P", sim_u_local: "Metodi di pagamento locali", sim_u_choose: "Scegli Crypto", sim_u_buy: "Compra Crypto",
+                sim_u_continue: "Continua", sim_u_confirm_tx: "Conferma Transazione", sim_u_amount: "Importo", sim_u_network_fee: "Costo di Rete",
+                sim_u_to_address: "Indirizzo Destinatario", sim_u_confirm_pay: "Conferma Pagamento",
+                tw_t1: "1. Apri @wallet", tw_d1: "Cerca <b>@wallet</b> nella barra di ricerca in alto. Clicca <b>Avvia</b> e poi premi sul pulsante <b>Open Wallet</b> o digita sul browser: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
+                tw_t2: "2. Attiva TON Space", tw_d2: "Clicca sui tre puntini (Impostazioni) in alto a destra. Attiva <b>TON Space Beta</b>. Questa diventerà la tua cassaforte personale.",
+                tw_t3: "3. Fai il Backup (Importante!)", tw_d3: "Fai il backup manuale. Ti verranno mostrate <b>24 parole segrete</b>. Scrivile su carta in ordine! Non fare screenshot, servono a recuperare i soldi se perdi il telefono.",
+                tw_t4: "4. Apri il Wallet", tw_d4: "Ora che hai capito come funziona, apri il tuo Wallet ufficiale su Telegram per procedere.",
+                tu_t1: "1. Aggiungi Crypto", tu_d1: "Nella schermata principale del tuo Wallet, clicca sul pulsante <b>Add Crypto</b>.",
+                tu_t2: "2. Scegli il Metodo", tu_d2: "Scegli <b>Carta Bancaria</b> per un acquisto immediato, oppure usa il <b>Mercato P2P</b> se preferisci usare metodi locali come bonifici.",
+                tu_t3: "3. Seleziona USDT", tu_d3: "Seleziona la criptovaluta USDT dall'elenco per iniziare l'acquisto.",
+                tu_t4: "4. Inserisci l'Importo (USDT)", tu_d4: "Acquista esattamente l'importo necessario a coprire l'accesso.",
+                tu_t5: "5. Compra il Gas (TON)", tu_d5: "Ripeti la stessa operazione scegliendo <b>TON</b>. Acquista <b>1 TON</b>. Ti servirà per pagare la piccolissima tassa della blockchain.",
+                tu_t6: "6. Paga l'Accademia", tu_d6: "Tornato al menu, clicca su <b>PAGA ORA</b>. Confermerai la transazione allo Smart Contract. A pagamento completato riceverai istantaneamente il <b>Link d'ingresso</b> e la <b>Password Univoca</b>.",
+                step: "Passo", prev: "Prec", next: "Avanti", done: "Finito", tut_badge: "Tutorial - Simulazione non operativa", tw_btn_open: "Apri il Wallet Telegram"
             }
         };
 
