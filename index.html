@@ -317,40 +317,117 @@
             </div>
         </section>
 
-        <section class="px-4 max-w-2xl mx-auto lazy-reveal min-h-section py-4">
-            <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-5 sm:p-8 text-center border border-brand-gold/30 relative shadow-gold mx-auto w-full">
+        <!-- PREZZI 3 OPZIONI -->
+        <section class="px-4 max-w-6xl mx-auto lazy-reveal py-8 sm:py-12" id="pricing">
+            <div class="text-center mb-10 sm:mb-14">
+                <h2 class="text-xl sm:text-3xl font-heading font-black text-white uppercase tracking-widest mb-3" data-i18n="pricing_main_title">CHOOSE YOUR PLAN</h2>
+                <p class="text-brand-gray text-[11px] sm:text-sm max-w-xl mx-auto px-2 mb-6" data-i18n="pricing_main_desc">Select the credit package that best suits your trading journey.</p>
                 
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-gold to-[#F5E084] text-black font-black uppercase tracking-widest text-[9px] sm:text-[10px] px-4 py-1 sm:py-1.5 rounded-full shadow-lg whitespace-nowrap">
-                    <i class="fa-solid fa-star mr-1"></i> <span data-i18n="price_badge">FULL ACCESS</span>
+                <div class="inline-flex items-start sm:items-center justify-center gap-3 bg-[#0c1017] border border-white/10 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl max-w-2xl mx-auto text-left shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+                    <i class="fa-solid fa-circle-info text-[#60A5FA] text-base sm:text-lg shrink-0 mt-0.5 sm:mt-0 opacity-80"></i>
+                    <p class="text-brand-gray text-[11px] sm:text-xs leading-relaxed font-medium" data-i18n="credit_info">
+                        <strong class="text-white tracking-wide uppercase text-[10px] sm:text-[11px]">Access Policy:</strong> 1 Credit = 1 Day of uninterrupted access. The period runs consecutively from the moment of activation (e.g., 30 credits = 30 consecutive days).
+                    </p>
                 </div>
+            </div>
 
-                <h2 class="text-lg sm:text-2xl font-heading font-black text-white uppercase tracking-widest mb-1.5 mt-1" data-i18n="price_title">PLATFORM MEMBERSHIP</h2>
-                <p class="text-brand-gray text-[11px] sm:text-xs max-w-sm mx-auto mb-5 sm:mb-6" data-i18n="price_desc">Immediate, unrestricted access to the complete Academy and the Premium A.I. Signals Room.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center max-w-5xl mx-auto pt-4 md:pt-0">
                 
-                <div class="flex flex-col items-center justify-center mb-5 sm:mb-6">
-                    <div class="relative inline-block mb-0.5">
-                        <span class="text-base sm:text-lg font-bold text-gray-500 opacity-70 tracking-wider">199 USDT</span>
-                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                            <div class="w-full h-[1.5px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
+                <!-- STARTER -->
+                <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-white/10 relative w-full flex flex-col h-full hover:border-white/30 transition-colors">
+                    <h2 class="text-xl sm:text-2xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-2">Starter</h2>
+                    <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_starter">30 Days of continuous access (30 Credits)</p>
+
+                    <div class="flex flex-col items-center justify-center mb-6 flex-1">
+                        <div class="relative inline-block mb-1">
+                            <span class="text-lg sm:text-xl font-bold text-gray-500 opacity-70 tracking-wider">188 USDT</span>
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                                <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-end justify-center gap-1 sm:gap-2">
+                            <span class="text-4xl sm:text-5xl font-heading font-black text-white leading-none">94</span>
+                            <div class="flex flex-col items-start pb-1 sm:pb-1.5">
+                                <span class="text-lg text-gray-300 font-bold leading-none">USDT</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="save_50">
+                            SAVE 50%
                         </div>
                     </div>
-                    
-                    <div class="flex items-end justify-center gap-1 sm:gap-2">
-                        <span class="text-4xl sm:text-6xl font-heading font-black text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">97</span>
-                        <div class="flex flex-col items-start pb-1 sm:pb-1.5">
-                            <span class="text-lg sm:text-xl text-gray-300 font-bold leading-none">USDT</span>
-                            <span class="text-[9px] sm:text-[10px] text-gray-500 font-medium mt-0.5" data-i18n="price_sub">/mo</span>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-2 bg-green-500/10 border border-green-500/30 text-green-400 text-[9px] sm:text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-widest animate-pulse" data-i18n="price_discount">
-                        Save over 50%
-                    </div>
+
+                    <a data-plan="starter" href="app-full-price.html" class="pricing-btn inline-flex items-center justify-center w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 outline-none mt-auto">
+                        <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
+                    </a>
                 </div>
 
-                <a id="btn-full-price" href="app-full-price.html" class="inline-flex items-center justify-center w-full max-w-[280px] sm:max-w-xs bg-gradient-to-r from-[#D4AF37] via-[#FFF0B3] to-[#D4AF37] bg-[length:200%_auto] hover:bg-right text-black font-black py-2.5 sm:py-3 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 outline-none shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)]">
-                    <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
-                </a>
+                <!-- PRO (PIU SCELTO - EVIDENZIATO) -->
+                <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-brand-gold/50 relative shadow-gold w-full flex flex-col md:scale-110 z-10 bg-[#0c1017]">
+                    
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-gold to-[#FFF0B3] text-black font-black uppercase tracking-widest text-[9px] sm:text-[10px] px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                        <i class="fa-solid fa-star mr-1"></i> <span data-i18n="price_badge_pro">COMPLETE OFFER</span>
+                    </div>
+
+                    <h2 class="text-2xl sm:text-3xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-3">Pro</h2>
+                    <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_pro">90 Days of continuous access (90 Credits)</p>
+
+                    <div class="flex flex-col items-center justify-center mb-6 flex-1">
+                        <div class="relative inline-block mb-1">
+                            <span class="text-xl sm:text-2xl font-bold text-gray-500 opacity-70 tracking-wider">468 USDT</span>
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                                <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-end justify-center gap-1 sm:gap-2">
+                            <span class="text-5xl sm:text-6xl font-heading font-black text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">234</span>
+                            <div class="flex flex-col items-start pb-1 sm:pb-1.5">
+                                <span class="text-xl text-gray-300 font-bold leading-none">USDT</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest animate-pulse" data-i18n="save_50">
+                            SAVE 50%
+                        </div>
+                    </div>
+
+                    <a data-plan="pro" href="app-full-price.html" class="pricing-btn inline-flex items-center justify-center w-full bg-gradient-to-r from-[#D4AF37] via-[#FFF0B3] to-[#D4AF37] bg-[length:200%_auto] hover:bg-right text-black font-black py-3 sm:py-3.5 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 outline-none shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] mt-auto">
+                        <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
+                    </a>
+                </div>
+
+                <!-- ELITE -->
+                <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-white/10 relative w-full flex flex-col h-full hover:border-white/30 transition-colors">
+                    <h2 class="text-xl sm:text-2xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-2">Elite</h2>
+                    <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_elite">180 Days of continuous access (180 Credits)</p>
+
+                    <div class="flex flex-col items-center justify-center mb-6 flex-1">
+                        <div class="relative inline-block mb-1">
+                            <span class="text-lg sm:text-xl font-bold text-gray-500 opacity-70 tracking-wider">788 USDT</span>
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                                <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-end justify-center gap-1 sm:gap-2">
+                            <span class="text-4xl sm:text-5xl font-heading font-black text-white leading-none">394</span>
+                            <div class="flex flex-col items-start pb-1 sm:pb-1.5">
+                                <span class="text-lg text-gray-300 font-bold leading-none">USDT</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="save_50">
+                            SAVE 50%
+                        </div>
+                    </div>
+
+                    <a data-plan="elite" href="app-full-price.html" class="pricing-btn inline-flex items-center justify-center w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 outline-none mt-auto">
+                        <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
+                    </a>
+                </div>
+
             </div>
         </section>
 
@@ -497,11 +574,14 @@
                 card3_title: "CAPITAL MANAGEMENT", 
                 card3_desc: "Rigid algorithmic models designed to protect and compound your bankroll mathematically.",
                 
-                price_badge: "FULL ACCESS", 
-                price_title: "PLATFORM MEMBERSHIP", 
-                price_desc: "Immediate, unrestricted access to the complete Academy and the Premium A.I. Signals Room.",
-                price_sub: "/mo", 
-                price_discount: "Save over 50%",
+                pricing_main_title: "CHOOSE YOUR PLAN",
+                pricing_main_desc: "Select the credit package that best suits your trading journey.",
+                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Access Policy:</strong> 1 Credit = 1 Day of uninterrupted access. The period runs consecutively from the moment of activation (e.g., 30 credits = 30 consecutive days).",
+                desc_starter: "30 Days of continuous access (30 Credits)",
+                desc_pro: "90 Days of continuous access (90 Credits)",
+                desc_elite: "180 Days of continuous access (180 Credits)",
+                price_badge_pro: "COMPLETE OFFER",
+                save_50: "SAVE 50%",
                 price_btn: "SUBSCRIBE NOW",
                 
                 faq_title: "FREQUENTLY ASKED QUESTIONS",
@@ -548,11 +628,14 @@
                 card3_title: "GESTIÓN DE CAPITAL", 
                 card3_desc: "Modelos algorítmicos rígidos diseñados para proteger y componer tu capital de forma matemática.",
                 
-                price_badge: "ACCESO TOTAL", 
-                price_title: "MEMBRESÍA DE PLATAFORMA", 
-                price_desc: "Acceso inmediato y sin restricciones a la Academia completa y a la Sala Premium de Señales de IA.",
-                price_sub: "/mes", 
-                price_discount: "Ahorra más del 50%",
+                pricing_main_title: "ELIGE TU PLAN",
+                pricing_main_desc: "Selecciona el paquete de créditos que mejor se adapte a tu trading.",
+                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Política de Acceso:</strong> 1 Crédito = 1 Día de acceso ininterrumpido. El período transcurre de forma consecutiva desde la activación (ej. 30 créditos = 30 días consecutivos).",
+                desc_starter: "30 Días de acceso continuo (30 Créditos)",
+                desc_pro: "90 Días de acceso continuo (90 Créditos)",
+                desc_elite: "180 Días de acceso continuo (180 Créditos)",
+                price_badge_pro: "OFERTA COMPLETA",
+                save_50: "AHORRAS EL 50%",
                 price_btn: "SUSCRÍBETE AHORA",
                 
                 faq_title: "PREGUNTAS FRECUENTES",
@@ -599,11 +682,14 @@
                 card3_title: "GESTÃO DE CAPITAL", 
                 card3_desc: "Modelos algorítmicos rígidos concebidos para proteger e aumentar o seu capital de forma matemática.",
                 
-                price_badge: "ACESSO TOTAL", 
-                price_title: "MEMBROS DA PLATAFORMA", 
-                price_desc: "Acesso imediato e sem restrições a toda a Academia e à Sala Premium de Sinais de IA.",
-                price_sub: "/mês", 
-                price_discount: "Poupe mais de 50%",
+                pricing_main_title: "ESCOLHA SEU PLANO",
+                pricing_main_desc: "Selecione o pacote de créditos que melhor se adapta ao seu trading.",
+                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Política de Acesso:</strong> 1 Crédito = 1 Dia de acesso ininterrupto. O período decorre de forma consecutiva a partir da ativação (ex. 30 créditos = 30 dias consecutivos).",
+                desc_starter: "30 Dias de acesso contínuo (30 Créditos)",
+                desc_pro: "90 Dias de acesso contínuo (90 Créditos)",
+                desc_elite: "180 Dias de acesso contínuo (180 Créditos)",
+                price_badge_pro: "OFERTA COMPLETA",
+                save_50: "POUPE 50%",
                 price_btn: "SUBSCREVER AGORA",
                 
                 faq_title: "PERGUNTAS FREQUENTES",
@@ -650,11 +736,14 @@
                 card3_title: "MONEY MANAGEMENT", 
                 card3_desc: "Modelli algoritmici rigidi progettati per far crescere il tuo bankroll in modo matematico.",
                 
-                price_badge: "OFFERTA COMPLETA", 
-                price_title: "ACCESSO PIATTAFORMA", 
-                price_desc: "Accesso completo e senza limiti all'Academy e alla Premium Room con Segnali A.I.",
-                price_sub: "/mese", 
-                price_discount: "Risparmi oltre il 50%",
+                pricing_main_title: "SCEGLI IL TUO PIANO",
+                pricing_main_desc: "Seleziona il pacchetto di crediti più adatto al tuo trading.",
+                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Policy di Accesso:</strong> 1 Credito = 1 Giorno di fruizione ininterrotta. Il periodo decorre in modo consecutivo dal momento dell'attivazione (es. 30 crediti = 30 giorni consecutivi).",
+                desc_starter: "30 Giorni di accesso continuo (30 Crediti)",
+                desc_pro: "90 Giorni di accesso continuo (90 Crediti)",
+                desc_elite: "180 Giorni di accesso continuo (180 Crediti)",
+                price_badge_pro: "OFFERTA COMPLETA",
+                save_50: "RISPARMI IL 50%",
                 price_btn: "ACQUISTA ORA",
                 
                 faq_title: "DOMANDE FREQUENTI",
@@ -699,8 +788,11 @@
             document.getElementById('current-lang-display').innerText = lang.toUpperCase();
             document.documentElement.lang = lang;
 
-            const buyBtn = document.getElementById('btn-full-price');
-            if(buyBtn) buyBtn.href = `app-full-price.html?lang=${lang}`;
+            // Aggiorna dinamicamente i link per le 3 opzioni di acquisto
+            document.querySelectorAll('.pricing-btn').forEach(btn => {
+                const plan = btn.getAttribute('data-plan');
+                btn.href = `app-full-price.html?plan=${plan}&lang=${lang}`;
+            });
 
             // Gestione Dinamica URL Assistenza (WA & TG)
             const waSupportBtn = document.getElementById('btn-support-wa');
