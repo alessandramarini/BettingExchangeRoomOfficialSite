@@ -2,24 +2,28 @@
 <html lang="en" class="scroll-smooth bg-[#05070a]">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#05070a">
-    <meta name="description" content="Betting Exchange Room - Estrai Valore Atteso. Modelli algoritmici per far crescere il tuo bankroll.">
+    <meta name="description" content="Betting Exchange Room - Extract Expected Value. Algorithmic models to grow your bankroll.">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
+    <!-- Preconnect for Lightning Fast Load on Vercel/GitHub Pages -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://flagcdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://flagcdn.com">
+    
     <link rel="preload" as="video" href="spot1.mp4" type="video/mp4" fetchpriority="high">
     
     <title>Betting Exchange Room | Official Site</title>
     <link rel="icon" type="image/jpeg" href="logo-tondo.jpeg">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
-    
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -38,7 +42,17 @@
                             neonDark: '#84cc16',
                             gold: '#D4AF37',
                             gray: '#8a94a6'
-                        }
+                        },
+                        'bf-yellow': '#D4AF37',
+                        'bf-blue': '#3B82F6',
+                        'bf-pink': '#E11D48',
+                        'bf-green': '#10B981',
+                        'dark-bg': '#070B14',
+                        'panel-bg': '#111827',
+                        'tg-blue': '#3390ec',
+                        'tg-bg': '#1c242f',
+                        'tg-panel': '#212d3b',
+                        'tg-text': '#f5f5f5'
                     },
                     boxShadow: {
                         'neon': '0 0 20px rgba(163, 230, 53, 0.2)',
@@ -72,31 +86,29 @@
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
             width: 100%;
-            /* Safe area padding for mobile sticky CTA - Exact calculation based on element height */
-            padding-bottom: calc(90px + env(safe-area-inset-bottom)); 
-            /* Hide initially to prevent translation flash (FOUC) */
-            opacity: 0;
+            opacity: 0; /* Prevents FOUC */
             transition: opacity 0.4s ease-in-out;
+            overscroll-behavior-y: none;
         }
-        
-        @media (min-width: 640px) {
-            body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
-        }
-
         body.ready { opacity: 1; }
 
-        /* Perfect Viewport Fitting Utility */
-        /* Calculates available space and adds slightly more buffer to prevent cut-offs */
+        /* Full Screen Section Alignment (No overlap, dynamic sizing) */
+        .landing-pad {
+            padding-bottom: calc(90px + env(safe-area-inset-bottom)); 
+        }
+        @media (min-width: 640px) {
+            .landing-pad { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+        }
+
         .min-h-section {
-            min-height: calc(100dvh - 11rem); 
+            min-height: max(100dvh - 5rem, 550px); 
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 1rem;
-            padding-bottom: 1rem;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
         }
 
-        /* Glassmorphism Refined */
         .glass-panel {
             background: linear-gradient(180deg, rgba(17, 24, 39, 0.7) 0%, rgba(10, 14, 23, 0.9) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -106,7 +118,7 @@
             transition: border-color 0.3s ease, transform 0.3s ease;
         }
 
-        /* Dropdown custom */
+        /* Language Dropdown */
         .lang-dropdown-wrapper { position: relative; display: inline-block; cursor: pointer; outline: none; }
         .lang-dropdown-content { 
             visibility: hidden; opacity: 0; position: absolute; right: 0; top: calc(100% + 0.5rem); 
@@ -121,730 +133,1249 @@
             visibility: visible; opacity: 1; transform: translateY(0) scale(1); 
         }
 
-        /* Dashboard Quant Styles */
+        /* Quant Dashboard Text */
         .dashboard-quant-text span {
-            display: block;
-            color: #60A5FA;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
-            text-shadow: 0 0 15px rgba(96, 165, 250, 0.3);
-            text-transform: uppercase;
-        }
-        @media (min-width: 640px) {
-            .dashboard-quant-text span { font-size: 1.15rem; }
+            display: block; color: #60A5FA; font-size: clamp(0.9rem, 2vw, 1.15rem); margin-bottom: 0.5rem;
+            letter-spacing: 0.05em; text-shadow: 0 0 15px rgba(96, 165, 250, 0.3); text-transform: uppercase;
         }
 
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
 
-        /* Reveal Animation */
         .lazy-reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
         .lazy-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        /* Checkout SPA Styles */
+        #checkout-container { overscroll-behavior-y: none; }
+        .screen {
+            display: none; animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .screen.active { display: flex; }
+        
+        .scroll-container {
+            flex: 1; width: 100%; overflow-y: auto; overflow-x: hidden;
+            display: flex; flex-direction: column; align-items: center; padding-bottom: 24px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .glass-btn {
+            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+
+        .btn-premium-action {
+            background: linear-gradient(90deg, #1E3A8A 0%, #3B82F6 50%, #1E3A8A 100%);
+            background-size: 200% auto; color: #fff; box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .btn-premium-action:hover { background-position: right center; }
+        .btn-premium-action:active { transform: scale(0.98); }
+
+        .modal-enter { animation: modalPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes modalPop { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Simulator Styles - Adaptive scaling */
+        .sim-phone { 
+            flex: none; 
+            height: min(380px, 45dvh); /* Perfectly adapts to small screens dynamically */
+            width: 100%; 
+            max-width: 240px; 
+            background-color: #000; 
+            border-radius: 2rem; 
+            border: 4px solid #1F2937; 
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), inset 0 0 0 1px #374151; 
+            position: relative; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            margin: 0 auto; 
+        }
+        .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 40%; height: 18px; background-color: #1F2937; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 50; }
+        .phone-home-indicator { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 35%; height: 3px; background-color: rgba(255, 255, 255, 0.3); border-radius: 4px; z-index: 50; }
+        .sim-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #1c242f; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); transform: scale(0.98) translateX(10px); display: flex; flex-direction: column; padding-top: 18px; font-size: 0.85rem; }
+        .sim-screen.active { opacity: 1; pointer-events: auto; transform: scale(1) translateX(0); }
+        .sim-screen.prev { transform: scale(0.98) translateX(-10px); }
+        .tg-toggle { width: 36px; height: 20px; background-color: #3390ec; border-radius: 12px; position: relative; flex-shrink: 0; }
+        .tg-toggle::after { content: ''; position: absolute; right: 2px; top: 2px; width: 16px; height: 16px; background-color: white; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
     </style>
 </head>
 
 <body class="antialiased selection:bg-brand-neon selection:text-black font-sans" id="main-body">
 
-    <header class="fixed w-full z-50 top-0 bg-[#05070a]/85 backdrop-blur-xl border-b border-white/5 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.5)]" id="main-header">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-            
-            <a href="#" class="flex items-center gap-2.5 group outline-none focus-visible:ring-2 focus-visible:ring-brand-neon rounded-lg">
-                <div class="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-white/10 shadow-lg group-hover:border-brand-neon/50 transition-colors shrink-0 bg-black">
-                    <img src="logo-tondo.jpeg" alt="Logo" class="w-full h-full object-cover">
-                </div>
-                <span class="font-heading font-black text-[11px] sm:text-sm tracking-widest text-white uppercase truncate">
-                    Betting Exchange <span class="text-brand-neon">Room</span>
-                </span>
-            </a>
-            
-            <div class="lang-dropdown-wrapper shrink-0" tabindex="0">
-                <button class="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-3 py-1.5 sm:py-2 rounded-xl border border-white/10 transition-colors outline-none" aria-label="Select Language">
-                    <i class="fa-solid fa-globe text-brand-gray text-xs sm:text-sm"></i>
-                    <span id="current-lang-display" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">EN</span>
-                    <i class="fa-solid fa-chevron-down text-[9px] text-brand-gray ml-0.5"></i>
-                </button>
-                <div class="lang-dropdown-content overflow-hidden p-1.5">
-                    <button onclick="setLang('en')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
-                        <img src="https://flagcdn.com/w20/gb.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> English
-                    </button>
-                    <button onclick="setLang('es')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
-                        <img src="https://flagcdn.com/w20/es.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Español
-                    </button>
-                    <button onclick="setLang('pt')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
-                        <img src="https://flagcdn.com/w20/br.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Português
-                    </button>
-                    <button onclick="setLang('it')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
-                        <img src="https://flagcdn.com/w20/it.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Italiano
-                    </button>
-                </div>
-            </div>
-            
-        </div>
-    </header>
-
-    <main class="pt-[64px] sm:pt-[80px]">
+    <!-- ==========================================
+         PART 1: LANDING PAGE SCREEN
+    =========================================== -->
+    <div id="screen-landing" class="block w-full landing-pad">
         
-        <section class="px-4 max-w-5xl mx-auto flex flex-col items-center justify-center text-center relative min-h-section py-4">
-            
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] bg-brand-neon/5 blur-[90px] rounded-full pointer-events-none"></div>
-
-            <div class="inline-flex items-center gap-2 bg-brand-neon/5 border border-brand-neon/20 px-3 py-1 sm:px-3.5 sm:py-1 rounded-full mb-3 sm:mb-4 animate-fade-in-up" style="animation-delay: 0.1s;">
-                <span class="relative flex h-1.5 w-1.5 shrink-0">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-neon"></span>
-                </span>
-                <span class="text-brand-gray text-[9px] sm:text-[10px] font-bold tracking-widest uppercase" data-i18n="hero_badge">
-                    Active signals on Telegram
-                </span>
-            </div>
-
-            <h1 class="font-heading font-black mb-3 sm:mb-4 tracking-tighter w-full animate-fade-in-up" style="animation-delay: 0.2s;">
-                <span class="block text-[clamp(1.6rem,3.5vw,4rem)] leading-[1.05] text-white uppercase drop-shadow-2xl" data-i18n="hero_title_1">YOUR MATHEMATICAL</span>
-                <span class="block text-[clamp(1.6rem,3.5vw,4rem)] leading-[1.05] text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-neon to-[#65a30d] uppercase mt-0 drop-shadow-2xl" data-i18n="hero_title_2">ADVANTAGE</span>
-            </h1>
-
-            <p class="text-brand-gray text-[11px] sm:text-xs lg:text-sm max-w-xl mx-auto font-medium mb-5 sm:mb-6 animate-fade-in-up px-2" style="animation-delay: 0.3s;" data-i18n="hero_subtitle">
-                Forget gambling. Leverage our neural networks to extract true <span class='text-white font-bold'>Expected Value</span> from the Exchange. Copy trades, manage risk, and protect your bankroll.
-            </p>
-
-            <div class="w-full max-w-2xl lg:max-w-3xl mx-auto aspect-video rounded-[0.75rem] sm:rounded-[1rem] overflow-hidden border border-white/10 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] relative animate-fade-in-up bg-black shrink-0" style="animation-delay: 0.4s;">
-                <video autoplay muted playsinline webkit-playsinline loop preload="auto" class="w-full h-full object-cover">
-                    <source src="spot1.mp4" type="video/mp4">
-                </video>
-            </div>
-        </section>
-
-        <section class="px-4 max-w-5xl mx-auto lazy-reveal min-h-section py-4">
-            
-            <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-1 border border-white/5 relative overflow-hidden shadow-2xl group w-full flex-1 flex flex-col justify-center">
+        <header class="fixed w-full z-50 top-0 bg-[#05070a]/85 backdrop-blur-xl border-b border-white/5 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.5)]" id="main-header">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
                 
-                <div class="absolute inset-0 bg-gradient-to-br from-brand-neon/15 via-[#05070a] to-blue-500/15 opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
-                
-                <div class="relative bg-[#05070a]/95 backdrop-blur-2xl rounded-[1.15rem] sm:rounded-[1.9rem] p-5 sm:p-8 lg:p-10 w-full overflow-hidden flex flex-col justify-center h-full">
-                    
-                    <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none"></div>
-
-                    <div class="text-center mb-5 sm:mb-8 relative z-10">
-                        <h2 class="text-[clamp(1.4rem,3vw,3rem)] leading-[1.1] font-heading font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 tracking-tight drop-shadow-lg" data-i18n="new_sec_title">
-                            COPY. PASTE. CASH IN.
-                        </h2>
+                <a href="#" onclick="window.scrollTo(0,0); return false;" class="flex items-center gap-2.5 group outline-none focus-visible:ring-2 focus-visible:ring-brand-neon rounded-lg">
+                    <div class="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-white/10 shadow-lg group-hover:border-brand-neon/50 transition-colors shrink-0 bg-black">
+                        <img src="logo-tondo.jpeg" alt="Logo" class="w-full h-full object-cover">
                     </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 relative z-10 items-center">
-                        
-                        <div class="flex flex-col items-center md:items-start text-center md:text-left md:pr-8 lg:pr-12 relative">
-                            <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-[90%] bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
-                            
-                            <div class="relative flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-brand-neon/10 border border-brand-neon/30 mb-3 sm:mb-4 shadow-neon shrink-0">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-2xl bg-brand-neon opacity-20"></span>
-                                <i class="fa-solid fa-satellite-dish text-brand-neon text-lg sm:text-xl"></i>
-                            </div>
-                            
-                            <p class="text-blue-200/90 text-xs sm:text-sm lg:text-base font-semibold tracking-wide leading-relaxed" data-i18n="new_sec_desc1">
-                                Receive clear, precise signals with preset stop-loss and money management parameters.
-                            </p>
-                        </div>
-
-                        <div class="md:hidden w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-1"></div>
-
-                        <div class="flex flex-col items-center md:items-start text-center md:text-left md:pl-8 lg:pl-12 relative dashboard-quant-text">
-                            <div class="h-12 w-12 sm:h-14 sm:w-14 flex items-center justify-center rounded-2xl bg-blue-500/10 border border-blue-500/30 mb-3 sm:mb-4 shadow-[0_0_20px_rgba(59,130,246,0.2)] shrink-0">
-                                <i class="fa-solid fa-microchip text-blue-400 text-lg sm:text-xl"></i>
-                            </div>
-                            
-                            <p class="text-brand-gray text-[11px] sm:text-xs lg:text-sm leading-relaxed font-medium" data-i18n="new_sec_desc2">
-                                <span class='text-white font-bold'>APPLIED QUANTITATIVE ANALYSIS.</span> Not a prediction, but a strict mathematical protocol designed for risk management and Stop Loss.
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="px-4 max-w-5xl mx-auto py-6 sm:py-10 lazy-reveal">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 h-full">
-                
-                <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
-                    <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
-                        <img src="cyborgtifoso.jpeg" alt="Academy" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
-                    </div>
-                    <div class="p-4 sm:p-5 relative z-10 flex flex-col flex-1 -mt-8 sm:-mt-10">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#05070a] flex items-center justify-center border border-purple-500/40 mb-2 sm:mb-3 shadow-lg shadow-purple-500/20 shrink-0">
-                            <i class="fa-solid fa-graduation-cap text-purple-400 text-sm sm:text-base"></i>
-                        </div>
-                        <h3 class="text-base sm:text-lg font-heading font-black text-white mb-1.5 tracking-wide" data-i18n="card1_title">FROM BEGINNER TO PRO</h3>
-                        <p class="text-brand-gray text-[11px] sm:text-xs leading-relaxed flex-1" data-i18n="card1_desc">
-                            ZERO TO HERO Academy.<br>30 interactive lessons featuring video, audio, simulations, and AI-guided assessments.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
-                    <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
-                        <img src="cyborgcalciatore.jpeg" alt="AI Signals" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
-                    </div>
-                    <div class="p-4 sm:p-5 relative z-10 flex flex-col flex-1 -mt-8 sm:-mt-10">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#05070a] flex items-center justify-center border border-cyan-500/40 mb-2 sm:mb-3 shadow-lg shadow-cyan-500/20 shrink-0">
-                            <i class="fa-solid fa-robot text-cyan-400 text-sm sm:text-base"></i>
-                        </div>
-                        <h3 class="text-base sm:text-lg font-heading font-black text-white mb-1.5 tracking-wide" data-i18n="card2_title">EMOTIONLESS TRADING</h3>
-                        <p class="text-brand-gray text-[11px] sm:text-xs leading-relaxed flex-1" data-i18n="card2_desc">
-                            Copy the signal. Execute the trade. Maintain your mathematical edge.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
-                    <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
-                        <img src="cyborgarbitro.jpeg" alt="Risk Management" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
-                    </div>
-                    <div class="p-4 sm:p-5 relative z-10 flex flex-col flex-1 -mt-8 sm:-mt-10">
-                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#05070a] flex items-center justify-center border border-amber-500/40 mb-2 sm:mb-3 shadow-lg shadow-amber-500/20 shrink-0">
-                            <i class="fa-solid fa-shield-halved text-amber-400 text-sm sm:text-base"></i>
-                        </div>
-                        <h3 class="text-base sm:text-lg font-heading font-black text-white mb-1.5 tracking-wide" data-i18n="card3_title">CAPITAL MANAGEMENT</h3>
-                        <p class="text-brand-gray text-[11px] sm:text-xs leading-relaxed flex-1" data-i18n="card3_desc">
-                            Rigid algorithmic models designed to protect and compound your bankroll mathematically.
-                        </p>
-                    </div>
-                </article>
-                
-            </div>
-        </section>
-
-        <!-- PREZZI 3 OPZIONI -->
-        <section class="px-4 max-w-6xl mx-auto lazy-reveal py-8 sm:py-12" id="pricing">
-            <div class="text-center mb-10 sm:mb-14">
-                <h2 class="text-xl sm:text-3xl font-heading font-black text-white uppercase tracking-widest mb-3" data-i18n="pricing_main_title">CHOOSE YOUR PLAN</h2>
-                <p class="text-brand-gray text-[11px] sm:text-sm max-w-xl mx-auto px-2 mb-6" data-i18n="pricing_main_desc">Select the credit package that best suits your trading journey.</p>
-                
-                <div class="inline-flex items-start sm:items-center justify-center gap-3 bg-[#0c1017] border border-white/10 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl max-w-2xl mx-auto text-left shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-                    <i class="fa-solid fa-circle-info text-[#60A5FA] text-base sm:text-lg shrink-0 mt-0.5 sm:mt-0 opacity-80"></i>
-                    <p class="text-brand-gray text-[11px] sm:text-xs leading-relaxed font-medium" data-i18n="credit_info">
-                        <strong class="text-white tracking-wide uppercase text-[10px] sm:text-[11px]">Access Policy:</strong> 1 Credit = 1 Day of uninterrupted access. The period runs consecutively from the moment of activation (e.g., 30 credits = 30 consecutive days).
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center max-w-5xl mx-auto pt-4 md:pt-0">
-                
-                <!-- STARTER -->
-                <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-white/10 relative w-full flex flex-col h-full hover:border-white/30 transition-colors">
-                    <h2 class="text-xl sm:text-2xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-2">Starter</h2>
-                    <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_starter">30 Days of continuous access (30 Credits)</p>
-
-                    <div class="flex flex-col items-center justify-center mb-6 flex-1">
-                        <div class="relative inline-block mb-1">
-                            <span class="text-lg sm:text-xl font-bold text-gray-500 opacity-70 tracking-wider">188 USDT</span>
-                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                                <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-end justify-center gap-1 sm:gap-2">
-                            <span class="text-4xl sm:text-5xl font-heading font-black text-white leading-none">94</span>
-                            <div class="flex flex-col items-start pb-1 sm:pb-1.5">
-                                <span class="text-lg text-gray-300 font-bold leading-none">USDT</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="save_50">
-                            SAVE 50%
-                        </div>
-                    </div>
-
-                    <a data-plan="starter" href="app-full-price.html" class="pricing-btn inline-flex items-center justify-center w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 outline-none mt-auto">
-                        <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
-                    </a>
-                </div>
-
-                <!-- PRO (PIU SCELTO - EVIDENZIATO) -->
-                <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-brand-gold/50 relative shadow-gold w-full flex flex-col md:scale-110 z-10 bg-[#0c1017]">
-                    
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-gold to-[#FFF0B3] text-black font-black uppercase tracking-widest text-[9px] sm:text-[10px] px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">
-                        <i class="fa-solid fa-star mr-1"></i> <span data-i18n="price_badge_pro">COMPLETE OFFER</span>
-                    </div>
-
-                    <h2 class="text-2xl sm:text-3xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-3">Pro</h2>
-                    <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_pro">90 Days of continuous access (90 Credits)</p>
-
-                    <div class="flex flex-col items-center justify-center mb-6 flex-1">
-                        <div class="relative inline-block mb-1">
-                            <span class="text-xl sm:text-2xl font-bold text-gray-500 opacity-70 tracking-wider">468 USDT</span>
-                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                                <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-end justify-center gap-1 sm:gap-2">
-                            <span class="text-5xl sm:text-6xl font-heading font-black text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">234</span>
-                            <div class="flex flex-col items-start pb-1 sm:pb-1.5">
-                                <span class="text-xl text-gray-300 font-bold leading-none">USDT</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest animate-pulse" data-i18n="save_50">
-                            SAVE 50%
-                        </div>
-                    </div>
-
-                    <a data-plan="pro" href="app-full-price.html" class="pricing-btn inline-flex items-center justify-center w-full bg-gradient-to-r from-[#D4AF37] via-[#FFF0B3] to-[#D4AF37] bg-[length:200%_auto] hover:bg-right text-black font-black py-3 sm:py-3.5 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 outline-none shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] mt-auto">
-                        <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
-                    </a>
-                </div>
-
-                <!-- ELITE -->
-                <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-white/10 relative w-full flex flex-col h-full hover:border-white/30 transition-colors">
-                    <h2 class="text-xl sm:text-2xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-2">Elite</h2>
-                    <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_elite">180 Days of continuous access (180 Credits)</p>
-
-                    <div class="flex flex-col items-center justify-center mb-6 flex-1">
-                        <div class="relative inline-block mb-1">
-                            <span class="text-lg sm:text-xl font-bold text-gray-500 opacity-70 tracking-wider">788 USDT</span>
-                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                                <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-end justify-center gap-1 sm:gap-2">
-                            <span class="text-4xl sm:text-5xl font-heading font-black text-white leading-none">394</span>
-                            <div class="flex flex-col items-start pb-1 sm:pb-1.5">
-                                <span class="text-lg text-gray-300 font-bold leading-none">USDT</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="save_50">
-                            SAVE 50%
-                        </div>
-                    </div>
-
-                    <a data-plan="elite" href="app-full-price.html" class="pricing-btn inline-flex items-center justify-center w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 outline-none mt-auto">
-                        <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
-                    </a>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="py-8 px-4 max-w-2xl mx-auto lazy-reveal">
-            <h2 class="font-heading font-black text-lg sm:text-xl text-center text-white mb-6 uppercase tracking-widest" data-i18n="faq_title">FREQUENTLY ASKED QUESTIONS</h2>
-            
-            <div class="space-y-2.5 sm:space-y-3">
-                <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
-                    <summary class="flex justify-between items-center font-bold text-xs sm:text-sm text-white p-3.5 sm:p-4 outline-none rounded-xl">
-                        <span data-i18n="faq_q1">Are there any long-term contracts?</span>
-                        <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
-                            <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
-                        </span>
-                    </summary>
-                    <div class="px-3.5 sm:px-4 pb-4 text-brand-gray text-[11px] sm:text-xs leading-relaxed cursor-text" data-i18n="faq_a1">
-                        No. The subscription is strictly month-to-month. You can easily manage or cancel your membership at any time.
-                    </div>
-                </details>
-
-                <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
-                    <summary class="flex justify-between items-center font-bold text-xs sm:text-sm text-white p-3.5 sm:p-4 outline-none rounded-xl">
-                        <span data-i18n="faq_q2">Why do I need to use USDT/TON?</span>
-                        <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
-                            <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
-                        </span>
-                    </summary>
-                    <div class="px-3.5 sm:px-4 pb-4 text-brand-gray text-[11px] sm:text-xs leading-relaxed cursor-text" data-i18n="faq_a2">
-                        We utilize Blockchain infrastructure to ensure global, instant, and borderless transactions without traditional banking restrictions. Our quick-start tutorial explains how.
-                    </div>
-                </details>
-
-                <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
-                    <summary class="flex justify-between items-center font-bold text-xs sm:text-sm text-white p-3.5 sm:p-4 outline-none rounded-xl">
-                        <span data-i18n="faq_q3">What exactly is included?</span>
-                        <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
-                            <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
-                        </span>
-                    </summary>
-                    <div class="px-3.5 sm:px-4 pb-4 text-brand-gray text-[11px] sm:text-xs leading-relaxed cursor-text" data-i18n="faq_a3">
-                        Unlimited access to the Zero To Hero Academy and exclusive entry to the Telegram Premium Room for real-time automated trading signals.
-                    </div>
-                </details>
-            </div>
-        </section>
-
-        <section class="py-6 px-4 max-w-3xl mx-auto lazy-reveal">
-            <div class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] p-5 sm:p-8 text-center border border-white/10 shadow-glass">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/30 mb-4 text-blue-400">
-                    <i class="fa-solid fa-headset text-xl"></i>
-                </div>
-                <h2 class="text-base sm:text-xl font-heading font-black text-white uppercase tracking-widest mb-2" data-i18n="support_title">CUSTOMER SUPPORT</h2>
-                <p class="text-brand-gray text-[11px] sm:text-xs max-w-md mx-auto mb-6 leading-relaxed" data-i18n="support_desc">Need help? Open a direct ticket with our team. We are available on Telegram and WhatsApp.</p>
-                
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                    <a id="btn-support-tg" href="tg://user?id=556534716" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full sm:w-auto bg-[#229ED9]/20 hover:bg-[#229ED9] border border-[#229ED9]/50 text-white font-bold py-3 px-6 rounded-xl text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 outline-none hover:shadow-[0_0_15px_rgba(34,158,217,0.4)]">
-                        <i class="fa-brands fa-telegram text-base mr-2"></i> <span data-i18n="support_tg">TELEGRAM TICKET</span>
-                    </a>
-                    
-                    <a id="btn-support-wa" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full sm:w-auto bg-[#25D366]/20 hover:bg-[#25D366] border border-[#25D366]/50 text-white font-bold py-3 px-6 rounded-xl text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 outline-none hover:shadow-[0_0_15px_rgba(37,211,102,0.4)]">
-                        <i class="fa-brands fa-whatsapp text-base mr-2"></i> <span data-i18n="support_wa">WHATSAPP TICKET</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-6 px-4 max-w-3xl mx-auto lazy-reveal">
-            <div class="glass-panel bg-gradient-to-br from-indigo-900/40 to-blue-900/40 border-indigo-500/20 rounded-[1rem] sm:rounded-[1.25rem] p-4 sm:p-6 flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
-                <i class="fa-solid fa-gamepad absolute -right-4 -bottom-4 text-6xl sm:text-7xl text-white/5 pointer-events-none transform -rotate-12"></i>
-                
-                <div class="text-center md:text-left relative z-10 flex-1">
-                    <h3 class="text-base sm:text-lg font-heading font-black text-white uppercase mb-1.5 flex items-center justify-center md:justify-start gap-2">
-                        <i class="fa-solid fa-gamepad text-indigo-400"></i> <span data-i18n="sub_title">SUBBUTEO</span>
-                    </h3>
-                    <p class="text-brand-gray text-[11px] sm:text-xs max-w-sm" data-i18n="sub_desc">Take a break from the charts. Challenge your friends in this web simulation.</p>
-                </div>
-                
-                <a href="Game-Subbuteo.html" class="relative z-10 inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-lg font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-transform hover:scale-105 outline-none w-full md:w-auto whitespace-nowrap shadow-lg">
-                    <span data-i18n="sub_btn">PLAY NOW</span> <i class="fa-solid fa-gamepad ml-2 text-[9px] opacity-70"></i>
+                    <span class="font-heading font-black text-[11px] sm:text-sm tracking-widest text-white uppercase truncate">
+                        Betting Exchange <span class="text-brand-neon">Room</span>
+                    </span>
                 </a>
+                
+                <div class="lang-dropdown-wrapper shrink-0" tabindex="0">
+                    <button class="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-3 py-1.5 sm:py-2 rounded-xl border border-white/10 transition-colors outline-none" aria-label="Select Language">
+                        <i class="fa-solid fa-globe text-brand-gray text-xs sm:text-sm"></i>
+                        <span id="current-lang-display" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">EN</span>
+                        <i class="fa-solid fa-chevron-down text-[9px] text-brand-gray ml-0.5"></i>
+                    </button>
+                    <!-- Oridne strictly richiesto: EN, ES, PT, IT -->
+                    <div class="lang-dropdown-content overflow-hidden p-1.5">
+                        <button onclick="setLang('en')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
+                            <img src="https://flagcdn.com/w20/gb.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> English
+                        </button>
+                        <button onclick="setLang('es')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
+                            <img src="https://flagcdn.com/w20/es.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Español
+                        </button>
+                        <button onclick="setLang('pt')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
+                            <img src="https://flagcdn.com/w20/br.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Português
+                        </button>
+                        <button onclick="setLang('it')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
+                            <img src="https://flagcdn.com/w20/it.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Italiano
+                        </button>
+                    </div>
+                </div>
+                
             </div>
-        </section>
+        </header>
 
-    </main>
-
-    <footer class="pt-8 pb-4 px-4 border-t border-white/5 mt-2 lazy-reveal flex flex-col items-center">
-        
-        <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium py-2.5 px-5 rounded-full transition-colors text-xs sm:text-sm mb-8 outline-none">
-            <i class="fa-solid fa-handshake text-[#D4AF37] text-base"></i> <span data-i18n="wa_btn">Partner with us</span>
-        </a>
-
-        <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mb-6">
-            <a href="https://x.com/BettingExcRoom" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-white hover:bg-white/10 transition-all text-sm" aria-label="X (Twitter)">
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="currentColor"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
-            </a>
-            <a href="https://www.youtube.com/@bettingexchangeroom" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#FF0000] hover:bg-white/10 transition-all text-sm" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="https://www.facebook.com/share/19gmdRYKa9/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#1877F2] hover:bg-white/10 transition-all text-sm" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://whatsapp.com/channel/0029VbCLlH8LI8YUjKBH0v1o" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#25D366] hover:bg-white/10 transition-all text-sm" aria-label="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#229ED9] hover:bg-white/10 transition-all text-sm" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-        </div>
-
-        <div class="max-w-3xl mx-auto w-full mb-6 p-3 sm:p-4 bg-red-900/10 border border-red-500/20 rounded-xl text-center">
-            <p class="text-red-400/80 text-[9px] sm:text-[10px] leading-relaxed uppercase tracking-widest font-bold" data-i18n="legal_18">
-                🔞 Gambling is strictly prohibited for minors under 18 years of age. Trading involves risk of loss. Play responsibly.
-            </p>
-        </div>
-
-        <p class="text-gray-600 text-[9px] sm:text-[10px] uppercase tracking-widest text-center">&copy; <span id="current-year"></span> Betting Exchange Room. All rights reserved.</p>
-    </footer>
-
-    <div class="fixed bottom-0 left-0 w-full z-50 bg-[#05070a]/90 backdrop-blur-xl border-t border-brand-neon/20 p-2.5 sm:p-4 pb-[calc(10px+env(safe-area-inset-bottom))] shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
-        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-6">
+        <main class="pt-[64px] sm:pt-[80px]">
             
-            <div class="hidden sm:flex flex-col items-start flex-1">
-                <span class="text-white font-bold text-sm lg:text-base leading-tight" data-i18n="cta_title">Begin your journey today</span>
-                <span class="text-brand-gray text-[9px] lg:text-[10px] font-bold uppercase tracking-widest mt-0.5" data-i18n="no_card_req">NO CREDIT CARD REQUIRED</span>
+            <section class="px-4 max-w-7xl mx-auto flex flex-col items-center justify-center text-center relative min-h-section py-4">
+                
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] bg-brand-neon/5 blur-[90px] rounded-full pointer-events-none"></div>
+
+                <div class="inline-flex items-center gap-2 bg-brand-neon/5 border border-brand-neon/20 px-3 py-1 sm:px-3.5 sm:py-1 rounded-full mb-3 sm:mb-4 animate-fade-in-up" style="animation-delay: 0.1s;">
+                    <span class="relative flex h-1.5 w-1.5 shrink-0">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-neon"></span>
+                    </span>
+                    <span class="text-brand-gray text-[9px] sm:text-[10px] font-bold tracking-widest uppercase" data-i18n="hero_badge">
+                        Active signals on Telegram
+                    </span>
+                </div>
+
+                <h1 class="font-heading font-black mb-3 sm:mb-4 tracking-tighter w-full animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <span class="block text-[clamp(1.6rem,3.5vw,4rem)] leading-[1.05] text-white uppercase drop-shadow-2xl" data-i18n="hero_title_1">YOUR MATHEMATICAL</span>
+                    <span class="block text-[clamp(1.6rem,3.5vw,4rem)] leading-[1.05] text-transparent bg-clip-text bg-gradient-to-r from-white via-brand-neon to-[#65a30d] uppercase mt-0 drop-shadow-2xl" data-i18n="hero_title_2">ADVANTAGE</span>
+                </h1>
+
+                <p class="text-brand-gray text-[11px] sm:text-xs lg:text-sm max-w-xl mx-auto font-medium mb-5 sm:mb-6 animate-fade-in-up px-2" style="animation-delay: 0.3s;" data-i18n="hero_subtitle">
+                    Forget gambling. Leverage our neural networks to extract true <span class='text-white font-bold'>Expected Value</span> from the Exchange. Copy trades, manage risk, and protect your bankroll.
+                </p>
+
+                <div class="w-full max-w-2xl lg:max-w-4xl mx-auto aspect-video rounded-[0.75rem] sm:rounded-[1rem] overflow-hidden border border-white/10 shadow-[0_15px_40px_-10px_rgba(0,0,0,0.8)] relative animate-fade-in-up bg-black shrink-0" style="animation-delay: 0.4s;">
+                    <video autoplay muted playsinline webkit-playsinline loop preload="auto" class="w-full h-full object-cover">
+                        <source src="spot1.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </section>
+
+            <section class="px-4 max-w-6xl mx-auto lazy-reveal min-h-section py-4">
+                <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-1 border border-white/5 relative overflow-hidden shadow-2xl group w-full flex-1 flex flex-col justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-br from-brand-neon/15 via-[#05070a] to-blue-500/15 opacity-50 group-hover:opacity-100 transition-opacity duration-700"></div>
+                    <div class="relative bg-[#05070a]/95 backdrop-blur-2xl rounded-[1.15rem] sm:rounded-[1.9rem] p-6 sm:p-10 lg:p-12 w-full overflow-hidden flex flex-col justify-center h-full">
+                        <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none"></div>
+                        <div class="text-center mb-6 sm:mb-10 relative z-10">
+                            <h2 class="text-[clamp(1.5rem,3.5vw,3rem)] leading-[1.1] font-heading font-black text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 tracking-tight drop-shadow-lg" data-i18n="new_sec_title">
+                                COPY. PASTE. CASH IN.
+                            </h2>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-0 relative z-10 items-center">
+                            <div class="flex flex-col items-center lg:items-start text-center lg:text-left lg:pr-12 relative">
+                                <div class="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-[90%] bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
+                                <div class="relative flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-brand-neon/10 border border-brand-neon/30 mb-4 sm:mb-5 shadow-neon shrink-0">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-2xl bg-brand-neon opacity-20"></span>
+                                    <i class="fa-solid fa-satellite-dish text-brand-neon text-lg sm:text-2xl"></i>
+                                </div>
+                                <p class="text-blue-200/90 text-sm sm:text-base lg:text-lg font-semibold tracking-wide leading-relaxed" data-i18n="new_sec_desc1">
+                                    Receive clear, precise signals with preset stop-loss and money management parameters.
+                                </p>
+                            </div>
+                            <div class="lg:hidden w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent my-2"></div>
+                            <div class="flex flex-col items-center lg:items-start text-center lg:text-left lg:pl-12 relative dashboard-quant-text">
+                                <div class="h-12 w-12 sm:h-16 sm:w-16 flex items-center justify-center rounded-2xl bg-blue-500/10 border border-blue-500/30 mb-4 sm:mb-5 shadow-[0_0_20px_rgba(59,130,246,0.2)] shrink-0">
+                                    <i class="fa-solid fa-microchip text-blue-400 text-lg sm:text-2xl"></i>
+                                </div>
+                                <p class="text-brand-gray text-[11px] sm:text-sm lg:text-base leading-relaxed font-medium" data-i18n="new_sec_desc2">
+                                    <span class='text-white font-bold block mb-1'>APPLIED QUANTITATIVE ANALYSIS.</span> Not a prediction, but a strict mathematical protocol designed for risk management and Stop Loss.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="px-4 max-w-7xl mx-auto py-6 sm:py-10 lazy-reveal min-h-section">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 h-full items-stretch">
+                    <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
+                        <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
+                            <img src="cyborgtifoso.jpeg" alt="Academy" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
+                        </div>
+                        <div class="p-5 sm:p-6 lg:p-8 relative z-10 flex flex-col flex-1 -mt-10 sm:-mt-12">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#05070a] flex items-center justify-center border border-purple-500/40 mb-3 shadow-lg shadow-purple-500/20 shrink-0">
+                                <i class="fa-solid fa-graduation-cap text-purple-400 text-base sm:text-lg"></i>
+                            </div>
+                            <h3 class="text-base sm:text-lg lg:text-xl font-heading font-black text-white mb-2 tracking-wide" data-i18n="card1_title">FROM BEGINNER TO PRO</h3>
+                            <p class="text-brand-gray text-xs sm:text-sm leading-relaxed flex-1" data-i18n="card1_desc">
+                                ZERO TO HERO Academy.<br>30 interactive lessons featuring video, audio, simulations, and AI-guided assessments.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full">
+                        <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
+                            <img src="cyborgcalciatore.jpeg" alt="AI Signals" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
+                        </div>
+                        <div class="p-5 sm:p-6 lg:p-8 relative z-10 flex flex-col flex-1 -mt-10 sm:-mt-12">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#05070a] flex items-center justify-center border border-cyan-500/40 mb-3 shadow-lg shadow-cyan-500/20 shrink-0">
+                                <i class="fa-solid fa-robot text-cyan-400 text-base sm:text-lg"></i>
+                            </div>
+                            <h3 class="text-base sm:text-lg lg:text-xl font-heading font-black text-white mb-2 tracking-wide" data-i18n="card2_title">EMOTIONLESS TRADING</h3>
+                            <p class="text-brand-gray text-xs sm:text-sm leading-relaxed flex-1" data-i18n="card2_desc">
+                                Copy the signal. Execute the trade. Maintain your mathematical edge.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] overflow-hidden flex flex-col group h-full md:col-span-2 lg:col-span-1">
+                        <div class="w-full aspect-video relative overflow-hidden bg-black shrink-0">
+                            <img src="cyborgarbitro.jpeg" alt="Risk Management" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out opacity-90 group-hover:opacity-100">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#05070a] via-[#05070a]/40 to-transparent"></div>
+                        </div>
+                        <div class="p-5 sm:p-6 lg:p-8 relative z-10 flex flex-col flex-1 -mt-10 sm:-mt-12">
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#05070a] flex items-center justify-center border border-amber-500/40 mb-3 shadow-lg shadow-amber-500/20 shrink-0">
+                                <i class="fa-solid fa-shield-halved text-amber-400 text-base sm:text-lg"></i>
+                            </div>
+                            <h3 class="text-base sm:text-lg lg:text-xl font-heading font-black text-white mb-2 tracking-wide" data-i18n="card3_title">CAPITAL MANAGEMENT</h3>
+                            <p class="text-brand-gray text-xs sm:text-sm leading-relaxed flex-1" data-i18n="card3_desc">
+                                Rigid algorithmic models designed to protect and compound your bankroll mathematically.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- PREZZI 3 OPZIONI -->
+            <section class="px-4 max-w-7xl mx-auto lazy-reveal py-8 sm:py-12 min-h-section" id="pricing">
+                <div class="text-center mb-10 sm:mb-14">
+                    <h2 class="text-xl sm:text-3xl lg:text-4xl font-heading font-black text-white uppercase tracking-widest mb-3" data-i18n="pricing_main_title">CHOOSE YOUR PLAN</h2>
+                    <p class="text-brand-gray text-[11px] sm:text-sm lg:text-base max-w-xl mx-auto px-2 mb-6" data-i18n="pricing_main_desc">Select the credit package that best suits your trading journey.</p>
+                    
+                    <div class="inline-flex items-start sm:items-center justify-center gap-3 bg-[#0c1017] border border-white/10 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl max-w-2xl mx-auto text-left shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+                        <i class="fa-solid fa-circle-info text-[#60A5FA] text-base sm:text-lg shrink-0 mt-0.5 sm:mt-0 opacity-80"></i>
+                        <p class="text-brand-gray text-[11px] sm:text-xs leading-relaxed font-medium" data-i18n="credit_info">
+                            <strong class="text-white tracking-wide uppercase text-[10px] sm:text-[11px]">Access Policy:</strong> 1 Credit = 1 Day of uninterrupted access. The period runs consecutively from the moment of activation (e.g., 30 credits = 30 consecutive days).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center max-w-6xl mx-auto pt-4 md:pt-0">
+                    
+                    <!-- STARTER -->
+                    <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-white/10 relative w-full flex flex-col h-full hover:border-white/30 transition-colors">
+                        <h2 class="text-xl sm:text-2xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-2">Starter</h2>
+                        <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_starter">30 Days of continuous access (30 Credits)</p>
+
+                        <div class="flex flex-col items-center justify-center mb-6 flex-1">
+                            <div class="relative inline-block mb-1">
+                                <span class="text-lg sm:text-xl font-bold text-gray-500 opacity-70 tracking-wider">188 USDT</span>
+                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                                    <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-end justify-center gap-1 sm:gap-2">
+                                <span class="text-4xl sm:text-5xl font-heading font-black text-white leading-none">94</span>
+                                <div class="flex flex-col items-start pb-1 sm:pb-1.5">
+                                    <span class="text-lg text-gray-300 font-bold leading-none">USDT</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="save_50">SAVE 50%</div>
+                        </div>
+
+                        <button onclick="startCheckout('Starter', 94, 30)" class="inline-flex items-center justify-center w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 outline-none mt-auto cursor-pointer">
+                            <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
+                        </button>
+                    </div>
+
+                    <!-- PRO (Scale applies safely on lg screens) -->
+                    <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-brand-gold/50 relative shadow-gold w-full flex flex-col lg:scale-105 z-10 bg-[#0c1017]">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-brand-gold to-[#FFF0B3] text-black font-black uppercase tracking-widest text-[9px] sm:text-[10px] px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                            <i class="fa-solid fa-star mr-1"></i> <span data-i18n="price_badge_pro">COMPLETE OFFER</span>
+                        </div>
+
+                        <h2 class="text-2xl sm:text-3xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-3">Pro</h2>
+                        <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_pro">90 Days of continuous access (90 Credits)</p>
+
+                        <div class="flex flex-col items-center justify-center mb-6 flex-1">
+                            <div class="relative inline-block mb-1">
+                                <span class="text-xl sm:text-2xl font-bold text-gray-500 opacity-70 tracking-wider">468 USDT</span>
+                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                                    <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-end justify-center gap-1 sm:gap-2">
+                                <span class="text-5xl sm:text-6xl font-heading font-black text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">234</span>
+                                <div class="flex flex-col items-start pb-1 sm:pb-1.5">
+                                    <span class="text-xl text-gray-300 font-bold leading-none">USDT</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest animate-pulse" data-i18n="save_50">SAVE 50%</div>
+                        </div>
+
+                        <button onclick="startCheckout('Pro', 234, 90)" class="inline-flex items-center justify-center w-full bg-gradient-to-r from-[#D4AF37] via-[#FFF0B3] to-[#D4AF37] bg-[length:200%_auto] hover:bg-right text-black font-black py-3 sm:py-3.5 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 outline-none shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] mt-auto cursor-pointer">
+                            <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
+                        </button>
+                    </div>
+
+                    <!-- ELITE -->
+                    <div class="glass-panel rounded-[1.25rem] sm:rounded-[2rem] p-6 sm:p-8 text-center border border-white/10 relative w-full flex flex-col h-full hover:border-white/30 transition-colors">
+                        <h2 class="text-xl sm:text-2xl font-heading font-black text-white uppercase tracking-widest mb-1 mt-2">Elite</h2>
+                        <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_elite">180 Days of continuous access (180 Credits)</p>
+
+                        <div class="flex flex-col items-center justify-center mb-6 flex-1">
+                            <div class="relative inline-block mb-1">
+                                <span class="text-lg sm:text-xl font-bold text-gray-500 opacity-70 tracking-wider">788 USDT</span>
+                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+                                    <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-end justify-center gap-1 sm:gap-2">
+                                <span class="text-4xl sm:text-5xl font-heading font-black text-white leading-none">394</span>
+                                <div class="flex flex-col items-start pb-1 sm:pb-1.5">
+                                    <span class="text-lg text-gray-300 font-bold leading-none">USDT</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="save_50">SAVE 50%</div>
+                        </div>
+
+                        <button onclick="startCheckout('Elite', 394, 180)" class="inline-flex items-center justify-center w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black py-3 px-4 rounded-xl text-xs sm:text-sm uppercase tracking-widest transition-all duration-300 outline-none mt-auto cursor-pointer">
+                            <i class="fa-solid fa-lock mr-2 opacity-80"></i> <span data-i18n="price_btn">SUBSCRIBE NOW</span>
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="py-8 px-4 max-w-2xl mx-auto lazy-reveal min-h-section">
+                <h2 class="font-heading font-black text-lg sm:text-xl lg:text-2xl text-center text-white mb-6 uppercase tracking-widest" data-i18n="faq_title">FREQUENTLY ASKED QUESTIONS</h2>
+                <div class="space-y-2.5 sm:space-y-3">
+                    <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
+                        <summary class="flex justify-between items-center font-bold text-xs sm:text-sm lg:text-base text-white p-4 sm:p-5 outline-none rounded-xl">
+                            <span data-i18n="faq_q1">Are there any long-term contracts?</span>
+                            <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
+                                <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
+                            </span>
+                        </summary>
+                        <div class="px-4 sm:px-5 pb-5 text-brand-gray text-[11px] sm:text-xs lg:text-sm leading-relaxed cursor-text" data-i18n="faq_a1">
+                            No. The subscription is strictly month-to-month. You can easily manage or cancel your membership at any time.
+                        </div>
+                    </details>
+                    <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
+                        <summary class="flex justify-between items-center font-bold text-xs sm:text-sm lg:text-base text-white p-4 sm:p-5 outline-none rounded-xl">
+                            <span data-i18n="faq_q2">Why do I need to use USDT/TON?</span>
+                            <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
+                                <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
+                            </span>
+                        </summary>
+                        <div class="px-4 sm:px-5 pb-5 text-brand-gray text-[11px] sm:text-xs lg:text-sm leading-relaxed cursor-text" data-i18n="faq_a2">
+                            We utilize Blockchain infrastructure to ensure global, instant, and borderless transactions without traditional banking restrictions. Our quick-start tutorial explains how.
+                        </div>
+                    </details>
+                    <details class="glass-panel border border-white/10 rounded-xl group cursor-pointer hover:bg-white/5 transition-colors">
+                        <summary class="flex justify-between items-center font-bold text-xs sm:text-sm lg:text-base text-white p-4 sm:p-5 outline-none rounded-xl">
+                            <span data-i18n="faq_q3">What exactly is included?</span>
+                            <span class="relative flex-shrink-0 ml-3 w-4 h-4 flex items-center justify-center">
+                                <i class="fa-solid fa-chevron-down text-brand-gray text-[10px] sm:text-xs group-open:rotate-180 transition-transform duration-300"></i>
+                            </span>
+                        </summary>
+                        <div class="px-4 sm:px-5 pb-5 text-brand-gray text-[11px] sm:text-xs lg:text-sm leading-relaxed cursor-text" data-i18n="faq_a3">
+                            Unlimited access to the Zero To Hero Academy and exclusive entry to the Telegram Premium Room for real-time automated trading signals.
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <section class="py-6 px-4 max-w-3xl mx-auto lazy-reveal min-h-section">
+                <div class="glass-panel rounded-[1rem] sm:rounded-[1.25rem] p-6 sm:p-10 text-center border border-white/10 shadow-glass">
+                    <div class="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-blue-500/10 border border-blue-500/30 mb-4 sm:mb-6 text-blue-400">
+                        <i class="fa-solid fa-headset text-xl sm:text-2xl"></i>
+                    </div>
+                    <h2 class="text-base sm:text-xl lg:text-2xl font-heading font-black text-white uppercase tracking-widest mb-2" data-i18n="support_title">CUSTOMER SUPPORT</h2>
+                    <p class="text-brand-gray text-[11px] sm:text-xs lg:text-sm max-w-md mx-auto mb-6 sm:mb-8 leading-relaxed" data-i18n="support_desc">Need help? Open a direct ticket with our team. We are available on Telegram and WhatsApp.</p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                        <a id="btn-support-tg" href="tg://user?id=556534716" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full sm:w-auto bg-[#229ED9]/20 hover:bg-[#229ED9] border border-[#229ED9]/50 text-white font-bold py-3.5 sm:py-4 px-6 sm:px-8 rounded-xl text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 outline-none hover:shadow-[0_0_15px_rgba(34,158,217,0.4)]">
+                            <i class="fa-brands fa-telegram text-base mr-2"></i> <span data-i18n="support_tg">TELEGRAM TICKET</span>
+                        </a>
+                        <a id="btn-support-wa" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full sm:w-auto bg-[#25D366]/20 hover:bg-[#25D366] border border-[#25D366]/50 text-white font-bold py-3.5 sm:py-4 px-6 sm:px-8 rounded-xl text-[11px] sm:text-xs uppercase tracking-wider transition-all duration-300 outline-none hover:shadow-[0_0_15px_rgba(37,211,102,0.4)]">
+                            <i class="fa-brands fa-whatsapp text-base mr-2"></i> <span data-i18n="support_wa">WHATSAPP TICKET</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="pt-8 pb-4 px-4 border-t border-white/5 mt-2 lazy-reveal flex flex-col items-center">
+            <a id="wa-btn" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium py-2.5 px-5 rounded-full transition-colors text-xs sm:text-sm mb-8 outline-none">
+                <i class="fa-solid fa-handshake text-[#D4AF37] text-base"></i> <span data-i18n="wa_btn">Partner with us</span>
+            </a>
+            <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mb-6">
+                <a href="https://x.com/BettingExcRoom" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-white hover:bg-white/10 transition-all text-sm"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="currentColor"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a>
+                <a href="https://www.youtube.com/@bettingexchangeroom" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#FF0000] hover:bg-white/10 transition-all text-sm"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/share/19gmdRYKa9/" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#1877F2] hover:bg-white/10 transition-all text-sm"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://whatsapp.com/channel/0029VbCLlH8LI8YUjKBH0v1o" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#25D366] hover:bg-white/10 transition-all text-sm"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://t.me/BettingExchangeRoomFree" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-brand-gray hover:text-[#229ED9] hover:bg-white/10 transition-all text-sm"><i class="fa-brands fa-telegram"></i></a>
             </div>
+            <div class="max-w-3xl mx-auto w-full mb-6 p-3 sm:p-4 bg-red-900/10 border border-red-500/20 rounded-xl text-center">
+                <p class="text-red-400/80 text-[9px] sm:text-[10px] leading-relaxed uppercase tracking-widest font-bold" data-i18n="legal_18">
+                    🔞 Gambling is strictly prohibited for minors under 18 years of age. Trading involves risk of loss. Play responsibly.
+                </p>
+            </div>
+            <p class="text-gray-600 text-[9px] sm:text-[10px] uppercase tracking-widest text-center">&copy; <span id="current-year"></span> Betting Exchange Room. All rights reserved.</p>
+        </footer>
 
-            <a href="StartForFree.html" class="w-full sm:w-auto flex-1 max-w-xs bg-brand-neon hover:bg-brand-neonDark text-brand-dark font-black py-3 sm:py-3.5 px-5 rounded-xl text-xs sm:text-sm flex items-center justify-center uppercase tracking-wider transition-all duration-300 outline-none animate-pulse-soft shadow-[0_0_15px_rgba(163,230,53,0.3)]">
-                <i class="fa-solid fa-bolt mr-2 text-sm"></i> <span data-i18n="cta_button">START FOR FREE</span>
-            </a>
-            
-            <span class="sm:hidden text-brand-gray text-[8px] font-bold uppercase tracking-widest text-center w-full" data-i18n="no_card_req">NO CREDIT CARD REQUIRED</span>
+        <!-- Stiky CTA for mobile -->
+        <div class="fixed bottom-0 left-0 w-full z-40 bg-[#05070a]/90 backdrop-blur-xl border-t border-brand-neon/20 p-2.5 sm:p-4 pb-[calc(10px+env(safe-area-inset-bottom))] shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+            <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-6">
+                <div class="hidden sm:flex flex-col items-start flex-1">
+                    <span class="text-white font-bold text-sm lg:text-base leading-tight" data-i18n="cta_title">Begin your journey today</span>
+                    <span class="text-brand-gray text-[9px] lg:text-[10px] font-bold uppercase tracking-widest mt-0.5" data-i18n="no_card_req">NO CREDIT CARD REQUIRED</span>
+                </div>
+                <button onclick="document.getElementById('pricing').scrollIntoView({behavior: 'smooth'})" class="w-full sm:w-auto flex-1 max-w-xs bg-brand-neon hover:bg-brand-neonDark text-brand-dark font-black py-3 sm:py-3.5 px-5 rounded-xl text-xs sm:text-sm flex items-center justify-center uppercase tracking-wider transition-all duration-300 outline-none animate-pulse-soft shadow-[0_0_15px_rgba(163,230,53,0.3)]">
+                    <i class="fa-solid fa-bolt mr-2 text-sm"></i> <span data-i18n="cta_button">START NOW</span>
+                </button>
+                <span class="sm:hidden text-brand-gray text-[8px] font-bold uppercase tracking-widest text-center w-full" data-i18n="no_card_req">NO CREDIT CARD REQUIRED</span>
+            </div>
         </div>
     </div>
+
+
+    <!-- ==========================================
+         PART 2: CHECKOUT FLOW (SPA)
+    =========================================== -->
+    <div id="checkout-container" class="hidden w-full h-[100dvh] flex-col items-center justify-start overflow-hidden px-3 sm:px-4 pt-3 sm:pt-5 bg-[#05070A]">
+        
+        <div class="flex flex-col items-center justify-center shrink-0 w-full mb-3 sm:mb-4">
+            <img src="logo-tondo.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=BE&background=111827&color=D4AF37&rounded=true'" alt="Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-700 shadow-[0_4px_15px_rgba(0,0,0,0.3)] object-cover mb-2">
+            <h1 class="text-[13px] sm:text-[15px] font-bold tracking-[0.2em] text-center text-gray-300 leading-tight">
+                BETTING EXCHANGE <span class="text-bf-yellow">ROOM</span>
+            </h1>
+        </div>
+
+        <div class="flex-1 w-full max-w-[420px] relative overflow-hidden flex flex-col">
+
+            <!-- 1. Countdown Offer Screen -->
+            <div id="screen-offer" class="screen">
+                <div class="scroll-container justify-center pt-2">
+                    <div class="bg-panel-bg rounded-3xl border border-gray-800 p-5 sm:p-6 w-full relative flex flex-col items-center shadow-2xl flex-shrink-0">
+                        
+                        <h2 data-i18n="offer_title" class="text-white font-black text-xl mb-1 uppercase tracking-widest text-center">Checkout</h2>
+                        <p id="checkout-plan-name" class="text-bf-yellow text-[11px] font-bold tracking-widest uppercase mb-4">PLAN NAME</p>
+                        
+                        <div class="flex items-baseline justify-center mb-6">
+                            <span id="checkout-price-display" class="text-6xl sm:text-7xl font-black text-white tracking-tighter drop-shadow-sm">97</span>
+                            <span class="text-2xl sm:text-3xl text-gray-300 font-bold ml-2">USDT</span>
+                        </div>
+                        
+                        <div class="bg-dark-bg rounded-xl py-3.5 px-4 mb-6 flex flex-col items-center border border-gray-800 w-full shrink-0">
+                            <span data-i18n="expires_in" class="text-[10px] text-gray-400 font-semibold mb-1.5 uppercase tracking-widest">OFFERTA VALIDA X 24 ORE:</span>
+                            <div id="flash-timer" class="text-3xl sm:text-4xl font-mono font-medium text-white flex items-center gap-1 tracking-wider">24:00:00</div>
+                        </div>
+                        
+                        <button onclick="goToPayment()" class="w-full btn-premium-action rounded-xl py-4 text-[15px] sm:text-[16px] font-bold flex items-center justify-center gap-2 shrink-0 cursor-pointer mb-4">
+                            <i class="fa-solid fa-lock"></i> <span data-i18n="lock_price">PROCEDI AL PAGAMENTO</span>
+                        </button>
+                        
+                        <p class="text-[10px] sm:text-[11px] text-gray-500 shrink-0 font-medium flex items-center justify-center gap-1.5"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="no_payment">Pagamento Sicuro Web3</span></p>
+
+                        <button onclick="backToHome()" class="mt-8 text-gray-600 hover:text-white transition-colors text-[11px] uppercase tracking-widest font-bold cursor-pointer bg-transparent border-none">
+                            <i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_home">TORNA ALLA HOME</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Payment Action Screen -->
+            <div id="screen-payment" class="screen">
+                <div class="scroll-container no-scrollbar justify-start pt-2">
+                    
+                    <div class="w-full bg-[#111827] rounded-3xl border border-gray-700 shadow-2xl relative overflow-hidden flex flex-col items-center px-4 py-6 mb-5 flex-shrink-0">
+                        <p data-i18n="pl_subtitle" class="text-[12px] sm:text-[13px] text-gray-400 text-center mb-5 font-medium px-2">Completa il pagamento per sbloccare la Premium Room:</p>
+                        <div class="text-white font-black text-[22px] sm:text-[24px] mb-2"><span id="pay-exact-amount">97 USDT</span></div>
+                        <div id="checkout-duration" class="bg-gray-800 text-gray-300 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-5">90 Giorni di accesso</div>
+                        
+                        <div class="w-full bg-[#070B14] border border-gray-800 rounded-2xl p-4 mb-6 shadow-inner">
+                            <ul class="space-y-3 text-[12px] sm:text-[13px] text-gray-200 font-semibold">
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-bf-green/20 border border-bf-green/50 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-bf-green text-[9px]"></i></div> 
+                                    <span data-i18n="vp_1">Accesso alla zero To Hero Academy</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-bf-green/20 border border-bf-green/50 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-bf-green text-[9px]"></i></div> 
+                                    <span data-i18n="vp_2">Accesso alla Segnali Operativi ad Alta Precisione</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <div class="w-5 h-5 rounded-full bg-bf-green/20 border border-bf-green/50 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-bf-green text-[9px]"></i></div> 
+                                    <span data-i18n="vp_3">Nessun vincolo</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button onclick="openPaymentModal()" class="w-full btn-premium-action rounded-2xl py-4 text-[15px] sm:text-[16px] font-black flex items-center justify-center gap-2 cursor-pointer">
+                            <i class="fa-solid fa-bolt text-white"></i> <span data-i18n="pay_now">SBLOCCA ACCESSO ORA</span>
+                        </button>
+                    </div>
+
+                    <div class="w-full flex flex-col items-center flex-shrink-0 px-1">
+                        <div class="flex items-center gap-3 w-full mb-4">
+                            <div class="h-px bg-gray-800 flex-1"></div>
+                            <span data-i18n="new_to_crypto" class="text-[10px] text-gray-500 font-bold uppercase tracking-widest text-center">Primo pagamento in crypto?</span>
+                            <div class="h-px bg-gray-800 flex-1"></div>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row gap-3 w-full">
+                            <button onclick="openTutorial('wallet')" class="flex-1 glass-btn hover:bg-white/5 py-3 px-3.5 rounded-xl flex items-center gap-3 transition-colors text-left border border-gray-800 shadow-sm active:scale-95 cursor-pointer">
+                                <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center shrink-0 text-white font-black text-[13px] border border-gray-700 shadow-inner"><i class="fa-solid fa-1"></i></div>
+                                <div>
+                                    <div data-i18n="how_wallet_title" class="text-[12px] font-bold text-tg-blue">Crea il Wallet</div>
+                                    <div data-i18n="how_wallet_sub" class="text-[10px] text-gray-500 mt-0.5 font-medium">Richiede 1 minuto</div>
+                                </div>
+                            </button>
+                            <button onclick="openTutorial('usdt')" class="flex-1 glass-btn hover:bg-white/5 py-3 px-3.5 rounded-xl flex items-center gap-3 transition-colors text-left border border-gray-800 shadow-sm active:scale-95 cursor-pointer">
+                                <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center shrink-0 text-white font-black text-[13px] border border-gray-700 shadow-inner"><i class="fa-solid fa-2"></i></div>
+                                <div>
+                                    <div data-i18n="how_usdt_title" class="text-[12px] font-bold text-tg-blue">Compra USDT</div>
+                                    <div data-i18n="how_usdt_sub" class="text-[10px] text-gray-500 mt-0.5 font-medium">Guida passo passo</div>
+                                </div>
+                            </button>
+                        </div>
+
+                        <div class="mt-4 w-full bg-blue-900/10 border border-blue-500/20 rounded-xl p-3 flex gap-3 items-start shrink-0 backdrop-blur-sm">
+                            <i class="fa-solid fa-link text-blue-400 mt-0.5 text-[12px] shrink-0"></i>
+                            <p data-i18n="trust_crypto" class="text-[10px] text-gray-400 leading-relaxed font-medium">
+                                Infrastruttura di pagamento su Blockchain. Transazioni trasparenti, sicure e svincolate da intermediari bancari.
+                            </p>
+                        </div>
+
+                        <button onclick="openSecurityModal()" class="mt-5 text-gray-400 hover:text-white transition-colors text-[11px] flex items-center gap-2 font-medium cursor-pointer">
+                            <i class="fa-solid fa-shield-halved opacity-70"></i> <span data-i18n="sec_btn" class="underline underline-offset-4">Cos'è il Gas (TON), USDT e la Sicurezza?</span>
+                        </button>
+                        
+                        <button onclick="showScreen('screen-offer')" class="mt-8 text-gray-600 hover:text-white transition-colors text-[11px] uppercase tracking-widest font-bold cursor-pointer mb-4 bg-transparent border-none">
+                            <i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_home">TORNA ALL'OFFERTA</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Tutorial Wallet Section -->
+            <div id="screen-tutorial-wallet" class="screen">
+                <div class="scroll-container no-scrollbar">
+                    <div class="bg-gray-800/50 border border-gray-700 text-gray-300 text-[10px] font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3 flex items-center gap-2 shrink-0">
+                        <i class="fa-solid fa-info-circle"></i> <span data-i18n="tut_badge">Tutorial - Simulazione non operativa</span>
+                    </div>
+
+                    <div class="sim-phone mb-4">
+                        <div class="phone-notch"></div>
+                        <div id="sim-tw-1" class="sim-screen active">
+                            <div class="bg-tg-panel px-3 py-2 flex items-center gap-2 z-10 border-b border-gray-800 shrink-0">
+                                <div class="w-6 h-6 bg-tg-blue rounded-full flex items-center justify-center text-white text-xs shrink-0"><i class="fa-solid fa-wallet"></i></div>
+                                <div>
+                                    <div class="text-white text-[11px] font-semibold">Wallet</div>
+                                    <div class="text-tg-blue text-[9px] leading-tight">bot</div>
+                                </div>
+                            </div>
+                            <div class="flex-1 p-3 flex flex-col justify-end gap-3 bg-[#0f1621] min-h-0 overflow-y-auto no-scrollbar">
+                                <div data-i18n="sim_w_welcome" class="bg-tg-panel p-2.5 rounded-xl rounded-bl-sm text-white text-[10px] self-start max-w-[90%]">Welcome to Wallet!</div>
+                                <div class="mt-1 mb-2 flex justify-center w-full shrink-0">
+                                    <div class="bg-tg-blue text-white font-medium py-2.5 px-3 rounded-xl text-[11px] w-full text-center shrink-0"><span data-i18n="sim_w_open">Open Wallet</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sim-tw-2" class="sim-screen">
+                            <div class="bg-tg-panel px-3 py-2 flex justify-center z-10 border-b border-gray-800 shrink-0"><div data-i18n="sim_w_settings" class="text-white text-[12px] font-semibold">Settings</div></div>
+                            <div class="flex-1 p-3 flex flex-col gap-2 mt-1 min-h-0 overflow-y-auto no-scrollbar">
+                                <div data-i18n="sim_w_features" class="text-tg-blue text-[10px] font-semibold uppercase ml-1">Features</div>
+                                <div class="bg-tg-panel rounded-xl p-3 flex justify-between items-center border border-gray-700/50 shrink-0">
+                                    <div class="flex items-center gap-3"><div class="w-6 h-6 bg-blue-500 rounded-md text-white flex items-center justify-center text-[10px] shrink-0"><i class="fa-solid fa-gem"></i></div><span class="text-white text-[12px] font-medium leading-tight">TON Space Beta</span></div>
+                                    <div class="tg-toggle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sim-tw-3" class="sim-screen">
+                            <div class="bg-tg-panel px-3 py-2 flex justify-center z-10 border-b border-gray-800 shrink-0"><div data-i18n="sim_w_recovery" class="text-white text-[12px] font-semibold">Your Recovery Phrase</div></div>
+                            <div class="flex-1 p-3 flex flex-col items-center mt-1 min-h-0 overflow-y-auto no-scrollbar">
+                                <p data-i18n="sim_w_write" class="text-[10px] text-gray-400 text-center mb-3 shrink-0">Write down these 24 words.</p>
+                                <div class="grid grid-cols-2 gap-2 w-full mb-4 shrink-0">
+                                    <div class="bg-tg-panel rounded-md py-1.5 px-2 text-[10px] text-white border border-gray-700"><span class="text-gray-500 mr-1.5">1.</span> apple</div>
+                                    <div class="bg-tg-panel rounded-md py-1.5 px-2 text-[10px] text-white border border-gray-700"><span class="text-gray-500 mr-1.5">2.</span> bravo</div>
+                                    <div class="col-span-2 text-center text-gray-500 text-xs mt-1">. . .</div>
+                                </div>
+                                <div data-i18n="sim_w_saved" class="bg-tg-blue w-full py-2.5 rounded-xl text-center text-white text-[11px] font-medium mb-2 shrink-0 mt-auto">I saved them</div>
+                            </div>
+                        </div>
+                        <div id="sim-tw-4" class="sim-screen">
+                            <div class="bg-tg-panel px-3 py-3 flex justify-center z-10 border-b border-gray-800 shrink-0 shadow-md"><div data-i18n="sim_w_ready" class="text-white text-[13px] font-bold tracking-wide">Ready!</div></div>
+                            <div class="flex-1 p-5 flex flex-col items-center justify-center mt-1 min-h-0 relative bg-gradient-to-b from-[#1c242f] to-[#0f1621] overflow-y-auto no-scrollbar">
+                                <div class="w-20 h-20 bg-gradient-to-br from-[#3390ec] to-[#1c74d4] rounded-[22px] flex items-center justify-center text-white text-4xl shadow-[0_10px_30px_rgba(51,144,236,0.3)] mb-6 transform rotate-3 hover:rotate-0 transition-transform border border-blue-400/20 shrink-0"><i class="fa-brands fa-telegram"></i></div>
+                                <h3 data-i18n="sim_w_done_title" class="text-white text-[16px] font-bold mb-2">Setup Complete</h3>
+                                <a href="https://t.me/wallet" target="_blank" class="w-full bg-[#2AABEE] hover:bg-[#2298D6] py-3.5 rounded-2xl flex items-center justify-center gap-2.5 text-white font-bold text-[14px] mt-4 shrink-0"><i class="fa-solid fa-wallet text-[12px]"></i> <span data-i18n="tw_btn_open">Open Wallet</span></a>
+                            </div>
+                        </div>
+                        <div class="phone-home-indicator"></div>
+                    </div>
+
+                    <div class="bg-panel-bg w-full p-4 rounded-2xl border border-gray-800 shadow-xl flex flex-col justify-between relative shrink-0">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 id="tw-title" class="font-bold text-[13px] text-white">...</h3>
+                            <span class="text-gray-400 font-medium text-[10px]"><span data-i18n="step">Step</span> <span id="tw-step-num">1</span>/4</span>
+                        </div>
+                        <p id="tw-desc" class="text-[12px] text-gray-400 leading-snug min-h-[50px] mb-3">...</p>
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-800/50">
+                            <button id="tw-btn-prev" onclick="navTutorial('wallet', -1)" class="text-gray-500 hover:text-white text-[11px] flex items-center gap-1 font-medium bg-transparent border-none cursor-pointer"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="prev">Prev</span></button>
+                            <div class="flex gap-1.5" id="tw-dots-container"></div>
+                            <button id="tw-btn-next" onclick="navTutorial('wallet', 1)" class="text-blue-400 font-semibold text-[11px] flex items-center gap-1 bg-transparent border-none cursor-pointer"><span id="tw-next-text" data-i18n="next">Next</span> <i id="tw-next-icon" class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                        </div>
+                    </div>
+                    <button onclick="showScreen('screen-payment')" class="mt-5 text-gray-500 hover:text-white text-[12px] underline underline-offset-4 bg-transparent border-none cursor-pointer mb-2"><span data-i18n="close_tut">Chiudi Tutorial</span></button>
+                </div>
+            </div>
+
+            <!-- 4. Tutorial USDT Section -->
+            <div id="screen-tutorial-usdt" class="screen">
+                <div class="scroll-container no-scrollbar">
+                    <div class="bg-gray-800/50 border border-gray-700 text-gray-300 text-[10px] font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3 flex items-center gap-2 shrink-0">
+                        <i class="fa-solid fa-info-circle"></i> <span data-i18n="tut_badge">Tutorial - Simulazione non operativa</span>
+                    </div>
+
+                    <div class="sim-phone mb-4">
+                        <div class="phone-notch"></div>
+                        <div id="sim-tu-1" class="sim-screen active">
+                            <div class="flex-1 p-4 flex flex-col items-center pt-8 min-h-0 overflow-y-auto no-scrollbar">
+                                <div data-i18n="sim_u_total" class="text-gray-400 text-[11px] mb-1 font-medium mt-4 shrink-0">Total Balance</div>
+                                <div class="text-white text-3xl font-bold mb-6 tracking-tight shrink-0">$0.00</div>
+                                <div class="flex justify-center gap-3 w-full shrink-0">
+                                    <div class="flex-1 bg-tg-blue rounded-[12px] py-2 flex items-center justify-center gap-1.5"><i class="fa-solid fa-plus text-white text-[10px]"></i> <span data-i18n="sim_u_add" class="text-white text-[10px]">Add Crypto</span></div>
+                                    <div class="flex-1 bg-tg-panel rounded-[12px] py-2 flex items-center justify-center gap-1.5 opacity-60 border border-gray-700"><span data-i18n="sim_u_send" class="text-white text-[10px]">Send</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sim-tu-2" class="sim-screen">
+                            <div class="flex-1 bg-black/60 relative backdrop-blur-md min-h-0">
+                                <div class="absolute bottom-0 w-full bg-tg-panel rounded-t-2xl p-4 flex flex-col gap-3">
+                                    <div class="w-8 h-1 bg-gray-600 rounded-full mx-auto mb-1 shrink-0"></div>
+                                    <div data-i18n="sim_u_add" class="text-white font-semibold text-[13px] text-center mb-1 shrink-0">Add Crypto</div>
+                                    <div class="flex items-center gap-3 bg-[#1c242f] p-3 rounded-xl border border-gray-700/50 shrink-0">
+                                        <div class="w-8 h-8 rounded-full bg-tg-blue/10 flex items-center justify-center shrink-0"><i class="fa-regular fa-credit-card text-tg-blue text-[12px]"></i></div>
+                                        <div><div data-i18n="sim_u_bank" class="text-white text-[12px]">Bank Card</div><div data-i18n="sim_u_fastest" class="text-gray-400 text-[10px]">Fastest method</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sim-tu-3" class="sim-screen">
+                            <div class="bg-tg-panel px-4 py-3 flex items-center z-10 border-b border-gray-800 shrink-0"><i class="fa-solid fa-arrow-left text-white text-[12px]"></i><div data-i18n="sim_u_choose" class="text-white text-[13px] font-semibold ml-4">Choose Crypto</div></div>
+                            <div class="flex-1 p-3 flex flex-col gap-2 relative pt-4 min-h-0 overflow-y-auto no-scrollbar">
+                                <div class="bg-tg-panel p-3 rounded-xl flex items-center gap-3 border border-gray-800"><img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=025" class="w-7 h-7 shrink-0"><div class="flex-1"><div class="text-white text-[12px]">Tether</div><div class="text-gray-400 text-[10px]">USDT</div></div></div>
+                            </div>
+                        </div>
+                        <div id="sim-tu-4" class="sim-screen">
+                            <div class="bg-tg-panel px-4 py-3 flex items-center z-10 border-b border-gray-800 shrink-0"><div data-i18n="sim_u_buy" class="text-white text-[13px] font-semibold ml-4">Buy Crypto</div></div>
+                            <div class="flex-1 p-4 flex flex-col items-center pt-6 relative min-h-0">
+                                <div class="bg-tg-bg border border-gray-800 w-full rounded-2xl p-4 flex flex-col items-center shrink-0">
+                                    <div class="text-white text-4xl font-bold flex items-baseline gap-1.5 mb-2"><span id="sim-price-display" class="text-white">97</span> <span class="text-[12px] text-gray-400">USDT</span></div>
+                                </div>
+                                <div class="mt-auto w-full pt-4 shrink-0"><div data-i18n="sim_u_continue" class="bg-tg-blue w-full py-3 rounded-xl text-center text-white text-[12px] font-semibold">Continue</div></div>
+                            </div>
+                        </div>
+                        <div id="sim-tu-5" class="sim-screen">
+                            <div class="bg-tg-panel px-4 py-3 flex items-center z-10 border-b border-gray-800 shrink-0"><div data-i18n="sim_u_buy" class="text-white text-[13px] font-semibold ml-4">Buy Crypto</div></div>
+                            <div class="flex-1 p-4 flex flex-col items-center pt-6 relative min-h-0">
+                                <div class="bg-tg-bg border border-gray-800 w-full rounded-2xl p-4 flex flex-col items-center shrink-0">
+                                    <div class="text-white text-4xl font-bold flex items-baseline gap-1.5 mb-2"><span class="text-white">1</span> <span class="text-[12px] text-gray-400">TON</span></div>
+                                </div>
+                                <div class="mt-auto w-full pt-4 shrink-0"><div data-i18n="sim_u_continue" class="bg-tg-blue w-full py-3 rounded-xl text-center text-white text-[12px] font-semibold">Continue</div></div>
+                            </div>
+                        </div>
+                        <div id="sim-tu-6" class="sim-screen">
+                            <div class="flex-1 bg-black/70 relative backdrop-blur-md flex flex-col justify-end pb-3 min-h-0">
+                                <div class="bg-tg-panel rounded-2xl p-4 w-[92%] mx-auto flex flex-col gap-3 border border-gray-700">
+                                    <div data-i18n="sim_u_confirm_tx" class="text-white font-semibold text-[13px] text-center shrink-0">Confirm Transaction</div>
+                                    <div class="bg-[#1c242f] rounded-xl p-3 border border-gray-700/50 flex flex-col gap-2 shrink-0">
+                                        <div class="flex justify-between items-center"><span data-i18n="sim_u_amount" class="text-gray-400 text-[10px]">Amount</span><span id="sim-final-price" class="text-white font-medium text-[11px]">97 USDT</span></div>
+                                    </div>
+                                    <div class="mt-1 shrink-0"><div data-i18n="sim_u_confirm_pay" class="bg-tg-blue w-full py-2.5 rounded-xl text-center text-white text-[12px] font-semibold">Confirm Payment</div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="phone-home-indicator"></div>
+                    </div>
+
+                    <div class="bg-panel-bg w-full p-4 rounded-2xl border border-gray-800 shadow-xl flex flex-col justify-between relative shrink-0">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 id="tu-title" class="font-bold text-[13px] text-white">...</h3>
+                            <span class="text-gray-400 font-medium text-[10px]"><span data-i18n="step">Step</span> <span id="tu-step-num">1</span>/6</span>
+                        </div>
+                        <p id="tu-desc" class="text-[12px] text-gray-400 leading-snug min-h-[55px] mb-3">...</p>
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-800/50">
+                            <button id="tu-btn-prev" onclick="navTutorial('usdt', -1)" class="text-gray-500 hover:text-white text-[11px] flex items-center gap-1 font-medium bg-transparent border-none cursor-pointer"><i class="fa-solid fa-chevron-left"></i> <span data-i18n="prev">Prev</span></button>
+                            <div class="flex gap-1.5" id="tu-dots-container"></div>
+                            <button id="tu-btn-next" onclick="navTutorial('usdt', 1)" class="text-blue-400 font-semibold text-[11px] flex items-center gap-1 bg-transparent border-none cursor-pointer"><span id="tu-next-text" data-i18n="next">Next</span> <i id="tu-next-icon" class="fa-solid fa-chevron-right text-[10px]"></i></button>
+                        </div>
+                    </div>
+
+                    <button onclick="showScreen('screen-payment')" class="mt-5 text-gray-500 hover:text-white text-[12px] underline underline-offset-4 bg-transparent border-none cursor-pointer mb-2"><span data-i18n="close_tut">Chiudi Tutorial</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         PART 3: MODALS
+    =========================================== -->
+    <!-- Security Modal -->
+    <div id="security-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[100] p-4">
+        <div class="bg-panel-bg border border-gray-800 rounded-3xl p-5 w-full max-w-sm relative overflow-hidden shadow-2xl modal-enter max-h-[90vh] overflow-y-auto">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
+            <div class="relative z-10">
+                <div class="flex justify-between items-center mb-5 sticky top-0 bg-panel-bg pb-3 z-20 border-b border-gray-800">
+                    <h3 data-i18n="sec_title" class="text-base font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved text-gray-400"></i> Info Sicurezza
+                    </h3>
+                    <button onclick="closeSecurityModal()" class="text-gray-500 hover:text-white bg-transparent border-none cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
+                </div>
+                <div class="space-y-5">
+                    <div class="flex gap-3 items-start">
+                        <div class="mt-0.5 w-8 h-8 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-globe"></i></div>
+                        <div>
+                            <h4 data-i18n="sec_lock_title" class="font-bold text-white text-[13px] mb-1">Pagamenti Globali Web 3.0</h4>
+                            <p data-i18n="sec_lock_desc" class="text-[12px] text-gray-400 leading-snug">Con la Blockchain paghi da tutto il mondo senza confini. Addio carte bloccate dalle banche per frodi inesistenti o commissioni folli sul cambio valuta. La transazione è istantanea.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <div class="mt-0.5 w-8 h-8 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-dollar-sign"></i></div>
+                        <div>
+                            <h4 data-i18n="sec_usdt_title" class="font-bold text-white text-[13px] mb-1">Cos'è USDT?</h4>
+                            <p data-i18n="sec_usdt_desc" class="text-[12px] text-gray-400 leading-snug">È il "dollaro digitale". 1 USDT vale esattamente 1 Dollaro Americano. È stabile, non oscilla come il Bitcoin, perfetto per gli abbonamenti.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 items-start bg-gray-800/30 p-3 rounded-xl border border-gray-700/50">
+                        <div class="mt-0.5 w-8 h-8 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-gas-pump"></i></div>
+                        <div>
+                            <h4 data-i18n="sec_gas_title" class="font-bold text-white text-[13px] mb-1">Perché serve anche il Toncoin (TON)?</h4>
+                            <p data-i18n="sec_gas_desc" class="text-[12px] text-gray-300 leading-snug">Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima "tassa di trasporto" (Gas) che si paga <b>solo in Toncoin (TON)</b>.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <div class="mt-0.5 w-8 h-8 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center shrink-0 text-sm"><i class="fa-brands fa-telegram"></i></div>
+                        <div>
+                            <h4 data-i18n="sec_tg_title" class="font-bold text-white text-[13px] mb-1">È un sistema sicuro?</h4>
+                            <p data-i18n="sec_tg_desc" class="text-[12px] text-gray-400 leading-snug">Assolutamente sì. Il Wallet è una funzione ufficiale di Telegram. Attivando 'TON Space' possiedi le tue chiavi private: nessuno può toccare i tuoi fondi tranne te.</p>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeSecurityModal()" class="w-full mt-6 bg-white text-black font-bold py-3.5 rounded-xl text-[14px] active:scale-95 cursor-pointer border-none">
+                    <span data-i18n="close_understood">Ho capito, chiudi</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Real Modal -->
+    <div id="payment-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[100] p-4">
+        <div class="bg-[#0a0f18] border border-blue-500/30 rounded-3xl p-6 w-full max-w-sm text-center shadow-[0_15px_50px_rgba(59,130,246,0.15)] modal-enter relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 to-blue-400"></div>
+            <div class="w-16 h-16 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center mx-auto mb-4 border border-blue-500/20"><i class="fa-brands fa-telegram text-3xl"></i></div>
+            
+            <h2 data-i18n="pay_modal_title" class="text-[18px] font-black text-white mb-2 uppercase">Effettua il Pagamento</h2>
+            <p data-i18n="pay_modal_text" class="text-[13px] font-medium mb-4 text-gray-300">
+                Invia esattamente <strong id="modal-pay-amount" class="text-white text-base">97 USDT</strong> sulla rete <strong class="text-white">TON</strong> a questo indirizzo:
+            </p>
+            
+            <div class="bg-black/50 border border-gray-700 p-3 rounded-xl flex items-center justify-between gap-3 mb-4">
+                <span id="usdt-address" class="text-[11px] text-gray-300 font-mono break-all text-left flex-1 selection:bg-blue-500/30">UQBK7F4nTjfCL7JiwnD2kiZOV1klycVHMOHWPtZcVqNXa4_r</span>
+                <button id="copy-btn" onclick="copyAddress()" class="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center text-white shrink-0 transition-colors border-none cursor-pointer">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+
+            <div class="bg-red-500/10 border border-red-500/20 p-2.5 rounded-lg mb-6 text-left flex items-start gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-red-400 text-[10px] mt-0.5"></i>
+                <p data-i18n="pay_warning" class="text-[10px] text-red-200 leading-tight">
+                    Invia SOLO <strong class="text-red-400">USDT</strong> tramite la rete <strong class="text-red-400">TON (Toncoin)</strong>. Altre reti causeranno la perdita dei fondi.
+                </p>
+            </div>
+            
+            <button onclick="closePaymentModal()" class="w-full bg-white text-black py-3.5 rounded-xl font-bold text-[13px] uppercase tracking-widest active:scale-95 shadow-lg border-none cursor-pointer">
+                <span data-i18n="pay_modal_close">Ho compreso, chiudi</span>
+            </button>
+        </div>
+    </div>
+
 
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
+        // MERGED TRANSLATIONS (Landing + Checkout)
         const translations = {
             en: {
-                hero_badge: "Active signals on Telegram", 
-                hero_title_1: "YOUR MATHEMATICAL", 
-                hero_title_2: "ADVANTAGE",
+                // Landing Keys
+                hero_badge: "Active signals on Telegram", hero_title_1: "YOUR MATHEMATICAL", hero_title_2: "ADVANTAGE",
                 hero_subtitle: "Forget gambling. Leverage our neural networks to extract true <span class='text-white font-bold'>Expected Value</span> from the Exchange. Copy trades, manage risk, and protect your bankroll.",
-                
-                new_sec_title: "COPY. PASTE. CASH IN.",
-                new_sec_desc1: "Receive clear, precise signals with preset stop-loss and money management parameters.",
+                new_sec_title: "COPY. PASTE. CASH IN.", new_sec_desc1: "Receive clear, precise signals with preset stop-loss and money management parameters.",
                 new_sec_desc2: "<span class='text-white font-bold'>APPLIED QUANTITATIVE ANALYSIS.</span> Not a prediction, but a strict mathematical protocol designed for risk management and Stop Loss.",
-
-                card1_title: "FROM BEGINNER TO PRO", 
-                card1_desc: "ZERO TO HERO Academy.<br>30 interactive lessons featuring video, audio, simulations, and AI-guided assessments.",
-                card2_title: "EMOTIONLESS TRADING", 
-                card2_desc: "Copy the signal. Execute the trade. Maintain your mathematical edge.",
-                card3_title: "CAPITAL MANAGEMENT", 
-                card3_desc: "Rigid algorithmic models designed to protect and compound your bankroll mathematically.",
-                
-                pricing_main_title: "CHOOSE YOUR PLAN",
-                pricing_main_desc: "Select the credit package that best suits your trading journey.",
+                card1_title: "FROM BEGINNER TO PRO", card1_desc: "ZERO TO HERO Academy.<br>30 interactive lessons featuring video, audio, simulations, and AI-guided assessments.",
+                card2_title: "EMOTIONLESS TRADING", card2_desc: "Copy the signal. Execute the trade. Maintain your mathematical edge.",
+                card3_title: "CAPITAL MANAGEMENT", card3_desc: "Rigid algorithmic models designed to protect and compound your bankroll mathematically.",
+                pricing_main_title: "CHOOSE YOUR PLAN", pricing_main_desc: "Select the credit package that best suits your trading journey.",
                 credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Access Policy:</strong> 1 Credit = 1 Day of uninterrupted access. The period runs consecutively from the moment of activation (e.g., 30 credits = 30 consecutive days).",
-                desc_starter: "30 Days of continuous access (30 Credits)",
-                desc_pro: "90 Days of continuous access (90 Credits)",
-                desc_elite: "180 Days of continuous access (180 Credits)",
-                price_badge_pro: "COMPLETE OFFER",
-                save_50: "SAVE 50%",
-                price_btn: "SUBSCRIBE NOW",
-                
-                faq_title: "FREQUENTLY ASKED QUESTIONS",
-                faq_q1: "Are there any long-term contracts?", 
-                faq_a1: "No. The subscription is strictly month-to-month. You can easily manage or cancel your membership at any time.",
-                faq_q2: "Why do I need to use USDT/TON?", 
-                faq_a2: "We utilize Blockchain infrastructure to ensure global, instant, and borderless transactions without traditional banking restrictions. Our quick-start tutorial explains how.",
-                faq_q3: "What exactly is included?", 
-                faq_a3: "Unlimited access to the Zero To Hero Academy and exclusive entry to the Telegram Premium Room for real-time automated trading signals.",
-                
-                support_title: "CUSTOMER SUPPORT",
-                support_desc: "Need help? Open a direct ticket with our team. We are available on Telegram and WhatsApp.",
-                support_tg: "TELEGRAM TICKET",
-                support_wa: "WHATSAPP TICKET",
-                support_msg: "Hello! I need support with the Betting Exchange Room.",
-                
-                sub_title: "SUBBUTEO", 
-                sub_desc: "Take a break from the charts. Challenge your friends in this web simulation.", 
-                sub_btn: "PLAY NOW",
-                
-                wa_btn: "Partner with us", 
-                wa_msg: "Hello, I am interested in partnership opportunities with Betting Exchange Room.",
-                
+                desc_starter: "30 Days of continuous access (30 Credits)", desc_pro: "90 Days of continuous access (90 Credits)", desc_elite: "180 Days of continuous access (180 Credits)",
+                price_badge_pro: "COMPLETE OFFER", save_50: "SAVE 50%", price_btn: "SUBSCRIBE NOW",
+                faq_title: "FREQUENTLY ASKED QUESTIONS", faq_q1: "Are there any long-term contracts?", faq_a1: "No. The subscription is strictly month-to-month. You can easily manage or cancel your membership at any time.",
+                faq_q2: "Why do I need to use USDT/TON?", faq_a2: "We utilize Blockchain infrastructure to ensure global, instant, and borderless transactions without traditional banking restrictions. Our quick-start tutorial explains how.",
+                faq_q3: "What exactly is included?", faq_a3: "Unlimited access to the Zero To Hero Academy and exclusive entry to the Telegram Premium Room for real-time automated trading signals.",
+                support_title: "CUSTOMER SUPPORT", support_desc: "Need help? Open a direct ticket with our team. We are available on Telegram and WhatsApp.",
+                support_tg: "TELEGRAM TICKET", support_wa: "WHATSAPP TICKET", support_msg: "Hello! I need support with the Betting Exchange Room.",
+                wa_btn: "Partner with us", wa_msg: "Hello, I am interested in partnership opportunities with Betting Exchange Room.",
                 legal_18: "🔞 Gambling is strictly prohibited for minors under 18 years of age. Trading involves risk of loss. Play responsibly.",
-                
-                cta_title: "Begin your journey today",
-                cta_button: "START FOR FREE",
-                no_card_req: "NO CREDIT CARD REQUIRED"
-            },
-            es: {
-                hero_badge: "Señales activas en Telegram", 
-                hero_title_1: "TU VENTAJA", 
-                hero_title_2: "MATEMÁTICA",
-                hero_subtitle: "Olvida el azar. Aprovecha nuestras redes neuronales para extraer verdadero <span class='text-white font-bold'>Valor Esperado</span> del Exchange. Copia operaciones, gestiona el riesgo y protege tu bankroll.",
-                
-                new_sec_title: "COPIA. PEGA. COBRA.",
-                new_sec_desc1: "Recibe señales claras y precisas, con parámetros de stop-loss y gestión de capital preestablecidos.",
-                new_sec_desc2: "<span class='text-white font-bold'>ANÁLISIS CUANTITATIVO APLICADO.</span> No es una predicción, sino un protocolo matemático estricto diseñado para la gestión de riesgos y Stop Loss.",
+                cta_title: "Begin your journey today", cta_button: "START NOW", no_card_req: "NO CREDIT CARD REQUIRED",
 
-                card1_title: "DE PRINCIPIANTE A PRO", 
-                card1_desc: "ZERO TO HERO Academy.<br>30 lecciones interactivas con vídeo, audio, simulaciones y evaluaciones guiadas por IA.",
-                card2_title: "TRADING SIN EMOCIONES", 
-                card2_desc: "Copia la señal. Ejecuta la operación. Mantén tu ventaja matemática.",
-                card3_title: "GESTIÓN DE CAPITAL", 
-                card3_desc: "Modelos algorítmicos rígidos diseñados para proteger y componer tu capital de forma matemática.",
+                // Checkout Keys
+                offer_title: "Checkout", expires_in: "OFFER VALID FOR 24 HOURS:", lock_price: "PROCEED TO PAYMENT",
+                no_payment: "Secure Web3 Payment", back_home: "BACK TO HOME", days_access: "Days of continuous access",
+                pl_subtitle: "Complete payment to unlock the Premium Room:", vp_1: "Access to Zero To Hero Academy",
+                vp_2: "Access to High-Precision Trading Signals", vp_3: "No lock-in contract", pay_now: "UNLOCK ACCESS NOW",
+                new_to_crypto: "First crypto payment?", how_wallet_title: "Create Wallet", how_wallet_sub: "Takes 1 minute",
+                how_usdt_title: "Buy USDT", how_usdt_sub: "Step-by-step guide", trust_crypto: "Blockchain payment infrastructure. Transparent, secure transactions independent of banking intermediaries.",
+                sec_btn: "What is Gas (TON), USDT & Security?", close_tut: "Close Tutorial", sec_title: "Security Info",
+                sec_lock_title: "Global Web 3.0 Payments", sec_lock_desc: "With Blockchain, you pay from anywhere in the world without borders. Goodbye to cards blocked by banks for non-existent fraud or crazy currency exchange fees. The transaction is instant.",
+                sec_usdt_title: "What is USDT?", sec_usdt_desc: "It's the 'digital dollar'. 1 USDT is always worth exactly 1 US Dollar. It's stable, doesn't fluctuate like Bitcoin, perfect for subscriptions.",
+                sec_gas_title: "Why do I also need Toncoin (TON)?", sec_gas_desc: "On the Blockchain, USDT is the currency used to pay for the subscription. However, every transaction requires a tiny 'transport fee' (Gas) that is paid <b>only in Toncoin (TON)</b>.",
+                sec_tg_title: "Is it secure?", sec_tg_desc: "Absolutely. The Wallet is an official Telegram feature. By activating 'TON Space' you hold your private keys: nobody can touch your funds except you.",
+                close_understood: "I understand, close", pay_modal_title: "Make the Payment", pay_modal_text: "Send exactly <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> on the <strong class='text-white'>TON</strong> network to this address:",
+                pay_warning: "Send ONLY <strong class='text-red-400'>USDT</strong> via the <strong class='text-red-400'>TON (Toncoin)</strong> network. Other networks will result in loss of funds.", pay_modal_close: "I Understand, Close",
                 
-                pricing_main_title: "ELIGE TU PLAN",
-                pricing_main_desc: "Selecciona el paquete de créditos que mejor se adapte a tu trading.",
-                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Política de Acceso:</strong> 1 Crédito = 1 Día de acceso ininterrumpido. El período transcurre de forma consecutiva desde la activación (ej. 30 créditos = 30 días consecutivos).",
-                desc_starter: "30 Días de acceso continuo (30 Créditos)",
-                desc_pro: "90 Días de acceso continuo (90 Créditos)",
-                desc_elite: "180 Días de acceso continuo (180 Créditos)",
-                price_badge_pro: "OFERTA COMPLETA",
-                save_50: "AHORRAS EL 50%",
-                price_btn: "SUSCRÍBETE AHORA",
-                
-                faq_title: "PREGUNTAS FRECUENTES",
-                faq_q1: "¿Hay contratos a largo plazo?", 
-                faq_a1: "No. La suscripción es estrictamente mensual. Puedes cancelar tu membresía fácilmente en cualquier momento.",
-                faq_q2: "¿Por qué debo usar USDT/TON?", 
-                faq_a2: "Utilizamos infraestructura Blockchain para garantizar transacciones globales e instantáneas sin restricciones bancarias tradicionales. Nuestro tutorial rápido lo explica todo.",
-                faq_q3: "¿Qué se incluye exactamente?", 
-                faq_a3: "Acceso ilimitado a la Academia Zero To Hero y entrada exclusiva a la Sala Premium de Telegram para recibir señales de trading automatizadas en tiempo real.",
-                
-                support_title: "ATENCIÓN AL CLIENTE",
-                support_desc: "¿Necesitas ayuda? Abre un ticket directo con nuestro equipo. Estamos disponibles en Telegram y WhatsApp.",
-                support_tg: "TICKET TELEGRAM",
-                support_wa: "TICKET WHATSAPP",
-                support_msg: "¡Hola! Necesito ayuda con Betting Exchange Room.",
-
-                sub_title: "SUBBUTEO", 
-                sub_desc: "Tómate un descanso de los gráficos. Desafía a tus amigos en esta simulación web.", 
-                sub_btn: "JUGAR AHORA",
-                
-                wa_btn: "Colabora con nosotros", 
-                wa_msg: "Hola, estoy interesado en oportunidades de colaboración con Betting Exchange Room.",
-                
-                legal_18: "🔞 El juego está estrictamente prohibido para menores de 18 años. El trading implica riesgo de pérdida. Juega responsablemente.",
-
-                cta_title: "Comienza tu viaje hoy",
-                cta_button: "EMPEZAR GRATIS",
-                no_card_req: "NO SE REQUIERE TARJETA"
-            },
-            pt: {
-                hero_badge: "Sinais ativos no Telegram", 
-                hero_title_1: "A SUA VANTAGEM", 
-                hero_title_2: "MATEMÁTICA",
-                hero_subtitle: "Esqueça o acaso. Utilize as nossas redes neurais para extrair o verdadeiro <span class='text-white font-bold'>Valor Esperado</span> do Exchange. Copie operações, gira o risco e proteja a sua banca.",
-                
-                new_sec_title: "COPIA. COLA. RECEBE.",
-                new_sec_desc1: "Receba sinais claros e precisos, com parâmetros de stop-loss e gestão de capital predefinidos.",
-                new_sec_desc2: "<span class='text-white font-bold'>ANÁLISE QUANTITATIVA APLICADA.</span> Não é uma previsão, mas um rigoroso protocolo matemático com gestão de risco e Stop Loss.",
-
-                card1_title: "DE INICIANTE A PRO", 
-                card1_desc: "ZERO TO HERO Academy.<br>30 lições interativas com vídeo, áudio, simulações e avaliações guiadas por IA.",
-                card2_title: "TRADING SEM EMOÇÕES", 
-                card2_desc: "Copie o sinal. Execute a operação. Mantenha a sua vantagem matemática.",
-                card3_title: "GESTÃO DE CAPITAL", 
-                card3_desc: "Modelos algorítmicos rígidos concebidos para proteger e aumentar o seu capital de forma matemática.",
-                
-                pricing_main_title: "ESCOLHA SEU PLANO",
-                pricing_main_desc: "Selecione o pacote de créditos que melhor se adapta ao seu trading.",
-                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Política de Acesso:</strong> 1 Crédito = 1 Dia de acesso ininterrupto. O período decorre de forma consecutiva a partir da ativação (ex. 30 créditos = 30 dias consecutivos).",
-                desc_starter: "30 Dias de acesso contínuo (30 Créditos)",
-                desc_pro: "90 Dias de acesso contínuo (90 Créditos)",
-                desc_elite: "180 Dias de acesso contínuo (180 Créditos)",
-                price_badge_pro: "OFERTA COMPLETA",
-                save_50: "POUPE 50%",
-                price_btn: "SUBSCREVER AGORA",
-                
-                faq_title: "PERGUNTAS FREQUENTES",
-                faq_q1: "Existem contratos a longo prazo?", 
-                faq_a1: "Não. A subscrição é estritamente mensal. Pode cancelar a sua adesão facilmente em qualquer altura.",
-                faq_q2: "Por que preciso usar USDT/TON?", 
-                faq_a2: "Utilizamos infraestruturas Blockchain para garantir transações globais e instantâneas, evitando restrições bancárias tradicionais. O nosso tutorial explica tudo.",
-                faq_q3: "O que está exatamente incluído?", 
-                faq_a3: "Acesso ilimitado à Academia Zero To Hero e entrada exclusiva na Sala Premium do Telegram para sinais de trading automatizados em tempo real.",
-                
-                support_title: "SUPORTE AO CLIENTE",
-                support_desc: "Precisa de ajuda? Abra um ticket direto com a nossa equipa. Estamos disponíveis no Telegram e WhatsApp.",
-                support_tg: "TICKET TELEGRAM",
-                support_wa: "TICKET WHATSAPP",
-                support_msg: "Olá! Preciso de ajuda com a Betting Exchange Room.",
-
-                sub_title: "SUBBUTEO", 
-                sub_desc: "Faça uma pausa nos gráficos. Desafie os seus amigos nesta simulação web.", 
-                sub_btn: "JOGAR AGORA",
-                
-                wa_btn: "Trabalhe connosco", 
-                wa_msg: "Olá, estou interessado em oportunidades de parceria com a Betting Exchange Room.",
-                
-                legal_18: "🔞 O jogo é estritamente proibido a menores de 18 anos. A negociação envolve risco de perda. Jogue com responsabilidade.",
-
-                cta_title: "Comece a sua jornada hoje",
-                cta_button: "COMEÇAR GRÁTIS",
-                no_card_req: "NÃO REQUER CARTÃO"
+                // Simulators
+                sim_w_welcome: "Welcome to Wallet! <br>Buy, sell and trade crypto directly in Telegram.", sim_w_open: "Open Wallet", sim_w_settings: "Settings",
+                sim_w_features: "Features", sim_w_recovery: "Your Recovery Phrase", sim_w_write: "Write down these 24 words in the exact order.",
+                sim_w_saved: "I saved them", sim_w_ready: "Ready!", sim_w_done_title: "Setup Complete", sim_w_done_desc: "You have successfully backed up your wallet. Keep your phrase safe.",
+                sim_u_total: "Total Balance", sim_u_add: "Add Crypto", sim_u_send: "Send", sim_u_bank: "Bank Card", sim_u_fastest: "Fastest method",
+                sim_u_p2p: "P2P Market", sim_u_local: "Local payment methods", sim_u_choose: "Choose Crypto", sim_u_buy: "Buy Crypto",
+                sim_u_continue: "Continue", sim_u_confirm_tx: "Confirm Transaction", sim_u_amount: "Amount", sim_u_network_fee: "Network Fee",
+                sim_u_to_address: "To Address", sim_u_confirm_pay: "Confirm Payment",
+                tw_t1: "1. Open @wallet", tw_d1: "Search for <b>@wallet</b> in the top Telegram search bar. Click <b>Start</b> and then press the <b>Open Wallet</b> button or type in your browser: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
+                tw_t2: "2. Enable TON Space", tw_d2: "Click the three dots (Settings) top right. Toggle on <b>TON Space Beta</b>. This will become your personal vault.",
+                tw_t3: "3. Backup (Important!)", tw_d3: "Choose manual backup. You will see <b>24 secret words</b>. Write them on paper in order! No screenshots, they recover your funds if you lose your phone.",
+                tw_t4: "4. Open Wallet", tw_d4: "Now that you understand how it works, open your official Telegram Wallet to proceed.",
+                tu_t1: "1. Add Crypto", tu_d1: "On the main screen of your new Wallet, click the <b>Add Crypto</b> button.",
+                tu_t2: "2. Choose Method", tu_d2: "Select <b>Bank Card</b> for instant purchase, or <b>P2P Market</b> if you prefer local methods.",
+                tu_t3: "3. Select USDT", tu_d3: "Select the cryptocurrency USDT to begin.",
+                tu_t4: "4. Enter Amount (USDT)", tu_d4: "Buy exactly the required USDT amount to cover your subscription.",
+                tu_t5: "5. Buy TON (Gas)", tu_d5: "Repeat the process selecting <b>TON</b>. Buy <b>1 TON</b>. This is needed to pay the tiny blockchain network fee.",
+                tu_t6: "6. Pay & Get Access", tu_d6: "Back on the menu, click <b>PAY NOW</b> to confirm the Smart Contract. Once paid, you will instantly receive the <b>Signals Channel Link</b> and your <b>Unique Password</b>.",
+                step: "Step", prev: "Prev", next: "Next", done: "Done", tut_badge: "TUTORIAL - NOT OPERATIONAL", tw_btn_open: "Open Telegram Wallet"
             },
             it: {
-                hero_badge: "Segnali attivi su Telegram", 
-                hero_title_1: "IL TUO VANTAGGIO", 
-                hero_title_2: "MATEMATICO",
+                // Landing Keys
+                hero_badge: "Segnali attivi su Telegram", hero_title_1: "IL TUO VANTAGGIO", hero_title_2: "MATEMATICO",
                 hero_subtitle: "Dimentica l'azzardo. Sfrutta le nostre reti neurali per estrarre vero <span class='text-white font-bold'>Valore Atteso</span> dall'Exchange. Copia le operazioni, gestisci il rischio e proteggi il tuo bankroll.",
-                
-                new_sec_title: "COPIA. INCOLLA. INCASSA.",
-                new_sec_desc1: "Ricevi segnali chiari e precisi, con stop loss e money management preimpostati.",
+                new_sec_title: "COPIA. INCOLLA. INCASSA.", new_sec_desc1: "Ricevi segnali chiari e precisi, con stop loss e money management preimpostati.",
                 new_sec_desc2: "<span class='text-white font-bold'>ANALISI QUANTITATIVA APPLICATA.</span> Non una previsione, ma un protocollo matematico con rigorosa gestione del rischio e Stop Loss.",
-
-                card1_title: "DA PRINCIPIANTE A PRO", 
-                card1_desc: "ZERO TO HERO Academy.<br>30 lezioni interattive guidate dall'AI.",
-                card2_title: "NESSUNA EMOZIONE", 
-                card2_desc: "Copia il segnale. Imposta il trade. Vantaggio matematico.",
-                card3_title: "MONEY MANAGEMENT", 
-                card3_desc: "Modelli algoritmici rigidi progettati per far crescere il tuo bankroll in modo matematico.",
-                
-                pricing_main_title: "SCEGLI IL TUO PIANO",
-                pricing_main_desc: "Seleziona il pacchetto di crediti più adatto al tuo trading.",
+                card1_title: "DA PRINCIPIANTE A PRO", card1_desc: "ZERO TO HERO Academy.<br>30 lezioni interattive guidate dall'AI.",
+                card2_title: "NESSUNA EMOZIONE", card2_desc: "Copia il segnale. Imposta il trade. Vantaggio matematico.",
+                card3_title: "MONEY MANAGEMENT", card3_desc: "Modelli algoritmici rigidi progettati per far crescere il tuo bankroll in modo matematico.",
+                pricing_main_title: "SCEGLI IL TUO PIANO", pricing_main_desc: "Seleziona il pacchetto di crediti più adatto al tuo trading.",
                 credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Policy di Accesso:</strong> 1 Credito = 1 Giorno di fruizione ininterrotta. Il periodo decorre in modo consecutivo dal momento dell'attivazione (es. 30 crediti = 30 giorni consecutivi).",
-                desc_starter: "30 Giorni di accesso continuo (30 Crediti)",
-                desc_pro: "90 Giorni di accesso continuo (90 Crediti)",
-                desc_elite: "180 Giorni di accesso continuo (180 Crediti)",
-                price_badge_pro: "OFFERTA COMPLETA",
-                save_50: "RISPARMI IL 50%",
-                price_btn: "ACQUISTA ORA",
-                
-                faq_title: "DOMANDE FREQUENTI",
-                faq_q1: "Posso annullare quando voglio?", 
-                faq_a1: "Sì, l'abbonamento è mensile e non ha vincoli di permanenza. Puoi disdire in qualsiasi momento.",
-                faq_q2: "Devo usare per forza USDT e TON?", 
-                faq_a2: "Sì, utilizziamo la tecnologia Blockchain per garantire pagamenti sicuri, istantanei e senza limiti bancari. Nel tutorial ti spieghiamo come fare.",
-                faq_q3: "Cosa include esattamente l'abbonamento?", 
-                faq_a3: "Accesso completo e illimitato alla Zero To Hero Academy e ingresso esclusivo nella Premium Room su Telegram con segnali in tempo reale.",
-                
-                support_title: "ASSISTENZA CLIENTI",
-                support_desc: "Hai bisogno di aiuto? Apri un ticket diretto con il nostro team. Siamo disponibili su Telegram e WhatsApp.",
-                support_tg: "TICKET TELEGRAM",
-                support_wa: "TICKET WHATSAPP",
-                support_msg: "Ciao! Ho bisogno di assistenza per la Betting Exchange Room.",
-
-                sub_title: "SUBBUTEO", 
-                sub_desc: "Prenditi una pausa dai grafici. Sfida i tuoi amici in questa simulazione web.", 
-                sub_btn: "GIOCA ORA",
-                
-                wa_btn: "Lavora con noi", 
-                wa_msg: "Salve, sono interessato a opportunità di partnership con Betting Exchange Room.",
-                
+                desc_starter: "30 Giorni di accesso continuo (30 Crediti)", desc_pro: "90 Giorni di accesso continuo (90 Crediti)", desc_elite: "180 Giorni di accesso continuo (180 Crediti)",
+                price_badge_pro: "OFFERTA COMPLETA", save_50: "RISPARMI IL 50%", price_btn: "ACQUISTA ORA",
+                faq_title: "DOMANDE FREQUENTI", faq_q1: "Posso annullare quando voglio?", faq_a1: "Sì, l'abbonamento non ha vincoli di permanenza. Puoi disdire in qualsiasi momento.",
+                faq_q2: "Devo usare per forza USDT e TON?", faq_a2: "Sì, utilizziamo la tecnologia Blockchain per garantire pagamenti sicuri, istantanei e senza limiti bancari. Nel tutorial ti spieghiamo come fare.",
+                faq_q3: "Cosa include esattamente l'abbonamento?", faq_a3: "Accesso completo e illimitato alla Zero To Hero Academy e ingresso esclusivo nella Premium Room su Telegram con segnali in tempo reale.",
+                support_title: "ASSISTENZA CLIENTI", support_desc: "Hai bisogno di aiuto? Apri un ticket diretto con il nostro team. Siamo disponibili su Telegram e WhatsApp.",
+                support_tg: "TICKET TELEGRAM", support_wa: "TICKET WHATSAPP", support_msg: "Ciao! Ho bisogno di assistenza per la Betting Exchange Room.",
+                wa_btn: "Lavora con noi", wa_msg: "Salve, sono interessato a opportunità di partnership con Betting Exchange Room.",
                 legal_18: "🔞 Il gioco d'azzardo è severamente vietato ai minori di 18 anni. Il trading comporta rischi di perdita del capitale. Gioca responsabilmente.",
+                cta_title: "Inizia subito il tuo percorso", cta_button: "INIZIA ORA", no_card_req: "NESSUNA CARTA RICHIESTA",
 
-                cta_title: "Inizia subito il tuo percorso",
-                cta_button: "INIZIA ORA GRATIS",
-                no_card_req: "NESSUNA CARTA RICHIESTA"
+                // Checkout Keys
+                offer_title: "Checkout", expires_in: "OFFERTA VALIDA X 24 ORE:", lock_price: "PROCEDI AL PAGAMENTO",
+                no_payment: "Pagamento Sicuro Web3", back_home: "TORNA ALLA HOME", days_access: "Giorni di accesso continuo",
+                pl_subtitle: "Completa il pagamento per sbloccare la Premium Room:", vp_1: "Accesso alla Zero To Hero Academy",
+                vp_2: "Accesso alla Segnali Operativi ad Alta Precisione", vp_3: "Nessun vincolo", pay_now: "SBLOCCA ACCESSO ORA",
+                new_to_crypto: "Primo pagamento in crypto?", how_wallet_title: "Crea il Wallet", how_wallet_sub: "Richiede 1 minuto",
+                how_usdt_title: "Compra USDT", how_usdt_sub: "Guida passo passo", trust_crypto: "Infrastruttura di pagamento su Blockchain. Transazioni trasparenti, sicure e svincolate da intermediari bancari.",
+                sec_btn: "Cos'è il Gas (TON), USDT e la Sicurezza?", close_tut: "Chiudi Tutorial", sec_title: "Info Sicurezza",
+                sec_lock_title: "Pagamenti Globali Web 3.0", sec_lock_desc: "Con la Blockchain paghi da tutto il mondo senza confini. Addio carte bloccate dalle banche per frodi inesistenti o commissioni folli sul cambio valuta. La transazione è istantanea.",
+                sec_usdt_title: "Cos'è USDT?", sec_usdt_desc: "È il 'dollaro digitale'. 1 USDT vale esattamente 1 Dollaro Americano. È stabile, non oscilla come il Bitcoin, perfetto per gli abbonamenti.",
+                sec_gas_title: "Perché serve anche il Toncoin (TON)?", sec_gas_desc: "Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima 'tassa di trasporto' (Gas) che si paga <b>solo in Toncoin (TON)</b>.",
+                sec_tg_title: "È un sistema sicuro?", sec_tg_desc: "Assolutamente sì. Il Wallet è una funzione ufficiale di Telegram. Attivando 'TON Space' possiedi le tue chiavi private: nessuno al mondo può toccare i tuoi fondi tranne te.",
+                close_understood: "Ho capito, chiudi", pay_modal_title: "Effettua il Pagamento", pay_modal_text: "Invia esattamente <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> sulla rete <strong class='text-white'>TON</strong> a questo indirizzo:",
+                pay_warning: "Invia SOLO <strong class='text-red-400'>USDT</strong> tramite la rete <strong class='text-red-400'>TON (Toncoin)</strong>. Altre reti causeranno la perdita dei fondi.", pay_modal_close: "Ho compreso, chiudi",
+
+                // Simulators
+                sim_w_welcome: "Benvenuto in Wallet! <br>Compra, vendi e scambia crypto su Telegram.", sim_w_open: "Apri Wallet", sim_w_settings: "Impostazioni",
+                sim_w_features: "Funzionalità", sim_w_recovery: "Frase di Recupero", sim_w_write: "Trascrivi queste 24 parole nell'ordine esatto.",
+                sim_w_saved: "Le ho salvate", sim_w_ready: "Pronto!", sim_w_done_title: "Configurazione Completata", sim_w_done_desc: "Hai salvato correttamente il wallet. Custodisci la frase al sicuro.",
+                sim_u_total: "Saldo Totale", sim_u_add: "Aggiungi Crypto", sim_u_send: "Invia", sim_u_bank: "Carta Bancaria", sim_u_fastest: "Metodo più veloce",
+                sim_u_p2p: "Mercato P2P", sim_u_local: "Metodi di pagamento locali", sim_u_choose: "Scegli Crypto", sim_u_buy: "Compra Crypto",
+                sim_u_continue: "Continua", sim_u_confirm_tx: "Conferma Transazione", sim_u_amount: "Importo", sim_u_network_fee: "Costo di Rete",
+                sim_u_to_address: "Indirizzo Destinatario", sim_u_confirm_pay: "Conferma Pagamento",
+                tw_t1: "1. Apri @wallet", tw_d1: "Cerca <b>@wallet</b> nella barra di ricerca in alto. Clicca <b>Avvia</b> e poi premi sul pulsante <b>Open Wallet</b> o digita sul browser: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
+                tw_t2: "2. Attiva TON Space", tw_d2: "Clicca sui tre puntini (Impostazioni) in alto a destra. Attiva <b>TON Space Beta</b>. Questa diventerà la tua cassaforte personale.",
+                tw_t3: "3. Fai il Backup (Importante!)", tw_d3: "Fai il backup manuale. Ti verranno mostrate <b>24 parole segrete</b>. Scrivile su carta in ordine! Non fare screenshot, servono a recuperare i soldi se perdi il telefono.",
+                tw_t4: "4. Apri il Wallet", tw_d4: "Ora che hai capito come funziona, apri il tuo Wallet ufficiale su Telegram per procedere.",
+                tu_t1: "1. Aggiungi Crypto", tu_d1: "Nella schermata principale del tuo Wallet, clicca sul pulsante <b>Add Crypto</b>.",
+                tu_t2: "2. Scegli il Metodo", tu_d2: "Scegli <b>Carta Bancaria</b> per un acquisto immediato, oppure usa il <b>Mercato P2P</b> se preferisci usare metodi locali come bonifici.",
+                tu_t3: "3. Seleziona USDT", tu_d3: "Seleziona la criptovaluta USDT dall'elenco per iniziare l'acquisto.",
+                tu_t4: "4. Inserisci l'Importo (USDT)", tu_d4: "Acquista esattamente l'importo necessario a coprire l'accesso.",
+                tu_t5: "5. Compra il Gas (TON)", tu_d5: "Ripeti la stessa operazione scegliendo <b>TON</b>. Acquista <b>1 TON</b>. Ti servirà per pagare la piccolissima tassa della blockchain.",
+                tu_t6: "6. Paga l'Accademia", tu_d6: "Tornato al menu, clicca su <b>PAGA ORA</b>. Confermerai la transazione allo Smart Contract. A pagamento completato riceverai istantaneamente il <b>Link d'ingresso</b> e la <b>Password Univoca</b>.",
+                step: "Passo", prev: "Prec", next: "Avanti", done: "Finito", tut_badge: "Tutorial - Simulazione non operativa", tw_btn_open: "Apri il Wallet Telegram"
+            },
+            es: {
+                // Landing Keys
+                hero_badge: "Señales activas en Telegram", hero_title_1: "TU VENTAJA", hero_title_2: "MATEMÁTICA",
+                hero_subtitle: "Olvida el azar. Aprovecha nuestras redes neuronales para extraer verdadero <span class='text-white font-bold'>Valor Esperado</span> del Exchange. Copia operaciones, gestiona el riesgo y protege tu bankroll.",
+                new_sec_title: "COPIA. PEGA. COBRA.", new_sec_desc1: "Recibe señales claras y precisas, con parámetros de stop-loss y gestión de capital preestablecidos.",
+                new_sec_desc2: "<span class='text-white font-bold'>ANÁLISIS CUANTITATIVO APLICADO.</span> No es una predicción, sino un protocolo matemático estricto diseñado para la gestión de riesgos y Stop Loss.",
+                card1_title: "DE PRINCIPIANTE A PRO", card1_desc: "ZERO TO HERO Academy.<br>30 lecciones interactivas con vídeo, audio, simulaciones y evaluaciones guiadas por IA.",
+                card2_title: "TRADING SIN EMOCIONES", card2_desc: "Copia la señal. Ejecuta la operación. Mantén tu ventaja matemática.",
+                card3_title: "GESTIÓN DE CAPITAL", card3_desc: "Modelos algorítmicos rígidos diseñados para proteger y componer tu capital de forma matemática.",
+                pricing_main_title: "ELIGE TU PLAN", pricing_main_desc: "Selecciona el paquete de créditos que mejor se adapte a tu trading.",
+                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Política de Acceso:</strong> 1 Crédito = 1 Día de acceso ininterrumpido. El período transcurre de forma consecutiva desde la activación (ej. 30 créditos = 30 días consecutivos).",
+                desc_starter: "30 Días de acceso continuo (30 Créditos)", desc_pro: "90 Días de acceso continuo (90 Créditos)", desc_elite: "180 Días de acceso continuo (180 Créditos)",
+                price_badge_pro: "OFERTA COMPLETA", save_50: "AHORRAS EL 50%", price_btn: "SUSCRÍBETE AHORA",
+                faq_title: "PREGUNTAS FRECUENTES", faq_q1: "¿Hay contratos a largo plazo?", faq_a1: "No. La suscripción no tiene permanencia. Puedes cancelar fácilmente en cualquier momento.",
+                faq_q2: "¿Por qué debo usar USDT/TON?", faq_a2: "Utilizamos infraestructura Blockchain para garantizar transacciones globales e instantáneas sin restricciones bancarias tradicionales. Nuestro tutorial rápido lo explica todo.",
+                faq_q3: "¿Qué se incluye exactamente?", faq_a3: "Acceso ilimitado a la Academia Zero To Hero y entrada exclusiva a la Sala Premium de Telegram para recibir señales de trading automatizadas en tiempo real.",
+                support_title: "ATENCIÓN AL CLIENTE", support_desc: "¿Necesitas ayuda? Abre un ticket directo con nuestro equipo. Estamos disponibles en Telegram y WhatsApp.",
+                support_tg: "TICKET TELEGRAM", support_wa: "TICKET WHATSAPP", support_msg: "¡Hola! Necesito ayuda con Betting Exchange Room.",
+                wa_btn: "Colabora con nosotros", wa_msg: "Hola, estoy interesado en oportunidades de colaboración con Betting Exchange Room.",
+                legal_18: "🔞 El juego está estrictamente prohibido para menores de 18 años. El trading implica riesgo de pérdida. Juega responsablemente.",
+                cta_title: "Comienza tu viaje hoy", cta_button: "EMPEZAR AHORA", no_card_req: "NO SE REQUIERE TARJETA",
+
+                // Checkout Keys
+                offer_title: "Caja", expires_in: "OFERTA VÁLIDA POR 24 HORAS:", lock_price: "PROCEDER AL PAGO",
+                no_payment: "Pago Seguro Web3", back_home: "VOLVER AL INICIO", days_access: "Días de acceso continuo",
+                pl_subtitle: "Completa el pago para desbloquear la Premium Room:", vp_1: "Acceso a la Zero To Hero Academy",
+                vp_2: "Acceso a las Señales de Trading de Alta Precisión", vp_3: "Sin permanencia", pay_now: "DESBLOQUEAR ACCESO AHORA",
+                new_to_crypto: "¿Primer pago en cripto?", how_wallet_title: "Crea tu Wallet", how_wallet_sub: "Toma 1 minuto",
+                how_usdt_title: "Comprar USDT", how_usdt_sub: "Guia paso a paso", trust_crypto: "Infraestructura de pago en Blockchain. Transacciones transparentes, seguras e independientes de intermediarios bancarios.",
+                sec_btn: "¿Qué es Gas (TON), USDT y Seguridad?", close_tut: "Cerrar Tutorial", sec_title: "Info de Seguridad",
+                sec_lock_title: "Pagos Globales Web 3.0", sec_lock_desc: "Con Blockchain pagas desde todo el mundo sin fronteras. Adiós a las tarjetas bloqueadas por los bancos por fraudes inexistentes o comisiones locas de cambio de divisas. La transacción es instantánea.",
+                sec_usdt_title: "¿Qué es USDT?", sec_usdt_desc: "Es el 'dólar digital'. 1 USDT vale exactamente 1 Dólar Estadounidense. Es estable, no fluctúa como Bitcoin, perfecto para suscripciones.",
+                sec_gas_title: "¿Por qué necesito también Toncoin (TON)?", sec_gas_desc: "En la Blockchain, USDT es la moneda utilizada para pagar la suscripción. Sin embargo, cada transacción requiere una minúscula 'tarifa de transporte' (Gas) que se paga <b>solo en Toncoin (TON)</b>.",
+                sec_tg_title: "¿Es un sistema seguro?", sec_tg_desc: "Absolutamente sí. La Wallet es una función oficial de Telegram. Al activar 'TON Space' posees tus claves privadas: nadie puede tocar tus fondos excepto tú.",
+                close_understood: "Entendido, cerrar", pay_modal_title: "Realiza el Pago", pay_modal_text: "Envía exactamente <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> en la red <strong class='text-white'>TON</strong> a esta dirección:",
+                pay_warning: "Envía SOLO <strong class='text-red-400'>USDT</strong> por la red <strong class='text-red-400'>TON (Toncoin)</strong>. Otras redes causarán pérdida de fondos.", pay_modal_close: "Entendido, Cerrar",
+                
+                // Simulators
+                sim_w_welcome: "¡Bienvenido a Wallet! <br>Compra, vende e intercambia criptos en Telegram.", sim_w_open: "Abrir Wallet", sim_w_settings: "Ajustes",
+                sim_w_features: "Funciones", sim_w_recovery: "Frase de Recuperación", sim_w_write: "Escribe estas 24 palabras en el orden exacto.",
+                sim_w_saved: "Las he guardado", sim_w_ready: "¡Listo!", sim_w_done_title: "Configuración Completa", sim_w_done_desc: "Has guardado correctamente tu wallet. Mantén tu frase segura.",
+                sim_u_total: "Saldo Total", sim_u_add: "Añadir Cripto", sim_u_send: "Enviar", sim_u_bank: "Tarjeta Bancaria", sim_u_fastest: "Método más rápido",
+                sim_u_p2p: "Mercado P2P", sim_u_local: "Métodos de pago locales", sim_u_choose: "Elegir Cripto", sim_u_buy: "Comprar Cripto",
+                sim_u_continue: "Continuar", sim_u_confirm_tx: "Confirmar Transacción", sim_u_amount: "Monto", sim_u_network_fee: "Tarifa de Red",
+                sim_u_to_address: "Dirección de destino", sim_u_confirm_pay: "Confirmar Pago",
+                tw_t1: "1. Abre @wallet", tw_d1: "Busca <b>@wallet</b> en la barra superior. Haz clic en <b>Iniciar</b> y luego en el botón <b>Open Wallet</b> o escribe: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
+                tw_t2: "2. Activa TON Space", tw_d2: "Haz clic en Ajustes arriba a la derecha. Activa <b>TON Space Beta</b>. Esta será tu bóveda personal.",
+                tw_t3: "3. Respaldo (¡Importante!)", tw_d3: "Elige respaldo manual. Verás <b>24 palabras secretas</b>. ¡Escríbelas en papel en orden! No capturas de pantalla, recuperan tus fondos si pierdes el teléfono.",
+                tw_t4: "4. Abrir Wallet", tw_d4: "Ahora que entiendes cómo funciona, abre tu Wallet oficial en Telegram para proceder.",
+                tu_t1: "1. Añadir Cripto", tu_d1: "En la pantalla principal de tu nueva Wallet, haz clic en el botón <b>Add Crypto</b>.",
+                tu_t2: "2. Elige el Método", tu_d2: "Elige <b>Tarjeta Bancaria</b> para compra instantánea, o <b>Mercado P2P</b> si prefieres métodos locales.",
+                tu_t3: "3. Seleccionar USDT", tu_d3: "Selecciona la criptomoneda USDT para comenzar.",
+                tu_t4: "4. Ingresa el Monto", tu_d4: "Compra exactamente la cantidad de USDT requerida para el acceso.",
+                tu_t5: "5. Compra Gas (TON)", tu_d5: "Repita el proceso seleccionando <b>TON</b>. Compra <b>1 TON</b>. Es necesario para pagar la pequeña comisión de la blockchain.",
+                tu_t6: "6. Paga y Recibe Acceso", tu_d6: "De vuelta en el menú, presiona <b>PAGAR AHORA</b> para confirmar. Al instante recibirás el <b>Enlace de Acceso</b> y tu <b>Contraseña Única</b>.",
+                step: "Paso", prev: "Ant", next: "Sig", done: "Hecho", tut_badge: "TUTORIAL - NO OPERATIVO", tw_btn_open: "Abrir Telegram Wallet"
+            },
+            pt: {
+                // Landing Keys
+                hero_badge: "Sinais ativos no Telegram", hero_title_1: "A SUA VANTAGEM", hero_title_2: "MATEMÁTICA",
+                hero_subtitle: "Esqueça o acaso. Utilize as nossas redes neurais para extrair o verdadeiro <span class='text-white font-bold'>Valor Esperado</span> do Exchange. Copie operações, gira o risco e proteja a sua banca.",
+                new_sec_title: "COPIA. COLA. RECEBE.", new_sec_desc1: "Receba sinais claros e precisos, com parâmetros de stop-loss e gestão de capital predefinidos.",
+                new_sec_desc2: "<span class='text-white font-bold'>ANÁLISE QUANTITATIVA APLICADA.</span> Não é uma previsão, mas um rigoroso protocolo matemático com gestão de risco e Stop Loss.",
+                card1_title: "DE INICIANTE A PRO", card1_desc: "ZERO TO HERO Academy.<br>30 lições interativas com vídeo, áudio, simulações e avaliações guiadas por IA.",
+                card2_title: "TRADING SEM EMOÇÕES", card2_desc: "Copie o sinal. Execute a operação. Mantenha a sua vantagem matemática.",
+                card3_title: "GESTÃO DE CAPITAL", card3_desc: "Modelos algorítmicos rígidos concebidos para proteger e aumentar o seu capital de forma matemática.",
+                pricing_main_title: "ESCOLHA SEU PLANO", pricing_main_desc: "Selecione o pacote de créditos que melhor se adapta ao seu trading.",
+                credit_info: "<strong class='text-white tracking-wide uppercase text-[10px] sm:text-[11px]'>Política de Acesso:</strong> 1 Crédito = 1 Dia de acesso ininterrupto. O período decorre de forma consecutiva a partir da ativação (ex. 30 créditos = 30 dias consecutivos).",
+                desc_starter: "30 Dias de acesso contínuo (30 Créditos)", desc_pro: "90 Dias de acesso contínuo (90 Créditos)", desc_elite: "180 Dias de acesso contínuo (180 Créditos)",
+                price_badge_pro: "OFERTA COMPLETA", save_50: "POUPE 50%", price_btn: "SUBSCREVER AGORA",
+                faq_title: "PERGUNTAS FREQUENTES", faq_q1: "Existem contratos a longo prazo?", faq_a1: "Não. A subscrição não tem fidelidade. Pode cancelar facilmente em qualquer altura.",
+                faq_q2: "Por que preciso usar USDT/TON?", faq_a2: "Utilizamos infraestruturas Blockchain para garantir transações globais e instantâneas, evitando restrições bancárias tradicionais. O nosso tutorial explica tudo.",
+                faq_q3: "O que está exatamente incluído?", faq_a3: "Acesso ilimitado à Academia Zero To Hero e entrada exclusiva na Sala Premium do Telegram para sinais de trading automatizados em tempo real.",
+                support_title: "SUPORTE AO CLIENTE", support_desc: "Precisa de ajuda? Abra um ticket direto com a nossa equipa. Estamos disponíveis no Telegram e WhatsApp.",
+                support_tg: "TICKET TELEGRAM", support_wa: "TICKET WHATSAPP", support_msg: "Olá! Preciso de ajuda com a Betting Exchange Room.",
+                wa_btn: "Trabalhe connosco", wa_msg: "Olá, estou interessado em oportunidades de parceria com a Betting Exchange Room.",
+                legal_18: "🔞 O jogo é estritamente proibido a menores de 18 anos. A negociação envolve risco de perda. Jogue com responsabilidade.",
+                cta_title: "Comece a sua jornada hoje", cta_button: "COMEÇAR AGORA", no_card_req: "NÃO REQUER CARTÃO",
+
+                // Checkout Keys
+                offer_title: "Caixa", expires_in: "OFERTA VÁLIDA POR 24 HORAS:", lock_price: "PROSSEGUIR PARA PAGAMENTO",
+                no_payment: "Pagamento Seguro Web3", back_home: "VOLTAR AO INÍCIO", days_access: "Dias de acesso contínuo",
+                pl_subtitle: "Conclua o pagamento para desbloquear a Premium Room:", vp_1: "Acesso à Zero To Hero Academy",
+                vp_2: "Acesso aos Sinais de Trading de Alta Precisão", vp_3: "Sem fidelidade", pay_now: "DESBLOQUEAR ACESSO AGORA",
+                new_to_crypto: "Primeiro pagamento em cripto?", how_wallet_title: "Crie a Carteira", how_wallet_sub: "Leva 1 minuto",
+                how_usdt_title: "Comprar USDT", how_usdt_sub: "Guia passo a passo", trust_crypto: "Infraestrutura de pagamento em Blockchain. Transações transparentes, seguras e independentes de intermediários bancários.",
+                sec_btn: "O que é Gas (TON), USDT e Segurança?", close_tut: "Fechar Tutorial", sec_title: "Info de Segurança",
+                sec_lock_title: "Pagamentos Globais Web 3.0", sec_lock_desc: "Com Blockchain você paga de qualquer lugar do mundo sem fronteiras. Adeus aos cartões bloqueados por bancos por fraudes inexistentes ou taxas loucas de câmbio. A transação é instantânea.",
+                sec_usdt_title: "O que é USDT?", sec_usdt_desc: "É o 'dólar digital'. 1 USDT vale exatamente 1 Dólar Americano. É estável, não oscila como o Bitcoin, perfeito para assinaturas.",
+                sec_gas_title: "Por que também preciso de Toncoin (TON)?", sec_gas_desc: "Na Blockchain, USDT é a moeda usada para pagar a assinatura. No entanto, cada transação exige uma pequena 'taxa de transporte' (Gas) que é paga <b>apenas em Toncoin (TON)</b>.",
+                sec_tg_title: "É um sistema seguro?", sec_tg_desc: "Com certeza. A Carteira é um recurso oficial do Telegram. Ao ativar o 'TON Space' você possui suas chaves privadas: ninguém pode tocar em seus fundos exceto você.",
+                close_understood: "Entendi, fechar", pay_modal_title: "Faça o Pagamento", pay_modal_text: "Envie exatamente <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> na rede <strong class='text-white'>TON</strong> para este endereço:",
+                pay_warning: "Envie APENAS <strong class='text-red-400'>USDT</strong> pela rede <strong class='text-red-400'>TON (Toncoin)</strong>. Outras redes causarão perda de fundos.", pay_modal_close: "Entendi, Fechar",
+                
+                // Simulators
+                sim_w_welcome: "Bem-vindo à Carteira! <br>Compre, venda e negocie criptos no Telegram.", sim_w_open: "Abrir Carteira", sim_w_settings: "Configurações",
+                sim_w_features: "Recursos", sim_w_recovery: "Frase de Recuperação", sim_w_write: "Escreva estas 24 palavras na ordem exata.",
+                sim_w_saved: "Eu as salvei", sim_w_ready: "Pronto!", sim_w_done_title: "Configuração Completa", sim_w_done_desc: "Você salvou sua carteira com sucesso. Mantenha sua frase segura.",
+                sim_u_total: "Saldo Total", sim_u_add: "Adicionar Cripto", sim_u_send: "Enviar", sim_u_bank: "Cartão Bancário", sim_u_fastest: "Método mais rápido",
+                sim_u_p2p: "Mercado P2P", sim_u_local: "Métodos de pagamento locais", sim_u_choose: "Escolher Cripto", sim_u_buy: "Comprar Cripto",
+                sim_u_continue: "Continuar", sim_u_confirm_tx: "Confirmar Transação", sim_u_amount: "Valor", sim_u_network_fee: "Taxa da Rede",
+                sim_u_to_address: "Endereço de destino", sim_u_confirm_pay: "Confirmar Pagamento",
+                tw_t1: "1. Abra o @wallet", tw_d1: "Pesquise <b>@wallet</b> na barra superior. Clique em <b>Iniciar</b> e depois no botão <b>Open Wallet</b> ou digite: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
+                tw_t2: "2. Ative o TON Space", tw_d2: "Clique nos três pontos (Configurações) no canto superior direito. Ative <b>TON Space Beta</b>. Este será o seu cofre pessoal.",
+                tw_t3: "3. Backup (Importante!)", tw_d3: "Escolha backup manual. Você verá <b>24 palavras secretas</b>. Escreva no papel na ordem exata! Sem prints, elas recuperam seus fundos se perder o celular.",
+                tw_t4: "4. Abrir Carteira", tw_d4: "Agora que você entendeu como funciona, abra sua Carteira oficial no Telegram para prosseguir.",
+                tu_t1: "1. Adicionar Cripto", tu_d1: "Na tela inicial da sua nova Carteira, clique no botão <b>Add Crypto</b>.",
+                tu_t2: "2. Escolha o Método", tu_d2: "Escolha <b>Cartão Bancário</b> para compra instantânea, ou <b>Mercado P2P</b> se preferir métodos locais.",
+                tu_t3: "3. Selecionar USDT", tu_d3: "Selecione a criptomoeda USDT para começar.",
+                tu_t4: "4. Insira o Valor", tu_d4: "Compre exatamente o valor de USDT necessário para cobrir o acesso.",
+                tu_t5: "5. Compre Gas (TON)", tu_d5: "Repita o processo selecionando <b>TON</b>. Compre <b>1 TON</b>. Isso é necessário para pagar a pequena taxa da blockchain.",
+                tu_t6: "6. Pague e Receba Acesso", tu_d6: "De volta ao menu, clique em <b>PAGAR AGORA</b> para confirmar. Você receberá instantaneamente o <b>Link de Acesso</b> e sua <b>Senha Única</b>.",
+                step: "Passo", prev: "Ant", next: "Próx", done: "Feito", tut_badge: "TUTORIAL - NÃO OPERACIONAL", tw_btn_open: "Abrir Telegram Wallet"
             }
         };
 
-        function setLang(lang) {
-            if (!translations[lang]) lang = 'en';
-            
+        let currentLang = 'en'; 
+        const supportedLangs = ['en', 'es', 'pt', 'it'];
+
+        // Language & UI Initialization
+        function applyTranslations() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
+                if(translations[currentLang] && translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
                 }
             });
 
-            document.getElementById('current-lang-display').innerText = lang.toUpperCase();
-            document.documentElement.lang = lang;
+            document.getElementById('current-lang-display').innerText = currentLang.toUpperCase();
+            document.documentElement.lang = currentLang;
 
-            // Aggiorna dinamicamente i link per le 3 opzioni di acquisto
-            document.querySelectorAll('.pricing-btn').forEach(btn => {
-                const plan = btn.getAttribute('data-plan');
-                btn.href = `app-full-price.html?plan=${plan}&lang=${lang}`;
-            });
-
-            // Gestione Dinamica URL Assistenza (WA & TG)
+            // Support Links
             const waSupportBtn = document.getElementById('btn-support-wa');
             const tgSupportBtn = document.getElementById('btn-support-tg');
             const waPartnerBtn = document.getElementById('wa-btn');
             
-            if(waSupportBtn && tgSupportBtn) {
-                const supportMsg = encodeURIComponent(translations[lang].support_msg);
+            if(waSupportBtn && tgSupportBtn && translations[currentLang].support_msg) {
+                const supportMsg = encodeURIComponent(translations[currentLang].support_msg);
                 waSupportBtn.href = `https://wa.me/393482487172?text=${supportMsg}`;
-                // Deep link web di telegram sicuro per fallback numero/testo, in caso l'ID non agganci il client
                 tgSupportBtn.href = `https://t.me/+393482487172?text=${supportMsg}`; 
             }
-
-            if(waPartnerBtn) {
-                const partnerMsg = encodeURIComponent(translations[lang].wa_msg);
+            if(waPartnerBtn && translations[currentLang].wa_msg) {
+                const partnerMsg = encodeURIComponent(translations[currentLang].wa_msg);
                 waPartnerBtn.href = `https://wa.me/393482487172?text=${partnerMsg}`;
             }
 
-            try { localStorage.setItem('bx_lang', lang); } catch(e) {}
+            // Update Tutorials if active
+            if(document.getElementById('screen-tutorial-wallet') && document.getElementById('screen-tutorial-wallet').classList.contains('active')) updateTutorialUI('wallet');
+            if(document.getElementById('screen-tutorial-usdt') && document.getElementById('screen-tutorial-usdt').classList.contains('active')) updateTutorialUI('usdt');
         }
 
-        (function initLanguageAndReveal() {
-            let startLang = 'en';
-            try {
-                const saved = localStorage.getItem('bx_lang');
-                const systemLang = navigator.language || navigator.userLanguage || 'en';
-                const browserLang = systemLang.substring(0, 2).toLowerCase();
-                
-                if (saved && translations[saved]) {
-                    startLang = saved;
-                } else if (translations[browserLang]) {
-                    startLang = browserLang;
-                }
-            } catch(e) {}
-            
-            setLang(startLang);
-            document.getElementById('main-body').classList.add('ready');
-            
-            // Forzatura per link Telegram Desktop se si clicca specificamente per ID (sovrascrive href di base se supportato)
-            const tgBtn = document.getElementById('btn-support-tg');
-            if(tgBtn) {
-                tgBtn.addEventListener('click', function(e) {
-                    // Tenta di aprire nativamente l'app via ID utente se in ambiente supportato (es. mobile/app desktop)
-                    // Il fallback web rimane l'href standard con il numero preimpostato
-                    setTimeout(() => {
-                         window.location.href = "tg://user?id=556534716";
-                    }, 25);
-                });
-            }
-        })();
+        function setLang(lang) {
+            currentLang = supportedLangs.includes(lang) ? lang : 'en';
+            applyTranslations();
+            try { localStorage.setItem('bx_lang', currentLang); } catch(e) {}
+        }
 
+        // SPA Navigation Logic
+        function startCheckout(planName, priceUsdt, days) {
+            // Update Dynamic Texts
+            document.getElementById('checkout-plan-name').innerText = planName.toUpperCase() + " PLAN";
+            document.getElementById('checkout-price-display').innerText = priceUsdt;
+            
+            // Payment screen specific texts
+            document.getElementById('pay-exact-amount').innerText = priceUsdt + " USDT";
+            document.getElementById('modal-pay-amount').innerText = priceUsdt + " USDT";
+            document.getElementById('sim-price-display').innerText = priceUsdt;
+            document.getElementById('sim-final-price').innerText = priceUsdt + " USDT";
+            
+            document.getElementById('checkout-duration').innerText = days + " " + translations[currentLang]['days_access'];
+
+            // Hide Landing, Show Checkout Flow
+            document.getElementById('screen-landing').classList.replace('block', 'hidden');
+            document.getElementById('checkout-container').classList.replace('hidden', 'flex');
+            
+            showScreen('screen-offer');
+            window.scrollTo(0,0);
+        }
+
+        function backToHome() {
+            document.getElementById('checkout-container').classList.replace('flex', 'hidden');
+            document.getElementById('screen-landing').classList.replace('hidden', 'block');
+            window.scrollTo(0,0);
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            document.querySelectorAll('.scroll-container').forEach(c => c.scrollTop = 0);
+        }
+
+        function goToPayment() {
+            showScreen('screen-payment');
+        }
+
+        // Modals
+        function openSecurityModal() {
+            document.getElementById('security-modal').classList.remove('hidden');
+            document.getElementById('security-modal').classList.add('flex');
+        }
+        function closeSecurityModal() {
+            document.getElementById('security-modal').classList.add('hidden');
+            document.getElementById('security-modal').classList.remove('flex');
+        }
+        function openPaymentModal() {
+            document.getElementById('payment-modal').classList.remove('hidden');
+            document.getElementById('payment-modal').classList.add('flex');
+        }
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.add('hidden');
+            document.getElementById('payment-modal').classList.remove('flex');
+        }
+
+        // Utils
+        function copyAddress() {
+            const addr = "UQBK7F4nTjfCL7JiwnD2kiZOV1klycVHMOHWPtZcVqNXa4_r";
+            const btn = document.getElementById('copy-btn');
+            navigator.clipboard.writeText(addr).then(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check text-green-400"></i>';
+                setTimeout(() => { btn.innerHTML = '<i class="fa-regular fa-copy"></i>'; }, 2000);
+            }).catch(err => {
+                const textArea = document.createElement("textarea");
+                textArea.value = addr; document.body.appendChild(textArea);
+                textArea.select(); document.execCommand("copy"); document.body.removeChild(textArea);
+                btn.innerHTML = '<i class="fa-solid fa-check text-green-400"></i>';
+                setTimeout(() => { btn.innerHTML = '<i class="fa-regular fa-copy"></i>'; }, 2000);
+            });
+        }
+
+        // Tutorial Simulator Logic
+        const tutorials = {
+            wallet: { current: 1, max: 4, color: 'bg-bf-yellow', prefix: 'tw' },
+            usdt: { current: 1, max: 6, color: 'bg-bf-yellow', prefix: 'tu' } 
+        };
+
+        function openTutorial(type) {
+            tutorials[type].current = 1;
+            document.querySelectorAll(`.sim-screen[id^="sim-${tutorials[type].prefix}"]`).forEach(el => el.classList.remove('active', 'prev'));
+            document.getElementById(`sim-${tutorials[type].prefix}-1`).classList.add('active');
+            updateTutorialUI(type);
+            showScreen(`screen-tutorial-${type}`);
+        }
+
+        function navTutorial(type, dir) {
+            let t = tutorials[type];
+            let newStep = t.current + dir;
+            if (newStep < 1) return;
+            if (newStep > t.max) {
+                showScreen('screen-payment');
+                return;
+            }
+            let currentScreen = document.getElementById(`sim-${t.prefix}-${t.current}`);
+            let nextScreen = document.getElementById(`sim-${t.prefix}-${newStep}`);
+            currentScreen.classList.remove('active');
+            if (dir > 0) currentScreen.classList.add('prev');
+            nextScreen.classList.remove('prev');
+            nextScreen.classList.add('active');
+            t.current = newStep;
+            updateTutorialUI(type);
+        }
+
+        function updateTutorialUI(type) {
+            let t = tutorials[type];
+            let pfx = t.prefix;
+            document.getElementById(`${pfx}-step-num`).textContent = t.current;
+            document.getElementById(`${pfx}-title`).innerHTML = translations[currentLang][`${pfx}_t${t.current}`] || "";
+            document.getElementById(`${pfx}-desc`).innerHTML = translations[currentLang][`${pfx}_d${t.current}`] || "";
+            
+            let prevBtn = document.getElementById(`${pfx}-btn-prev`);
+            let nextText = document.getElementById(`${pfx}-next-text`);
+            let nextIcon = document.getElementById(`${pfx}-next-icon`);
+            let dotsContainer = document.getElementById(`${pfx}-dots-container`);
+            
+            if (t.current === 1) prevBtn.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+            else prevBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+
+            if (t.current === t.max) {
+                nextText.textContent = translations[currentLang]['done'];
+                nextIcon.className = "fa-solid fa-check";
+            } else {
+                nextText.textContent = translations[currentLang]['next'];
+                nextIcon.className = "fa-solid fa-chevron-right";
+            }
+
+            dotsContainer.innerHTML = '';
+            for (let i = 1; i <= t.max; i++) {
+                let dot = document.createElement('div');
+                if (i === t.current) dot.className = `w-1.5 h-1.5 rounded-full ${t.color} transition-all duration-300 transform scale-125`;
+                else dot.className = `w-1.5 h-1.5 rounded-full bg-gray-700 transition-all duration-300`;
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        // Timer Logic
+        let flashTimerInterval = null;
+        function startFlashTimer(duration) {
+            clearInterval(flashTimerInterval);
+            let timer = duration, hours, minutes, seconds;
+            const display = document.getElementById('flash-timer');
+            flashTimerInterval = setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = hours + ":" + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = 0; 
+                    clearInterval(flashTimerInterval); 
+                    display.classList.add('text-red-500');
+                }
+            }, 1000);
+        }
+
+        // Startup Initialization
         document.addEventListener('DOMContentLoaded', () => {
+            // Landing Animations
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -854,9 +1385,34 @@
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 
-            document.querySelectorAll('.lazy-reveal').forEach(el => {
-                revealObserver.observe(el);
-            });
+            document.querySelectorAll('.lazy-reveal').forEach(el => revealObserver.observe(el));
+
+            // System Language Detection & Initialization
+            try {
+                const saved = localStorage.getItem('bx_lang');
+                const systemLang = (navigator.language || navigator.userLanguage).split('-')[0].toLowerCase();
+                
+                if (saved && supportedLangs.includes(saved)) {
+                    currentLang = saved;
+                } else if (supportedLangs.includes(systemLang)) {
+                    currentLang = systemLang;
+                } else {
+                    currentLang = 'en'; // Fallback a inglese se lingua non supportata
+                }
+            } catch(e) {}
+            
+            setLang(currentLang);
+            document.getElementById('main-body').classList.add('ready');
+
+            // Force Telegram desktop deep link behavior
+            const tgBtn = document.getElementById('btn-support-tg');
+            if(tgBtn) {
+                tgBtn.addEventListener('click', function(e) {
+                    setTimeout(() => { window.location.href = "tg://user?id=556534716"; }, 25);
+                });
+            }
+
+            startFlashTimer(24 * 60 * 60);
         });
     </script>
 </body>
