@@ -110,7 +110,7 @@
 
         .min-h-section {
             /* Usiamo svh (Small Viewport Height) o vh invece di dvh per prevenire "scatti" visivi
-               su mobile quando compare/scompare la barra degli indirizzi */
+                su mobile quando compare/scompare la barra degli indirizzi */
             min-height: calc(100vh - 64px - 110px);
             min-height: calc(100svh - 64px - 110px); 
             display: flex;
@@ -440,21 +440,12 @@
                         <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_starter">30 Days of continuous access</p>
 
                         <div class="flex flex-col items-center justify-center mb-6 flex-1">
-                            <div class="relative inline-block mb-1">
-                                <span class="text-lg sm:text-xl font-bold text-gray-500 opacity-70 tracking-wider">188 USDT</span>
-                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                                    <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
-                                </div>
-                            </div>
-
-                            <div class="flex items-end justify-center gap-1 sm:gap-2">
+                            <div class="flex items-end justify-center gap-1 sm:gap-2 mt-4">
                                 <span class="text-4xl sm:text-5xl font-heading font-black text-white leading-none">94</span>
                                 <div class="flex flex-col items-start pb-1 sm:pb-1.5">
                                     <span class="text-lg text-gray-300 font-bold leading-none">USDT</span>
                                 </div>
                             </div>
-
-                            <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="save_50">SAVE 50%</div>
                         </div>
 
                         <button onclick="startCheckout('Starter', 94, 30)" class="inline-flex items-center justify-center w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black py-3 px-4 rounded-xl text-[11px] sm:text-sm uppercase tracking-widest transition-all duration-300 outline-none mt-auto cursor-pointer">
@@ -472,21 +463,16 @@
                         <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_pro">90 Days of continuous access</p>
 
                         <div class="flex flex-col items-center justify-center mb-6 flex-1">
-                            <div class="relative inline-block mb-1">
-                                <span class="text-xl sm:text-2xl font-bold text-gray-500 opacity-70 tracking-wider">468 USDT</span>
-                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                                    <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
-                                </div>
-                            </div>
-
-                            <div class="flex items-end justify-center gap-1 sm:gap-2">
+                            <div class="flex items-end justify-center gap-1 sm:gap-2 mt-2">
                                 <span class="text-5xl sm:text-6xl font-heading font-black text-transparent bg-clip-text bg-gradient-to-br from-[#D4AF37] to-[#FFF0B3] leading-none">234</span>
                                 <div class="flex flex-col items-start pb-1 sm:pb-1.5">
                                     <span class="text-xl text-gray-300 font-bold leading-none">USDT</span>
                                 </div>
                             </div>
+                            
+                            <div class="text-gray-400 text-[10px] sm:text-[11px] font-medium mt-1.5" data-i18n="eq_pro">(equivalent to 78 USDT / month)</div>
 
-                            <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest animate-pulse" data-i18n="save_50">SAVE 50%</div>
+                            <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest animate-pulse" data-i18n="save_pro">SAVE 48 USDT IN TOTAL</div>
                         </div>
 
                         <button onclick="startCheckout('Pro', 234, 90)" class="inline-flex items-center justify-center w-full bg-gradient-to-r from-[#D4AF37] via-[#FFF0B3] to-[#D4AF37] bg-[length:200%_auto] hover:bg-right text-black font-black py-3 sm:py-3.5 px-4 rounded-xl text-[11px] sm:text-sm uppercase tracking-widest transition-all duration-500 hover:scale-105 active:scale-95 outline-none shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] mt-auto cursor-pointer">
@@ -500,21 +486,16 @@
                         <p class="text-brand-gray text-[11px] sm:text-xs mb-6" data-i18n="desc_elite">180 Days of continuous access</p>
 
                         <div class="flex flex-col items-center justify-center mb-6 flex-1">
-                            <div class="relative inline-block mb-1">
-                                <span class="text-lg sm:text-xl font-bold text-gray-500 opacity-70 tracking-wider">788 USDT</span>
-                                <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-                                    <div class="w-full h-[2px] bg-red-500/80 -rotate-[12deg] scale-110"></div>
-                                </div>
-                            </div>
-
-                            <div class="flex items-end justify-center gap-1 sm:gap-2">
+                            <div class="flex items-end justify-center gap-1 sm:gap-2 mt-4">
                                 <span class="text-4xl sm:text-5xl font-heading font-black text-white leading-none">394</span>
                                 <div class="flex flex-col items-start pb-1 sm:pb-1.5">
                                     <span class="text-lg text-gray-300 font-bold leading-none">USDT</span>
                                 </div>
                             </div>
 
-                            <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="save_50">SAVE 50%</div>
+                            <div class="text-gray-400 text-[10px] sm:text-[11px] font-medium mt-1.5" data-i18n="eq_elite">(equivalent to 65.66 USDT / month)</div>
+
+                            <div class="mt-4 bg-green-500/10 border border-green-500/30 text-green-400 text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="save_elite">SAVE 170 USDT IN TOTAL</div>
                         </div>
 
                         <button onclick="startCheckout('Elite', 394, 180)" class="inline-flex items-center justify-center w-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-black py-3 px-4 rounded-xl text-[11px] sm:text-sm uppercase tracking-widest transition-all duration-300 outline-none mt-auto cursor-pointer">
@@ -1000,7 +981,9 @@
                 game_btn: "PLAY NOW",
                 pricing_main_title: "CHOOSE YOUR PLAN", pricing_main_desc: "Select the credit package that best suits your trading journey.",
                 desc_starter: "30 Days of continuous access", desc_pro: "90 Days of continuous access", desc_elite: "180 Days of continuous access",
-                price_badge_pro: "MOST POPULAR", save_50: "SAVE 50%", price_btn: "SUBSCRIBE NOW",
+                price_badge_pro: "MOST POPULAR", save_pro: "SAVE 48 USDT IN TOTAL", save_elite: "SAVE 170 USDT IN TOTAL", 
+                eq_pro: "(equivalent to 78 USDT / month)", eq_elite: "(equivalent to 65.66 USDT / month)",
+                price_btn: "SUBSCRIBE NOW",
                 faq_title: "FREQUENTLY ASKED QUESTIONS", faq_q1: "Is this an auto-renewing subscription?", faq_a1: "No. We operate on a strictly transparent policy: one-time payment, no auto-renewal. Your access simply expires at the end of your selected period. You have full control over when and if to top up, with no need to cancel anything.",
                 faq_q2: "Why do I need to use USDT/TON?", faq_a2: "We utilize Blockchain infrastructure to ensure global, instant, and borderless transactions without traditional banking restrictions. Our quick-start tutorial explains how.",
                 faq_q3: "What exactly is included?", faq_a3: "Unlimited access to the Zero To Hero Academy and exclusive entry to the Telegram Premium Room for real-time automated trading signals.",
@@ -1048,7 +1031,7 @@
                 hero_subtitle: "Olvida el azar. Aprovecha nuestras redes neuronales para extraer verdadero <span class='text-white font-bold'>Valor Esperado</span> del Exchange. Copia operaciones, gestiona el riesgo y protege tu bankroll.",
                 new_sec_title: "COPIA. PEGA. COBRA.", new_sec_desc1: "Recibe señales claras y precisas, con parámetros de stop-loss y gestión de capital preestablecidos.",
                 new_sec_desc2: "<span class='text-white font-bold'>ANÁLISIS CUANTITATIVO APLICADO.</span> No es una predicción, sino un protocolo matemático estricto diseñado para la gestión de riesgos y Stop Loss.",
-                card1_title: "DE PRINCIPIANTE A PRO", card1_desc: "ZERO TO HERO Academy.<br>30 lecciones interactivas con vídeo, audio, simulaciones y evaluaciones guiadas por IA.",
+                card1_title: "DE PRINCIPIANTE A PRO", card1_desc: "ZERO TO HERO Academy.<br>30 lecciones interativas con vídeo, audio, simulaciones y evaluaciones guiadas por IA.",
                 card2_title: "TRADING SIN EMOCIONES", card2_desc: "Copia la señal. Ejecuta la operación. Mantén tu ventaja matemática.",
                 card3_title: "GESTIÓN DE CAPITAL", card3_desc: "Modelos algorítmicos rígidos diseñados para proteger y componer tu capital de forma matemática.",
                 game_badge: "Pausa de Entretenimiento", game_title: "SUBBUTEO LEGENDS", 
@@ -1056,7 +1039,9 @@
                 game_btn: "JUGAR AHORA",
                 pricing_main_title: "ELIGE TU PLAN", pricing_main_desc: "Selecciona el paquete de créditos que mejor se adapte a tu trading.",
                 desc_starter: "30 Días de acceso continuo", desc_pro: "90 Días de acceso continuo", desc_elite: "180 Días de acceso continuo",
-                price_badge_pro: "MÁS POPULAR", save_50: "AHORRAS EL 50%", price_btn: "SUSCRÍBETE AHORA",
+                price_badge_pro: "MÁS POPULAR", save_pro: "AHORRAS 48 USDT EN TOTAL", save_elite: "AHORRAS 170 USDT EN TOTAL",
+                eq_pro: "(equivalente a 78 USDT al mes)", eq_elite: "(equivalente a 65,66 USDT al mes)",
+                price_btn: "SUSCRÍBETE AHORA",
                 faq_title: "PREGUNTAS FRECUENTES", faq_q1: "¿Es una suscripción de renovación automática?", faq_a1: "No. Operamos con total transparencia: es un pago único, sin renovaciones automáticas. Su acceso simplemente caduca al final del período seleccionado. No necesita cancelar nada, usted tiene el control total.",
                 faq_q2: "¿Por qué debo usar USDT/TON?", faq_a2: "Utilizamos infraestructura Blockchain para garantizar transacciones globales e instantáneas sin restricciones bancarias tradicionales. Nuestro tutorial rápido lo explica todo.",
                 faq_q3: "¿Qué se incluye exactamente?", faq_a3: "Acceso ilimitado a la Academia Zero To Hero y entrada exclusiva a la Sala Premium de Telegram para recibir señales de trading automatizadas en tiempo real.",
@@ -1112,7 +1097,9 @@
                 game_btn: "JOGAR AGORA",
                 pricing_main_title: "ESCOLHA SEU PLANO", pricing_main_desc: "Selecione o pacote de créditos que melhor se adapta ao seu trading.",
                 desc_starter: "30 Dias de acesso contínuo", desc_pro: "90 Dias de acesso contínuo", desc_elite: "180 Dias de acesso contínuo",
-                price_badge_pro: "MAIS POPULAR", save_50: "POUPE 50%", price_btn: "SUBSCREVER AGORA",
+                price_badge_pro: "MAIS POPULAR", save_pro: "POUPE 48 USDT NO TOTAL", save_elite: "POUPE 170 USDT NO TOTAL",
+                eq_pro: "(equivalente a 78 USDT por mês)", eq_elite: "(equivalente a 65,66 USDT por mês)",
+                price_btn: "SUBSCREVER AGORA",
                 faq_title: "PERGUNTAS FREQUENTES", faq_q1: "É uma assinatura de renovação automática?", faq_a1: "Não. Operamos com total transparência: pagamento único, sem renovações automáticas. O seu acesso simplesmente expira no final do período selecionado. Não é necessário cancelar nada, você tem o controle total.",
                 faq_q2: "Por que preciso usar USDT/TON?", faq_a2: "Utilizamos infraestruturas Blockchain para garantir transações globais e instantâneas, evitando restrições bancárias tradicionais. O nosso tutorial explica tudo.",
                 faq_q3: "O que está exatamente incluído?", faq_a3: "Acesso ilimitado à Academia Zero To Hero e entrada exclusiva na Sala Premium do Telegram para sinais de trading automatizados em tempo real.",
@@ -1168,7 +1155,9 @@
                 game_btn: "GIOCA ORA",
                 pricing_main_title: "SCEGLI IL TUO PIANO", pricing_main_desc: "Seleziona il pacchetto di crediti più adatto al tuo trading.",
                 desc_starter: "30 Giorni di accesso continuo", desc_pro: "90 Giorni di accesso continuo", desc_elite: "180 Giorni di accesso continuo",
-                price_badge_pro: "IL PIÙ SCELTO", save_50: "RISPARMI IL 50%", price_btn: "ACQUISTA ORA",
+                price_badge_pro: "IL PIÙ SCELTO", save_pro: "RISPARMI 48 USDT TOTALI", save_elite: "RISPARMI 170 USDT TOTALI",
+                eq_pro: "(equivalente a 78 USDT al mese)", eq_elite: "(equivalente a 65,66 USDT al mese)",
+                price_btn: "ACQUISTA ORA",
                 faq_title: "DOMANDE FREQUENTI", faq_q1: "Si tratta di un abbonamento a rinnovo automatico?", faq_a1: "Assolutamente no. Operiamo con la massima trasparenza: si tratta di un pagamento una tantum senza prelievi automatici. L'accesso scade semplicemente al termine del periodo acquistato. Non devi disdire nulla, hai tu il pieno controllo.",
                 faq_q2: "Devo usare per forza USDT e TON?", faq_a2: "Sì, utilizziamo la tecnologia Blockchain per garantire pagamenti sicuri, istantanei e senza limiti bancari. Nel tutorial ti spieghiamo come fare.",
                 faq_q3: "Cosa include esattamente l'abbonamento?", faq_a3: "Accesso completo e illimitato alla Zero To Hero Academy e ingresso esclusivo nella Premium Room su Telegram con segnali in tempo reale.",
