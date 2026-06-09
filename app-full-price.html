@@ -144,7 +144,7 @@
                     <h2 data-i18n="offer_title" class="text-white font-black text-xl mb-4 uppercase tracking-widest text-center">Checkout</h2>
                     
                     <div class="flex items-baseline justify-center mb-6">
-                        <span class="text-6xl sm:text-7xl font-black text-white tracking-tighter drop-shadow-sm">97</span>
+                        <span class="text-6xl sm:text-7xl font-black text-white tracking-tighter drop-shadow-sm price-display">97</span>
                         <span class="text-2xl sm:text-3xl text-gray-300 font-bold ml-2">USDT</span>
                         <span data-i18n="per_month" class="text-sm sm:text-base text-gray-500 font-semibold ml-1">/mese</span>
                     </div>
@@ -173,11 +173,11 @@
                 
                 <div class="w-full bg-[#111827] rounded-3xl border border-gray-700 shadow-2xl relative overflow-hidden flex flex-col items-center px-4 py-6 mb-5 flex-shrink-0">
                     <p data-i18n="pl_subtitle" class="text-[12px] sm:text-[13px] text-gray-400 text-center mb-5 font-medium px-2">
-                        Completa il pagamento per sbloccare la Premium Room:<br>
-                        <span class='block mt-2 flex items-center justify-center gap-2'>
-                            <span class='text-white font-black text-[22px] sm:text-[24px]'>97 USDT/mese</span> 
-                        </span>
+                        Completa il pagamento per sbloccare la Premium Room:
                     </p>
+                    <span class='block mb-5 flex items-center justify-center gap-2'>
+                        <span class='text-white font-black text-[22px] sm:text-[24px]'><span class="price-display">97</span> USDT/mese</span> 
+                    </span>
                     
                     <div class="w-full bg-[#070B14] border border-gray-800 rounded-2xl p-4 mb-6 shadow-inner">
                         <ul class="space-y-3 text-[12px] sm:text-[13px] text-gray-200 font-semibold">
@@ -196,7 +196,7 @@
                         </ul>
                     </div>
 
-                    <button onclick="openPaymentModal()" class="w-full btn-premium-action rounded-2xl py-4 text-[15px] sm:text-[16px] font-black flex items-center justify-center gap-2 cursor-pointer">
+                    <button onclick="openPromoModal()" class="w-full btn-premium-action rounded-2xl py-4 text-[15px] sm:text-[16px] font-black flex items-center justify-center gap-2 cursor-pointer">
                         <i class="fa-solid fa-bolt text-white"></i> <span data-i18n="pay_now">SBLOCCA ACCESSO ORA</span>
                     </button>
                 </div>
@@ -434,7 +434,7 @@
                                     <img src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=025" class="w-3.5 h-3.5"> USDT 
                                 </div>
                                 <div class="text-white text-4xl font-bold flex items-baseline gap-1.5 mb-2">
-                                    <span class="text-white">97</span> 
+                                    <span class="text-white price-display">97</span> 
                                     <span class="text-[12px] font-medium text-gray-400">USDT</span>
                                 </div>
                             </div>
@@ -479,7 +479,7 @@
                                 <div class="bg-[#1c242f] rounded-xl p-3 border border-gray-700/50 flex flex-col gap-2 shrink-0">
                                     <div class="flex justify-between items-center">
                                         <span data-i18n="sim_u_amount" class="text-gray-400 text-[10px]">Amount</span>
-                                        <span class="text-white font-medium text-[11px]">97 USDT</span>
+                                        <span class="text-white font-medium text-[11px]"><span class="price-display">97</span> USDT</span>
                                     </div>
                                     <div class="flex justify-between items-center">
                                         <span data-i18n="sim_u_network_fee" class="text-gray-400 text-[10px]">Network Fee</span>
@@ -520,8 +520,36 @@
 
     </div>
 
-    <!-- Modali Sicurezza / Pagamento Reale -->
-    <div id="security-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <!-- Modale Inserimento Promo Code / Link -->
+    <div id="promo-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[60] p-4">
+        <div class="bg-panel-bg border border-bf-blue/30 rounded-3xl p-6 w-full max-w-sm text-center shadow-[0_15px_50px_rgba(59,130,246,0.15)] modal-enter relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 to-bf-blue"></div>
+            
+            <div class="w-16 h-16 rounded-full bg-bf-blue/10 text-bf-blue flex items-center justify-center mx-auto mb-4 border border-bf-blue/20">
+                <i class="fa-solid fa-tags text-3xl"></i>
+            </div>
+            
+            <h2 data-i18n="promo_title" class="text-[18px] font-black text-white mb-2 uppercase tracking-widest">Codice Promo</h2>
+            <p data-i18n="promo_desc" class="text-[12px] sm:text-[13px] font-medium mb-5 text-gray-300 leading-relaxed">
+                Hai un codice promozionale o un link invito? Inseriscilo qui sotto per ottenere il <strong>50% di sconto</strong> sul tuo abbonamento.
+            </p>
+            
+            <div class="mb-5 relative">
+                <input type="text" id="promo-input" data-i18n-placeholder="promo_placeholder" placeholder="Inserisci Codice Promo..." class="w-full bg-black/50 border border-gray-700 p-3.5 rounded-xl text-white text-center font-mono text-[14px] uppercase tracking-wider focus:border-bf-blue focus:ring-1 focus:ring-bf-blue outline-none transition-all placeholder:text-gray-600 placeholder:normal-case placeholder:tracking-normal">
+            </div>
+
+            <button onclick="verifyPromoCode()" class="w-full btn-premium-action py-3.5 rounded-xl font-black text-[13px] sm:text-[14px] uppercase tracking-widest active:scale-95 shadow-lg transition-all border-none cursor-pointer mb-3 flex items-center justify-center gap-2">
+                <i id="verify-btn-icon" class="fa-solid fa-check-circle"></i> <span id="verify-btn-text" data-i18n="promo_btn">VERIFICA CODICE</span>
+            </button>
+
+            <button onclick="skipPromo()" class="w-full bg-transparent text-gray-500 hover:text-white py-2 rounded-xl font-bold text-[11px] uppercase tracking-widest transition-colors border-none cursor-pointer">
+                <span data-i18n="promo_skip">PROCEDI SENZA CODICE</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modale Sicurezza -->
+    <div id="security-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[70] p-4">
         <div class="bg-panel-bg border border-gray-800 rounded-3xl p-5 w-full max-w-sm relative overflow-hidden shadow-2xl modal-enter max-h-[90vh] overflow-y-auto">
             <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
             
@@ -560,7 +588,7 @@
                         </div>
                         <div>
                             <h4 data-i18n="sec_gas_title" class="font-bold text-white text-[13px] mb-1">Perché serve anche il Toncoin (TON)?</h4>
-                            <p data-i18n="sec_gas_desc" class="text-[12px] text-gray-300 leading-snug">Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima "tassa di trasporto" (Gas) che si paga <b>solo in Toncoin (TON)</b>. Per questo nel wallet devi avere 97 USDT per il servizio e circa 1 TON per permettere al sistema di muovere i fondi.</p>
+                            <p data-i18n="sec_gas_desc" class="text-[12px] text-gray-300 leading-snug">Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima "tassa di trasporto" (Gas) che si paga <b>solo in Toncoin (TON)</b>.</p>
                         </div>
                     </div>
 
@@ -583,7 +611,7 @@
     </div>
 
     <!-- PAGAMENTO REALE MODAL -->
-    <div id="payment-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div id="payment-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[70] p-4">
         <div class="bg-[#0a0f18] border border-blue-500/30 rounded-3xl p-6 w-full max-w-sm text-center shadow-[0_15px_50px_rgba(59,130,246,0.15)] modal-enter relative overflow-hidden">
             <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 to-blue-400"></div>
             
@@ -594,7 +622,7 @@
             <h2 data-i18n="pay_modal_title" class="text-[18px] font-black text-white mb-2 uppercase">Effettua il Pagamento</h2>
             
             <p data-i18n="pay_modal_text" class="text-[13px] font-medium mb-4 text-gray-300">
-                Invia esattamente <strong class="text-white text-base">97 USDT</strong> sulla rete <strong class="text-white">TON</strong> a questo indirizzo:
+                Invia esattamente <strong class="text-white text-base"><span class="price-display">97</span> USDT</strong> sulla rete <strong class="text-white">TON</strong> a questo indirizzo:
             </p>
             
             <div class="bg-black/50 border border-gray-700 p-3 rounded-xl flex items-center justify-between gap-3 mb-4">
@@ -626,7 +654,7 @@
                 lock_price: "PROCEED TO PAYMENT",
                 no_payment: "Secure Web3 Payment",
                 back_home: "BACK TO HOME",
-                pl_subtitle: "Complete payment to unlock the Premium Room:<br><span class='block mt-2 flex items-center justify-center gap-2'><span class='text-white font-black text-[22px] sm:text-[24px]'>97 USDT/mo</span></span>",
+                pl_subtitle: "Complete payment to unlock the Premium Room:",
                 vp_1: "Access to zero To Hero Academy",
                 vp_2: "Access to High-Precision Trading Signals",
                 vp_3: "No lock-in contract",
@@ -643,19 +671,27 @@
 
                 sec_title: "Security Info",
                 sec_lock_title: "Global Web 3.0 Payments",
-                sec_lock_desc: "With Blockchain, you pay from anywhere in the world without borders. Goodbye to cards blocked by banks for non-existent fraud or crazy currency exchange fees. The transaction is instant.",
+                sec_lock_desc: "With Blockchain, you pay from anywhere in the world without borders. Goodbye to cards blocked by banks for non-existent fraud or crazy currency exchange fees.",
                 sec_usdt_title: "What is USDT?",
                 sec_usdt_desc: "It's the 'digital dollar'. 1 USDT is always worth exactly 1 US Dollar. It's stable, doesn't fluctuate like Bitcoin, perfect for subscriptions.",
                 sec_gas_title: "Why do I also need Toncoin (TON)?",
-                sec_gas_desc: "On the Blockchain, USDT is the currency used to pay for the subscription. However, every transaction requires a tiny 'transport fee' (Gas) that is paid <b>only in Toncoin (TON)</b>. This is why your wallet must have 97 USDT for the service and about 1 TON to allow the system to move the funds.",
+                sec_gas_desc: "On the Blockchain, USDT is the currency used to pay for the subscription. However, every transaction requires a tiny 'transport fee' (Gas) that is paid <b>only in Toncoin (TON)</b>.",
                 sec_tg_title: "Is it secure?",
                 sec_tg_desc: "Absolutely. The Wallet is an official Telegram feature. By activating 'TON Space' you hold your private keys: nobody can touch your funds except you.",
                 close_understood: "I understand, close",
                 
                 pay_modal_title: "Make the Payment",
-                pay_modal_text: "Send exactly <strong class='text-white text-base'>97 USDT</strong> on the <strong class='text-white'>TON</strong> network to this address:",
+                pay_modal_text: "Send exactly <strong class='text-white text-base'><span class='price-display'>97</span> USDT</strong> on the <strong class='text-white'>TON</strong> network to this address:",
                 pay_warning: "Send ONLY <strong class='text-red-400'>USDT</strong> via the <strong class='text-red-400'>TON (Toncoin)</strong> network. Other networks will result in loss of funds.",
                 pay_modal_close: "I Understand, Close",
+
+                promo_title: "Promo Code",
+                promo_desc: "Do you have a promotional code or a referral link? Enter it below to get a <strong>50% discount</strong> on your subscription.",
+                promo_placeholder: "Enter Promo Code...",
+                promo_btn: "VERIFY CODE",
+                promo_skip: "PROCEED WITHOUT CODE",
+                verifying: "VERIFYING...",
+                success: "CODE APPLIED!",
 
                 sim_w_welcome: "Welcome to Wallet! <br>Buy, sell and trade crypto directly in Telegram.",
                 sim_w_open: "Open Wallet",
@@ -688,7 +724,7 @@
                 tw_t2: "2. Enable TON Space",
                 tw_d2: "Click the three dots (Settings) top right. Toggle on <b>TON Space Beta</b>. This will become your personal vault.",
                 tw_t3: "3. Backup (Important!)",
-                tw_d3: "Choose manual backup. You will see <b>24 secret words</b>. Write them on paper in order! No screenshots, they recover your funds if you lose your phone.",
+                tw_d3: "Choose manual backup. You will see <b>24 secret words</b>. Write them on paper in order! No screenshots.",
                 tw_t4: "4. Open Wallet",
                 tw_d4: "Now that you understand how it works, open your official Telegram Wallet to proceed.",
                 
@@ -699,12 +735,12 @@
                 tu_t3: "3. Select USDT",
                 tu_d3: "Select the cryptocurrency USDT to begin.",
                 tu_t4: "4. Enter Amount (USDT)",
-                tu_d4: "Buy <b>97 USDT</b> to cover your subscription.",
+                tu_d4: "Buy the required USDT to cover your subscription.",
                 tu_t5: "5. Buy TON (Gas)",
                 tu_d5: "Repeat the process selecting <b>TON</b>. Buy <b>1 TON</b>. This is needed to pay the tiny blockchain network fee.",
                 tu_t6: "6. Pay & Get Access",
                 tu_d6: "Back on the menu, click <b>PAY NOW</b> to confirm the Smart Contract. Once paid, you will instantly receive the <b>Signals Channel Link</b> and your <b>Unique Password</b>.",
-                step: "Step", prev: "Prev", next: "Next", done: "Done", tut_badge: "TUTORIAL - NOT OPERATIONAL", tw_btn_open: "Open Telegram Wallet"
+                step: "Step", prev: "Prev", next: "Next", done: "Done", tut_badge: "Tutorial - Simulation", tw_btn_open: "Open Telegram Wallet"
             },
             it: {
                 offer_title: "Checkout",
@@ -713,7 +749,7 @@
                 lock_price: "PROCEDI AL PAGAMENTO",
                 no_payment: "Pagamento Sicuro Web3",
                 back_home: "TORNA ALLA HOME",
-                pl_subtitle: "Completa il pagamento per sbloccare la Premium Room:<br><span class='block mt-2 flex items-center justify-center gap-2'><span class='text-white font-black text-[22px] sm:text-[24px]'>97 USDT/mese</span></span>",
+                pl_subtitle: "Completa il pagamento per sbloccare la Premium Room:",
                 vp_1: "Accesso alla zero To Hero Academy",
                 vp_2: "Accesso alla Segnali Operativi ad Alta Precisione",
                 vp_3: "Nessun vincolo",
@@ -734,15 +770,23 @@
                 sec_usdt_title: "Cos'è USDT?",
                 sec_usdt_desc: "È il 'dollaro digitale'. 1 USDT vale esattamente 1 Dollaro Americano. È stabile, non oscilla come il Bitcoin, perfetto per gli abbonamenti.",
                 sec_gas_title: "Perché serve anche il Toncoin (TON)?",
-                sec_gas_desc: "Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima 'tassa di trasporto' (Gas) che si paga <b>solo in Toncoin (TON)</b>. Per questo nel wallet devi avere 97 USDT per il servizio e circa 1 TON per permettere al sistema di muovere i fondi.",
+                sec_gas_desc: "Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima 'tassa di trasporto' (Gas) che si paga <b>solo in Toncoin (TON)</b>.",
                 sec_tg_title: "È un sistema sicuro?",
                 sec_tg_desc: "Assolutamente sì. Il Wallet è una funzione ufficiale di Telegram. Attivando 'TON Space' possiedi le tue chiavi private: nessuno al mondo può toccare i tuoi fondi tranne te.",
                 close_understood: "Ho capito, chiudi",
 
                 pay_modal_title: "Effettua il Pagamento",
-                pay_modal_text: "Invia esattamente <strong class='text-white text-base'>97 USDT</strong> sulla rete <strong class='text-white'>TON</strong> a questo indirizzo:",
+                pay_modal_text: "Invia esattamente <strong class='text-white text-base'><span class='price-display'>97</span> USDT</strong> sulla rete <strong class='text-white'>TON</strong> a questo indirizzo:",
                 pay_warning: "Invia SOLO <strong class='text-red-400'>USDT</strong> tramite la rete <strong class='text-red-400'>TON (Toncoin)</strong>. Altre reti causeranno la perdita dei fondi.",
                 pay_modal_close: "Ho compreso, chiudi",
+
+                promo_title: "Codice Promo",
+                promo_desc: "Hai un codice promozionale o un link invito? Inseriscilo qui sotto per ottenere il <strong>50% di sconto</strong> sul tuo abbonamento.",
+                promo_placeholder: "Inserisci Codice Promo...",
+                promo_btn: "VERIFICA CODICE",
+                promo_skip: "PROCEDI SENZA CODICE",
+                verifying: "VERIFICA IN CORSO...",
+                success: "CODICE APPLICATO!",
 
                 sim_w_welcome: "Benvenuto in Wallet! <br>Compra, vendi e scambia crypto su Telegram.",
                 sim_w_open: "Apri Wallet",
@@ -775,7 +819,7 @@
                 tw_t2: "2. Attiva TON Space",
                 tw_d2: "Clicca sui tre puntini (Impostazioni) in alto a destra. Attiva <b>TON Space Beta</b>. Questa diventerà la tua cassaforte personale.",
                 tw_t3: "3. Fai il Backup (Importante!)",
-                tw_d3: "Fai il backup manuale. Ti verranno mostrate <b>24 parole segrete</b>. Scrivile su carta in ordine! Non fare screenshot, servono a recuperare i soldi se perdi il telefono.",
+                tw_d3: "Fai il backup manuale. Ti verranno mostrate <b>24 parole segrete</b>. Scrivile su carta in ordine! Non fare screenshot.",
                 tw_t4: "4. Apri il Wallet",
                 tw_d4: "Ora che hai capito come funziona, apri il tuo Wallet ufficiale su Telegram per procedere.",
                 
@@ -786,11 +830,11 @@
                 tu_t3: "3. Seleziona USDT",
                 tu_d3: "Seleziona la criptovaluta USDT dall'elenco per iniziare l'acquisto.",
                 tu_t4: "4. Inserisci l'Importo (USDT)",
-                tu_d4: "Acquista <b>97 USDT</b> per coprire il costo dell'abbonamento.",
+                tu_d4: "Acquista l'ammontare di USDT necessario per coprire il costo dell'abbonamento.",
                 tu_t5: "5. Compra il Gas (TON)",
                 tu_d5: "Ripeti la stessa operazione scegliendo <b>TON</b>. Acquista <b>1 TON</b>. Ti servirà per pagare la piccolissima tassa della blockchain.",
                 tu_t6: "6. Paga l'Accademia",
-                tu_d6: "Tornato al menu, clicca su <b>PAGA ORA</b>. Confermerai la transazione allo Smart Contract. A pagamento completato riceverai istantaneamente il <b>Link d'ingresso al Canale Segnali</b> e la <b>Password Univoca</b>.",
+                tu_d6: "Tornato al menu, clicca su <b>PAGA ORA</b>. Confermerai la transazione allo Smart Contract. A pagamento completato riceverai istantaneamente il <b>Link d'ingresso</b>.",
                 step: "Passo", prev: "Prec", next: "Avanti", done: "Finito", tut_badge: "Tutorial - Simulazione non operativa", tw_btn_open: "Apri il Wallet Telegram"
             },
             es: {
@@ -800,7 +844,7 @@
                 lock_price: "PROCEDER AL PAGO",
                 no_payment: "Pago Seguro Web3",
                 back_home: "VOLVER AL INICIO",
-                pl_subtitle: "Completa el pago para desbloquear la Premium Room:<br><span class='block mt-2 flex items-center justify-center gap-2'><span class='text-white font-black text-[22px] sm:text-[24px]'>97 USDT/mes</span></span>",
+                pl_subtitle: "Completa el pago para desbloquear la Premium Room:",
                 vp_1: "Acceso a la zero To Hero Academy",
                 vp_2: "Acceso a las Señales de Trading de Alta Precisión",
                 vp_3: "Sin permanencia",
@@ -817,19 +861,27 @@
 
                 sec_title: "Info de Seguridad",
                 sec_lock_title: "Pagos Globales Web 3.0",
-                sec_lock_desc: "Con Blockchain pagas desde todo el mundo sin fronteras. Adiós a las tarjetas bloqueadas por los bancos por fraudes inexistentes o comisiones locas de cambio de divisas. La transacción es instantánea.",
+                sec_lock_desc: "Con Blockchain pagas desde todo el mundo sin fronteras. Adiós a las tarjetas bloqueadas por los bancos por fraudes inexistentes o comisiones locas de cambio de divisas.",
                 sec_usdt_title: "¿Qué es USDT?",
-                sec_usdt_desc: "Es el 'dólar digital'. 1 USDT vale exactamente 1 Dólar Estadounidense. Es estable, no fluctúa como Bitcoin, perfecto para suscripciones.",
+                sec_usdt_desc: "Es el 'dólar digital'. 1 USDT vale exactamente 1 Dólar Estadounidense. Es estable, perfecto para suscripciones.",
                 sec_gas_title: "¿Por qué necesito también Toncoin (TON)?",
-                sec_gas_desc: "En la Blockchain, USDT es la moneda utilizada para pagar la suscripción. Sin embargo, cada transacción requiere una minúscula 'tarifa de transporte' (Gas) que se paga <b>solo en Toncoin (TON)</b>. Es por eso que tu billetera debe tener 97 USDT para el servicio y aproximadamente 1 TON para permitir que el sistema mueva los fondos.",
+                sec_gas_desc: "En la Blockchain, USDT es la moneda utilizada para pagar la suscripción. Sin embargo, cada transacción requiere una minúscula 'tarifa de transporte' (Gas) que se paga <b>solo en Toncoin (TON)</b>.",
                 sec_tg_title: "¿Es un sistema seguro?",
                 sec_tg_desc: "Absolutamente sí. La Wallet es una función oficial de Telegram. Al activar 'TON Space' posees tus claves privadas: nadie puede tocar tus fondos excepto tú.",
                 close_understood: "Entendido, cerrar",
 
                 pay_modal_title: "Realiza el Pago",
-                pay_modal_text: "Envía exactamente <strong class='text-white text-base'>97 USDT</strong> en la red <strong class='text-white'>TON</strong> a esta dirección:",
+                pay_modal_text: "Envía exactamente <strong class='text-white text-base'><span class='price-display'>97</span> USDT</strong> en la red <strong class='text-white'>TON</strong> a esta dirección:",
                 pay_warning: "Envía SOLO <strong class='text-red-400'>USDT</strong> por la red <strong class='text-red-400'>TON (Toncoin)</strong>. Otras redes causarán pérdida de fondos.",
                 pay_modal_close: "Entendido, Cerrar",
+
+                promo_title: "Código Promocional",
+                promo_desc: "¿Tienes un código promocional o un enlace de referido? Introdúcelo a continuación para obtener un <strong>50% de descuento</strong>.",
+                promo_placeholder: "Ingresa el Código...",
+                promo_btn: "VERIFICAR CÓDIGO",
+                promo_skip: "CONTINUAR SIN CÓDIGO",
+                verifying: "VERIFICANDO...",
+                success: "¡CÓDIGO APLICADO!",
 
                 sim_w_welcome: "¡Bienvenido a Wallet! <br>Compra, vende e intercambia criptos en Telegram.",
                 sim_w_open: "Abrir Wallet",
@@ -858,26 +910,26 @@
                 sim_u_confirm_pay: "Confirmar Pago",
 
                 tw_t1: "1. Abre @wallet",
-                tw_d1: "Busca <b>@wallet</b> en la barra de búsqueda superior. Haz clic en <b>Iniciar</b> y luego en el botón <b>Open Wallet</b> o escribe en tu navegador: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
+                tw_d1: "Busca <b>@wallet</b> en la barra superior. Haz clic en <b>Iniciar</b> y luego en <b>Open Wallet</b>.",
                 tw_t2: "2. Activa TON Space",
-                tw_d2: "Haz clic en los tres puntos (Ajustes) arriba a la derecha. Activa <b>TON Space Beta</b>. Esta será tu bóveda personal.",
+                tw_d2: "Haz clic en Ajustes arriba a la derecha. Activa <b>TON Space Beta</b>. Esta será tu bóveda personal.",
                 tw_t3: "3. Respaldo (¡Importante!)",
-                tw_d3: "Elige respaldo manual. Verás <b>24 palabras secretas</b>. ¡Escríbelas en papel en orden! No capturas de pantalla, recuperan tus fondos si pierdes el teléfono.",
+                tw_d3: "Elige respaldo manual. Verás <b>24 palabras secretas</b>. ¡Escríbelas en papel en orden! No capturas de pantalla.",
                 tw_t4: "4. Abrir Wallet",
-                tw_d4: "Ahora que entiendes cómo funciona, abre tu Wallet oficial en Telegram para proceder.",
+                tw_d4: "Ahora abre tu Wallet oficial en Telegram para proceder.",
                 
                 tu_t1: "1. Añadir Cripto",
-                tu_d1: "En la pantalla principal de tu nueva Wallet, haz clic en el botón <b>Add Crypto</b>.",
+                tu_d1: "En la pantalla principal, haz clic en el botón <b>Add Crypto</b>.",
                 tu_t2: "2. Elige el Método",
-                tu_d2: "Elige <b>Tarjeta Bancaria</b> para compra instantánea, o <b>Mercado P2P</b> si prefieres métodos locales.",
+                tu_d2: "Elige <b>Tarjeta Bancaria</b> para compra instantánea, o <b>Mercado P2P</b> para métodos locales.",
                 tu_t3: "3. Seleccionar USDT",
                 tu_d3: "Selecciona la criptomoneda USDT para comenzar.",
                 tu_t4: "4. Ingresa el Monto (USDT)",
-                tu_d4: "Compra <b>97 USDT</b> para cubrir la suscripción.",
+                tu_d4: "Compra los USDT necesarios para cubrir la suscripción.",
                 tu_t5: "5. Compra Gas (TON)",
                 tu_d5: "Repita el proceso seleccionando <b>TON</b>. Compra <b>1 TON</b>. Es necesario para pagar la pequeña comisión de la blockchain.",
                 tu_t6: "6. Paga y Recibe Acceso",
-                tu_d6: "De vuelta en el menú, presiona <b>PAGAR AHORA</b> para confirmar el Smart Contract. Al instante recibirás el <b>Enlace del Canal de Señales</b> y tu <b>Contraseña Única</b>.",
+                tu_d6: "Presiona <b>PAGAR AHORA</b> para confirmar. Al instante recibirás el <b>Enlace del Canal de Señales</b>.",
                 step: "Paso", prev: "Ant", next: "Sig", done: "Hecho", tut_badge: "TUTORIAL - NO OPERATIVO", tw_btn_open: "Abrir Telegram Wallet"
             },
             pt: {
@@ -887,7 +939,7 @@
                 lock_price: "PROSSEGUIR PARA PAGAMENTO",
                 no_payment: "Pagamento Seguro Web3",
                 back_home: "VOLTAR AO INÍCIO",
-                pl_subtitle: "Conclua o pagamento para desbloquear a Premium Room:<br><span class='block mt-2 flex items-center justify-center gap-2'><span class='text-white font-black text-[22px] sm:text-[24px]'>97 USDT/mês</span></span>",
+                pl_subtitle: "Conclua o pagamento para desbloquear a Premium Room:",
                 vp_1: "Acesso à zero To Hero Academy",
                 vp_2: "Acesso aos Sinais de Trading de Alta Precisão",
                 vp_3: "Sem fidelidade",
@@ -904,19 +956,27 @@
 
                 sec_title: "Info de Segurança",
                 sec_lock_title: "Pagamentos Globais Web 3.0",
-                sec_lock_desc: "Com Blockchain você paga de qualquer lugar do mundo sem fronteiras. Adeus aos cartões bloqueados por bancos por fraudes inexistentes ou taxas loucas de câmbio. A transação é instantânea.",
+                sec_lock_desc: "Com Blockchain você paga de qualquer lugar do mundo sem fronteiras. Adeus aos cartões bloqueados por bancos por fraudes inexistentes ou taxas loucas de câmbio.",
                 sec_usdt_title: "O que é USDT?",
-                sec_usdt_desc: "É o 'dólar digital'. 1 USDT vale exatamente 1 Dólar Americano. É estável, não oscila como o Bitcoin, perfeito para assinaturas.",
+                sec_usdt_desc: "É o 'dólar digital'. 1 USDT vale exatamente 1 Dólar Americano. Perfeito para assinaturas.",
                 sec_gas_title: "Por que também preciso de Toncoin (TON)?",
-                sec_gas_desc: "Na Blockchain, USDT é a moeda usada para pagar a assinatura. No entanto, cada transação exige uma pequena 'taxa de transporte' (Gas) que é paga <b>apenas em Toncoin (TON)</b>. É por isso que sua carteira deve ter 97 USDT para o serviço e cerca de 1 TON para permitir que o sistema movimente os fundos.",
+                sec_gas_desc: "Na Blockchain, USDT é a moeda usada para pagar a assinatura. No entanto, cada transação exige uma pequena 'taxa de transporte' (Gas) que é paga <b>apenas em Toncoin (TON)</b>.",
                 sec_tg_title: "É um sistema seguro?",
-                sec_tg_desc: "Com certeza. A Carteira é um recurso oficial do Telegram. Ao ativar o 'TON Space' você possui suas chaves privadas: ninguém pode tocar em seus fundos exceto você.",
+                sec_tg_desc: "Com certeza. A Carteira é um recurso oficial do Telegram. Ao ativar o 'TON Space' você possui suas chaves privadas.",
                 close_understood: "Entendi, fechar",
                 
                 pay_modal_title: "Faça o Pagamento",
-                pay_modal_text: "Envie exatamente <strong class='text-white text-base'>97 USDT</strong> na rede <strong class='text-white'>TON</strong> para este endereço:",
+                pay_modal_text: "Envie exatamente <strong class='text-white text-base'><span class='price-display'>97</span> USDT</strong> na rede <strong class='text-white'>TON</strong> para este endereço:",
                 pay_warning: "Envie APENAS <strong class='text-red-400'>USDT</strong> pela rede <strong class='text-red-400'>TON (Toncoin)</strong>. Outras redes causarão perda de fundos.",
                 pay_modal_close: "Entendi, Fechar",
+
+                promo_title: "Código Promocional",
+                promo_desc: "Tem um código promocional ou um link de convite? Insira-o abaixo para obter <strong>50% de desconto</strong> na sua assinatura.",
+                promo_placeholder: "Insira o Código...",
+                promo_btn: "VERIFICAR CÓDIGO",
+                promo_skip: "PROSSEGUIR SEM CÓDIGO",
+                verifying: "VERIFICANDO...",
+                success: "CÓDIGO APLICADO!",
 
                 sim_w_welcome: "Bem-vindo à Carteira! <br>Compre, venda e negocie criptos no Telegram.",
                 sim_w_open: "Abrir Carteira",
@@ -945,31 +1005,32 @@
                 sim_u_confirm_pay: "Confirmar Pagamento",
 
                 tw_t1: "1. Abra o @wallet",
-                tw_d1: "Pesquise <b>@wallet</b> na barra de busca superior. Clique em <b>Iniciar</b> e depois no botão <b>Open Wallet</b> ou digite no navegador: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
+                tw_d1: "Pesquise <b>@wallet</b> na barra superior. Clique em <b>Iniciar</b>.",
                 tw_t2: "2. Ative o TON Space",
-                tw_d2: "Clique nos três pontos (Configurações) no canto superior direito. Ative <b>TON Space Beta</b>. Este será o seu cofre pessoal.",
+                tw_d2: "Clique em Configurações. Ative <b>TON Space Beta</b>. Este será o seu cofre pessoal.",
                 tw_t3: "3. Backup (Importante!)",
-                tw_d3: "Escolha backup manual. Você verá <b>24 palavras secretas</b>. Escreva no papel na ordem exata! Sem prints, elas recuperam seus fundos se perder o celular.",
+                tw_d3: "Escolha backup manual. Escreva no papel as <b>24 palavras secretas</b> na ordem exata!",
                 tw_t4: "4. Abrir Carteira",
-                tw_d4: "Agora que você entendeu como funciona, abra sua Carteira oficial no Telegram para prosseguir.",
+                tw_d4: "Abra sua Carteira oficial no Telegram para prosseguir.",
                 
                 tu_t1: "1. Adicionar Cripto",
-                tu_d1: "Na tela inicial da sua nova Carteira, clique no botão <b>Add Crypto</b>.",
+                tu_d1: "Na tela inicial, clique no botão <b>Add Crypto</b>.",
                 tu_t2: "2. Escolha o Método",
-                tu_d2: "Escolha <b>Cartão Bancário</b> para compra instantânea, ou <b>Mercado P2P</b> se preferir métodos locais.",
+                tu_d2: "Escolha <b>Cartão Bancário</b> para compra instantânea.",
                 tu_t3: "3. Selecionar USDT",
                 tu_d3: "Selecione a criptomoeda USDT para começar.",
                 tu_t4: "4. Insira o Valor (USDT)",
-                tu_d4: "Compre <b>97 USDT</b> para cobrir a assinatura.",
+                tu_d4: "Compre o valor de USDT necessário para cobrir a assinatura.",
                 tu_t5: "5. Compre Gas (TON)",
-                tu_d5: "Repita o processo selecionando <b>TON</b>. Compre <b>1 TON</b>. Isso é necessário para pagar a pequena taxa da blockchain.",
+                tu_d5: "Repita selecionando <b>TON</b>. Compre <b>1 TON</b> para pagar a pequena taxa da blockchain.",
                 tu_t6: "6. Pague e Receba Acesso",
-                tu_d6: "De volta ao menu, clique em <b>PAGAR AGORA</b> para confirmar o Smart Contract. Você receberá instantaneamente o <b>Link do Canal de Sinais</b> e sua <b>Senha Única</b>.",
+                tu_d6: "Clique em <b>PAGAR AGORA</b> para confirmar. Você receberá instantaneamente o <b>Link do Canal</b>.",
                 step: "Passo", prev: "Ant", next: "Próx", done: "Feito", tut_badge: "TUTORIAL - NÃO OPERACIONAL", tw_btn_open: "Abrir Telegram Wallet"
             }
         };
 
         let currentLang = 'it'; 
+        let isPromoApplied = false;
 
         function applyTranslations() {
             document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -978,6 +1039,14 @@
                     el.innerHTML = translations[currentLang][key];
                 }
             });
+            
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if(translations[currentLang] && translations[currentLang][key]) {
+                    el.setAttribute('placeholder', translations[currentLang][key]);
+                }
+            });
+            
             if(document.getElementById('screen-tutorial-wallet').classList.contains('active')) updateTutorialUI('wallet');
             if(document.getElementById('screen-tutorial-usdt').classList.contains('active')) updateTutorialUI('usdt');
         }
@@ -1005,6 +1074,66 @@
         function closeSecurityModal() {
             document.getElementById('security-modal').classList.add('hidden');
             document.getElementById('security-modal').classList.remove('flex');
+        }
+
+        /* ----- LOGICA PROMO & PAGAMENTO ----- */
+        function openPromoModal() {
+            if(isPromoApplied) {
+                // Se è già applicato, bypassa e vai dritto al pagamento
+                openPaymentModal();
+                return;
+            }
+            document.getElementById('promo-modal').classList.remove('hidden');
+            document.getElementById('promo-modal').classList.add('flex');
+        }
+
+        function closePromoModal() {
+            document.getElementById('promo-modal').classList.add('hidden');
+            document.getElementById('promo-modal').classList.remove('flex');
+            
+            // Ripristina l'UI del pulsante (in caso l'utente chiuda a metà verifica)
+            if(!isPromoApplied) {
+                document.getElementById('verify-btn-text').innerHTML = translations[currentLang]['promo_btn'];
+                document.getElementById('verify-btn-icon').className = 'fa-solid fa-check-circle';
+            }
+        }
+
+        function verifyPromoCode() {
+            const input = document.getElementById('promo-input');
+            const btnText = document.getElementById('verify-btn-text');
+            const btnIcon = document.getElementById('verify-btn-icon');
+            
+            if(input.value.trim() === '') {
+                input.classList.add('border-red-500', 'ring-1', 'ring-red-500');
+                setTimeout(() => input.classList.remove('border-red-500', 'ring-1', 'ring-red-500'), 2000);
+                return;
+            }
+            
+            btnText.innerHTML = translations[currentLang]['verifying'];
+            btnIcon.className = 'fa-solid fa-spinner fa-spin';
+            
+            // Simula processo di verifica in rete e applicazione sconto 50%
+            setTimeout(() => {
+                btnText.innerHTML = translations[currentLang]['success'];
+                btnIcon.className = 'fa-solid fa-check text-green-400';
+                
+                isPromoApplied = true;
+                
+                // Aggiorna visivamente il prezzo in tutte le schermate da 97 a 48.5
+                document.querySelectorAll('.price-display').forEach(el => {
+                    el.innerText = '48.5';
+                });
+                
+                setTimeout(() => {
+                    closePromoModal();
+                    openPaymentModal();
+                }, 1000);
+            }, 1500);
+        }
+
+        function skipPromo() {
+            closePromoModal();
+            openPaymentModal();
         }
 
         function openPaymentModal() {
