@@ -62,7 +62,8 @@
                     },
                     animation: {
                         'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite'
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+                        'shine': 'shine 1.5s ease-in-out infinite'
                     },
                     keyframes: {
                         fadeInUp: {
@@ -72,6 +73,9 @@
                         pulseSoft: {
                             '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 20px rgba(163, 230, 53, 0.2)' },
                             '50%': { transform: 'scale(1.02)', boxShadow: '0 0 30px rgba(163, 230, 53, 0.5)' }
+                        },
+                        shine: {
+                            '100%': { transform: 'translateX(400%)' }
                         }
                     }
                 }
@@ -88,7 +92,6 @@
             overflow-x: hidden;
             width: 100%;
             overscroll-behavior-y: none;
-            /* Fade In Nativo per evitare la schermata bianca */
             animation: fadeInBody 0.4s ease-out forwards;
         }
         
@@ -97,11 +100,7 @@
             to { opacity: 1; }
         }
 
-        /* * CALCOLO DEGLI SPAZI (Anti-Taglio) 
-         * Previene che le barre fisse sopra e sotto coprano i testi 
-         */
         .landing-pad {
-            /* Spazio in basso per la sticky CTA Mobile (~110px) */
             padding-bottom: calc(110px + env(safe-area-inset-bottom)); 
         }
         @media (min-width: 640px) {
@@ -109,8 +108,6 @@
         }
 
         .min-h-section {
-            /* Usiamo svh (Small Viewport Height) o vh invece di dvh per prevenire "scatti" visivi
-                su mobile quando compare/scompare la barra degli indirizzi */
             min-height: calc(100vh - 64px - 110px);
             min-height: calc(100svh - 64px - 110px); 
             display: flex;
@@ -152,7 +149,6 @@
             visibility: visible; opacity: 1; transform: translateY(0) scale(1); 
         }
 
-        /* Dashboard Texts */
         .dashboard-quant-text span {
             display: block; color: #60A5FA; font-size: clamp(0.9rem, 2vw, 1.15rem); margin-bottom: 0.5rem;
             letter-spacing: 0.05em; text-shadow: 0 0 15px rgba(96, 165, 250, 0.3); text-transform: uppercase;
@@ -168,7 +164,7 @@
         #checkout-container { overscroll-behavior-y: none; }
         .screen {
             display: none; animation: fadeIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: center;
+            width: 100%; height: 100%; flex-direction: column; align-items: center; justify-content: flex-start;
         }
         .screen.active { display: flex; }
         
@@ -202,21 +198,9 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Simulator Styles - Fixed height limits to prevent layout jumping */
+        /* Simulator Styles */
         .sim-phone { 
-            flex: none; 
-            height: 380px; 
-            width: 100%; 
-            max-width: 240px; 
-            background-color: #000; 
-            border-radius: 2rem; 
-            border: 4px solid #1F2937; 
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), inset 0 0 0 1px #374151; 
-            position: relative; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            margin: 0 auto; 
+            flex: none; height: 380px; width: 100%; max-width: 240px; background-color: #000; border-radius: 2rem; border: 4px solid #1F2937; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.8), inset 0 0 0 1px #374151; position: relative; overflow: hidden; display: flex; flex-direction: column; margin: 0 auto; 
         }
         .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 40%; height: 18px; background-color: #1F2937; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; z-index: 50; }
         .phone-home-indicator { position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 35%; height: 3px; background-color: rgba(255, 255, 255, 0.3); border-radius: 4px; z-index: 50; }
@@ -240,7 +224,7 @@
                 
                 <a href="#" onclick="window.scrollTo(0,0); return false;" class="flex items-center gap-2.5 group outline-none focus-visible:ring-2 focus-visible:ring-brand-neon rounded-lg">
                     <div class="relative w-8 h-8 sm:w-11 sm:h-11 rounded-full overflow-hidden border border-white/10 shadow-lg group-hover:border-brand-neon/50 transition-colors shrink-0 bg-black">
-                        <img src="logo-tondo.jpeg" alt="Logo" class="w-full h-full object-cover">
+                        <img src="logo-tondo.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=BE&background=111827&color=D4AF37&rounded=true'" alt="Logo" class="w-full h-full object-cover">
                     </div>
                     <span class="font-heading font-black text-[12px] sm:text-sm tracking-widest text-white uppercase truncate">
                         Betting Exchange <span class="text-brand-neon">Room</span>
@@ -623,23 +607,23 @@
                         <p id="checkout-plan-name" class="text-bf-yellow text-[11px] font-bold tracking-widest uppercase mb-4">PLAN NAME</p>
                         
                         <div class="flex items-baseline justify-center mb-6">
-                            <span id="checkout-price-display" class="text-6xl sm:text-7xl font-black text-white tracking-tighter drop-shadow-sm">97</span>
+                            <span class="text-6xl sm:text-7xl font-black text-white tracking-tighter drop-shadow-sm price-display">94</span>
                             <span class="text-2xl sm:text-3xl text-gray-300 font-bold ml-2">USDT</span>
                         </div>
                         
                         <div class="bg-dark-bg rounded-xl py-3.5 px-4 mb-6 flex flex-col items-center border border-gray-800 w-full shrink-0">
-                            <span data-i18n="expires_in" class="text-[10px] text-gray-400 font-semibold mb-1.5 uppercase tracking-widest">OFFERTA VALIDA X 24 ORE:</span>
+                            <span data-i18n="expires_in" class="text-[10px] text-gray-400 font-semibold mb-1.5 uppercase tracking-widest">OFFER VALID FOR 24 HOURS:</span>
                             <div id="flash-timer" class="text-3xl sm:text-4xl font-mono font-medium text-white flex items-center gap-1 tracking-wider">24:00:00</div>
                         </div>
                         
                         <button onclick="goToPayment()" class="w-full btn-premium-action rounded-xl py-3.5 sm:py-4 text-[14px] sm:text-[16px] font-bold flex items-center justify-center gap-2 shrink-0 cursor-pointer mb-4">
-                            <i class="fa-solid fa-lock"></i> <span data-i18n="lock_price">PROCEDI AL PAGAMENTO</span>
+                            <i class="fa-solid fa-lock"></i> <span data-i18n="lock_price">PROCED TO PAYMENT</span>
                         </button>
                         
-                        <p class="text-[10px] sm:text-[11px] text-gray-500 shrink-0 font-medium flex items-center justify-center gap-1.5"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="no_payment">Pagamento Sicuro Web3</span></p>
+                        <p class="text-[10px] sm:text-[11px] text-gray-500 shrink-0 font-medium flex items-center justify-center gap-1.5"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="no_payment">Secure Web3 Payment</span></p>
 
                         <button onclick="backToHome()" class="mt-6 sm:mt-8 text-gray-600 hover:text-white transition-colors text-[11px] uppercase tracking-widest font-bold cursor-pointer bg-transparent border-none">
-                            <i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_home">TORNA ALLA HOME</span>
+                            <i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_home">BACK TO HOME</span>
                         </button>
                     </div>
                 </div>
@@ -650,36 +634,42 @@
                 <div class="scroll-container no-scrollbar justify-start pt-2 w-full pb-[80px]">
                     
                     <div class="w-full bg-[#111827] rounded-3xl border border-gray-700 shadow-2xl relative overflow-hidden flex flex-col items-center px-4 py-5 sm:py-6 mb-4 sm:mb-5 flex-shrink-0">
-                        <p data-i18n="pl_subtitle" class="text-[12px] sm:text-[13px] text-gray-400 text-center mb-4 sm:mb-5 font-medium px-2">Completa il pagamento per sbloccare la Premium Room:</p>
-                        <div class="text-white font-black text-[22px] sm:text-[24px] mb-2"><span id="pay-exact-amount">97 USDT</span></div>
-                        <div id="checkout-duration" class="bg-gray-800 text-gray-300 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4 sm:mb-5">90 Giorni di accesso</div>
+                        <p data-i18n="pl_subtitle" class="text-[12px] sm:text-[13px] text-gray-400 text-center mb-4 sm:mb-5 font-medium px-2">Complete payment to unlock the Premium Room:</p>
+                        <div class="text-white font-black text-[22px] sm:text-[24px] mb-2"><span class="price-display">94</span> USDT</div>
+                        <div id="checkout-duration" class="bg-gray-800 text-gray-300 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4 sm:mb-5">Days of continuous access</div>
                         
                         <div class="w-full bg-[#070B14] border border-gray-800 rounded-2xl p-4 mb-5 sm:mb-6 shadow-inner">
                             <ul class="space-y-3 text-[11px] sm:text-[13px] text-gray-200 font-semibold">
                                 <li class="flex items-center gap-3">
                                     <div class="w-5 h-5 rounded-full bg-bf-green/20 border border-bf-green/50 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-bf-green text-[9px]"></i></div> 
-                                    <span data-i18n="vp_1">Accesso alla Zero To Hero Academy</span>
+                                    <span data-i18n="vp_1">Access to Zero To Hero Academy</span>
                                 </li>
                                 <li class="flex items-center gap-3">
                                     <div class="w-5 h-5 rounded-full bg-bf-green/20 border border-bf-green/50 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-bf-green text-[9px]"></i></div> 
-                                    <span data-i18n="vp_2">Accesso alla Segnali Operativi ad Alta Precisione</span>
+                                    <span data-i18n="vp_2">Access to Premium Telegram Signals Room</span>
                                 </li>
                                 <li class="flex items-center gap-3">
                                     <div class="w-5 h-5 rounded-full bg-bf-green/20 border border-bf-green/50 flex items-center justify-center shrink-0"><i class="fa-solid fa-check text-bf-green text-[9px]"></i></div> 
-                                    <span data-i18n="vp_3">Nessun vincolo</span>
+                                    <span data-i18n="vp_3">No lock-in contract</span>
                                 </li>
                             </ul>
                         </div>
 
-                        <button onclick="openPaymentModal()" class="w-full btn-premium-action rounded-2xl py-3.5 sm:py-4 text-[14px] sm:text-[16px] font-black flex items-center justify-center gap-2 cursor-pointer">
-                            <i class="fa-solid fa-bolt text-white"></i> <span data-i18n="pay_now">SBLOCCA ACCESSO ORA</span>
+                        <button onclick="openPromoModal()" class="w-full btn-premium-action rounded-2xl py-3.5 sm:py-4 text-[14px] sm:text-[16px] font-black flex items-center justify-center gap-2 cursor-pointer relative overflow-hidden group">
+                            <div class="absolute inset-0 w-1/4 h-full bg-white/20 skew-x-12 -translate-x-full group-hover:animate-shine"></div>
+                            <i class="fa-solid fa-bolt text-white"></i> <span data-i18n="pay_now">UNLOCK ACCESS NOW</span>
                         </button>
+                        
+                        <!-- Nuovo indicatore visivo che ricorda la possibilità del codice sconto -->
+                        <p data-i18n="promo_hint" class="text-[10px] text-gray-500 mt-4 font-medium text-center">
+                            Have a Referral Link? You can enter it in the next step.
+                        </p>
                     </div>
 
                     <div class="w-full flex flex-col items-center flex-shrink-0 px-1">
                         <div class="flex items-center gap-3 w-full mb-4">
                             <div class="h-px bg-gray-800 flex-1"></div>
-                            <span data-i18n="new_to_crypto" class="text-[10px] text-gray-500 font-bold uppercase tracking-widest text-center">Primo pagamento in crypto?</span>
+                            <span data-i18n="new_to_crypto" class="text-[10px] text-gray-500 font-bold uppercase tracking-widest text-center">First crypto payment?</span>
                             <div class="h-px bg-gray-800 flex-1"></div>
                         </div>
                         
@@ -687,15 +677,15 @@
                             <button onclick="openTutorial('wallet')" class="flex-1 glass-btn hover:bg-white/5 py-2.5 sm:py-3 px-3.5 rounded-xl flex items-center gap-3 transition-colors text-left border border-gray-800 shadow-sm active:scale-95 cursor-pointer">
                                 <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center shrink-0 text-white font-black text-[13px] border border-gray-700 shadow-inner"><i class="fa-solid fa-1"></i></div>
                                 <div>
-                                    <div data-i18n="how_wallet_title" class="text-[12px] font-bold text-tg-blue">Crea il Wallet</div>
-                                    <div data-i18n="how_wallet_sub" class="text-[10px] text-gray-500 mt-0.5 font-medium">Richiede 1 minuto</div>
+                                    <div data-i18n="how_wallet_title" class="text-[12px] font-bold text-tg-blue">Create Wallet</div>
+                                    <div data-i18n="how_wallet_sub" class="text-[10px] text-gray-500 mt-0.5 font-medium">Takes 1 minute</div>
                                 </div>
                             </button>
                             <button onclick="openTutorial('usdt')" class="flex-1 glass-btn hover:bg-white/5 py-2.5 sm:py-3 px-3.5 rounded-xl flex items-center gap-3 transition-colors text-left border border-gray-800 shadow-sm active:scale-95 cursor-pointer">
                                 <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center shrink-0 text-white font-black text-[13px] border border-gray-700 shadow-inner"><i class="fa-solid fa-2"></i></div>
                                 <div>
-                                    <div data-i18n="how_usdt_title" class="text-[12px] font-bold text-tg-blue">Compra USDT</div>
-                                    <div data-i18n="how_usdt_sub" class="text-[10px] text-gray-500 mt-0.5 font-medium">Guida passo passo</div>
+                                    <div data-i18n="how_usdt_title" class="text-[12px] font-bold text-tg-blue">Buy USDT</div>
+                                    <div data-i18n="how_usdt_sub" class="text-[10px] text-gray-500 mt-0.5 font-medium">Step-by-step guide</div>
                                 </div>
                             </button>
                         </div>
@@ -703,16 +693,16 @@
                         <div class="mt-4 w-full bg-blue-900/10 border border-blue-500/20 rounded-xl p-3 flex gap-3 items-start shrink-0 backdrop-blur-sm">
                             <i class="fa-solid fa-link text-blue-400 mt-0.5 text-[12px] shrink-0"></i>
                             <p data-i18n="trust_crypto" class="text-[10px] text-gray-400 leading-relaxed font-medium">
-                                Infrastruttura di pagamento su Blockchain. Transazioni trasparenti, sicure e svincolate da intermediari bancari.
+                                Blockchain payment infrastructure. Transparent, secure transactions independent of banking intermediaries.
                             </p>
                         </div>
 
-                        <button onclick="openSecurityModal()" class="mt-5 text-gray-400 hover:text-white transition-colors text-[11px] flex items-center gap-2 font-medium cursor-pointer">
-                            <i class="fa-solid fa-shield-halved opacity-70"></i> <span data-i18n="sec_btn" class="underline underline-offset-4">Cos'è il Gas (TON), USDT e la Sicurezza?</span>
+                        <button onclick="openSecurityModal()" class="mt-5 text-gray-400 hover:text-white transition-colors text-[11px] flex items-center gap-2 font-medium cursor-pointer bg-transparent border-none">
+                            <i class="fa-solid fa-shield-halved opacity-70"></i> <span data-i18n="sec_btn" class="underline underline-offset-4">What is Gas (TON), USDT & Security?</span>
                         </button>
                         
                         <button onclick="showScreen('screen-offer')" class="mt-6 sm:mt-8 text-gray-600 hover:text-white transition-colors text-[11px] uppercase tracking-widest font-bold cursor-pointer mb-4 bg-transparent border-none">
-                            <i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_home">TORNA ALL'OFFERTA</span>
+                            <i class="fa-solid fa-arrow-left"></i> <span data-i18n="back_home">BACK TO OFFER</span>
                         </button>
                     </div>
                 </div>
@@ -722,10 +712,9 @@
             <div id="screen-tutorial-wallet" class="screen">
                 <div class="scroll-container no-scrollbar">
                     <div class="bg-gray-800/50 border border-gray-700 text-gray-300 text-[10px] font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3 flex items-center gap-2 shrink-0">
-                        <i class="fa-solid fa-info-circle"></i> <span data-i18n="tut_badge">Tutorial - Simulazione non operativa</span>
+                        <i class="fa-solid fa-info-circle"></i> <span data-i18n="tut_badge">Tutorial - Simulation</span>
                     </div>
 
-                    <!-- Fixed height smartphone shell to prevent jumping -->
                     <div class="sim-phone mb-4">
                         <div class="phone-notch"></div>
                         <div id="sim-tw-1" class="sim-screen active">
@@ -788,7 +777,7 @@
                             <button id="tw-btn-next" onclick="navTutorial('wallet', 1)" class="text-blue-400 font-semibold text-[11px] flex items-center gap-1 bg-transparent border-none cursor-pointer"><span id="tw-next-text" data-i18n="next">Next</span> <i id="tw-next-icon" class="fa-solid fa-chevron-right text-[10px]"></i></button>
                         </div>
                     </div>
-                    <button onclick="showScreen('screen-payment')" class="mt-5 text-gray-500 hover:text-white text-[12px] underline underline-offset-4 bg-transparent border-none cursor-pointer mb-2"><span data-i18n="close_tut">Chiudi Tutorial</span></button>
+                    <button onclick="showScreen('screen-payment')" class="mt-5 text-gray-500 hover:text-white text-[12px] underline underline-offset-4 bg-transparent border-none cursor-pointer mb-2"><span data-i18n="close_tut">Close Tutorial</span></button>
                 </div>
             </div>
 
@@ -796,7 +785,7 @@
             <div id="screen-tutorial-usdt" class="screen">
                 <div class="scroll-container no-scrollbar">
                     <div class="bg-gray-800/50 border border-gray-700 text-gray-300 text-[10px] font-semibold uppercase tracking-widest px-3 py-1.5 rounded-full mb-3 flex items-center gap-2 shrink-0">
-                        <i class="fa-solid fa-info-circle"></i> <span data-i18n="tut_badge">Tutorial - Simulazione non operativa</span>
+                        <i class="fa-solid fa-info-circle"></i> <span data-i18n="tut_badge">Tutorial - Simulation</span>
                     </div>
 
                     <div class="sim-phone mb-4">
@@ -833,7 +822,7 @@
                             <div class="bg-tg-panel px-4 py-3 flex items-center z-10 border-b border-gray-800 shrink-0"><div data-i18n="sim_u_buy" class="text-white text-[13px] font-semibold ml-4">Buy Crypto</div></div>
                             <div class="flex-1 p-4 flex flex-col items-center pt-6 relative min-h-0">
                                 <div class="bg-tg-bg border border-gray-800 w-full rounded-2xl p-4 flex flex-col items-center shrink-0">
-                                    <div class="text-white text-4xl font-bold flex items-baseline gap-1.5 mb-2"><span id="sim-price-display" class="text-white">97</span> <span class="text-[12px] text-gray-400">USDT</span></div>
+                                    <div class="text-white text-4xl font-bold flex items-baseline gap-1.5 mb-2"><span class="price-display text-white">94</span> <span class="text-[12px] text-gray-400">USDT</span></div>
                                 </div>
                                 <div class="mt-auto w-full pt-4 shrink-0"><div data-i18n="sim_u_continue" class="bg-tg-blue w-full py-3 rounded-xl text-center text-white text-[12px] font-semibold">Continue</div></div>
                             </div>
@@ -852,7 +841,7 @@
                                 <div class="bg-tg-panel rounded-2xl p-4 w-[92%] mx-auto flex flex-col gap-3 border border-gray-700">
                                     <div data-i18n="sim_u_confirm_tx" class="text-white font-semibold text-[13px] text-center shrink-0">Confirm Transaction</div>
                                     <div class="bg-[#1c242f] rounded-xl p-3 border border-gray-700/50 flex flex-col gap-2 shrink-0">
-                                        <div class="flex justify-between items-center"><span data-i18n="sim_u_amount" class="text-gray-400 text-[10px]">Amount</span><span id="sim-final-price" class="text-white font-medium text-[11px]">97 USDT</span></div>
+                                        <div class="flex justify-between items-center"><span data-i18n="sim_u_amount" class="text-gray-400 text-[10px]">Amount</span><span class="text-white font-medium text-[11px]"><span class="price-display">94</span> USDT</span></div>
                                     </div>
                                     <div class="mt-1 shrink-0"><div data-i18n="sim_u_confirm_pay" class="bg-tg-blue w-full py-2.5 rounded-xl text-center text-white text-[12px] font-semibold">Confirm Payment</div></div>
                                 </div>
@@ -873,8 +862,7 @@
                             <button id="tu-btn-next" onclick="navTutorial('usdt', 1)" class="text-blue-400 font-semibold text-[11px] flex items-center gap-1 bg-transparent border-none cursor-pointer"><span id="tu-next-text" data-i18n="next">Next</span> <i id="tu-next-icon" class="fa-solid fa-chevron-right text-[10px]"></i></button>
                         </div>
                     </div>
-
-                    <button onclick="showScreen('screen-payment')" class="mt-5 text-gray-500 hover:text-white text-[12px] underline underline-offset-4 bg-transparent border-none cursor-pointer mb-2"><span data-i18n="close_tut">Chiudi Tutorial</span></button>
+                    <button onclick="showScreen('screen-payment')" class="mt-5 text-gray-500 hover:text-white text-[12px] underline underline-offset-4 bg-transparent border-none cursor-pointer mb-2"><span data-i18n="close_tut">Close Tutorial</span></button>
                 </div>
             </div>
         </div>
@@ -883,6 +871,35 @@
     <!-- ==========================================
          PART 3: MODALS
     =========================================== -->
+    
+    <!-- Modale Inserimento Promo Code / REFERRAL Link -->
+    <div id="promo-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[100] p-4">
+        <div class="bg-panel-bg border border-bf-blue/30 rounded-3xl p-6 w-full max-w-sm text-center shadow-[0_15px_50px_rgba(59,130,246,0.15)] modal-enter relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 to-bf-blue"></div>
+            
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-bf-blue/10 text-bf-blue flex items-center justify-center mx-auto mb-4 border border-bf-blue/20">
+                <i class="fa-solid fa-user-tag text-2xl sm:text-3xl"></i>
+            </div>
+            
+            <h2 data-i18n="promo_title" class="text-[16px] sm:text-[18px] font-black text-white mb-2 uppercase tracking-widest">Promo / Referral Code</h2>
+            <p data-i18n="promo_desc" class="text-[12px] sm:text-[13px] font-medium mb-5 text-gray-300 leading-relaxed">
+                Were you invited? Enter your sponsor's <strong>Referral Link</strong> or a promo code below to get a discount on your subscription.
+            </p>
+            
+            <div class="mb-5 relative">
+                <input type="text" id="promo-input" data-i18n-placeholder="promo_placeholder" placeholder="Enter Promo Code or Referral..." class="w-full bg-black/50 border border-gray-700 p-3.5 rounded-xl text-white text-center font-mono text-[14px] focus:border-bf-blue focus:ring-1 focus:ring-bf-blue outline-none transition-all placeholder:text-gray-600 placeholder:normal-case">
+            </div>
+
+            <button onclick="verifyPromoCode()" class="w-full btn-premium-action py-3 sm:py-3.5 rounded-xl font-black text-[12px] sm:text-[13px] uppercase tracking-widest active:scale-95 shadow-lg transition-all border-none cursor-pointer mb-3 flex items-center justify-center gap-2">
+                <i id="verify-btn-icon" class="fa-solid fa-check-circle"></i> <span id="verify-btn-text" data-i18n="promo_btn">APPLY CODE</span>
+            </button>
+
+            <button onclick="skipPromo()" class="w-full bg-transparent text-gray-500 hover:text-white py-2 rounded-xl font-bold text-[11px] uppercase tracking-widest transition-colors border-none cursor-pointer">
+                <span data-i18n="promo_skip">PROCEED AT FULL PRICE</span>
+            </button>
+        </div>
+    </div>
+
     <!-- Security Modal -->
     <div id="security-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[100] p-4">
         <div class="bg-panel-bg border border-gray-800 rounded-3xl p-5 w-full max-w-sm relative overflow-hidden shadow-2xl modal-enter max-h-[90vh] overflow-y-auto">
@@ -890,7 +907,7 @@
             <div class="relative z-10">
                 <div class="flex justify-between items-center mb-5 sticky top-0 bg-panel-bg pb-3 z-20 border-b border-gray-800">
                     <h3 data-i18n="sec_title" class="text-base font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-shield-halved text-gray-400"></i> Info Sicurezza
+                        <i class="fa-solid fa-shield-halved text-gray-400"></i> Security Info
                     </h3>
                     <button onclick="closeSecurityModal()" class="text-gray-500 hover:text-white bg-transparent border-none cursor-pointer"><i class="fa-solid fa-xmark text-xl"></i></button>
                 </div>
@@ -898,34 +915,34 @@
                     <div class="flex gap-3 items-start">
                         <div class="mt-0.5 w-8 h-8 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-globe"></i></div>
                         <div>
-                            <h4 data-i18n="sec_lock_title" class="font-bold text-white text-[13px] mb-1">Pagamenti Globali Web 3.0</h4>
-                            <p data-i18n="sec_lock_desc" class="text-[12px] text-gray-400 leading-snug">Con la Blockchain paghi da tutto il mondo senza confini. Addio carte bloccate dalle banche per frodi inesistenti o commissioni folli sul cambio valuta. La transazione è istantanea.</p>
+                            <h4 data-i18n="sec_lock_title" class="font-bold text-white text-[13px] mb-1">Global Web 3.0 Payments</h4>
+                            <p data-i18n="sec_lock_desc" class="text-[12px] text-gray-400 leading-snug">With Blockchain, you pay from anywhere in the world without borders.</p>
                         </div>
                     </div>
                     <div class="flex gap-3 items-start">
                         <div class="mt-0.5 w-8 h-8 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-dollar-sign"></i></div>
                         <div>
-                            <h4 data-i18n="sec_usdt_title" class="font-bold text-white text-[13px] mb-1">Cos'è USDT?</h4>
-                            <p data-i18n="sec_usdt_desc" class="text-[12px] text-gray-400 leading-snug">È il "dollaro digitale". 1 USDT vale esattamente 1 Dollaro Americano. È stabile, non oscilla come il Bitcoin, perfetto per gli abbonamenti.</p>
+                            <h4 data-i18n="sec_usdt_title" class="font-bold text-white text-[13px] mb-1">What is USDT?</h4>
+                            <p data-i18n="sec_usdt_desc" class="text-[12px] text-gray-400 leading-snug">It's the 'digital dollar'. 1 USDT is always worth exactly 1 US Dollar.</p>
                         </div>
                     </div>
                     <div class="flex gap-3 items-start bg-gray-800/30 p-3 rounded-xl border border-gray-700/50">
                         <div class="mt-0.5 w-8 h-8 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center shrink-0 text-sm"><i class="fa-solid fa-gas-pump"></i></div>
                         <div>
-                            <h4 data-i18n="sec_gas_title" class="font-bold text-white text-[13px] mb-1">Perché serve anche il Toncoin (TON)?</h4>
-                            <p data-i18n="sec_gas_desc" class="text-[12px] text-gray-300 leading-snug">Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima "tassa di trasporto" (Gas) che si paga <b>solo in Toncoin (TON)</b>.</p>
+                            <h4 data-i18n="sec_gas_title" class="font-bold text-white text-[13px] mb-1">Why do I also need Toncoin (TON)?</h4>
+                            <p data-i18n="sec_gas_desc" class="text-[12px] text-gray-300 leading-snug">Every transaction requires a tiny 'transport fee' (Gas) that is paid <b>only in Toncoin (TON)</b>.</p>
                         </div>
                     </div>
                     <div class="flex gap-3 items-start">
                         <div class="mt-0.5 w-8 h-8 rounded-full bg-gray-800 text-gray-300 flex items-center justify-center shrink-0 text-sm"><i class="fa-brands fa-telegram"></i></div>
                         <div>
-                            <h4 data-i18n="sec_tg_title" class="font-bold text-white text-[13px] mb-1">È un sistema sicuro?</h4>
-                            <p data-i18n="sec_tg_desc" class="text-[12px] text-gray-400 leading-snug">Assolutamente sì. Il Wallet è una funzione ufficiale di Telegram. Attivando 'TON Space' possiedi le tue chiavi private: nessuno può toccare i tuoi fondi tranne te.</p>
+                            <h4 data-i18n="sec_tg_title" class="font-bold text-white text-[13px] mb-1">Is it secure?</h4>
+                            <p data-i18n="sec_tg_desc" class="text-[12px] text-gray-400 leading-snug">Absolutely. The Wallet is an official Telegram feature.</p>
                         </div>
                     </div>
                 </div>
                 <button onclick="closeSecurityModal()" class="w-full mt-6 bg-white text-black font-bold py-3.5 rounded-xl text-[14px] active:scale-95 cursor-pointer border-none">
-                    <span data-i18n="close_understood">Ho capito, chiudi</span>
+                    <span data-i18n="close_understood">I understand, close</span>
                 </button>
             </div>
         </div>
@@ -937,9 +954,9 @@
             <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 to-blue-400"></div>
             <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-blue-500/10 text-blue-400 flex items-center justify-center mx-auto mb-4 border border-blue-500/20"><i class="fa-brands fa-telegram text-2xl sm:text-3xl"></i></div>
             
-            <h2 data-i18n="pay_modal_title" class="text-[16px] sm:text-[18px] font-black text-white mb-2 uppercase">Effettua il Pagamento</h2>
+            <h2 data-i18n="pay_modal_title" class="text-[16px] sm:text-[18px] font-black text-white mb-2 uppercase">Make the Payment</h2>
             <p data-i18n="pay_modal_text" class="text-[12px] sm:text-[13px] font-medium mb-4 text-gray-300">
-                Invia esattamente <strong id="modal-pay-amount" class="text-white text-base">97 USDT</strong> sulla rete <strong class="text-white">TON</strong> a questo indirizzo:
+                Send exactly <strong class="text-white text-base"><span class="price-display">94</span> USDT</strong> on the <strong class="text-white">TON</strong> network to this address:
             </p>
             
             <div class="bg-black/50 border border-gray-700 p-3 rounded-xl flex items-center justify-between gap-3 mb-4">
@@ -952,12 +969,12 @@
             <div class="bg-red-500/10 border border-red-500/20 p-2.5 rounded-lg mb-6 text-left flex items-start gap-2">
                 <i class="fa-solid fa-triangle-exclamation text-red-400 text-[10px] mt-0.5"></i>
                 <p data-i18n="pay_warning" class="text-[10px] text-red-200 leading-tight">
-                    Invia SOLO <strong class="text-red-400">USDT</strong> tramite la rete <strong class="text-red-400">TON (Toncoin)</strong>. Altre reti causeranno la perdita dei fondi.
+                    Send ONLY <strong class="text-red-400">USDT</strong> via the <strong class="text-red-400">TON (Toncoin)</strong> network. Other networks will result in loss of funds.
                 </p>
             </div>
             
             <button onclick="closePaymentModal()" class="w-full bg-white text-black py-3 sm:py-3.5 rounded-xl font-bold text-[12px] sm:text-[13px] uppercase tracking-widest active:scale-95 shadow-lg border-none cursor-pointer">
-                <span data-i18n="pay_modal_close">Ho compreso, chiudi</span>
+                <span data-i18n="pay_modal_close">I Understand, Close</span>
             </button>
         </div>
     </div>
@@ -966,7 +983,17 @@
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
-        // MERGED TRANSLATIONS (Landing + Checkout)
+        // -------------------------
+        // APP STATE (DYNAMIC PRICING & LANGUAGE)
+        // -------------------------
+        let currentBasePrice = 94; 
+        let currentDiscountedPrice = 94;
+        let isPromoApplied = false;
+        
+        let currentLang = 'en'; 
+        const supportedLangs = ['en', 'es', 'pt', 'it']; // Strict order requested
+
+        // MERGED TRANSLATIONS (Landing + Checkout + Promo)
         const translations = {
             en: {
                 hero_badge: "Active signals on Telegram", hero_title_1: "YOUR MATHEMATICAL", hero_title_2: "ADVANTAGE",
@@ -1004,8 +1031,17 @@
                 sec_usdt_title: "What is USDT?", sec_usdt_desc: "It's the 'digital dollar'. 1 USDT is always worth exactly 1 US Dollar. It's stable, doesn't fluctuate like Bitcoin, perfect for subscriptions.",
                 sec_gas_title: "Why do I also need Toncoin (TON)?", sec_gas_desc: "On the Blockchain, USDT is the currency used to pay for the subscription. However, every transaction requires a tiny 'transport fee' (Gas) that is paid <b>only in Toncoin (TON)</b>.",
                 sec_tg_title: "Is it secure?", sec_tg_desc: "Absolutely. The Wallet is an official Telegram feature. By activating 'TON Space' you hold your private keys: nobody can touch your funds except you.",
-                close_understood: "I understand, close", pay_modal_title: "Make the Payment", pay_modal_text: "Send exactly <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> on the <strong class='text-white'>TON</strong> network to this address:",
+                close_understood: "I understand, close", pay_modal_title: "Make the Payment", pay_modal_text: "Send exactly <strong class='text-white text-base'><span class='price-display'>94</span> USDT</strong> on the <strong class='text-white'>TON</strong> network to this address:",
                 pay_warning: "Send ONLY <strong class='text-red-400'>USDT</strong> via the <strong class='text-red-400'>TON (Toncoin)</strong> network. Other networks will result in loss of funds.", pay_modal_close: "I Understand, Close",
+
+                promo_hint: "Have a Referral Link? You can enter it in the next step.",
+                promo_title: "Promo / Referral Code",
+                promo_desc: "Were you invited? Enter your sponsor's <strong>Referral Link</strong> or a promo code below to get a discount on your subscription.",
+                promo_placeholder: "Enter Promo Code or Referral...",
+                promo_btn: "APPLY CODE",
+                promo_skip: "PROCEED AT FULL PRICE",
+                verifying: "VERIFYING...",
+                success: "CODE APPLIED!",
                 
                 sim_w_welcome: "Welcome to Wallet! <br>Buy, sell and trade crypto directly in Telegram.", sim_w_open: "Open Wallet", sim_w_settings: "Settings",
                 sim_w_features: "Features", sim_w_recovery: "Your Recovery Phrase", sim_w_write: "Write down these 24 words in the exact order.",
@@ -1014,9 +1050,9 @@
                 sim_u_p2p: "P2P Market", sim_u_local: "Local payment methods", sim_u_choose: "Choose Crypto", sim_u_buy: "Buy Crypto",
                 sim_u_continue: "Continue", sim_u_confirm_tx: "Confirm Transaction", sim_u_amount: "Amount", sim_u_network_fee: "Network Fee",
                 sim_u_to_address: "To Address", sim_u_confirm_pay: "Confirm Payment",
-                tw_t1: "1. Open @wallet", tw_d1: "Search for <b>@wallet</b> in the top Telegram search bar. Click <b>Start</b> and then press the <b>Open Wallet</b> button or type in your browser: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
+                tw_t1: "1. Open @wallet", tw_d1: "Search for <b>@wallet</b> in the top Telegram search bar. Click <b>Start</b> and then press the <b>Open Wallet</b> button.",
                 tw_t2: "2. Enable TON Space", tw_d2: "Click the three dots (Settings) top right. Toggle on <b>TON Space Beta</b>. This will become your personal vault.",
-                tw_t3: "3. Backup (Important!)", tw_d3: "Choose manual backup. You will see <b>24 secret words</b>. Write them on paper in order! No screenshots, they recover your funds if you lose your phone.",
+                tw_t3: "3. Backup (Important!)", tw_d3: "Choose manual backup. You will see <b>24 secret words</b>. Write them on paper in order! No screenshots.",
                 tw_t4: "4. Open Wallet", tw_d4: "Now that you understand how it works, open your official Telegram Wallet to proceed.",
                 tu_t1: "1. Add Crypto", tu_d1: "On the main screen of your new Wallet, click the <b>Add Crypto</b> button.",
                 tu_t2: "2. Choose Method", tu_d2: "Select <b>Bank Card</b> for instant purchase, or <b>P2P Market</b> if you prefer local methods.",
@@ -1024,7 +1060,7 @@
                 tu_t4: "4. Enter Amount (USDT)", tu_d4: "Buy exactly the required USDT amount to cover your subscription.",
                 tu_t5: "5. Buy TON (Gas)", tu_d5: "Repeat the process selecting <b>TON</b>. Buy <b>1 TON</b>. This is needed to pay the tiny blockchain network fee.",
                 tu_t6: "6. Pay & Get Access", tu_d6: "Back on the menu, click <b>PAY NOW</b> to confirm the Smart Contract. Once paid, you will instantly receive the <b>Signals Channel Link</b> and your <b>Unique Password</b>.",
-                step: "Step", prev: "Prev", next: "Next", done: "Done", tut_badge: "TUTORIAL - NOT OPERATIONAL", tw_btn_open: "Open Telegram Wallet"
+                step: "Step", prev: "Prev", next: "Next", done: "Done", tut_badge: "TUTORIAL - SIMULATION", tw_btn_open: "Open Telegram Wallet"
             },
             es: {
                 hero_badge: "Señales activas en Telegram", hero_title_1: "TU VENTAJA", hero_title_2: "MATEMÁTICA",
@@ -1062,8 +1098,17 @@
                 sec_usdt_title: "¿Qué es USDT?", sec_usdt_desc: "Es el 'dólar digital'. 1 USDT vale exactamente 1 Dólar Estadounidense. Es estable, no fluctúa como Bitcoin, perfecto para suscripciones.",
                 sec_gas_title: "¿Por qué necesito también Toncoin (TON)?", sec_gas_desc: "En la Blockchain, USDT es la moneda utilizada para pagar la suscripción. Sin embargo, cada transacción requiere una minúscula 'tarifa de transporte' (Gas) que se paga <b>solo en Toncoin (TON)</b>.",
                 sec_tg_title: "¿Es un sistema seguro?", sec_tg_desc: "Absolutamente sí. La Wallet es una función oficial de Telegram. Al activar 'TON Space' posees tus claves privadas: nadie puede tocar tus fondos excepto tú.",
-                close_understood: "Entendido, cerrar", pay_modal_title: "Realiza el Pago", pay_modal_text: "Envía exactamente <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> en la red <strong class='text-white'>TON</strong> a esta dirección:",
+                close_understood: "Entendido, cerrar", pay_modal_title: "Realiza el Pago", pay_modal_text: "Envía exactamente <strong class='text-white text-base'><span class='price-display'>94</span> USDT</strong> en la red <strong class='text-white'>TON</strong> a esta dirección:",
                 pay_warning: "Envía SOLO <strong class='text-red-400'>USDT</strong> por la red <strong class='text-red-400'>TON (Toncoin)</strong>. Otras redes causarán pérdida de fondos.", pay_modal_close: "Entendido, Cerrar",
+
+                promo_hint: "¿Tienes un Enlace de Referido? Podrás introducirlo en el siguiente paso.",
+                promo_title: "Código de Promoción / Referido",
+                promo_desc: "¿Has sido invitado? Introduce el <strong>Enlace de Referido</strong> de tu patrocinador o un código promocional a continuación para obtener un descuento.",
+                promo_placeholder: "Ingresa Código o Enlace...",
+                promo_btn: "APLICAR CÓDIGO",
+                promo_skip: "CONTINUAR A PRECIO COMPLETO",
+                verifying: "VERIFICANDO...",
+                success: "¡CÓDIGO APLICADO!",
                 
                 sim_w_welcome: "¡Bienvenido a Wallet! <br>Compra, vende e intercambia criptos en Telegram.", sim_w_open: "Abrir Wallet", sim_w_settings: "Ajustes",
                 sim_w_features: "Funciones", sim_w_recovery: "Frase de Recuperación", sim_w_write: "Escribe estas 24 palabras en el orden exacto.",
@@ -1072,10 +1117,10 @@
                 sim_u_p2p: "Mercado P2P", sim_u_local: "Métodos de pago locales", sim_u_choose: "Elegir Cripto", sim_u_buy: "Comprar Cripto",
                 sim_u_continue: "Continuar", sim_u_confirm_tx: "Confirmar Transacción", sim_u_amount: "Monto", sim_u_network_fee: "Tarifa de Red",
                 sim_u_to_address: "Dirección de destino", sim_u_confirm_pay: "Confirmar Pago",
-                tw_t1: "1. Abre @wallet", tw_d1: "Busca <b>@wallet</b> en la barra superior. Haz clic en <b>Iniciar</b> y luego en el botón <b>Open Wallet</b> o escribe: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
+                tw_t1: "1. Abre @wallet", tw_d1: "Busca <b>@wallet</b> en la barra superior. Haz clic en <b>Iniciar</b> y luego en el botón <b>Open Wallet</b>.",
                 tw_t2: "2. Activa TON Space", tw_d2: "Haz clic en Ajustes arriba a la derecha. Activa <b>TON Space Beta</b>. Esta será tu bóveda personal.",
-                tw_t3: "3. Respaldo (¡Importante!)", tw_d3: "Elige respaldo manual. Verás <b>24 palabras secretas</b>. ¡Escríbelas en papel en orden! No capturas de pantalla, recuperan tus fondos si pierdes el teléfono.",
-                tw_t4: "4. Abrir Wallet", tw_d4: "Ahora que entiendes cómo funciona, abre tu Wallet oficial en Telegram para proceder.",
+                tw_t3: "3. Respaldo (¡Importante!)", tw_d3: "Elige respaldo manual. Verás <b>24 palabras secretas</b>. ¡Escríbelas en papel en orden! No capturas de pantalla.",
+                tw_t4: "4. Abrir Wallet", tw_d4: "Ahora abre tu Wallet oficial en Telegram para proceder.",
                 tu_t1: "1. Añadir Cripto", tu_d1: "En la pantalla principal de tu nueva Wallet, haz clic en el botón <b>Add Crypto</b>.",
                 tu_t2: "2. Elige el Método", tu_d2: "Elige <b>Tarjeta Bancaria</b> para compra instantánea, o <b>Mercado P2P</b> si prefieres métodos locales.",
                 tu_t3: "3. Seleccionar USDT", tu_d3: "Selecciona la criptomoneda USDT para comenzar.",
@@ -1120,8 +1165,17 @@
                 sec_usdt_title: "O que é USDT?", sec_usdt_desc: "É o 'dólar digital'. 1 USDT vale exatamente 1 Dólar Americano. É estável, não oscila como o Bitcoin, perfeito para assinaturas.",
                 sec_gas_title: "Por que também preciso de Toncoin (TON)?", sec_gas_desc: "Na Blockchain, USDT é a moeda usada para pagar a assinatura. No entanto, cada transação exige uma pequena 'taxa de transporte' (Gas) que é paga <b>apenas em Toncoin (TON)</b>.",
                 sec_tg_title: "É um sistema seguro?", sec_tg_desc: "Com certeza. A Carteira é um recurso oficial do Telegram. Ao ativar o 'TON Space' você possui suas chaves privadas: ninguém pode tocar em seus fundos exceto você.",
-                close_understood: "Entendi, fechar", pay_modal_title: "Faça o Pagamento", pay_modal_text: "Envie exatamente <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> na rede <strong class='text-white'>TON</strong> para este endereço:",
+                close_understood: "Entendi, fechar", pay_modal_title: "Faça o Pagamento", pay_modal_text: "Envie exatamente <strong class='text-white text-base'><span class='price-display'>94</span> USDT</strong> na rede <strong class='text-white'>TON</strong> para este endereço:",
                 pay_warning: "Envie APENAS <strong class='text-red-400'>USDT</strong> pela rede <strong class='text-red-400'>TON (Toncoin)</strong>. Outras redes causarão perda de fundos.", pay_modal_close: "Entendi, Fechar",
+
+                promo_hint: "Tem um Link de Convite? Poderá inseri-lo no próximo passo.",
+                promo_title: "Código Promo / Convite",
+                promo_desc: "Foi convidado? Insira o <strong>Link de Indicação</strong> ou um código promocional abaixo para obter um desconto na sua assinatura.",
+                promo_placeholder: "Insira o Código ou Link...",
+                promo_btn: "APLICAR CÓDIGO",
+                promo_skip: "PROSSEGUIR COM PREÇO NORMAL",
+                verifying: "VERIFICANDO...",
+                success: "CÓDIGO APLICADO!",
                 
                 sim_w_welcome: "Bem-vindo à Carteira! <br>Compre, venda e negocie criptos no Telegram.", sim_w_open: "Abrir Carteira", sim_w_settings: "Configurações",
                 sim_w_features: "Recursos", sim_w_recovery: "Frase de Recuperação", sim_w_write: "Escreva estas 24 palavras na ordem exata.",
@@ -1130,16 +1184,16 @@
                 sim_u_p2p: "Mercado P2P", sim_u_local: "Métodos de pagamento locais", sim_u_choose: "Escolher Cripto", sim_u_buy: "Comprar Cripto",
                 sim_u_continue: "Continuar", sim_u_confirm_tx: "Confirmar Transação", sim_u_amount: "Valor", sim_u_network_fee: "Taxa da Rede",
                 sim_u_to_address: "Endereço de destino", sim_u_confirm_pay: "Confirmar Pagamento",
-                tw_t1: "1. Abra o @wallet", tw_d1: "Pesquise <b>@wallet</b> na barra superior. Clique em <b>Iniciar</b> e depois no botão <b>Open Wallet</b> ou digite: <a href='https://t.me/wallet' target='_blank' class='text-tg-blue underline'>https://t.me/wallet</a>.",
-                tw_t2: "2. Ative o TON Space", tw_d2: "Clique nos três pontos (Configurações) no canto superior direito. Ative <b>TON Space Beta</b>. Este será o seu cofre pessoal.",
-                tw_t3: "3. Backup (Importante!)", tw_d3: "Escolha backup manual. Você verá <b>24 palavras secretas</b>. Escreva no papel na ordem exata! Sem prints, elas recuperam seus fundos se perder o celular.",
-                tw_t4: "4. Abrir Carteira", tw_d4: "Agora que você entendeu como funciona, abra sua Carteira oficial no Telegram para prosseguir.",
+                tw_t1: "1. Abra o @wallet", tw_d1: "Pesquise <b>@wallet</b> na barra superior. Clique em <b>Iniciar</b>.",
+                tw_t2: "2. Ative o TON Space", tw_d2: "Clique em Configurações. Ative <b>TON Space Beta</b>. Este será o seu cofre pessoal.",
+                tw_t3: "3. Backup (Importante!)", tw_d3: "Escolha backup manual. Escreva no papel as <b>24 palavras secretas</b> na ordem exata!",
+                tw_t4: "4. Abrir Carteira", tw_d4: "Abra sua Carteira oficial no Telegram para prosseguir.",
                 tu_t1: "1. Adicionar Cripto", tu_d1: "Na tela inicial da sua nova Carteira, clique no botão <b>Add Crypto</b>.",
-                tu_t2: "2. Escolha o Método", tu_d2: "Escolha <b>Cartão Bancário</b> para compra instantânea, ou <b>Mercado P2P</b> se preferir métodos locais.",
+                tu_t2: "2. Escolha o Método", tu_d2: "Escolha <b>Cartão Bancário</b> para compra instantânea.",
                 tu_t3: "3. Selecionar USDT", tu_d3: "Selecione a criptomoeda USDT para começar.",
-                tu_t4: "4. Insira o Valor", tu_d4: "Compre exatamente o valor de USDT necessário para cobrir o acesso.",
-                tu_t5: "5. Compre Gas (TON)", tu_d5: "Repita o processo selecionando <b>TON</b>. Compre <b>1 TON</b>. Isso é necessário para pagar a pequena taxa da blockchain.",
-                tu_t6: "6. Pague e Receba Acesso", tu_d6: "De volta ao menu, clique em <b>PAGAR AGORA</b> para confirmar. Você receberá instantaneamente o <b>Link de Acesso</b> e sua <b>Senha Única</b>.",
+                tu_t4: "4. Insira o Valor (USDT)", tu_d4: "Compre o valor de USDT necessário para cobrir a assinatura.",
+                tu_t5: "5. Compre Gas (TON)", tu_d5: "Repita selecionando <b>TON</b>. Compre <b>1 TON</b> para pagar a pequena taxa da blockchain.",
+                tu_t6: "6. Pague e Receba Acesso", tu_d6: "Clique em <b>PAGAR AGORA</b> para confirmar. Você receberá instantaneamente o <b>Link do Canal</b>.",
                 step: "Passo", prev: "Ant", next: "Próx", done: "Feito", tut_badge: "TUTORIAL - NÃO OPERACIONAL", tw_btn_open: "Abrir Telegram Wallet"
             },
             it: {
@@ -1172,15 +1226,24 @@
                 pl_subtitle: "Completa il pagamento per sbloccare la Premium Room:", vp_1: "Accesso alla Zero To Hero Academy",
                 vp_2: "Accesso alla Sala Segnali Telegram Premium", vp_3: "Nessun vincolo", pay_now: "SBLOCCA ACCESSO ORA",
                 new_to_crypto: "Primo pagamento in crypto?", how_wallet_title: "Crea il Wallet", how_wallet_sub: "Richiede 1 minuto",
-                how_usdt_title: "Compra USDT", how_usdt_sub: "Guida passo passo", trust_crypto: "Infrastruttura di pagamento su Blockchain. Transazioni trasparenti, sicure e svincolate da intermediari bancari.",
+                how_usdt_title: "Compra USDT", how_usdt_sub: "Guida passo a passo", trust_crypto: "Infrastruttura di pagamento su Blockchain. Transazioni trasparenti, sicure e svincolate da intermediari bancari.",
                 sec_btn: "Cos'è il Gas (TON), USDT e la Sicurezza?", close_tut: "Chiudi Tutorial", sec_title: "Info Sicurezza",
                 sec_lock_title: "Pagamenti Globali Web 3.0", sec_lock_desc: "Con la Blockchain paghi da tutto il mondo senza confini. Addio carte bloccate dalle banche per frodi inesistenti o commissioni folli sul cambio valuta. La transazione è istantanea.",
                 sec_usdt_title: "Cos'è USDT?", sec_usdt_desc: "È il 'dollaro digitale'. 1 USDT vale esattamente 1 Dollaro Americano. È stabile, non oscilla come il Bitcoin, perfetto per gli abbonamenti.",
                 sec_gas_title: "Perché serve anche il Toncoin (TON)?", sec_gas_desc: "Sulla Blockchain, USDT è la moneta usata per pagare l'abbonamento. Tuttavia, ogni transazione richiede una piccolissima 'tassa di trasporto' (Gas) che si paga <b>solo in Toncoin (TON)</b>.",
                 sec_tg_title: "È un sistema sicuro?", sec_tg_desc: "Assolutamente sì. Il Wallet è una funzione ufficiale di Telegram. Attivando 'TON Space' possiedi le tue chiavi private: nessuno al mondo può toccare i tuoi fondi tranne te.",
-                close_understood: "Ho capito, chiudi", pay_modal_title: "Effettua il Pagamento", pay_modal_text: "Invia esattamente <strong id='modal-pay-amount' class='text-white text-base'>97 USDT</strong> sulla rete <strong class='text-white'>TON</strong> a questo indirizzo:",
+                close_understood: "Ho capito, chiudi", pay_modal_title: "Effettua il Pagamento", pay_modal_text: "Invia esattamente <strong class='text-white text-base'><span class='price-display'>94</span> USDT</strong> sulla rete <strong class='text-white'>TON</strong> a questo indirizzo:",
                 pay_warning: "Invia SOLO <strong class='text-red-400'>USDT</strong> tramite la rete <strong class='text-red-400'>TON (Toncoin)</strong>. Altre reti causeranno la perdita dei fondi.", pay_modal_close: "Ho compreso, chiudi",
 
+                promo_hint: "Hai un Referral Link? Potrai inserirlo nel prossimo passaggio.",
+                promo_title: "Codice Promo / Referral",
+                promo_desc: "Sei stato invitato? Inserisci il <strong>Referral Link</strong> del tuo referente o un codice promozionale per ottenere uno sconto sul tuo abbonamento.",
+                promo_placeholder: "Inserisci Codice o Link Referral...",
+                promo_btn: "APPLICA CODICE",
+                promo_skip: "PROCEDI A PREZZO PIENO",
+                verifying: "VERIFICA IN CORSO...",
+                success: "CODICE APPLICATO!",
+                
                 sim_w_welcome: "Benvenuto in Wallet! <br>Compra, vendi e scambia crypto su Telegram.", sim_w_open: "Apri Wallet", sim_w_settings: "Impostazioni",
                 sim_w_features: "Funzionalità", sim_w_recovery: "Frase di Recupero", sim_w_write: "Trascrivi queste 24 parole nell'ordine esatto.",
                 sim_w_saved: "Le ho salvate", sim_w_ready: "Pronto!", sim_w_done_title: "Configurazione Completata", sim_w_done_desc: "Hai salvato correttamente il wallet. Custodisci la frase al sicuro.",
@@ -1202,62 +1265,28 @@
             }
         };
 
-        let currentLang = 'en'; 
-        const supportedLangs = ['en', 'es', 'pt', 'it'];
-
-        // Language & UI Initialization
-        function applyTranslations() {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if(translations[currentLang] && translations[currentLang][key]) {
-                    el.innerHTML = translations[currentLang][key];
-                }
+        // -------------------------
+        // DYNAMIC PRICING LOGIC
+        // -------------------------
+        function updatePriceDisplay() {
+            let displayPrice = currentDiscountedPrice % 1 !== 0 ? currentDiscountedPrice.toFixed(1) : currentDiscountedPrice;
+            document.querySelectorAll('.price-display').forEach(el => {
+                el.innerText = displayPrice;
             });
-
-            document.getElementById('current-lang-display').innerText = currentLang.toUpperCase();
-            document.documentElement.lang = currentLang;
-
-            // Support Links
-            const waSupportBtn = document.getElementById('btn-support-wa');
-            const tgSupportBtn = document.getElementById('btn-support-tg');
-            const waPartnerBtn = document.getElementById('wa-btn');
-            
-            if(waSupportBtn && tgSupportBtn && translations[currentLang].support_msg) {
-                const supportMsg = encodeURIComponent(translations[currentLang].support_msg);
-                waSupportBtn.href = `https://wa.me/393482487172?text=${supportMsg}`;
-                tgSupportBtn.href = `https://t.me/+393482487172?text=${supportMsg}`; 
-            }
-            if(waPartnerBtn && translations[currentLang].wa_msg) {
-                const partnerMsg = encodeURIComponent(translations[currentLang].wa_msg);
-                waPartnerBtn.href = `https://wa.me/393482487172?text=${partnerMsg}`;
-            }
-
-            // Update Tutorials if active
-            if(document.getElementById('screen-tutorial-wallet') && document.getElementById('screen-tutorial-wallet').classList.contains('active')) updateTutorialUI('wallet');
-            if(document.getElementById('screen-tutorial-usdt') && document.getElementById('screen-tutorial-usdt').classList.contains('active')) updateTutorialUI('usdt');
         }
 
-        function setLang(lang) {
-            currentLang = supportedLangs.includes(lang) ? lang : 'en';
-            applyTranslations();
-            try { localStorage.setItem('bx_lang', currentLang); } catch(e) {}
-        }
-
-        // SPA Navigation Logic
+        // -------------------------
+        // CHECKOUT LOGIC & SPA
+        // -------------------------
         function startCheckout(planName, priceUsdt, days) {
-            // Update Dynamic Texts
-            document.getElementById('checkout-plan-name').innerText = planName.toUpperCase() + " PLAN";
-            document.getElementById('checkout-price-display').innerText = priceUsdt;
-            
-            // Payment screen specific texts
-            document.getElementById('pay-exact-amount').innerText = priceUsdt + " USDT";
-            document.getElementById('modal-pay-amount').innerText = priceUsdt + " USDT";
-            document.getElementById('sim-price-display').innerText = priceUsdt;
-            document.getElementById('sim-final-price').innerText = priceUsdt + " USDT";
-            
-            document.getElementById('checkout-duration').innerText = days + " " + translations[currentLang]['days_access'];
+            currentBasePrice = priceUsdt;
+            currentDiscountedPrice = isPromoApplied ? (currentBasePrice * 0.5) : currentBasePrice;
 
-            // Hide Landing, Show Checkout Flow
+            document.getElementById('checkout-plan-name').innerText = planName.toUpperCase() + " PLAN";
+            document.getElementById('checkout-duration').innerText = days + " " + translations[currentLang]['days_access'];
+            
+            updatePriceDisplay();
+
             document.getElementById('screen-landing').classList.replace('block', 'hidden');
             document.getElementById('checkout-container').classList.replace('hidden', 'flex');
             
@@ -1272,16 +1301,79 @@
         }
 
         function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('#checkout-container .screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
-            document.querySelectorAll('.scroll-container').forEach(c => c.scrollTop = 0);
+            document.querySelectorAll('#checkout-container .scroll-container').forEach(c => c.scrollTop = 0);
         }
 
         function goToPayment() {
             showScreen('screen-payment');
         }
 
-        // Modals
+        // -------------------------
+        // MODAL & PROMO LOGIC
+        // -------------------------
+        function checkForReferralInURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref') || urlParams.get('promo');
+            if (refCode) {
+                document.getElementById('promo-input').value = refCode;
+            }
+        }
+
+        function openPromoModal() {
+            if(isPromoApplied) {
+                openPaymentModal();
+                return;
+            }
+            document.getElementById('promo-modal').classList.remove('hidden');
+            document.getElementById('promo-modal').classList.add('flex');
+        }
+
+        function closePromoModal() {
+            document.getElementById('promo-modal').classList.add('hidden');
+            document.getElementById('promo-modal').classList.remove('flex');
+            if(!isPromoApplied) {
+                document.getElementById('verify-btn-text').innerHTML = translations[currentLang]['promo_btn'];
+                document.getElementById('verify-btn-icon').className = 'fa-solid fa-check-circle';
+            }
+        }
+
+        function verifyPromoCode() {
+            const input = document.getElementById('promo-input');
+            const btnText = document.getElementById('verify-btn-text');
+            const btnIcon = document.getElementById('verify-btn-icon');
+            
+            if(input.value.trim() === '') {
+                input.classList.add('border-red-500', 'ring-1', 'ring-red-500');
+                setTimeout(() => input.classList.remove('border-red-500', 'ring-1', 'ring-red-500'), 2000);
+                return;
+            }
+            
+            btnText.innerHTML = translations[currentLang]['verifying'];
+            btnIcon.className = 'fa-solid fa-spinner fa-spin';
+            
+            // Simula processo di verifica referral e calcolo sconto 50%
+            setTimeout(() => {
+                btnText.innerHTML = translations[currentLang]['success'];
+                btnIcon.className = 'fa-solid fa-check text-green-400';
+                
+                isPromoApplied = true;
+                currentDiscountedPrice = currentBasePrice * 0.5; // Applica 50% di sconto
+                updatePriceDisplay();
+                
+                setTimeout(() => {
+                    closePromoModal();
+                    openPaymentModal();
+                }, 1000);
+            }, 1500);
+        }
+
+        function skipPromo() {
+            closePromoModal();
+            openPaymentModal();
+        }
+
         function openSecurityModal() {
             document.getElementById('security-modal').classList.remove('hidden');
             document.getElementById('security-modal').classList.add('flex');
@@ -1299,7 +1391,6 @@
             document.getElementById('payment-modal').classList.remove('flex');
         }
 
-        // Utils
         function copyAddress() {
             const addr = "UQBK7F4nTjfCL7JiwnD2kiZOV1klycVHMOHWPtZcVqNXa4_r";
             const btn = document.getElementById('copy-btn');
@@ -1315,7 +1406,9 @@
             });
         }
 
-        // Tutorial Simulator Logic
+        // -------------------------
+        // TUTORIAL LOGIC
+        // -------------------------
         const tutorials = {
             wallet: { current: 1, max: 4, color: 'bg-bf-yellow', prefix: 'tw' },
             usdt: { current: 1, max: 6, color: 'bg-bf-yellow', prefix: 'tu' } 
@@ -1379,7 +1472,53 @@
             }
         }
 
-        // Timer Logic
+        // -------------------------
+        // LANGUAGE & INITIALIZATION
+        // -------------------------
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if(translations[currentLang] && translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if(translations[currentLang] && translations[currentLang][key]) {
+                    el.setAttribute('placeholder', translations[currentLang][key]);
+                }
+            });
+
+            document.getElementById('current-lang-display').innerText = currentLang.toUpperCase();
+            document.documentElement.lang = currentLang;
+
+            const waSupportBtn = document.getElementById('btn-support-wa');
+            const tgSupportBtn = document.getElementById('btn-support-tg');
+            const waPartnerBtn = document.getElementById('wa-btn');
+            
+            if(waSupportBtn && tgSupportBtn && translations[currentLang].support_msg) {
+                const supportMsg = encodeURIComponent(translations[currentLang].support_msg);
+                waSupportBtn.href = `https://wa.me/393482487172?text=${supportMsg}`;
+                tgSupportBtn.href = `https://t.me/+393482487172?text=${supportMsg}`; 
+            }
+            if(waPartnerBtn && translations[currentLang].wa_msg) {
+                const partnerMsg = encodeURIComponent(translations[currentLang].wa_msg);
+                waPartnerBtn.href = `https://wa.me/393482487172?text=${partnerMsg}`;
+            }
+
+            if(document.getElementById('screen-tutorial-wallet') && document.getElementById('screen-tutorial-wallet').classList.contains('active')) updateTutorialUI('wallet');
+            if(document.getElementById('screen-tutorial-usdt') && document.getElementById('screen-tutorial-usdt').classList.contains('active')) updateTutorialUI('usdt');
+            
+            // Re-render prices dynamically with the correct language specific features if needed
+            updatePriceDisplay();
+        }
+
+        function setLang(lang) {
+            currentLang = supportedLangs.includes(lang) ? lang : 'en';
+            applyTranslations();
+            try { localStorage.setItem('bx_lang', currentLang); } catch(e) {}
+        }
+
         let flashTimerInterval = null;
         function startFlashTimer(duration) {
             clearInterval(flashTimerInterval);
@@ -1394,19 +1533,17 @@
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
 
-                display.textContent = hours + ":" + minutes + ":" + seconds;
+                if (display) display.textContent = hours + ":" + minutes + ":" + seconds;
 
                 if (--timer < 0) {
                     timer = 0; 
                     clearInterval(flashTimerInterval); 
-                    display.classList.add('text-red-500');
+                    if (display) display.classList.add('text-red-500');
                 }
             }, 1000);
         }
 
-        // Startup Initialization
         document.addEventListener('DOMContentLoaded', () => {
-            // Landing Animations
             const revealObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1415,35 +1552,30 @@
                     }
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-
             document.querySelectorAll('.lazy-reveal').forEach(el => revealObserver.observe(el));
 
-            // System Language Detection & Initialization
             try {
                 const saved = localStorage.getItem('bx_lang');
                 const systemLang = (navigator.language || navigator.userLanguage).split('-')[0].toLowerCase();
-                
                 if (saved && supportedLangs.includes(saved)) {
                     currentLang = saved;
                 } else if (supportedLangs.includes(systemLang)) {
                     currentLang = systemLang;
                 } else {
-                    currentLang = 'en'; // Fallback a inglese se lingua non supportata
+                    currentLang = 'en'; 
                 }
             } catch(e) {}
             
             setLang(currentLang);
-            document.getElementById('main-body').classList.add('ready');
+            checkForReferralInURL();
+            startFlashTimer(24 * 60 * 60);
 
-            // Force Telegram desktop deep link behavior
             const tgBtn = document.getElementById('btn-support-tg');
             if(tgBtn) {
                 tgBtn.addEventListener('click', function(e) {
                     setTimeout(() => { window.location.href = "tg://user?id=556534716"; }, 25);
                 });
             }
-
-            startFlashTimer(24 * 60 * 60);
         });
     </script>
 </body>
