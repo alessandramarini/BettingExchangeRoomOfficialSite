@@ -231,26 +231,32 @@
                     </span>
                 </a>
                 
-                <div class="lang-dropdown-wrapper shrink-0" tabindex="0">
-                    <button class="flex items-center gap-1.5 bg-white/5 hover:bg-white/10 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl border border-white/10 transition-colors outline-none" aria-label="Select Language">
-                        <i class="fa-solid fa-globe text-brand-gray text-[11px] sm:text-sm"></i>
-                        <span id="current-lang-display" class="text-[11px] sm:text-sm font-bold uppercase tracking-wider text-white">EN</span>
-                        <i class="fa-solid fa-chevron-down text-[9px] text-brand-gray ml-0.5"></i>
+                <div class="flex items-center gap-3 sm:gap-6">
+                    <button onclick="openLoginModal()" class="text-gray-300 hover:text-brand-neon text-[11px] sm:text-xs font-bold uppercase tracking-widest transition-colors bg-transparent border-none cursor-pointer outline-none flex items-center gap-1.5">
+                        <i class="fa-solid fa-right-to-bracket"></i> <span data-i18n="nav_login">LOGIN</span>
                     </button>
-                    <!-- Strict Order: EN, ES, PT, IT -->
-                    <div class="lang-dropdown-content overflow-hidden p-1.5">
-                        <button onclick="setLang('en')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
-                            <img src="https://flagcdn.com/w20/gb.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> English
+                    
+                    <div class="lang-dropdown-wrapper shrink-0" tabindex="0">
+                        <button class="flex items-center gap-1.5 bg-white/5 hover:bg-white/10 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl border border-white/10 transition-colors outline-none" aria-label="Select Language">
+                            <i class="fa-solid fa-globe text-brand-gray text-[11px] sm:text-sm"></i>
+                            <span id="current-lang-display" class="text-[11px] sm:text-sm font-bold uppercase tracking-wider text-white">EN</span>
+                            <i class="fa-solid fa-chevron-down text-[9px] text-brand-gray ml-0.5"></i>
                         </button>
-                        <button onclick="setLang('es')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
-                            <img src="https://flagcdn.com/w20/es.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Español
-                        </button>
-                        <button onclick="setLang('pt')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
-                            <img src="https://flagcdn.com/w20/br.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Português
-                        </button>
-                        <button onclick="setLang('it')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
-                            <img src="https://flagcdn.com/w20/it.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Italiano
-                        </button>
+                        <!-- Strict Order: EN, ES, PT, IT -->
+                        <div class="lang-dropdown-content overflow-hidden p-1.5">
+                            <button onclick="setLang('en')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
+                                <img src="https://flagcdn.com/w20/gb.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> English
+                            </button>
+                            <button onclick="setLang('es')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
+                                <img src="https://flagcdn.com/w20/es.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Español
+                            </button>
+                            <button onclick="setLang('pt')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
+                                <img src="https://flagcdn.com/w20/br.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Português
+                            </button>
+                            <button onclick="setLang('it')" class="w-full text-left px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold hover:bg-white/10 transition-colors flex items-center gap-3 text-gray-300 hover:text-white">
+                                <img src="https://flagcdn.com/w20/it.png" alt="" class="w-4 rounded-[2px] shadow-sm" aria-hidden="true"> Italiano
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -872,6 +878,34 @@
          PART 3: MODALS
     =========================================== -->
     
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[100] p-4">
+        <div class="bg-panel-bg border border-brand-neon/30 rounded-3xl p-6 w-full max-w-sm text-center shadow-[0_15px_50px_rgba(163,230,53,0.15)] modal-enter relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-brand-neon to-[#65a30d]"></div>
+            
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-brand-neon/10 text-brand-neon flex items-center justify-center mx-auto mb-4 border border-brand-neon/20">
+                <i class="fa-solid fa-fingerprint text-2xl sm:text-3xl"></i>
+            </div>
+            
+            <h2 data-i18n="login_title" class="text-[16px] sm:text-[18px] font-black text-white mb-5 uppercase tracking-widest">Sign In</h2>
+            
+            <div class="mb-4 relative space-y-3">
+                <input type="text" id="login-username" data-i18n-placeholder="login_user_ph" placeholder="Username" class="w-full bg-black/50 border border-gray-700 p-3.5 rounded-xl text-white text-center font-mono text-[14px] focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none transition-all placeholder:text-gray-600 placeholder:normal-case" autocomplete="off">
+                <input type="password" id="login-password" data-i18n-placeholder="login_pass_ph" placeholder="Password" class="w-full bg-black/50 border border-gray-700 p-3.5 rounded-xl text-white text-center font-mono text-[14px] focus:border-brand-neon focus:ring-1 focus:ring-brand-neon outline-none transition-all placeholder:text-gray-600 placeholder:normal-case" onkeypress="if(event.key === 'Enter') processLogin()">
+            </div>
+
+            <p id="login-error" class="text-red-500 text-[11px] font-bold mb-3 hidden" data-i18n="login_error">Invalid credentials</p>
+
+            <button onclick="processLogin()" class="w-full bg-gradient-to-r from-[#A3E635] to-[#84cc16] hover:scale-105 text-black py-3 sm:py-3.5 rounded-xl font-black text-[12px] sm:text-[13px] uppercase tracking-widest active:scale-95 shadow-[0_0_15px_rgba(163,230,53,0.3)] transition-all border-none cursor-pointer mb-3 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-right-to-bracket"></i> <span data-i18n="login_btn">GO TO DASHBOARD</span>
+            </button>
+
+            <button onclick="closeLoginModal()" class="w-full bg-transparent text-gray-500 hover:text-white py-2 rounded-xl font-bold text-[11px] uppercase tracking-widest transition-colors border-none cursor-pointer">
+                <span data-i18n="close_understood">Close</span>
+            </button>
+        </div>
+    </div>
+
     <!-- Modale Inserimento Promo Code / REFERRAL Link -->
     <div id="promo-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-[100] p-4">
         <div class="bg-panel-bg border border-bf-blue/30 rounded-3xl p-6 w-full max-w-sm text-center shadow-[0_15px_50px_rgba(59,130,246,0.15)] modal-enter relative overflow-hidden">
@@ -996,6 +1030,7 @@
         // MERGED TRANSLATIONS (Landing + Checkout + Promo)
         const translations = {
             en: {
+                nav_login: "LOGIN", login_title: "Sign In", login_user_ph: "Username", login_pass_ph: "Password", login_btn: "GO TO DASHBOARD", login_error: "Invalid credentials",
                 hero_badge: "Active signals on Telegram", hero_title_1: "YOUR MATHEMATICAL", hero_title_2: "ADVANTAGE",
                 hero_subtitle: "Forget gambling. Leverage our neural networks to extract true <span class='text-white font-bold'>Expected Value</span> from the Exchange. Copy trades, manage risk, and protect your bankroll.",
                 new_sec_title: "COPY. PASTE. CASH IN.", new_sec_desc1: "Receive clear, precise signals with preset stop-loss and money management parameters.",
@@ -1063,6 +1098,7 @@
                 step: "Step", prev: "Prev", next: "Next", done: "Done", tut_badge: "TUTORIAL - SIMULATION", tw_btn_open: "Open Telegram Wallet"
             },
             es: {
+                nav_login: "ENTRAR", login_title: "Iniciar sesión", login_user_ph: "Usuario", login_pass_ph: "Contraseña", login_btn: "IR AL PANEL", login_error: "Credenciales inválidas",
                 hero_badge: "Señales activas en Telegram", hero_title_1: "TU VENTAJA", hero_title_2: "MATEMÁTICA",
                 hero_subtitle: "Olvida el azar. Aprovecha nuestras redes neuronales para extraer verdadero <span class='text-white font-bold'>Valor Esperado</span> del Exchange. Copia operaciones, gestiona el riesgo y protege tu bankroll.",
                 new_sec_title: "COPIA. PEGA. COBRA.", new_sec_desc1: "Recibe señales claras y precisas, con parámetros de stop-loss y gestión de capital preestablecidos.",
@@ -1130,6 +1166,7 @@
                 step: "Paso", prev: "Ant", next: "Sig", done: "Hecho", tut_badge: "TUTORIAL - NO OPERATIVO", tw_btn_open: "Abrir Telegram Wallet"
             },
             pt: {
+                nav_login: "ENTRAR", login_title: "Iniciar sessão", login_user_ph: "Usuário", login_pass_ph: "Senha", login_btn: "IR PARA O PAINEL", login_error: "Credenciais inválidas",
                 hero_badge: "Sinais ativos no Telegram", hero_title_1: "A SUA VANTAGEM", hero_title_2: "MATEMÁTICA",
                 hero_subtitle: "Esqueça o acaso. Utilize as nossas redes neurais para extrair o verdadeiro <span class='text-white font-bold'>Valor Esperado</span> do Exchange. Copie operações, gira o risco e proteja a sua banca.",
                 new_sec_title: "COPIA. COLA. RECEBE.", new_sec_desc1: "Receba sinais claros e precisos, com parâmetros de stop-loss e gestão de capital predefinidos.",
@@ -1197,6 +1234,7 @@
                 step: "Passo", prev: "Ant", next: "Próx", done: "Feito", tut_badge: "TUTORIAL - NÃO OPERACIONAL", tw_btn_open: "Abrir Telegram Wallet"
             },
             it: {
+                nav_login: "ACCEDI", login_title: "Accedi", login_user_ph: "Nome utente", login_pass_ph: "Password", login_btn: "VAI ALLA DASHBOARD", login_error: "Credenziali non valide",
                 hero_badge: "Segnali attivi su Telegram", hero_title_1: "IL TUO VANTAGGIO", hero_title_2: "MATEMATICO",
                 hero_subtitle: "Dimentica l'azzardo. Sfrutta le nostre reti neurali per estrarre vero <span class='text-white font-bold'>Valore Atteso</span> dall'Exchange. Copia le operazioni, gestisci il rischio e proteggi il tuo bankroll.",
                 new_sec_title: "COPIA. INCOLLA. INCASSA.", new_sec_desc1: "Ricevi segnali chiari e precisi, con stop loss e money management preimpostati.",
@@ -1389,6 +1427,30 @@
         function closePaymentModal() {
             document.getElementById('payment-modal').classList.add('hidden');
             document.getElementById('payment-modal').classList.remove('flex');
+        }
+
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden');
+            document.getElementById('login-modal').classList.add('flex');
+            document.getElementById('login-error').classList.add('hidden');
+            document.getElementById('login-username').value = '';
+            document.getElementById('login-password').value = '';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.add('hidden');
+            document.getElementById('login-modal').classList.remove('flex');
+        }
+
+        function processLogin() {
+            const user = document.getElementById('login-username').value;
+            const pass = document.getElementById('login-password').value;
+            
+            if (user === 'admin' && pass === 'Hpupdsup!1974') {
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
         }
 
         function copyAddress() {
