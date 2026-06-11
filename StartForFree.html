@@ -2,7 +2,662 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#050a05">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Room AI | Global Exchange Academy</title>
+    <meta name="description" content="Interactive Academy for Betting Exchange. Learn math, risk management, and emotional detachment.">
+
+    <!-- Pre-connessioni ai CDN per caricamento fulmineo (GitHub Pages / Vercel) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://flagcdn.com">
+    
+    <!-- Font e Tailwind -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --neon-green: #99E814;
+            --dark-bg: #050a05;
+            --panel-bg: rgba(10, 15, 10, 0.65);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 10% 40%, rgba(153, 232, 20, 0.04), transparent 30%),
+                radial-gradient(circle at 90% 60%, rgba(36, 161, 222, 0.04), transparent 30%);
+            background-attachment: fixed;
+            -webkit-tap-highlight-color: transparent;
+            color: #e5e7eb;
+            overflow-x: hidden;
+            overscroll-behavior-y: none;
+        }
+
+        /* Fluid Typography (nessun taglio su schermi piccoli) */
+        .text-fluid-h1 { font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.1; }
+        .text-fluid-h2 { font-size: clamp(1.1rem, 2vw, 1.5rem); line-height: 1.2; }
+        
+        /* Glassmorphism Premium Styling */
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            border-radius: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Temi cromatici dei bordi */
+        .border-neon { border: 1px solid rgba(153, 232, 20, 0.3); }
+        .border-gold { border: 1px solid rgba(212, 175, 55, 0.3); }
+        .border-cyan { border: 1px solid rgba(0, 229, 255, 0.3); }
+        .border-purple { border: 1px solid rgba(168, 85, 247, 0.3); }
+
+        /* Scrollbar stilizzata e nascosta su mobile */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(153, 232, 20, 0.5); border-radius: 4px; }
+
+        /* Bandiere HD */
+        .lang-flag {
+            width: 32px; height: 22px;
+            border-radius: 3px; overflow: hidden;
+            opacity: 0.5; filter: grayscale(80%);
+            transition: all 0.3s ease; border: 1px solid transparent;
+            cursor: pointer; padding: 0; outline: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .lang-flag.active {
+            opacity: 1; filter: grayscale(0%);
+            transform: scale(1.15); border-color: var(--neon-green);
+            box-shadow: 0 0 12px rgba(153, 232, 20, 0.5);
+        }
+        .lang-flag img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* Effetti Interattivi Pulsanti */
+        .premium-btn {
+            position: relative; overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .premium-btn::before {
+            content: ''; position: absolute; inset: 0;
+            background: inherit; filter: blur(20px); opacity: 0;
+            transition: opacity 0.3s ease; z-index: 0;
+        }
+        .premium-btn:hover::before { opacity: 1; }
+        .premium-btn > * { position: relative; z-index: 1; }
+        
+        .quiz-opt {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease; text-align: left;
+        }
+        .quiz-opt:hover:not(:disabled) { background: rgba(212, 175, 55, 0.1); border-color: #d4af37; transform: translateX(6px); }
+        .quiz-opt.correct { background: rgba(16, 185, 129, 0.2) !important; border-color: #10b981 !important; color: #10b981; }
+        .quiz-opt.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: #ef4444 !important; color: #ef4444; }
+
+        /* Animazioni Globali */
+        @keyframes pulse-neon { 0%, 100% { box-shadow: 0 0 10px rgba(153,232,20,0.2); } 50% { box-shadow: 0 0 20px rgba(153,232,20,0.6); } }
+        .pulse-neon-fx { animation: pulse-neon 3s infinite ease-in-out; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .float-fx { animation: float 4s infinite ease-in-out; }
+
+        /* Layout Grid Master ottimizzato (fluido, previene sovrapposizioni) */
+        .master-grid {
+            display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: stretch;
+        }
+        @media (min-width: 1024px) {
+            .master-grid { 
+                grid-template-columns: 1.25fr 1fr; 
+                /* Rimossa l'altezza fissa (height) che forzava l'overflow e la sovrapposizione */
+            }
+            .col-video { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 1rem; }
+            .video-wrapper { flex-grow: 1; min-height: 400px; display: flex; flex-direction: column; } 
+            .video-wrapper iframe { height: 100% !important; flex-grow: 1; }
+            .col-right { display: flex; flex-direction: column; justify-content: space-between; height: 100%; gap: 1rem; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-[100dvh]">
+
+    <header class="sticky top-0 z-50 bg-[#050a05]/90 backdrop-blur-md border-b border-[#99E814]/20 px-4 py-2 flex items-center justify-between shadow-lg">
+        <div class="flex items-center gap-3 overflow-hidden">
+            <div class="w-8 h-8 md:w-10 md:h-10 rounded-full border border-[#99E814] bg-[#99E814]/10 flex items-center justify-center font-black text-[#99E814] text-xs shrink-0 pulse-neon-fx">BE</div>
+            <h1 class="font-black text-xs md:text-sm tracking-wider uppercase truncate">
+                <span class="hidden sm:inline" data-i18n="headerPrefix">EXCHANGE</span> 
+                <span class="text-[#99E814]">ROOM</span>
+            </h1>
+        </div>
+        
+        <div class="flex items-center gap-4">
+            <!-- Centralized Flag Switcher (EN, ES, PT, IT) -->
+            <div class="flex items-center gap-2 bg-black/60 p-1.5 rounded-lg border border-gray-800 shadow-inner">
+                <button onclick="window.changeLang('en')" class="lang-flag" data-lang="en" title="English">
+                    <img src="https://flagcdn.com/w80/gb.png" alt="English">
+                </button>
+                <button onclick="window.changeLang('es')" class="lang-flag" data-lang="es" title="Español">
+                    <img src="https://flagcdn.com/w80/es.png" alt="Español">
+                </button>
+                <button onclick="window.changeLang('pt')" class="lang-flag" data-lang="pt" title="Português">
+                    <img src="https://flagcdn.com/w80/br.png" alt="Português"> <!-- Using BR flag as standard for PT betting -->
+                </button>
+                <button onclick="window.changeLang('it')" class="lang-flag" data-lang="it" title="Italiano">
+                    <img src="https://flagcdn.com/w80/it.png" alt="Italiano">
+                </button>
+            </div>
+            
+            <!-- XP Badge -->
+            <div class="hidden sm:flex items-center bg-black/80 border border-gray-700 px-3 py-1.5 rounded-full shadow-inner">
+                <span class="text-yellow-400 text-xs mr-1 drop-shadow-[0_0_5px_rgba(250,204,21,0.8)]">⚡</span>
+                <span id="xp-counter" class="font-mono font-bold text-xs text-white">0 XP</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-[1400px] mx-auto p-3 md:p-6 flex flex-col justify-center">
+        
+        <!-- Header Section -->
+        <div class="text-center mb-4 md:mb-6 flex flex-col items-center">
+            <span class="text-[#99E814] font-black text-[10px] md:text-xs tracking-[0.3em] uppercase bg-[#99E814]/10 px-3 py-1 rounded-full border border-[#99E814]/30 mb-2 float-fx" data-i18n="moduleTitle">DAY 1/30</span>
+            <h2 class="text-fluid-h1 font-black text-white uppercase tracking-tighter drop-shadow-md" data-i18n="lessonTitle">ZERO TO HERO</h2>
+            <p class="text-gray-400 max-w-xl mx-auto text-[11px] md:text-sm font-medium mt-1" data-i18n="lessonDesc">No gambling. Only math, risk management, and emotional detachment.</p>
+        </div>
+
+        <!-- MASTER GRID: Ottimizzato per Desktop (Orizzontale) e Mobile (Verticale) -->
+        <div class="master-grid">
+            
+            <!-- COLONNA SINISTRA: Contenuti Multimediali -->
+            <div class="col-video flex flex-col gap-4 w-full h-full">
+                <!-- Wrapper Video -->
+                <section class="glass-panel border-cyan p-2 w-full flex flex-col flex-1 shadow-[0_0_30px_rgba(0,229,255,0.05)]">
+                    <div class="video-wrapper relative w-full aspect-video bg-black rounded-xl overflow-hidden shadow-inner">
+                        <iframe id="main-video" class="absolute inset-0 w-full h-full" src="" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                </section>
+                
+                <!-- Pulsanti Azione (Podcast & Ebook) -->
+                <div class="grid grid-cols-2 gap-3 md:gap-4 shrink-0">
+                    <a id="btn-podcast" href="#" target="_blank" onclick="SoundEngine.click()" class="premium-btn flex flex-col items-center justify-center p-3 md:p-5 bg-gradient-to-b from-gray-900 to-black rounded-xl border border-gray-700/80 hover:border-[#00e5ff] transform-gpu hover:-translate-y-1 active:scale-95 shadow-lg group">
+                        <svg class="w-7 h-7 md:w-9 md:h-9 mb-2.5 text-[#00e5ff] drop-shadow-[0_0_8px_rgba(0,229,255,0.6)] group-hover:drop-shadow-[0_0_15px_rgba(0,229,255,1)] group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" x1="12" y1="19" x2="12" y2="22"></line>
+                        </svg>
+                        <span class="font-black text-[9px] md:text-xs tracking-[0.2em] uppercase text-center text-gray-300 group-hover:text-white transition-colors" data-i18n="btnPodcast">PODCAST</span>
+                    </a>
+                    <button onclick="openEbookModal()" class="premium-btn flex flex-col items-center justify-center p-3 md:p-5 bg-gradient-to-b from-gray-900 to-black rounded-xl border border-gray-700/80 hover:border-[#ffb703] transform-gpu hover:-translate-y-1 active:scale-95 shadow-lg group">
+                        <svg class="w-7 h-7 md:w-9 md:h-9 mb-2.5 text-[#ffb703] drop-shadow-[0_0_8px_rgba(255,183,3,0.6)] group-hover:drop-shadow-[0_0_15px_rgba(255,183,3,1)] group-hover:scale-110 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                        </svg>
+                        <span class="font-black text-[9px] md:text-xs tracking-[0.2em] uppercase text-center text-gray-300 group-hover:text-white transition-colors" data-i18n="btnEbook">MANUAL</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- COLONNA DESTRA: Quiz e Interattività -->
+            <div class="col-right flex flex-col gap-4 w-full h-full">
+                
+                <!-- QUIZ Section -->
+                <section class="glass-panel border-gold p-4 md:p-6 flex flex-col shadow-[0_0_20px_rgba(212,175,55,0.05)] w-full relative">
+                    <div id="quiz-container" class="flex-1 flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-[#d4af37] drop-shadow-[0_0_5px_rgba(212,175,55,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span class="text-[#d4af37] text-[10px] md:text-xs font-black uppercase tracking-widest" id="quiz-progress-text">Q 1/5</span>
+                            </div>
+                            <div class="flex gap-1.5" id="quiz-dots"></div>
+                        </div>
+                        
+                        <div class="mb-4 flex items-center min-h-[40px]">
+                            <p id="quiz-question-text" class="text-sm md:text-base text-white font-bold leading-snug drop-shadow-md"></p>
+                        </div>
+                        <div id="quiz-options-container" class="space-y-2"></div>
+                    </div>
+                    
+                    <!-- Feedback Modal -->
+                    <div id="quiz-feedback" class="hidden mt-4 p-3 rounded-xl text-center border backdrop-blur-sm">
+                        <div id="quiz-feedback-icon" class="text-2xl mb-1"></div>
+                        <p id="quiz-feedback-text" class="text-[10px] sm:text-xs font-black uppercase tracking-wide"></p>
+                    </div>
+
+                    <!-- Screen Completamento -->
+                    <div id="quiz-completed-screen" class="hidden flex-col items-center justify-center text-center py-6">
+                        <div class="text-5xl mb-3 drop-shadow-[0_0_15px_rgba(212,175,55,0.8)]">🏆</div>
+                        <h4 class="text-[#d4af37] font-black text-xl uppercase tracking-widest mb-1" data-i18n="quizCompletedTitle">Passed!</h4>
+                        <p class="text-gray-400 text-xs mb-5" data-i18n="quizCompletedDesc">+500 XP Unlocked.</p>
+                        <button onclick="resetQuiz()" class="px-5 py-2.5 bg-gray-900 text-[#d4af37] border border-[#d4af37]/50 rounded-lg text-xs font-black uppercase hover:bg-[#d4af37]/20 transition-all active:scale-95 shadow-lg" data-i18n="btnRetryQuiz">Retry</button>
+                    </div>
+                </section>
+
+                <!-- Demo & Gioco (Grid a 2 colonne interne) -->
+                <div class="grid grid-cols-2 gap-4 w-full flex-1">
+                    
+                    <!-- Simulator Demo -->
+                    <section class="glass-panel border-neon p-4 flex flex-col justify-center items-center text-center premium-btn cursor-pointer transform-gpu hover:-translate-y-1 active:scale-95 shadow-[0_0_15px_rgba(153,232,20,0.05)]" onclick="window.open('Demo-MondialCup.html', '_blank'); SoundEngine.click()">
+                        <svg class="w-8 h-8 md:w-10 md:h-10 text-[#99E814] drop-shadow-[0_0_10px_rgba(153,232,20,0.8)] mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <p class="text-[#99E814] font-black text-[9px] md:text-[10px] tracking-widest uppercase mb-1" data-i18n="demoBadge">INTERACTIVE DEMO</p>
+                        <h3 class="text-white font-bold text-xs md:text-sm" data-i18n="startSimulator">Start Simulator</h3>
+                    </section>
+
+                    <!-- Gioco Educativo -->
+                    <section class="glass-panel border-purple p-4 flex flex-col justify-center items-center text-center premium-btn cursor-pointer transform-gpu hover:-translate-y-1 active:scale-95 shadow-[0_0_15px_rgba(168,85,247,0.05)]" onclick="window.open('Game-Penalties.html', '_blank'); SoundEngine.click()">
+                        <div class="text-3xl md:text-4xl mb-2 drop-shadow-[0_0_15px_rgba(168,85,247,0.6)]">🎮</div>
+                        <p class="text-[#a855f7] font-black text-[9px] md:text-[10px] tracking-widest uppercase" data-i18n="penaltiesTitle">MINI EDUCATIONAL GAME</p>
+                    </section>
+                </div>
+
+                <!-- Pillola Finanziaria (Occupa tutta la larghezza sotto ai due bottoni) -->
+                <section class="glass-panel border-white/10 p-4 md:p-5 flex flex-col justify-center relative overflow-hidden bg-gradient-to-br from-gray-900 to-[#050a05] w-full">
+                    <div class="absolute -right-2 -top-4 text-7xl text-white/5 font-serif pointer-events-none">"</div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#24A1DE] shadow-[0_0_5px_rgba(36,161,222,1)]"></span>
+                        <p class="text-[#24A1DE] font-black text-[10px] tracking-widest uppercase" data-i18n="finLabel">MINDSET</p>
+                    </div>
+                    <p class="text-gray-300 text-xs md:text-sm italic leading-relaxed" data-i18n="finQuote">Bankroll is business capital, not a personal ATM. Withdraw to make it yours.</p>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Pulsante Prossima Lezione -->
+        <div class="mt-8 flex flex-col items-center justify-center w-full">
+            <a href="SummaryZeroToHeroAcademy.html" onclick="SoundEngine.click()" class="bg-gradient-to-r from-[#0a140f] to-[#112211] text-[#99E814] border border-[#99E814] font-black w-full max-w-md flex justify-center items-center px-6 py-4 rounded-xl hover:bg-[#99E814] hover:text-black transition-all duration-300 text-xs md:text-sm uppercase tracking-widest shadow-[0_0_20px_rgba(153,232,20,0.2)] group transform-gpu active:scale-95">
+                <span data-i18n="navNextLesson">NEXT LESSON</span> 
+                <svg class="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+            <div id="sub-warning-msg" class="hidden mt-3 text-center text-red-500 font-black text-[10px] uppercase tracking-widest bg-red-900/20 border border-red-500/50 px-4 py-2 rounded-lg" data-i18n="subNotActive">Subscription inactive!</div>
+        </div>
+    </main>
+
+    <!-- EBOOK MODAL (FullScreen Responsive) -->
+    <div id="ebook-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-black/90 backdrop-blur-md opacity-0 transition-opacity duration-300">
+        <div id="ebook-modal-content" class="bg-[#050a05] w-full h-full md:w-[90vw] md:h-[90vh] md:max-w-4xl md:rounded-2xl border border-gray-800 flex flex-col overflow-hidden transform scale-95 transition-transform duration-300 shadow-2xl">
+            <!-- Header Modal -->
+            <div class="flex justify-between items-center px-5 py-4 border-b border-gray-800 bg-black shrink-0">
+                <div class="flex items-center gap-3">
+                    <svg class="w-5 h-5 text-[#ffb703]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253"></path></svg>
+                    <span class="text-[#ffb703] font-black uppercase text-xs tracking-[0.2em]" data-i18n="btnEbookTitle">MANUAL</span>
+                </div>
+                <button onclick="closeEbookModal()" class="text-gray-400 hover:text-white p-2 rounded-lg bg-gray-900 hover:bg-red-900/50 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <!-- Contenuto Modal -->
+            <div class="flex-1 overflow-y-auto p-5 md:p-10 bg-[#0a0f0a]">
+                <div class="max-w-2xl mx-auto w-full" id="ebook-content-container" data-i18n-html="ebookContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGICA E DATI JAVASCRIPT -->
+    <script>
+        // Motore Audio Leggero
+        const SoundEngine = {
+            ctx: null, unlocked: false,
+            init: function() { 
+                if(!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if(AudioContext) this.ctx = new AudioContext(); 
+                }
+                if (this.ctx && this.ctx.state === 'suspended') this.ctx.resume();
+                this.unlocked = true;
+            },
+            playTone: function(freq, type, duration, vol) {
+                if(!this.unlocked) this.init();
+                if(!this.ctx || this.ctx.state === 'suspended') return;
+                try {
+                    const osc = this.ctx.createOscillator(); const gain = this.ctx.createGain();
+                    osc.type = type; osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                    gain.gain.setValueAtTime(vol, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+                    osc.connect(gain); gain.connect(this.ctx.destination);
+                    osc.start(); osc.stop(this.ctx.currentTime + duration);
+                } catch(e) {}
+            },
+            click: function() { this.playTone(600, 'sine', 0.1, 0.05); },
+            cashout: function() { this.playTone(880, 'sine', 0.1, 0.05); setTimeout(() => this.playTone(1760, 'sine', 0.2, 0.1), 100); },
+            error: function() { this.playTone(150, 'sawtooth', 0.2, 0.1); }
+        };
+
+        // Gestione Ebook Modal
+        function openEbookModal() {
+            SoundEngine.click();
+            const modal = document.getElementById('ebook-modal');
+            const content = document.getElementById('ebook-modal-content');
+            modal.classList.remove('hidden'); modal.classList.add('flex');
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0'); modal.classList.add('opacity-100');
+            content.classList.remove('scale-95'); content.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeEbookModal() {
+            SoundEngine.click();
+            const modal = document.getElementById('ebook-modal');
+            const content = document.getElementById('ebook-modal-content');
+            modal.classList.remove('opacity-100'); modal.classList.add('opacity-0');
+            content.classList.remove('scale-100'); content.classList.add('scale-95');
+            setTimeout(() => { 
+                modal.classList.add('hidden'); modal.classList.remove('flex'); 
+                document.body.style.overflow = ''; 
+            }, 300);
+        }
+
+        window.RoomApp = (function() {
+            const CONFIG = { STORAGE_KEY: 'bx_academy_day1_final' }; 
+            
+            const podcastUrls = {
+                en: "https://open.spotify.com/episode/6O2YicZuJbitsqlJ2VyhoM",
+                es: "https://open.spotify.com/episode/3cPHNB0pKR0yW4ZqyRacID",
+                pt: "https://open.spotify.com/episode/7mEi7eq8P1IPzjrgPeWo90",
+                it: "https://open.spotify.com/episode/2QDRZoYRQk8Gg1JqvXAuVU"
+            };
+
+            // Builder Layout Ebook
+            const buildEbookContent = (day, title1, title2, sub, p1, p2, f1, f2, f3) => `
+                <div class="text-center mb-8">
+                    <span class="text-[#99E814] font-mono text-[10px] bg-[#99E814]/10 px-3 py-1.5 rounded-full border border-[#99E814]/30">${day}</span>
+                    <h2 class="text-3xl md:text-5xl font-black uppercase text-white mt-5 leading-tight tracking-tighter">${title1} <br><span class="text-[#99E814] drop-shadow-[0_0_10px_rgba(153,232,20,0.4)]">${title2}</span></h2>
+                    <p class="text-[#24A1DE] font-bold text-xs mt-3 uppercase tracking-widest border-b border-[#24A1DE]/30 pb-2 inline-block">${sub}</p>
+                </div>
+                <div class="space-y-4 text-gray-300 text-sm md:text-base leading-relaxed bg-[#050a05]/50 p-6 rounded-2xl border border-gray-800 shadow-inner">
+                    <p>${p1}</p>
+                    <p>${p2}</p>
+                </div>
+                <div class="my-10 relative overflow-hidden bg-gradient-to-b from-[#99E814]/10 to-transparent p-8 rounded-2xl border border-[#99E814]/30 text-center shadow-[0_0_30px_rgba(153,232,20,0.05)]">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 mx-auto bg-[#0a140f] border border-[#99E814]/50 rounded-full flex items-center justify-center text-2xl mb-4 shadow-[0_0_15px_rgba(153,232,20,0.3)]">🧮</div>
+                        <h3 class="text-white font-black text-sm uppercase tracking-widest mb-4">${f1}</h3>
+                        <code class="text-[#99E814] bg-black border border-[#99E814]/20 px-5 py-3 rounded-xl font-mono font-bold text-xs md:text-sm block overflow-x-auto shadow-inner whitespace-nowrap">${f2}</code>
+                        <p class="text-gray-400 text-[11px] mt-4 font-medium uppercase tracking-wide border-t border-gray-800 pt-3">${f3}</p>
+                    </div>
+                </div>
+            `;
+
+            // Dizionario rigoroso (EN, ES, PT, IT)
+            const dict = {
+                en: {
+                    headerPrefix: "EXCHANGE",
+                    moduleTitle: "DAY 1/30", lessonTitle: "ZERO TO HERO", lessonDesc: "No gambling. Only math, risk management, and emotional detachment.",
+                    finLabel: "MINDSET", finQuote: "Bankroll is business capital, not a personal ATM. Withdraw to make it yours.",
+                    demoBadge: "INTERACTIVE DEMO", startSimulator: "Start Simulator",
+                    penaltiesTitle: "MINI EDUCATIONAL GAME",
+                    quizProgress: "Q {step}/5",
+                    btnPodcast: "PODCAST", btnEbook: "MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "Retry Test",
+                    navNextLesson: "NEXT LESSON", subNotActive: "SUBSCRIPTION NOT ACTIVE!",
+                    quizCompletedTitle: "Passed!", quizCompletedDesc: "You unlocked 500 XP. Keep going.",
+                    videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1",
+                    quizData: [
+                        { q: "In the Exchange, who is your counterparty when you 'Lay'?", opts: ["The traditional Bookmaker", "Other users who 'Backed'", "The platform itself"], correct: 1, successMsg: "Correct! You bet against real people.", failMsg: "Wrong. It's Peer-to-Peer." },
+                        { q: "What's the main advantage of the Exchange?", opts: ["Fixed odds forever", "Huge bonuses", "No limitations on winners"], correct: 2, successMsg: "Right! The Exchange loves winners.", failMsg: "Wrong. No account limits is the key." },
+                        { q: "What is 'Liability'?", opts: ["The actual risk when laying", "A platform tax", "Expected profit"], correct: 0, successMsg: "Correct. It's your locked capital.", failMsg: "Wrong. Liability equals risk." },
+                        { q: "How does the Exchange make money?", opts: ["Holding deposits", "Commission on net winnings", "Taking losing bets"], correct: 1, successMsg: "Spot on! Only a fee on profits.", failMsg: "No, they only take a tiny fee on wins." },
+                        { q: "Why is 'Liquidity' essential?", opts: ["Makes it fun", "No volume = no trading", "Guarantees wins"], correct: 1, successMsg: "Perfect! Volume is oxygen.", failMsg: "Wrong. Without money, you can't trade." }
+                    ],
+                    ebookContent: buildEbookContent("Day 1", "Structural", "Difference", "Bookmaker vs Exchange", 
+                        "The traditional Bookmaker acts as your direct counterparty: if you win, they lose. This creates a conflict of interest leading to account limits.",
+                        "In the Betting Exchange, you operate in a <span class='text-[#99E814]'>peer-to-peer</span> market. The platform is neutral and takes a small commission only on net winnings.",
+                        "The Formula (Back)", "Net = [ Stake × (Odds - 1) ] × (1 - Comm.)", "The trader follows liquidity, the gambler follows the team.")
+                },
+                es: {
+                    headerPrefix: "EXCHANGE",
+                    moduleTitle: "DÍA 1/30", lessonTitle: "ZERO TO HERO", lessonDesc: "Cero apuestas. Solo matemáticas, gestión del riesgo y desapego emocional.",
+                    finLabel: "MINDSET", finQuote: "El Bankroll es capital de trabajo, no un cajero. Retira para que sea tuyo.",
+                    demoBadge: "DEMO INTERACTIVA", startSimulator: "Iniciar Simulador",
+                    penaltiesTitle: "MINI JUEGO EDUCATIVO",
+                    quizProgress: "P {step}/5",
+                    btnPodcast: "PODCAST", btnEbook: "MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "Repetir Test",
+                    navNextLesson: "PRÓXIMA LECCIÓN", subNotActive: "¡SUSCRIPCIÓN NO ACTIVA!",
+                    quizCompletedTitle: "¡Superado!", quizCompletedDesc: "Has desbloqueado 500 XP. Sigue así.",
+                    videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1",
+                    quizData: [
+                        { q: "En el Exchange, ¿quién es tu contraparte cuando haces 'Lay'?", opts: ["El Bookmaker", "Usuarios que hicieron 'Back'", "La plataforma"], correct: 1, successMsg: "¡Correcto! Apuestas contra personas.", failMsg: "Error. Es un mercado Peer-to-Peer." },
+                        { q: "¿Cuál es la ventaja principal del Exchange?", opts: ["Cuotas fijas", "Grandes bonos", "Sin límites para ganadores"], correct: 2, successMsg: "¡Exacto! El Exchange ama a los ganadores.", failMsg: "Error. La clave es que no hay límites." },
+                        { q: "¿Qué es 'Liability'?", opts: ["El riesgo real al hacer Lay", "Un impuesto", "Beneficio esperado"], correct: 0, successMsg: "Correcto. Es tu capital en riesgo.", failMsg: "Falso. La Liability es el riesgo." },
+                        { q: "¿Cómo gana dinero el Exchange?", opts: ["Reteniendo depósitos", "Comisión sobre ganancias netas", "Quedándose las pérdidas"], correct: 1, successMsg: "¡Perfecto! Solo cobran si ganas.", failMsg: "No. Solo cobran pequeña comisión de ganancia." },
+                        { q: "¿Por qué es clave la 'Liquidez'?", opts: ["Es más divertido", "Sin volumen no hay trading", "Garantiza ganancias"], correct: 1, successMsg: "¡Exacto! El volumen es el oxígeno.", failMsg: "Error. Sin dinero emparejado, no hay trade." }
+                    ],
+                    ebookContent: buildEbookContent("Día 1", "Diferencia", "Estructural", "Bookmaker vs Exchange", 
+                        "El Bookmaker tradicional es tu contraparte: si ganas, ellos pierden. Esto genera conflictos de intereses y cierres de cuenta.",
+                        "En el Betting Exchange, operas en un mercado <span class='text-[#99E814]'>peer-to-peer</span>. La plataforma es neutral y solo cobra comisión por ganancias.",
+                        "La Fórmula (Back)", "Neto = [ Stake × (Cuota - 1) ] × (1 - Com.)", "El trader sigue la liquidez, el apostador al equipo.")
+                },
+                pt: {
+                    headerPrefix: "EXCHANGE",
+                    moduleTitle: "DIA 1/30", lessonTitle: "ZERO TO HERO", lessonDesc: "Zero apostas. Apenas matemática, gestão de risco e desapego emocional.",
+                    finLabel: "MINDSET", finQuote: "O Bankroll é capital de negócio, não um multibanco. Retire para ser seu.",
+                    demoBadge: "DEMO INTERATIVA", startSimulator: "Iniciar Simulador",
+                    penaltiesTitle: "MINI JOGO EDUCATIVO",
+                    quizProgress: "P {step}/5",
+                    btnPodcast: "PODCAST", btnEbook: "MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "Repetir Teste",
+                    navNextLesson: "PRÓXIMA LIÇÃO", subNotActive: "ASSINATURA INATIVA!",
+                    quizCompletedTitle: "Aprovado!", quizCompletedDesc: "Desbloqueaste 500 XP. Continua.",
+                    videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1",
+                    quizData: [
+                        { q: "Na Exchange, quem é a tua contraparte no 'Lay'?", opts: ["A Casa de Apostas", "Utilizadores que fizeram 'Back'", "A plataforma"], correct: 1, successMsg: "Certo! Apostas contra pessoas reais.", failMsg: "Erro. É Peer-to-Peer." },
+                        { q: "Qual a principal vantagem da Exchange?", opts: ["Odds fixas", "Bónus gigantes", "Sem limites para vencedores"], correct: 2, successMsg: "Exato! A Exchange adora vencedores.", failMsg: "Erro. A chave é não haver limitações." },
+                        { q: "O que é 'Liability'?", opts: ["O risco real no Lay", "Uma taxa", "Lucro esperado"], correct: 0, successMsg: "Certo. É o capital bloqueado.", failMsg: "Falso. Liability é o risco." },
+                        { q: "Como a Exchange ganha dinheiro?", opts: ["Reter depósitos", "Comissão sobre lucro líquido", "Ficar com perdas"], correct: 1, successMsg: "Perfeito! Apenas uma taxa nos lucros.", failMsg: "Não. Cobram apenas uma taxa de vitória." },
+                        { q: "Porque a 'Liquidez' é essencial?", opts: ["Diverte mais", "Sem volume não há trading", "Garante ganhos"], correct: 1, successMsg: "Exato! O volume é o oxigénio.", failMsg: "Erro. Sem dinheiro, não se pode negociar." }
+                    ],
+                    ebookContent: buildEbookContent("Dia 1", "Diferença", "Estrutural", "Bookmaker vs Exchange", 
+                        "A Casa de Apostas é a tua contraparte: se ganhas, eles perdem. Isso gera bloqueios e limitações de conta.",
+                        "Na Betting Exchange, operas num mercado <span class='text-[#99E814]'>peer-to-peer</span>. A plataforma é neutra.",
+                        "A Fórmula (Back)", "Líquido = [ Stake × (Odd - 1) ] × (1 - Com.)", "O trader segue a liquidez, o apostador a equipa.")
+                },
+                it: {
+                    headerPrefix: "EXCHANGE",
+                    moduleTitle: "GIORNO 1/30", lessonTitle: "ZERO TO HERO", lessonDesc: "Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.",
+                    finLabel: "MINDSET", finQuote: "Il Bankroll è capitale aziendale, non il tuo bancomat. Preleva per renderlo tuo.",
+                    demoBadge: "DEMO INTERATTIVA", startSimulator: "Avvia Simulatore",
+                    penaltiesTitle: "MINI GIOCO EDUCATIVO",
+                    quizProgress: "D {step}/5",
+                    btnPodcast: "PODCAST", btnEbook: "MANUALE", btnEbookTitle: "MANUALE", btnRetryQuiz: "Ripeti Test",
+                    navNextLesson: "PROSSIMA LEZIONE", subNotActive: "ABBONAMENTO NON ATTIVO!",
+                    quizCompletedTitle: "Superato!", quizCompletedDesc: "Hai sbloccato 500 XP. Avanti così.",
+                    videoUrl: "https://www.youtube.com/embed/tMfaj5nJoWY?rel=0&modestbranding=1",
+                    quizData: [
+                        { q: "Nell'Exchange, chi è la tua controparte quando 'Banchi'?", opts: ["Il Bookmaker", "Altri utenti che hanno 'Puntato'", "La piattaforma"], correct: 1, successMsg: "Esatto! Scommetti contro persone reali.", failMsg: "Errore. È un mercato Peer-to-Peer." },
+                        { q: "Qual è il vantaggio principale dell'Exchange?", opts: ["Quote fisse", "Bonus enormi", "Nessun limite sui conti vincenti"], correct: 2, successMsg: "Giusto! L'Exchange ama i vincenti.", failMsg: "Errore. L'assenza di ghiacciate è la chiave." },
+                        { q: "Cosa significa 'Liability'?", opts: ["Il rischio reale quando banchi", "Una tassa", "Il profitto"], correct: 0, successMsg: "Corretto. È il tuo capitale esposto.", failMsg: "Falso. La Liability è il tuo rischio." },
+                        { q: "Come guadagna la piattaforma Exchange?", opts: ["Trattenendo i depositi", "Commissione sulle vincite nette", "Prendendo le perdite"], correct: 1, successMsg: "Perfetto! Trattengono solo se vinci.", failMsg: "No. Loro sono intermediari neutrali." },
+                        { q: "Perché la 'Liquidità' è fondamentale?", opts: ["È divertente", "Senza volume non chiudi i trade", "Garantisce vincite"], correct: 1, successMsg: "Esatto! Il volume è l'ossigeno del mercato.", failMsg: "Errore. Serve per abbinare le scommesse." }
+                    ],
+                    ebookContent: buildEbookContent("Giorno 1", "Differenza", "Strutturale", "Bookmaker vs Exchange", 
+                        "Il Bookmaker agisce come controparte: se tu vinci, lui perde. Questo genera il blocco sistematico dei conti vincenti.",
+                        "Nell'Exchange si opera in mercato <span class='text-[#99E814]'>peer-to-peer</span>. La piattaforma trattiene solo una commissione sulle vincite.",
+                        "La Formula (Punta)", "Netto = [ Stake × (Quota - 1) ] × (1 - Comm.)", "Il trader segue la liquidità, lo scommettitore il tifo.")
+                }
+            };
+
+            let State = { lang: 'en', xp: 0, currentQuizStep: 0, quizCompleted: false };
+
+            const UIManager = {
+                setLanguage: (lang) => {
+                    const targetLang = dict[lang] ? lang : 'en';
+                    State.lang = targetLang;
+                    document.documentElement.lang = targetLang;
+                    
+                    // Update Active Flags
+                    document.querySelectorAll('.lang-flag').forEach(btn => {
+                        if(btn.getAttribute('data-lang') === targetLang) btn.classList.add('active');
+                        else btn.classList.remove('active');
+                    });
+                    
+                    // Translate Text & HTML
+                    document.querySelectorAll('[data-i18n]').forEach(el => {
+                        const key = el.getAttribute('data-i18n');
+                        if (dict[targetLang][key]) el.innerText = dict[targetLang][key];
+                    });
+                    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                        const key = el.getAttribute('data-i18n-html');
+                        if (dict[targetLang][key]) el.innerHTML = dict[targetLang][key];
+                    });
+                    
+                    // Update Media URLs Dynamically
+                    const videoIframe = document.getElementById('main-video');
+                    if (videoIframe && dict[targetLang].videoUrl) {
+                        videoIframe.src = dict[targetLang].videoUrl;
+                    }
+
+                    const podcastLink = document.getElementById('btn-podcast');
+                    if (podcastLink && podcastUrls[targetLang]) {
+                        podcastLink.href = podcastUrls[targetLang];
+                    }
+                    
+                    Gamification.renderQuiz();
+                    try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(State)); } catch(e){}
+                },
+                updateDashboards: () => {
+                    document.getElementById('xp-counter').innerText = `${State.xp} XP`;
+                }
+            };
+
+            const Gamification = {
+                renderQuiz: () => {
+                    const container = document.getElementById('quiz-container');
+                    const compScreen = document.getElementById('quiz-completed-screen');
+                    const feedback = document.getElementById('quiz-feedback');
+
+                    if (State.quizCompleted) {
+                        container.classList.add('hidden');
+                        feedback.classList.add('hidden');
+                        compScreen.classList.remove('hidden');
+                        compScreen.classList.add('flex');
+                        return;
+                    } else {
+                        compScreen.classList.add('hidden');
+                        compScreen.classList.remove('flex');
+                        container.classList.remove('hidden');
+                        container.classList.add('flex');
+                    }
+
+                    const qData = dict[State.lang].quizData[State.currentQuizStep];
+                    document.getElementById('quiz-progress-text').innerText = dict[State.lang].quizProgress.replace('{step}', State.currentQuizStep + 1);
+                    
+                    let dotsHtml = '';
+                    for(let i=0; i<5; i++) {
+                        dotsHtml += `<div class="w-2.5 h-2.5 rounded-full shadow-inner ${i < State.currentQuizStep ? 'bg-[#d4af37] shadow-[0_0_5px_rgba(212,175,55,0.8)]' : (i === State.currentQuizStep ? 'bg-white border border-[#d4af37]' : 'bg-gray-800')}"></div>`;
+                    }
+                    document.getElementById('quiz-dots').innerHTML = dotsHtml;
+                    document.getElementById('quiz-question-text').innerText = qData.q;
+                    
+                    const letters = ['A', 'B', 'C'];
+                    document.getElementById('quiz-options-container').innerHTML = qData.opts.map((opt, index) => `
+                        <button id="quiz-opt-${index}" onclick="checkAnswer(${index})" class="quiz-opt w-full p-3.5 rounded-xl flex items-center text-xs md:text-sm font-bold text-gray-200 group shadow-md">
+                            <span class="text-[#d4af37] w-6 mr-2 font-black text-lg drop-shadow-[0_0_3px_rgba(212,175,55,0.5)]">${letters[index]}</span> 
+                            <span>${opt}</span>
+                        </button>
+                    `).join('');
+                    
+                    feedback.classList.add('hidden');
+                },
+                checkQuiz: (selectedIndex) => {
+                    const qData = dict[State.lang].quizData[State.currentQuizStep];
+                    const feedback = document.getElementById('quiz-feedback');
+                    const icon = document.getElementById('quiz-feedback-icon');
+                    const text = document.getElementById('quiz-feedback-text');
+                    const clickedBtn = document.getElementById(`quiz-opt-${selectedIndex}`);
+                    const correctBtn = document.getElementById(`quiz-opt-${qData.correct}`);
+
+                    document.querySelectorAll('.quiz-opt').forEach(b => { b.onclick = null; b.disabled = true; });
+
+                    if (selectedIndex === qData.correct) {
+                        SoundEngine.cashout();
+                        clickedBtn.classList.add('correct');
+                        icon.innerText = '✅'; 
+                        text.innerText = qData.successMsg;
+                        feedback.className = 'mt-4 p-3 rounded-xl text-center border border-[#10b981]/50 bg-[#10b981]/10 text-[#10b981] shadow-[0_0_15px_rgba(16,185,129,0.2)]';
+                        State.xp += 100;
+                        UIManager.updateDashboards();
+                    } else {
+                        SoundEngine.error();
+                        clickedBtn.classList.add('wrong');
+                        correctBtn.classList.add('correct');
+                        icon.innerText = '❌'; 
+                        text.innerText = qData.failMsg;
+                        feedback.className = 'mt-4 p-3 rounded-xl text-center border border-[#ef4444]/50 bg-[#ef4444]/10 text-[#ef4444] shadow-[0_0_15px_rgba(239,68,68,0.2)]';
+                    }
+
+                    feedback.classList.remove('hidden');
+
+                    setTimeout(() => {
+                        if (State.currentQuizStep < 4) State.currentQuizStep++;
+                        else State.quizCompleted = true;
+                        
+                        Gamification.renderQuiz();
+                        try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(State)); } catch(e){}
+                    }, 2000);
+                }
+            };
+
+            window.resetQuiz = function() {
+                SoundEngine.click();
+                State.currentQuizStep = 0;
+                State.quizCompleted = false;
+                State.xp = Math.max(0, State.xp - 500);
+                UIManager.updateDashboards();
+                Gamification.renderQuiz();
+                try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(State)); } catch(e){}
+            };
+            
+            window.changeLang = function(l) { 
+                SoundEngine.click(); 
+                UIManager.setLanguage(l); 
+            };
+
+            return {
+                init: () => {
+                    // Auto-Detect Device Language
+                    let detectedLang = 'en';
+                    const browserLang = (navigator.language || navigator.userLanguage).split('-')[0].toLowerCase();
+                    if (['en', 'es', 'pt', 'it'].includes(browserLang)) {
+                        detectedLang = browserLang;
+                    }
+
+                    // Override with LocalStorage
+                    try { 
+                        const savedData = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY));
+                        if (savedData) {
+                            if (savedData.lang) detectedLang = savedData.lang;
+                            if (savedData.xp) State.xp = savedData.xp;
+                            if (savedData.currentQuizStep) State.currentQuizStep = savedData.currentQuizStep;
+                            if (savedData.quizCompleted) State.quizCompleted = savedData.quizCompleted;
+                        }
+                    } catch(e) {}
+                    
+                    UIManager.setLanguage(detectedLang);
+                    UIManager.updateDashboards();
+                    
+                    const unlockAudio = () => {
+                        SoundEngine.init(); 
+                        document.body.removeEventListener('click', unlockAudio);
+                        document.body.removeEventListener('touchstart', unlockAudio);
+                    };
+                    document.body.addEventListener('click', unlockAudio, { once: true });
+                    document.body.addEventListener('touchstart', unlockAudio, { once: true });
+                },
+                triggerQuiz: Gamification.checkQuiz
+            };
+        })();
+
+        document.addEventListener('DOMContentLoaded', () => { RoomApp.init(); });
+        window.checkAnswer = RoomApp.triggerQuiz;
+    </script>
+</body>
+</html> content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#050a05">
     <meta name="apple-mobile-web-app-capable" content="yes">
